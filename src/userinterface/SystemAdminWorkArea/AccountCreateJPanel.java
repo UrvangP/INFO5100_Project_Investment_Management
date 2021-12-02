@@ -7,9 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
 import Business.Employee.Employee;
-import Business.Role.AdminRole;
 import Business.Role.CustomerRole;
-import Business.Role.DeliverManRole;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -222,9 +220,9 @@ public class AccountCreateJPanel extends javax.swing.JPanel {
                         if (AdminJRadioButton.isSelected()) {
                             role = new SystemAdminRole();
                         } else if (RestaurantManagerJRadioButton.isSelected()) {
-                            role = new AdminRole();
+                            role = null;
                         } else if (DeliveryManJRadioButton.isSelected()) {
-                            role = new DeliverManRole();
+                            role = null;
                         } else {
                             role = new CustomerRole();
                         }
