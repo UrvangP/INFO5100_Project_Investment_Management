@@ -5,10 +5,22 @@
  */
 package Business.Network;
 
+import Business.Restaurant.Restaurant;
+import java.util.ArrayList;
+
 /**
  *
  * @author urvang
  */
-public class Network {
+public class NetworkDirectory {
+
+    private ArrayList<Network> networkList;
+
+    public NetworkDirectory() {
+        networkList = new ArrayList<>();
+    }
     
+     public ArrayList<Network> getNetworkList() {
+        return networkList;
+    }
 }
