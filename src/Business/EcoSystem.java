@@ -5,6 +5,7 @@
  */
 package Business;
 
+import Business.Organization.Organization;
 import Business.Customer.CustomerDirectory;
 import Business.Network.NetworkDirectory;
 import Business.Restaurant.RestaurantDirectory;
@@ -63,7 +64,7 @@ public class EcoSystem extends Organization {
     }
 
     public EcoSystem() {
-        super(null);
+        super(null, null, null, null, 0);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
