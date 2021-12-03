@@ -5,16 +5,18 @@
  */
 package userinterface.AssetMarketAdminRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class AssetMarketAdminJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AssetMarketAdminJPanel
-     */
-    public AssetMarketAdminJPanel() {
+    
+    public AssetMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

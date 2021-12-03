@@ -5,16 +5,18 @@
  */
 package userinterface.CryptoMarketAdminRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CryptoMarketAdminJPanel
-     */
-    public CryptoMarketAdminJPanel() {
+  
+    public CryptoMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

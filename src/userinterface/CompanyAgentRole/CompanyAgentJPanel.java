@@ -5,16 +5,18 @@
  */
 package userinterface.CompanyAgentRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class CompanyAgentJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CompanyAgentJPanel
-     */
-    public CompanyAgentJPanel() {
+
+    public CompanyAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

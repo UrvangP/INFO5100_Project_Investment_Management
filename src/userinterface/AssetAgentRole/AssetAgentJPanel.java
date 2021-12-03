@@ -5,16 +5,17 @@
  */
 package userinterface.AssetAgentRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class AssetAgentJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AssetAgentJPanel
-     */
-    public AssetAgentJPanel() {
+    public AssetAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

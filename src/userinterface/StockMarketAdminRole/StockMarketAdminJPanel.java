@@ -5,16 +5,18 @@
  */
 package userinterface.StockMarketAdminRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class StockMarketAdminJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form StockMarketAdminJPanel
-     */
-    public StockMarketAdminJPanel() {
+   
+    public StockMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

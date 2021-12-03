@@ -5,16 +5,18 @@
  */
 package userinterface.ForexMarketAdminRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class ForexMarketAdminJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ForexMarketAdminJPanel
-     */
-    public ForexMarketAdminJPanel() {
+ 
+    public ForexMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

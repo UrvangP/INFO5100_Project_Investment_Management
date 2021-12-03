@@ -5,16 +5,18 @@
  */
 package userinterface.CryptoAgentRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class CryptoAgentJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CryptoAgentJPanel
-     */
-    public CryptoAgentJPanel() {
+  
+    public CryptoAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 

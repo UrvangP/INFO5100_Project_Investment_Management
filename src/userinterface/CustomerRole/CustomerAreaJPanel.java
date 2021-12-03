@@ -21,24 +21,22 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
 
     private UserAccount userAccount;
-    /**
-     * Creates new form DoctorWorkAreaJPanel
-     */
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account) {
+
+    public CustomerAreaJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
-      
+
         this.userAccount = account;
         //valueLabel.setText(enterprise.getName());
         populateRequestTable();
-    }
-    
-    public void populateRequestTable(){
-        
+
     }
 
-    
+    public void populateRequestTable() {
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,15 +146,14 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
 
         populateRequestTable();
-        
+
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

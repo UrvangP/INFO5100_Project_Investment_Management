@@ -5,16 +5,18 @@
  */
 package userinterface.ForexAgentRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author prathameshnemade
  */
 public class ForexAgentJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ForexAgentJPanel
-     */
-    public ForexAgentJPanel() {
+  
+    public ForexAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
         initComponents();
     }
 
