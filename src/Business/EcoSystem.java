@@ -6,7 +6,6 @@
 package Business;
 
 import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Network.NetworkDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
@@ -24,7 +23,6 @@ public class EcoSystem extends Organization {
     private static EcoSystem business;
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
-    private DeliveryManDirectory deliveryManDirectory;
     private NetworkDirectory networkList;
     private HashMap<String, String> roleList = new HashMap<String, String>() {
         {
@@ -43,11 +41,10 @@ public class EcoSystem extends Organization {
         }
     };
 
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
+    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
 
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
-        this.deliveryManDirectory = deliveryManDirectory;
         this.networkList = networkList;
     }
 
@@ -69,8 +66,7 @@ public class EcoSystem extends Organization {
         super(null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
-        this.deliveryManDirectory = new DeliveryManDirectory();
-        // networkList=new ArrayList<Network>();
+        this.networkList = new NetworkDirectory();
     }
 
     public RestaurantDirectory getRestaurantDirectory() {
