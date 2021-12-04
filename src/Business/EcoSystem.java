@@ -7,6 +7,7 @@ package Business;
 
 import Business.Organization.Organization;
 import Business.Customer.CustomerDirectory;
+import Business.Network.Network;
 import Business.Network.NetworkDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
@@ -81,5 +82,11 @@ public class EcoSystem extends Organization {
 
     public HashMap<String, String> getRolesList() {
         return roleList;
+    }
+    
+     public Network createNetwork(){
+        Network network=new Network();
+        networkList.getNetworkList().add(network);
+        return network;
     }
 }

@@ -22,7 +22,7 @@ public class StockMarketEnterprise extends Enterprise {
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
 }
