@@ -40,18 +40,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         SystemAdminDashboard updateProfileAdmin = new SystemAdminDashboard(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(updateProfileAdmin);
+        
+        this.browsingJPanel.setVisible(true);
+        this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
 
-        Boolean temp1 = false;
-        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
-            Network temp = this.ecosystem.getNetwork().getNetworkList().get(i);
-            if (temp.getIsSelected()) {
-                temp1 = true;
-            }
-        }
-        if (temp1) {
-            this.browsingJPanel.setVisible(true);
-            this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
-        }
         //TODO- for enterprose and organization
     }
 

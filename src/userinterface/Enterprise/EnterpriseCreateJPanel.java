@@ -13,9 +13,11 @@ import Business.UserAccount.UserAccount;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import userinterface.Network.NetworkCreateJPanel;
 
 /**
  *
@@ -28,6 +30,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     private String selectedEnterprise;
     JPanel browsingJPanel;
+    private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
+
     private HashMap<String, Boolean> stateSelected = new HashMap<String, Boolean>() {
         {
             put("companiesSelected", true);
@@ -57,24 +61,40 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.selectedEnterprise = "StockMarket";
         this.typeJLabel.setText("StockMarket");
 
-        this.assetChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : true);
-        this.forexChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? false : true);
-        this.cryptoChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("CryptoMarket") == null ? false : true);
-        this.stockChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? false : true);
+        Network ongoing = null;
+
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoing = ongoing1;
+            }
+        }
+
+        if (ongoing != null) {
+            enterpriseSelection = ongoing.getEnterpriseDirectory().getEnterpriseSelection();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
+            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(networkCreateJPanel);
+        }
+        this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
+        this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
+        this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
+        this.stockChecked.setVisible(enterpriseSelection.get("StockMarket") == null ? false : true);
 
         this.assetMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
         this.cryptoMarketJPanel.setVisible(false);
         this.stockMarketJPanel.setVisible(false);
 
-        this.companiesChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("StockMarket").get("Companies"));
-        this.mutualChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("StockMarket").get("MutualFunds"));
-        this.industriesChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("Industries"));
-        this.realestateChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("RealEstate"));
-        this.jewelleyChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("Jewellery"));
-        this.banksChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("ForexMarket").get("Banks"));
-        this.brokersChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("ForexMarket").get("Brokers"));
-        this.walletChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("CryptoMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("CryptoMarket").get("Wallet"));
+        this.companiesChecked.setVisible(enterpriseSelection.get("StockMarket") == null ? true : enterpriseSelection.get("StockMarket").get("Companies"));
+        this.mutualChecked.setVisible(enterpriseSelection.get("StockMarket") == null ? false : enterpriseSelection.get("StockMarket").get("MutualFunds"));
+        this.industriesChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? true : enterpriseSelection.get("AssetMarket").get("Industries"));
+        this.realestateChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : enterpriseSelection.get("AssetMarket").get("RealEstate"));
+        this.jewelleyChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : enterpriseSelection.get("AssetMarket").get("Jewellery"));
+        this.banksChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? true : enterpriseSelection.get("ForexMarket").get("Banks"));
+        this.brokersChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : enterpriseSelection.get("ForexMarket").get("Brokers"));
+        this.walletChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? true : enterpriseSelection.get("CryptoMarket").get("Wallet"));
 
         this.createdByJLabel.setText("Please select to see!");
         this.dateOfCreationJLabel.setText("Please select to seeÏ!");
@@ -590,6 +610,9 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         this.selectedEnterprise = "StockMarket";
         this.typeJLabel.setText("StockMarket");
+
+        this.createdByJLabel.setText(this.account.getUsername());
+        this.dateOfCreationJLabel.setText(new Date().toString());
     }//GEN-LAST:event_stockMarketJLabelMouseClicked
 
     private void assetMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assetMarketJLabelMouseClicked
@@ -605,6 +628,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         this.selectedEnterprise = "AssetMarket";
         this.typeJLabel.setText("AssetMarket");
+        this.createdByJLabel.setText(this.account.getUsername());
+        this.dateOfCreationJLabel.setText(new Date().toString());
 
     }//GEN-LAST:event_assetMarketJLabelMouseClicked
 
@@ -620,7 +645,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.cryptoMarketJPanel.setVisible(false);
         this.selectedEnterprise = "ForexMarket";
         this.typeJLabel.setText("ForexMarket");
-
+        this.createdByJLabel.setText(this.account.getUsername());
+        this.dateOfCreationJLabel.setText(new Date().toString());
 
     }//GEN-LAST:event_forexMarketJLabelMouseClicked
 
@@ -636,7 +662,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.cryptoMarketJPanel.setVisible(true);
         this.selectedEnterprise = "CryptoMarket";
         this.typeJLabel.setText("CryptoMarket");
-
+        this.createdByJLabel.setText(this.account.getUsername());
+        this.dateOfCreationJLabel.setText(new Date().toString());
     }//GEN-LAST:event_cryptoMarketJLabelMouseClicked
 
     private void stockMarketJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMarketJLabel1MouseClicked
@@ -699,30 +726,30 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         if (this.selectedEnterprise == "AssetMarket") {
             name = "AssetMarket";
             type = Enterprise.EnterpriseType.AssetMarket;
-            this.ecosystem.getEnterpriseSelection().put("AssetMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("AssetMarket");
+            enterpriseSelection.put("AssetMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = enterpriseSelection.get("AssetMarket");
             visibility.put("Industries", this.industriesChecked.isVisible());
             visibility.put("RealEstate", this.realestateChecked.isVisible());
             visibility.put("Jewellery", this.jewelleyChecked.isVisible());
         } else if (this.selectedEnterprise == "CryptoMarket") {
             name = "CryptoMarket";
             type = Enterprise.EnterpriseType.CryptoMarket;
-            this.ecosystem.getEnterpriseSelection().put("CryptoMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("CryptoMarket");
+            enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
             visibility.put("Wallet", this.walletChecked.isVisible());
         } else if (this.selectedEnterprise == "ForexMarket") {
             name = "ForexMarket";
             type = Enterprise.EnterpriseType.ForexMarket;
-            this.ecosystem.getEnterpriseSelection().put("ForexMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("ForexMarket");
+            enterpriseSelection.put("ForexMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
             visibility.put("Banks", this.banksChecked.isVisible());
             visibility.put("Brokers", this.brokersChecked.isVisible());
         } else {
             name = "StockMarket";
             type = Enterprise.EnterpriseType.StockMarket;
             tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account);
-            this.ecosystem.getEnterpriseSelection().put("StockMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("StockMarket");
+            enterpriseSelection.put("StockMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
             visibility.put("Companies", this.companiesChecked.isVisible());
             visibility.put("MutualFunds", this.mutualChecked.isVisible());
         }
@@ -732,7 +759,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             if (ongoing.getIsSelected()) {
                 Integer index = this.ecosystem.getNetwork().getNetworkList().indexOf(ongoing);
                 System.out.println("dfdsf" + index);
-                System.out.println("name, new Date(), this.countryComboBox.getSelectedItem().toString(), account"+this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory());
+                System.out.println("name, new Date(), this.countryComboBox.getSelectedItem().toString(), account" + this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory());
                 this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account);
             }
         }

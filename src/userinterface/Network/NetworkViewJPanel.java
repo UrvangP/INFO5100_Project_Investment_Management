@@ -413,7 +413,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
             }
         }
         this.browsingJPanel.setVisible(true);
-        this.ecosystem.generateBrowsingHistoryNetwork(this.browsingJPanel);
+        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
         JOptionPane.showMessageDialog(this, "Network selected successfully!", "Network", INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel2MouseClicked
 

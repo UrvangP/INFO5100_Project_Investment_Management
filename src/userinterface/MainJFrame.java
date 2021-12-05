@@ -108,7 +108,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         browsingJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        browsingLevelJLabel.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 15)); // NOI18N
+        browsingLevelJLabel.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 10)); // NOI18N
         browsingLevelJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout browsingJPanelLayout = new javax.swing.GroupLayout(browsingJPanel);
