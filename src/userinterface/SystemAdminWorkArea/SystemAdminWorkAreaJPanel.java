@@ -10,11 +10,11 @@ import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 import javax.swing.JPanel;
-import userinterface.Enterprise.EnterpriseCreateJPanel;
+import userinterface.Enterprise.EnterpriseViewJPanel;
 import userinterface.Network.NetworkCreateJPanel;
+import userinterface.Network.NetworkViewJPanel;
 
 /**
  *
@@ -174,8 +174,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void networkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkButtonActionPerformed
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane.setRightComponent(networkCreateJPanel);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_networkButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
@@ -194,8 +194,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         if (temp1) {
             this.browsingJPanel.setVisible(true);
             this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
-            EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-            this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
+            EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(enterpriseViewJPanel);
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
         }

@@ -23,7 +23,7 @@ import userinterface.Network.NetworkCreateJPanel;
  *
  * @author prathameshnemade
  */
-public class EnterpriseCreateJPanel extends javax.swing.JPanel {
+public class EnterpriseEditJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
@@ -52,7 +52,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    public EnterpriseCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public EnterpriseEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
@@ -158,7 +158,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create a Enterprise");
+        jLabel1.setText("Edit a Enterprise");
 
         stockMarketJLabel.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
         stockMarketJLabel.setText("Stock Market");

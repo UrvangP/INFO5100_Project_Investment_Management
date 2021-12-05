@@ -28,7 +28,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     Integer selectedNetworkIndex;
     JPanel browsingJPanel;
 
-    NetworkViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public NetworkViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
