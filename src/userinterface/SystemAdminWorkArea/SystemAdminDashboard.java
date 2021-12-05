@@ -7,6 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
@@ -18,12 +19,14 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
+    JPanel browsingJPanel;
 
-    SystemAdminDashboard(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
+    SystemAdminDashboard(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
+        this.browsingJPanel = browsingJPanel;
     }
 
     /**

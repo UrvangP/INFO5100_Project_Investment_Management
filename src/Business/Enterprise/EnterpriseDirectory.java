@@ -30,6 +30,7 @@ public class EnterpriseDirectory {
     }
 
     public Enterprise createAssetMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount admin) {
+        System.out.println("SDSD" + name + Enterprise.EnterpriseType.AssetMarket + dateOfCreation + country + admin);
         AssetMarketEnterprise enterprise = new AssetMarketEnterprise(name, Enterprise.EnterpriseType.AssetMarket, dateOfCreation, country, admin);
         this.enterpriseDir.add(enterprise);
         return enterprise;
