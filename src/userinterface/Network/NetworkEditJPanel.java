@@ -8,8 +8,10 @@ package userinterface.Network;
 import Business.EcoSystem;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
-import java.util.Date;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 
@@ -17,26 +19,30 @@ import javax.swing.JSplitPane;
  *
  * @author prathameshnemade
  */
-public class NetworkCreateJPanel extends javax.swing.JPanel {
+public class NetworkEditJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
-    Network network;
+    Network selectedNetwork;
+    Integer selectedNetworkIndex;
 
-    public NetworkCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
+    public NetworkEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
-        _init();
+        _getAllNetworks();
     }
 
-    public void _init() {
-        this.network = new Network();
-        this.network.setNDateOfCreation(new Date());
-        this.dateOfCreationJLabel.setText(new Date().toString());
-        this.createdByJLabel.setText(this.account.getUsername().toString());
+    public void _getAllNetworks() {
+        DefaultListModel model = new DefaultListModel();
+        this.networkJList.setModel(model);
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            model.addElement(ongoing.getNName());
+        }
+        this.networkJList.setModel(model);
     }
 
     /**
@@ -62,12 +68,15 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         exitJLabel = new javax.swing.JLabel();
         viewJLabel = new javax.swing.JLabel();
         viewJLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        networkJList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add a Network");
+        jLabel1.setText("Edit/Delete a Network");
 
         seatsJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         seatsJLabel.setForeground(new java.awt.Color(67, 100, 100));
@@ -153,7 +162,7 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(200, 203, 178));
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(67, 100, 100));
-        jButton2.setText("ADD");
+        jButton2.setText("UPDATE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -179,6 +188,11 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         viewJLabel.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
         viewJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/view_all.png"))); // NOI18N
         viewJLabel.setText(" View Networks");
+        viewJLabel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                viewJLabelFocusGained(evt);
+            }
+        });
         viewJLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewJLabelMouseClicked(evt);
@@ -209,7 +223,7 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
                     .addComponent(viewJLabel1)
                     .addComponent(exitJLabel)
                     .addComponent(viewJLabel))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +237,21 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        networkJList.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        networkJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                networkJListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(networkJList);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/delete.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,27 +262,32 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(314, 314, 314)
+                                .addGap(12, 12, 12)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cardentifierJLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(cardentifierJLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(41, 41, 41)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(seatsJLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(seatsJLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(countryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(nameJField)
                                         .addComponent(dateOfCreationJLabel)
-                                        .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 79, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -261,26 +295,35 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brandJLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(seatsJLabel)
-                    .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardentifierJLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardentifierJLabel))
-                .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(seatsJLabel)
+                            .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardentifierJLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardentifierJLabel))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -324,23 +367,30 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String errorMessage = "";
-        network.setNName(this.nameJField.getText());
-        network.setNCountry(this.countryComboBox.getSelectedItem().toString());
-        network.setNCreatedBy(this.account);
-        this.ecosystem.createNetwork(network);
-        JOptionPane.showMessageDialog(this, "Network created successfully!", "Create Network", INFORMATION_MESSAGE);
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing == this.selectedNetwork) {
+                ongoing.setNName(this.nameJField.getText());
+                ongoing.setNCountry(this.countryComboBox.getSelectedItem().toString());
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Network edited successfully!", "Edit Network", INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane);
-        this.jSplitPane.setRightComponent(networkEditJPanel);
-    }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void exitJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_exitJLabelFocusGained
         NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelFocusGained
+
+    private void viewJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabelFocusGained
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(networkCreateJPanel);
+    }//GEN-LAST:event_viewJLabelFocusGained
+
+    private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(networkViewJPanel);
+    }//GEN-LAST:event_viewJLabelMouseClicked
 
     private void viewJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabel1FocusGained
         // TODO add your handling code here:
@@ -351,11 +401,30 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
-    private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane);
-        this.jSplitPane.setRightComponent(networkViewJPanel);
-    }//GEN-LAST:event_viewJLabelMouseClicked
+    private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(networkEditJPanel);
+    }//GEN-LAST:event_exitJLabelMouseClicked
 
+    private void networkJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_networkJListValueChanged
+        openSelectedNetwork();
+    }//GEN-LAST:event_networkJListValueChanged
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.ecosystem.getNetwork().getNetworkList().remove(this.selectedNetwork);
+        JOptionPane.showMessageDialog(this, "Network deleted successfully!", "Delete Network", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    public void openSelectedNetwork() {
+        selectedNetworkIndex = this.networkJList.getSelectedIndex();
+        if (selectedNetworkIndex != -1) {
+            this.selectedNetwork = this.ecosystem.getNetwork().getNetworkList().get(selectedNetworkIndex);
+            this.nameJField.setText(this.selectedNetwork.getNName());
+            this.countryComboBox.setSelectedItem(this.selectedNetwork.getNCountry());
+            this.dateOfCreationJLabel.setText(this.selectedNetwork.getNDateOfCreation().toString());
+            this.createdByJLabel.setText(this.selectedNetwork.getNCreatedBy().getUsername());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel brandJLabel;
@@ -367,8 +436,11 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel exitJLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameJField;
+    private javax.swing.JList<String> networkJList;
     private javax.swing.JLabel seatsJLabel;
     private javax.swing.JLabel viewJLabel;
     private javax.swing.JLabel viewJLabel1;

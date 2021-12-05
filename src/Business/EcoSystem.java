@@ -83,9 +83,12 @@ public class EcoSystem extends Organization {
     public HashMap<String, String> getRolesList() {
         return roleList;
     }
-    
-     public Network createNetwork(){
-        Network network=new Network();
+
+    public NetworkDirectory getNetwork() {
+        return networkList;
+    }
+
+    public Network createNetwork(Network network) {
         networkList.getNetworkList().add(network);
         return network;
     }

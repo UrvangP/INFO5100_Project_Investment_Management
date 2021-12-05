@@ -50,6 +50,8 @@ public class LoginPage extends javax.swing.JPanel {
         this.rootJPanel = rootJPanel;
         this.logoutJButton = logoutJButton;
         this.system = system;
+        this.emailIDJField.setText("sysadmin");
+        this.passwordJField.setText("sysadmin");
     }
 
     /**
