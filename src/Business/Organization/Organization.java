@@ -27,15 +27,15 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
-        Company("Company"),
+        Companies("Companies"),
         MutualFunds("Mutual Funds"),
         Industries("Industries"),
         RealEstate("Real Estate"),
         Jewellery("Jewellery"),
         Banks("Banks"),
         Brokers("Brokers"),
-        Wallet("Wallet"),
-        SysAdmin("Sysadmin");
+        Wallet("Wallet");
+        
         
         private String value;
         private Type(String value) {
@@ -46,7 +46,7 @@ public abstract class Organization {
         }
     }
 
-    public Organization(String name) {
+    public Organization(String name, String type, Date doc) {
         this.name = name;
         this.type = type;
         this.doc = doc;
