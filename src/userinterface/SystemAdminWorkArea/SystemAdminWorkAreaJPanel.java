@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import javax.swing.JPanel;
+import userinterface.Enterprise.EnterpriseCreateJPanel;
 import userinterface.Network.NetworkCreateJPanel;
 import userinterface.Organization.OrganizationCreateJPanel;
 
@@ -60,6 +61,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
         oraganizationButton = new javax.swing.JButton();
+        oraganizationButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -104,6 +106,16 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        oraganizationButton1.setBackground(new java.awt.Color(200, 203, 178));
+        oraganizationButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        oraganizationButton1.setForeground(new java.awt.Color(67, 100, 100));
+        oraganizationButton1.setText("Enterprise");
+        oraganizationButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                oraganizationButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,7 +129,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(userNameJLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(networkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(oraganizationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(oraganizationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oraganizationButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -132,11 +145,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(userNameJLabel))
-                .addGap(72, 72, 72)
+                .addGap(78, 78, 78)
                 .addComponent(networkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(oraganizationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(oraganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(85, 85, 85)
@@ -187,6 +202,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(organizationCreateJPanel);
     }//GEN-LAST:event_oraganizationButtonActionPerformed
 
+    private void oraganizationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oraganizationButton1ActionPerformed
+        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
+    }//GEN-LAST:event_oraganizationButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton homeButton;
@@ -197,6 +217,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JButton networkButton;
     private javax.swing.JButton oraganizationButton;
+    private javax.swing.JButton oraganizationButton1;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

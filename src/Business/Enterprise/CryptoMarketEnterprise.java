@@ -16,6 +16,8 @@ import java.util.Date;
  */
 public class CryptoMarketEnterprise extends Enterprise {
 
+    private Boolean isSelected;
+    
     public CryptoMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount admin) {
         super(Enterprise.EnterpriseType.CryptoMarket);
     }
@@ -23,6 +25,20 @@ public class CryptoMarketEnterprise extends Enterprise {
     @Override
     public ArrayList<Role> getSupportedRole() {
         return null; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * @return the isSelected
+     */
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * @param isSelected the isSelected to set
+     */
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
 }

@@ -16,6 +16,8 @@ import java.util.Date;
  */
 public class StockMarketEnterprise extends Enterprise {
 
+    private Boolean isSelected;
+
     public StockMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount admin) {
         super(EnterpriseType.StockMarket);
     }
@@ -25,4 +27,17 @@ public class StockMarketEnterprise extends Enterprise {
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * @return the isSelected
+     */
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * @param isSelected the isSelected to set
+     */
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 }

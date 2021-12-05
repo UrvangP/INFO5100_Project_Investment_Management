@@ -13,7 +13,8 @@ import Business.Organization.OrganizationDirectory;
  * @author urvang
  */
 public abstract class Enterprise extends Organization {
-
+    
+    private Boolean isSelected;
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
 
@@ -55,6 +56,20 @@ public abstract class Enterprise extends Organization {
         this.enterpriseType= type;
         organizationDirectory=new OrganizationDirectory();
         
+    }
+
+    /**
+     * @return the isSelected
+     */
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * @param isSelected the isSelected to set
+     */
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
 }
