@@ -9,6 +9,8 @@ import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 /**
  *
@@ -22,6 +24,7 @@ public abstract class Organization {
     private String country;
     private int zipCode;
     private String type;
+    private Date doc;
 
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
@@ -30,15 +33,15 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
-        Company("Company"),
-        MutualFund("Mutual Fund"),
-        Industry("Industry"),
+        Companies("Companies"),
+        MutualFunds("Mutual Funds"),
+        Industries("Industries"),
         RealEstate("Real Estate"),
-        Jewellery("Jewwllwery"),
-        Bank("Bank"),
-        Broker("Broker"),
+        Jewellery("Jewellery"),
+        Banks("Banks"),
+        Brokers("Brokers"),
         Wallet("Wallet");
-        
+
         private String value;
         private Type(String value) {
             this.value = value;
@@ -48,12 +51,10 @@ public abstract class Organization {
         }
     }
 
-    public Organization(String name, String streetAdd, String city, String country, int zip) {
+    public Organization(String name, String type, Date doc) {
         this.name = name;
-        this.streetAddress = streetAdd;
-        this.city = city;
-        this.country = country;
-        this.zipCode = zip;
+        this.type = type;
+        this.doc = doc;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
@@ -93,33 +94,25 @@ public abstract class Organization {
         this.workQueue = workQueue;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Date doc) {
+        this.doc = doc;
+    }
+
     @Override
     public String toString() {
         return name;
     }
     
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(int counter) {
-        Organization.counter = counter;
-    }
-       
 }

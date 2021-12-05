@@ -9,6 +9,7 @@ import Business.Organization.Organization;
 import Business.Customer.CustomerDirectory;
 import Business.Network.Network;
 import Business.Network.NetworkDirectory;
+import Business.Organization.Organization;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
@@ -72,7 +73,7 @@ public class EcoSystem extends Organization {
     }
 
     public EcoSystem() {
-        super(null, null, null, null, 0);
+        super(null,null,null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
