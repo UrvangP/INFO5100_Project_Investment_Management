@@ -34,6 +34,7 @@ public class EcoSystem extends Organization {
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
     private NetworkDirectory networkList;
+    private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
     private HashMap<String, String> roleList = new HashMap<String, String>() {
         {
             put("AssetAgentRole", "Business.Role.AssetAgentRole");
@@ -73,7 +74,7 @@ public class EcoSystem extends Organization {
     }
 
     public EcoSystem() {
-        super(null,null,null);
+        super(null, null, null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
@@ -99,6 +100,10 @@ public class EcoSystem extends Organization {
     public Network createNetwork(Network network) {
         networkList.getNetworkList().add(network);
         return network;
+    }
+
+    public HashMap<String, HashMap<String, Boolean>> getEnterpriseSelection() {
+        return enterpriseSelection;
     }
 
     public void generateBrowsingHistoryNetwork(JPanel browsingJPanel) {

@@ -6,8 +6,17 @@
 package userinterface.Enterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 
 /**
@@ -16,6 +25,9 @@ import javax.swing.JSplitPane;
  */
 public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
+    EcoSystem ecosystem;
+    UserAccount account;
+    JSplitPane jSplitPane;
     private String selectedEnterprise;
     private HashMap<String, Boolean> stateSelected = new HashMap<String, Boolean>() {
         {
@@ -38,26 +50,34 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     }
 
     public EnterpriseCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
+        this.ecosystem = ecosystem;
+        this.account = account;
+        this.jSplitPane = jSplitPane;
         initComponents();
         this.selectedEnterprise = "StockMarket";
-        this.assetChecked.setVisible(false);
-        this.forexChecked.setVisible(false);
-        this.cryptoChecked.setVisible(false);
-        this.stockChecked.setVisible(true);
+        this.typeJLabel.setText("StockMarket");
+
+        this.assetChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : true);
+        this.forexChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? false : true);
+        this.cryptoChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("CryptoMarket") == null ? false : true);
+        this.stockChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? false : true);
 
         this.assetMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
         this.cryptoMarketJPanel.setVisible(false);
-        this.stockMarketJPanel.setVisible(true);
+        this.stockMarketJPanel.setVisible(false);
 
-        this.companiesChecked.setVisible(true);
-        this.mutualChecked.setVisible(false);
-        this.industriesChecked.setVisible(true);
-        this.realestateChecked.setVisible(false);
-        this.jewelleyChecked.setVisible(false);
-        this.banksChecked.setVisible(true);
-        this.brokersChecked.setVisible(false);
-        this.walletChecked.setVisible(true);
+        this.companiesChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("StockMarket").get("Companies"));
+        this.mutualChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("StockMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("StockMarket").get("MutualFunds"));
+        this.industriesChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("Industries"));
+        this.realestateChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("RealEstate"));
+        this.jewelleyChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("AssetMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("AssetMarket").get("Jewellery"));
+        this.banksChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("ForexMarket").get("Banks"));
+        this.brokersChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("ForexMarket") == null ? false : this.ecosystem.getEnterpriseSelection().get("ForexMarket").get("Brokers"));
+        this.walletChecked.setVisible(this.ecosystem.getEnterpriseSelection().get("CryptoMarket") == null ? true : this.ecosystem.getEnterpriseSelection().get("CryptoMarket").get("Wallet"));
+
+        this.createdByJLabel.setText(account.getUsername().toString());
+        this.dateOfCreationJLabel.setText(new Date().toString());
     }
 
     /**
@@ -99,6 +119,15 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         cryptoMarketJPanel = new javax.swing.JPanel();
         stockMarketJLabel7 = new javax.swing.JLabel();
         walletChecked = new javax.swing.JLabel();
+        cardentifierJLabel1 = new javax.swing.JLabel();
+        dateOfCreationJLabel = new javax.swing.JTextField();
+        addJButton = new javax.swing.JButton();
+        cardentifierJLabel2 = new javax.swing.JLabel();
+        createdByJLabel = new javax.swing.JTextField();
+        cardentifierJLabel3 = new javax.swing.JLabel();
+        typeJLabel = new javax.swing.JTextField();
+        brandJLabel = new javax.swing.JLabel();
+        countryComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -379,6 +408,90 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        cardentifierJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel1.setText("Date of Creation:");
+
+        dateOfCreationJLabel.setEditable(false);
+        dateOfCreationJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        dateOfCreationJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        dateOfCreationJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        dateOfCreationJLabel.setToolTipText("This is your identifier.");
+        dateOfCreationJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        dateOfCreationJLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateOfCreationJLabelActionPerformed(evt);
+            }
+        });
+
+        addJButton.setBackground(new java.awt.Color(200, 203, 178));
+        addJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        addJButton.setForeground(new java.awt.Color(67, 100, 100));
+        addJButton.setText("ADD");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
+
+        cardentifierJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel2.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel2.setText("Created By:");
+
+        createdByJLabel.setEditable(false);
+        createdByJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        createdByJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        createdByJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        createdByJLabel.setToolTipText("This is your identifier.");
+        createdByJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        createdByJLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createdByJLabelActionPerformed(evt);
+            }
+        });
+
+        cardentifierJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel3.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel3.setText("Name/Type:");
+
+        typeJLabel.setEditable(false);
+        typeJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        typeJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        typeJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        typeJLabel.setToolTipText("This is your identifier.");
+        typeJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        typeJLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeJLabelActionPerformed(evt);
+            }
+        });
+
+        brandJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel.setText("Country (*):");
+
+        countryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling Islands)", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote D'Ivoire (Ivory Coast)", "Croatia (Hrvatska", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France", "Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and McDonald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and The Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovak Republic", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "S. Georgia and S. Sandwich Isls.", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom (Britain / UK)", "United States of America (USA)", "US Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City State (Holy See)", "Venezuela", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (US)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe" }));
+        countryComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                countryComboBoxItemStateChanged(evt);
+            }
+        });
+        countryComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                countryComboBoxFocusGained(evt);
+            }
+        });
+        countryComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countryComboBoxActionPerformed(evt);
+            }
+        });
+        countryComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                countryComboBoxPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -399,32 +512,66 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                     .addComponent(stockChecked))
                 .addGap(138, 138, 138)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(typeJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(dateOfCreationJLabel)
+                    .addComponent(createdByJLabel)
+                    .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stockChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(stockMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(assetChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(assetMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(forexChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(forexMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cryptoChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cryptoMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(stockChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(stockMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(assetChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(assetMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(forexChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(forexMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cryptoChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cryptoMarketJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(typeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardentifierJLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardentifierJLabel1))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardentifierJLabel2))
+                        .addGap(18, 18, 18)
+                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -441,6 +588,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.cryptoMarketJPanel.setVisible(false);
 
         this.selectedEnterprise = "StockMarket";
+        this.typeJLabel.setText("StockMarket");
     }//GEN-LAST:event_stockMarketJLabelMouseClicked
 
     private void assetMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assetMarketJLabelMouseClicked
@@ -455,6 +603,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.forexMarketJPanel.setVisible(false);
 
         this.selectedEnterprise = "AssetMarket";
+        this.typeJLabel.setText("AssetMarket");
+
     }//GEN-LAST:event_assetMarketJLabelMouseClicked
 
     private void forexMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forexMarketJLabelMouseClicked
@@ -468,6 +618,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.forexMarketJPanel.setVisible(true);
         this.cryptoMarketJPanel.setVisible(false);
         this.selectedEnterprise = "ForexMarket";
+        this.typeJLabel.setText("ForexMarket");
+
 
     }//GEN-LAST:event_forexMarketJLabelMouseClicked
 
@@ -482,6 +634,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.forexMarketJPanel.setVisible(false);
         this.cryptoMarketJPanel.setVisible(true);
         this.selectedEnterprise = "CryptoMarket";
+        this.typeJLabel.setText("CryptoMarket");
+
     }//GEN-LAST:event_cryptoMarketJLabelMouseClicked
 
     private void stockMarketJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMarketJLabel1MouseClicked
@@ -532,17 +686,99 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.stateSelected.put("brokersSelected", !value);
     }//GEN-LAST:event_stockMarketJLabel8MouseClicked
 
+    private void dateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfCreationJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
+
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        Enterprise tempStorage;
+        String name = null;
+        Enterprise.EnterpriseType type = null;
+
+        if (this.selectedEnterprise == "AssetMarket") {
+            name = "AssetMarket";
+            type = Enterprise.EnterpriseType.AssetMarket;
+            this.ecosystem.getEnterpriseSelection().put("AssetMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("AssetMarket");
+            visibility.put("Industries", this.industriesChecked.isVisible());
+            visibility.put("RealEstate", this.realestateChecked.isVisible());
+            visibility.put("Jewellery", this.jewelleyChecked.isVisible());
+        } else if (this.selectedEnterprise == "CryptoMarket") {
+            name = "CryptoMarket";
+            type = Enterprise.EnterpriseType.CryptoMarket;
+            this.ecosystem.getEnterpriseSelection().put("CryptoMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("CryptoMarket");
+            visibility.put("Wallet", this.walletChecked.isVisible());
+        } else if (this.selectedEnterprise == "ForexMarket") {
+            name = "ForexMarket";
+            type = Enterprise.EnterpriseType.ForexMarket;
+            this.ecosystem.getEnterpriseSelection().put("ForexMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("ForexMarket");
+            visibility.put("Banks", this.banksChecked.isVisible());
+            visibility.put("Brokers", this.brokersChecked.isVisible());
+        } else {
+            name = "StockMarket";
+            type = Enterprise.EnterpriseType.StockMarket;
+            tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account);
+            this.ecosystem.getEnterpriseSelection().put("StockMarket", new HashMap<String, Boolean>());
+            HashMap<String, Boolean> visibility = this.ecosystem.getEnterpriseSelection().get("StockMarket");
+            visibility.put("Companies", this.companiesChecked.isVisible());
+            visibility.put("MutualFunds", this.mutualChecked.isVisible());
+        }
+
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing.getIsSelected()) {
+                Integer index = this.ecosystem.getNetwork().getNetworkList().indexOf(ongoing);
+                this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account);
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void createdByJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdByJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createdByJLabelActionPerformed
+
+    private void typeJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typeJLabelActionPerformed
+
+    private void countryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_countryComboBoxItemStateChanged
+        //TOdo
+    }//GEN-LAST:event_countryComboBoxItemStateChanged
+
+    private void countryComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_countryComboBoxFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countryComboBoxFocusGained
+
+    private void countryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countryComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countryComboBoxActionPerformed
+
+    private void countryComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_countryComboBoxPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countryComboBoxPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addJButton;
     private javax.swing.JLabel assetChecked;
     private javax.swing.JLabel assetMarketJLabel;
     private javax.swing.JPanel assetMarketJPanel;
     private javax.swing.JLabel banksChecked;
+    private javax.swing.JLabel brandJLabel;
     private javax.swing.JLabel brokersChecked;
+    private javax.swing.JLabel cardentifierJLabel1;
+    private javax.swing.JLabel cardentifierJLabel2;
+    private javax.swing.JLabel cardentifierJLabel3;
     private javax.swing.JLabel companiesChecked;
+    private javax.swing.JComboBox<String> countryComboBox;
+    private javax.swing.JTextField createdByJLabel;
     private javax.swing.JLabel cryptoChecked;
     private javax.swing.JLabel cryptoMarketJLabel;
     private javax.swing.JPanel cryptoMarketJPanel;
+    private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel forexChecked;
     private javax.swing.JLabel forexMarketJLabel;
     private javax.swing.JPanel forexMarketJPanel;
@@ -563,6 +799,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel stockMarketJLabel7;
     private javax.swing.JLabel stockMarketJLabel8;
     private javax.swing.JPanel stockMarketJPanel;
+    private javax.swing.JTextField typeJLabel;
     private javax.swing.JLabel walletChecked;
     // End of variables declaration//GEN-END:variables
 
