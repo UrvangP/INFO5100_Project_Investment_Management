@@ -15,8 +15,7 @@ import javax.swing.JPanel;
  */
 public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
 
-  
-    public CryptoMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public CryptoMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

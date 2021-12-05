@@ -19,6 +19,7 @@ public class Network {
     private String NCountry;
     private Date NDateOfCreation;
     private UserAccount NCreatedBy;
+    private Boolean isSelected;
     private EnterpriseDirectory enterpriseDirectory;
 
     /**
@@ -89,6 +90,20 @@ public class Network {
      */
     public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
         this.enterpriseDirectory = enterpriseDirectory;
+    }
+
+    /**
+     * @return the isSelected
+     */
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * @param isSelected the isSelected to set
+     */
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
    
     

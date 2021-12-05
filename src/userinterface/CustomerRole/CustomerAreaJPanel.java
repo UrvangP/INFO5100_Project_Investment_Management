@@ -22,7 +22,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private UserAccount userAccount;
 
-    public CustomerAreaJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public CustomerAreaJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;

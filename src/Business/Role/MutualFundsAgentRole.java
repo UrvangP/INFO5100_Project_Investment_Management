@@ -17,8 +17,8 @@ import userinterface.MutualFundsAgentRole.MutualFundsAgentJPanel;
 public class MutualFundsAgentRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new MutualFundsAgentJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, JPanel browsingJPanel) {
+        return new MutualFundsAgentJPanel(userProcessContainer, account, business, browsingJPanel);//To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

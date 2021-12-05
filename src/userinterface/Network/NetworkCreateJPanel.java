@@ -328,8 +328,11 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         network.setNName(this.nameJField.getText());
         network.setNCountry(this.countryComboBox.getSelectedItem().toString());
         network.setNCreatedBy(this.account);
+        network.setIsSelected(false);
         this.ecosystem.createNetwork(network);
         JOptionPane.showMessageDialog(this, "Network created successfully!", "Create Network", INFORMATION_MESSAGE);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked

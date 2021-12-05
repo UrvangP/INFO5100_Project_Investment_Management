@@ -9,6 +9,9 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 
 /**
@@ -22,23 +25,35 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     Network selectedNetwork;
     Integer selectedNetworkIndex;
-    
+
     NetworkViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
-        _getAllNetworks();
+
+        if (this.ecosystem.getNetwork().getNetworkList().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No Network Found. Please create one!", "Network", ERROR_MESSAGE);
+        } else {
+            _getAllNetworks();
+        }
     }
 
     public void _getAllNetworks() {
         DefaultListModel model = new DefaultListModel();
         this.networkJList.setModel(model);
+        Boolean isAnySelected = false;
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
             model.addElement(ongoing.getNName());
+            if (ongoing.getIsSelected()) {
+                isAnySelected = true;
+            }
         }
         this.networkJList.setModel(model);
+        if (!isAnySelected) {
+            this.ecosystem.getNetwork().getNetworkList().get(0).setIsSelected(true);
+        }
     }
 
     /**
@@ -65,6 +80,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         viewJLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         networkJList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,11 +248,22 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(networkJList);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/select.png"))); // NOI18N
+        jLabel2.setText(" Select this!");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 861, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(665, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(87, 87, 87))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -269,7 +296,10 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(142, 142, 142))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(13, 13, 13)
@@ -370,6 +400,19 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         openSelectedNetwork();
     }//GEN-LAST:event_networkJListValueChanged
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing == this.selectedNetwork) {
+                ongoing.setIsSelected(true);
+            } else {
+                ongoing.setIsSelected(!true);
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Network selected successfully!", "Network", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     public void openSelectedNetwork() {
         selectedNetworkIndex = this.networkJList.getSelectedIndex();
         if (selectedNetworkIndex != -1) {
@@ -390,6 +433,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel exitJLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameJField;

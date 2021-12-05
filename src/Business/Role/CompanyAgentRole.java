@@ -17,8 +17,8 @@ import userinterface.CompanyAgentRole.CompanyAgentJPanel;
 public class CompanyAgentRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new CompanyAgentJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, JPanel browsingJPanel) {
+        return new CompanyAgentJPanel(userProcessContainer, account, business, browsingJPanel);//To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.MutualFundsAgentRole;
+package userinterface.Organization;
 
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
-import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 /**
  *
  * @author prathameshnemade
  */
-public class MutualFundsAgentJPanel extends javax.swing.JPanel {
+public class OrganizationCreateJPanel extends javax.swing.JPanel {
 
-    public MutualFundsAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
+    public OrganizationCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
         initComponents();
     }
 
@@ -28,19 +28,31 @@ public class MutualFundsAgentJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Add a Organization");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(272, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

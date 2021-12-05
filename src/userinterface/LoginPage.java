@@ -35,6 +35,7 @@ public class LoginPage extends javax.swing.JPanel {
     private JPanel rootJPanel;
     private JButton logoutJButton;
     private EcoSystem system;
+    JPanel browsingJPanel;
 
     /**
      * Creates new form LoginPage
@@ -44,14 +45,16 @@ public class LoginPage extends javax.swing.JPanel {
      * @param logoutJButton
      * @param system
      */
-    public LoginPage(JFrame rootFrame, JPanel rootJPanel, JButton logoutJButton, EcoSystem system) {
+    public LoginPage(JFrame rootFrame, JPanel rootJPanel, JButton logoutJButton, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
         this.rootFrame = rootFrame;
         this.rootJPanel = rootJPanel;
         this.logoutJButton = logoutJButton;
+        this.browsingJPanel = browsingJPanel;
         this.system = system;
         this.emailIDJField.setText("sysadmin");
         this.passwordJField.setText("sysadmin");
+        this.browsingJPanel.setVisible(false);
     }
 
     /**
@@ -180,57 +183,57 @@ public class LoginPage extends javax.swing.JPanel {
     public void redirectToPanel(UserAccount account) {
         this.logoutJButton.setVisible(true);
         if (account.getRole().toString().equals(this.system.getRolesList().get("SystemAdminRole"))) {
-            SystemAdminWorkAreaJPanel systemAdminWorkAreaJPanel = new SystemAdminWorkAreaJPanel(this.rootJPanel, account, system);
+            SystemAdminWorkAreaJPanel systemAdminWorkAreaJPanel = new SystemAdminWorkAreaJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(systemAdminWorkAreaJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("AssetAgentRole"))) {
-            AssetAgentJPanel assetAgentJPanel = new AssetAgentJPanel(this.rootJPanel, account, system);
+            AssetAgentJPanel assetAgentJPanel = new AssetAgentJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(assetAgentJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("AssetMarketAdminRole"))) {
-            AssetMarketAdminJPanel assetMarketAdminJPanel = new AssetMarketAdminJPanel(this.rootJPanel, account, system);
+            AssetMarketAdminJPanel assetMarketAdminJPanel = new AssetMarketAdminJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(assetMarketAdminJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("CompanyAgentRole"))) {
-            CompanyAgentJPanel companyAgentJPanel = new CompanyAgentJPanel(this.rootJPanel, account, system);
+            CompanyAgentJPanel companyAgentJPanel = new CompanyAgentJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(companyAgentJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("CryptoAgentRole"))) {
-            CryptoAgentJPanel cryptoAgentJPanel = new CryptoAgentJPanel(this.rootJPanel, account, system);
+            CryptoAgentJPanel cryptoAgentJPanel = new CryptoAgentJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(cryptoAgentJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("CryptoMarketAdminRole"))) {
-            CryptoMarketAdminJPanel cryptoMarketAdminJPanel = new CryptoMarketAdminJPanel(this.rootJPanel, account, system);
+            CryptoMarketAdminJPanel cryptoMarketAdminJPanel = new CryptoMarketAdminJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(cryptoMarketAdminJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("CustomerRole"))) {
-            CustomerAreaJPanel customerAreaJPanel = new CustomerAreaJPanel(this.rootJPanel, account, system);
+            CustomerAreaJPanel customerAreaJPanel = new CustomerAreaJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(customerAreaJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("ForexAgentRole"))) {
-            ForexAgentJPanel forexAgentJPanel = new ForexAgentJPanel(this.rootJPanel, account, system);
+            ForexAgentJPanel forexAgentJPanel = new ForexAgentJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(forexAgentJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("ForexMarketAdminRole"))) {
-            ForexMarketAdminJPanel forexMarketAdminJPanel = new ForexMarketAdminJPanel(this.rootJPanel, account, system);
+            ForexMarketAdminJPanel forexMarketAdminJPanel = new ForexMarketAdminJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(forexMarketAdminJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("MutualFundsAgentRole"))) {
-            MutualFundsAgentJPanel mutualFundsAgentJPanel = new MutualFundsAgentJPanel(this.rootJPanel, account, system);
+            MutualFundsAgentJPanel mutualFundsAgentJPanel = new MutualFundsAgentJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(mutualFundsAgentJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("StockMarketAdminRole"))) {
-            StockMarketAdminJPanel stockMarketAdminJPanel = new StockMarketAdminJPanel(this.rootJPanel, account, system);
+            StockMarketAdminJPanel stockMarketAdminJPanel = new StockMarketAdminJPanel(this.rootJPanel, account, system, browsingJPanel);
             this.rootJPanel.add(stockMarketAdminJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
@@ -266,7 +269,7 @@ public class LoginPage extends javax.swing.JPanel {
     }//GEN-LAST:event_emailIDJFieldActionPerformed
 
     private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
-        RegisterPage registerPage = new RegisterPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system);
+        RegisterPage registerPage = new RegisterPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system, this.browsingJPanel);
         this.rootJPanel.add(registerPage);
         CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
         layout.next(this.rootJPanel);

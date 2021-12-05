@@ -13,8 +13,15 @@ import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.WorkQueue.WorkQueue;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -91,5 +98,17 @@ public class EcoSystem extends Organization {
     public Network createNetwork(Network network) {
         networkList.getNetworkList().add(network);
         return network;
+    }
+
+    public void generateBrowsingHistoryNetwork(JPanel browsingJPanel) {
+        String value = "Not Selected";
+        for (int i = 0; i < this.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.getNetwork().getNetworkList().get(i);
+            if (ongoing.getIsSelected()) {
+                value = "Selected: " + ongoing.getNCountry() + " - " + ongoing.getNName();
+            }
+        }
+        JLabel tempText = (JLabel) browsingJPanel.getComponent(0);
+        tempText.setText("Network ( " + value + " ) -->");
     }
 }

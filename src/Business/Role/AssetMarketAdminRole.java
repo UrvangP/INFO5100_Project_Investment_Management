@@ -17,8 +17,8 @@ import userinterface.AssetMarketAdminRole.AssetMarketAdminJPanel;
 public class AssetMarketAdminRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new AssetMarketAdminJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, JPanel browsingJPanel) {
+        return new AssetMarketAdminJPanel(userProcessContainer, account, business, browsingJPanel);//To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

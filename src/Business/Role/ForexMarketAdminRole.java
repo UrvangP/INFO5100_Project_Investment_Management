@@ -17,8 +17,8 @@ import userinterface.ForexMarketAdminRole.ForexMarketAdminJPanel;
 public class ForexMarketAdminRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new ForexMarketAdminJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, JPanel browsingJPanel) {
+        return new ForexMarketAdminJPanel(userProcessContainer, account, business, browsingJPanel);//To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
