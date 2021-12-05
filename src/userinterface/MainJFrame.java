@@ -27,7 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 1680, 1050);
         this.logoutJButton.setVisible(false);
         system = DB4OUtil.getInstance().retrieveSystem();
-        LoginPage loginPage = new LoginPage(this, this.rootJPanel, this.logoutJButton, system);
+        LoginPage loginPage = new LoginPage(this, this.rootJPanel, this.logoutJButton, system, this.browsingJPanel);
         this.rootJPanel.add(loginPage);
         CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
         layout.next(this.rootJPanel);
@@ -47,6 +47,8 @@ public class MainJFrame extends javax.swing.JFrame {
         logoutJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         rootJPanel = new javax.swing.JPanel();
+        browsingJPanel = new javax.swing.JPanel();
+        browsingLevelJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +106,28 @@ public class MainJFrame extends javax.swing.JFrame {
 
         rootJPanel.setLayout(new java.awt.CardLayout());
 
+        browsingJPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        browsingLevelJLabel.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 15)); // NOI18N
+        browsingLevelJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout browsingJPanelLayout = new javax.swing.GroupLayout(browsingJPanel);
+        browsingJPanel.setLayout(browsingJPanelLayout);
+        browsingJPanelLayout.setHorizontalGroup(
+            browsingJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(browsingJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(browsingLevelJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        browsingJPanelLayout.setVerticalGroup(
+            browsingJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(browsingJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(browsingLevelJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,6 +135,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(browsingJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(rootJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -121,6 +146,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(logoutJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(browsingJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rootJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,7 +156,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
         this.logoutJButton.setVisible(false);
-        LoginPage loginPage = new LoginPage(this, this.rootJPanel, this.logoutJButton, system);
+        LoginPage loginPage = new LoginPage(this, this.rootJPanel, this.logoutJButton, system, this.browsingJPanel);
         this.rootJPanel.add(loginPage);
         CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
         layout.next(this.rootJPanel);
@@ -176,6 +203,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel browsingJPanel;
+    private javax.swing.JLabel browsingLevelJLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logoutJButton;

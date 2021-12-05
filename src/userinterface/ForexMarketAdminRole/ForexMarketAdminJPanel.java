@@ -15,8 +15,7 @@ import javax.swing.JPanel;
  */
 public class ForexMarketAdminJPanel extends javax.swing.JPanel {
 
- 
-    public ForexMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public ForexMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

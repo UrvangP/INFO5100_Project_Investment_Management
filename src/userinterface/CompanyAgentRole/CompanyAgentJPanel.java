@@ -15,8 +15,7 @@ import javax.swing.JPanel;
  */
 public class CompanyAgentJPanel extends javax.swing.JPanel {
 
-
-    public CompanyAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public CompanyAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

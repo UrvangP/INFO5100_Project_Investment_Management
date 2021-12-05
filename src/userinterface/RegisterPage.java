@@ -27,6 +27,7 @@ public class RegisterPage extends javax.swing.JPanel {
     private JPanel rootJPanel;
     private JButton logoutJButton;
     private EcoSystem system;
+    JPanel browsingJPanel;
 
     /**
      * Creates new form LoginPage
@@ -37,12 +38,13 @@ public class RegisterPage extends javax.swing.JPanel {
      * @param logoutJButton
      * @param system
      */
-    public RegisterPage(JFrame rootFrame, JPanel rootJPanel, JButton logoutJButton, EcoSystem system) {
+    public RegisterPage(JFrame rootFrame, JPanel rootJPanel, JButton logoutJButton, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
         this.rootFrame = rootFrame;
         this.rootJPanel = rootJPanel;
         this.logoutJButton = logoutJButton;
         this.system = system;
+        this.browsingJPanel = browsingJPanel;
     }
 
     /**
@@ -174,7 +176,7 @@ public class RegisterPage extends javax.swing.JPanel {
             (DB4OUtil.getInstance()).storeSystem(system);
             JOptionPane.showMessageDialog(this, "Registered Successfully!", "Register", INFORMATION_MESSAGE);
 
-            LoginPage loginPage = new LoginPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system);
+            LoginPage loginPage = new LoginPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system, this.browsingJPanel);
             this.rootJPanel.add(loginPage);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
@@ -199,7 +201,7 @@ public class RegisterPage extends javax.swing.JPanel {
     }//GEN-LAST:event_emailIDJFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        LoginPage loginPage = new LoginPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system);
+        LoginPage loginPage = new LoginPage(this.rootFrame, this.rootJPanel, this.logoutJButton, system, this.browsingJPanel);
         this.rootJPanel.add(loginPage);
         CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
         layout.next(this.rootJPanel);

@@ -11,6 +11,7 @@ import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 /**
  *
  * @author raunak
@@ -18,8 +19,13 @@ import java.util.Date;
 public abstract class Organization {
 
     private String name;
+    private String streetAddress;
+    private String city;
+    private String country;
+    private int zipCode;
     private String type;
     private Date doc;
+
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
@@ -35,8 +41,7 @@ public abstract class Organization {
         Banks("Banks"),
         Brokers("Brokers"),
         Wallet("Wallet");
-        
-        
+
         private String value;
         private Type(String value) {
             this.value = value;
@@ -109,6 +114,5 @@ public abstract class Organization {
     public String toString() {
         return name;
     }
-    
     
 }

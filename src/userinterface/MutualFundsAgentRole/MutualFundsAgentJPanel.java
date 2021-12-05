@@ -15,9 +15,7 @@ import javax.swing.JPanel;
  */
 public class MutualFundsAgentJPanel extends javax.swing.JPanel {
 
-   
-
-    public MutualFundsAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public MutualFundsAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

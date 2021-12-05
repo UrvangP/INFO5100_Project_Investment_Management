@@ -52,7 +52,8 @@ public abstract class Role {
 
     public abstract JPanel createWorkArea(JPanel userProcessContainer,
             UserAccount account,
-            EcoSystem business);
+            EcoSystem business,
+            JPanel browsingJPanel);
 
     @Override
     public String toString() {

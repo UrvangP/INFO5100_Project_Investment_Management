@@ -6,9 +6,17 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.awt.FlowLayout;
+import java.util.HashMap;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import javax.swing.JPanel;
+import userinterface.Enterprise.EnterpriseCreateJPanel;
+import userinterface.Network.NetworkCreateJPanel;
+import userinterface.Organization.OrganizationCreateJPanel;
 
 /**
  *
@@ -22,12 +30,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     EcoSystem ecosystem;
     UserAccount account;
+    JPanel browsingJPanel;
 
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem, JPanel browsingJPanel) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.account = account;
+        this.browsingJPanel = browsingJPanel;
+        this.browsingJPanel.setVisible(true);
         userNameJLabel.setText(account.getUsername());
 
         SystemAdminDashboard updateProfileAdmin = new SystemAdminDashboard(ecosystem, account, jSplitPane);
@@ -45,17 +56,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        networkButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         userNameJLabel = new javax.swing.JLabel();
-        AccountCreationJButton = new javax.swing.JButton();
-        AccountCreationJButton1 = new javax.swing.JButton();
-        AccountCreationJButton2 = new javax.swing.JButton();
-        OrderCreationJButton = new javax.swing.JButton();
-        OrderCreationJButton1 = new javax.swing.JButton();
-        OrderCreationJButton2 = new javax.swing.JButton();
-        AllOrdersJButton = new javax.swing.JButton();
-        OrderCreationJButton3 = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
+        oraganizationButton = new javax.swing.JButton();
+        oraganizationButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -63,14 +69,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton5.setBackground(new java.awt.Color(200, 203, 178));
-        jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(67, 100, 100));
-        jButton5.setText("Home");
-        jButton5.setBorder(null);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        networkButton.setBackground(new java.awt.Color(200, 203, 178));
+        networkButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        networkButton.setForeground(new java.awt.Color(67, 100, 100));
+        networkButton.setText("Network");
+        networkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                networkButtonActionPerformed(evt);
             }
         });
 
@@ -80,83 +85,34 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         userNameJLabel.setFont(new java.awt.Font("Noto Sans Oriya", 1, 36)); // NOI18N
         userNameJLabel.setText("System Admin!");
 
-        AccountCreationJButton.setBackground(new java.awt.Color(200, 203, 178));
-        AccountCreationJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        AccountCreationJButton.setForeground(new java.awt.Color(67, 100, 100));
-        AccountCreationJButton.setText("Account Creation");
-        AccountCreationJButton.addActionListener(new java.awt.event.ActionListener() {
+        homeButton.setBackground(new java.awt.Color(200, 203, 178));
+        homeButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(67, 100, 100));
+        homeButton.setText("Home");
+        homeButton.setBorder(null);
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AccountCreationJButtonActionPerformed(evt);
+                homeButtonActionPerformed(evt);
             }
         });
 
-        AccountCreationJButton1.setBackground(new java.awt.Color(200, 203, 178));
-        AccountCreationJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        AccountCreationJButton1.setForeground(new java.awt.Color(67, 100, 100));
-        AccountCreationJButton1.setText("Account Update");
-        AccountCreationJButton1.addActionListener(new java.awt.event.ActionListener() {
+        oraganizationButton.setBackground(new java.awt.Color(200, 203, 178));
+        oraganizationButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        oraganizationButton.setForeground(new java.awt.Color(67, 100, 100));
+        oraganizationButton.setText("Organizations");
+        oraganizationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AccountCreationJButton1ActionPerformed(evt);
+                oraganizationButtonActionPerformed(evt);
             }
         });
 
-        AccountCreationJButton2.setBackground(new java.awt.Color(200, 203, 178));
-        AccountCreationJButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        AccountCreationJButton2.setForeground(new java.awt.Color(67, 100, 100));
-        AccountCreationJButton2.setText("Create Restaurant");
-        AccountCreationJButton2.addActionListener(new java.awt.event.ActionListener() {
+        oraganizationButton1.setBackground(new java.awt.Color(200, 203, 178));
+        oraganizationButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        oraganizationButton1.setForeground(new java.awt.Color(67, 100, 100));
+        oraganizationButton1.setText("Enterprise");
+        oraganizationButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AccountCreationJButton2ActionPerformed(evt);
-            }
-        });
-
-        OrderCreationJButton.setBackground(new java.awt.Color(200, 203, 178));
-        OrderCreationJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        OrderCreationJButton.setForeground(new java.awt.Color(67, 100, 100));
-        OrderCreationJButton.setText("Order Creation");
-        OrderCreationJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderCreationJButtonActionPerformed(evt);
-            }
-        });
-
-        OrderCreationJButton1.setBackground(new java.awt.Color(200, 203, 178));
-        OrderCreationJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        OrderCreationJButton1.setForeground(new java.awt.Color(67, 100, 100));
-        OrderCreationJButton1.setText("Order Assignment");
-        OrderCreationJButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderCreationJButton1ActionPerformed(evt);
-            }
-        });
-
-        OrderCreationJButton2.setBackground(new java.awt.Color(200, 203, 178));
-        OrderCreationJButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        OrderCreationJButton2.setForeground(new java.awt.Color(67, 100, 100));
-        OrderCreationJButton2.setText("Change Order Delivery Status");
-        OrderCreationJButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderCreationJButton2ActionPerformed(evt);
-            }
-        });
-
-        AllOrdersJButton.setBackground(new java.awt.Color(200, 203, 178));
-        AllOrdersJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        AllOrdersJButton.setForeground(new java.awt.Color(67, 100, 100));
-        AllOrdersJButton.setText("All Orders");
-        AllOrdersJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AllOrdersJButtonActionPerformed(evt);
-            }
-        });
-
-        OrderCreationJButton3.setBackground(new java.awt.Color(200, 203, 178));
-        OrderCreationJButton3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        OrderCreationJButton3.setForeground(new java.awt.Color(67, 100, 100));
-        OrderCreationJButton3.setText("Change Status");
-        OrderCreationJButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderCreationJButton3ActionPerformed(evt);
+                oraganizationButton1ActionPerformed(evt);
             }
         });
 
@@ -167,20 +123,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userNameJLabel))
-                    .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AccountCreationJButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrderCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrderCreationJButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrderCreationJButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AllOrdersJButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrderCreationJButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(userNameJLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(networkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oraganizationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oraganizationButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,25 +145,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(userNameJLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AccountCreationJButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OrderCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OrderCreationJButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OrderCreationJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OrderCreationJButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AllOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(78, 78, 78)
+                .addComponent(networkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(oraganizationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(oraganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(297, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(85, 85, 85)
+                    .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(483, Short.MAX_VALUE)))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -236,59 +185,39 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         add(jSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void networkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkButtonActionPerformed
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(networkCreateJPanel);
+        this.ecosystem.generateBrowsingHistoryNetwork(browsingJPanel);
+    }//GEN-LAST:event_networkButtonActionPerformed
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         SystemAdminDashboard createAdmin = new SystemAdminDashboard(ecosystem, account, jSplitPane);
         this.jSplitPane.setRightComponent(createAdmin);
-    }//GEN-LAST:event_jButton5ActionPerformed
+        this.ecosystem.generateBrowsingHistoryNetwork(browsingJPanel);
+    }//GEN-LAST:event_homeButtonActionPerformed
 
-    private void AccountCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButtonActionPerformed
+    private void oraganizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oraganizationButtonActionPerformed
+        OrganizationCreateJPanel organizationCreateJPanel = new OrganizationCreateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(organizationCreateJPanel);
+    }//GEN-LAST:event_oraganizationButtonActionPerformed
 
-    }//GEN-LAST:event_AccountCreationJButtonActionPerformed
-
-    private void AccountCreationJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButton1ActionPerformed
-   
-    }//GEN-LAST:event_AccountCreationJButton1ActionPerformed
-
-    private void AccountCreationJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButton2ActionPerformed
-
-    }//GEN-LAST:event_AccountCreationJButton2ActionPerformed
-
-    private void OrderCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderCreationJButtonActionPerformed
-
-    }//GEN-LAST:event_OrderCreationJButtonActionPerformed
-
-    private void OrderCreationJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderCreationJButton1ActionPerformed
-
-    }//GEN-LAST:event_OrderCreationJButton1ActionPerformed
-
-    private void OrderCreationJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderCreationJButton2ActionPerformed
-
-    }//GEN-LAST:event_OrderCreationJButton2ActionPerformed
-
-    private void AllOrdersJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllOrdersJButtonActionPerformed
-
-    }//GEN-LAST:event_AllOrdersJButtonActionPerformed
-
-    private void OrderCreationJButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderCreationJButton3ActionPerformed
-
-    }//GEN-LAST:event_OrderCreationJButton3ActionPerformed
+    private void oraganizationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oraganizationButton1ActionPerformed
+        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
+    }//GEN-LAST:event_oraganizationButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AccountCreationJButton;
-    private javax.swing.JButton AccountCreationJButton1;
-    private javax.swing.JButton AccountCreationJButton2;
-    private javax.swing.JButton AllOrdersJButton;
-    private javax.swing.JButton OrderCreationJButton;
-    private javax.swing.JButton OrderCreationJButton1;
-    private javax.swing.JButton OrderCreationJButton2;
-    private javax.swing.JButton OrderCreationJButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JButton networkButton;
+    private javax.swing.JButton oraganizationButton;
+    private javax.swing.JButton oraganizationButton1;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

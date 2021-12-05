@@ -15,8 +15,7 @@ import javax.swing.JPanel;
  */
 public class StockMarketAdminJPanel extends javax.swing.JPanel {
 
-   
-    public StockMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public StockMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

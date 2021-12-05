@@ -15,8 +15,7 @@ import javax.swing.JPanel;
  */
 public class CryptoAgentJPanel extends javax.swing.JPanel {
 
-  
-    public CryptoAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public CryptoAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
     }
 

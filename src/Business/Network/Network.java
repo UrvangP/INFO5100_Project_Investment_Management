@@ -6,6 +6,7 @@
 package Business.Network;
 
 import Business.Enterprise.EnterpriseDirectory;
+import Business.UserAccount.UserAccount;
 import java.util.Date;
 
 /**
@@ -14,41 +15,96 @@ import java.util.Date;
  */
 public class Network {
     
-    private String networkName;
-    private String networkCountry;
+    private String NName;
+    private String NCountry;
+    private Date NDateOfCreation;
+    private UserAccount NCreatedBy;
+    private Boolean isSelected;
+    private EnterpriseDirectory enterpriseDirectory;
 
-    public String getNetworkName() {
-        return networkName;
+    /**
+     * @return the NName
+     */
+    public String getNName() {
+        return NName;
     }
 
-    public void setNetworkName(String networkName) {
-        this.networkName = networkName;
+    /**
+     * @param NName the NName to set
+     */
+    public void setNName(String NName) {
+        this.NName = NName;
     }
 
-    public String getNetworkCountry() {
-        return networkCountry;
+    /**
+     * @return the NCountry
+     */
+    public String getNCountry() {
+        return NCountry;
     }
 
-    public void setNetworkCountry(String networkCountry) {
-        this.networkCountry = networkCountry;
+    /**
+     * @param NCountry the NCountry to set
+     */
+    public void setNCountry(String NCountry) {
+        this.NCountry = NCountry;
     }
 
-    public Date getRegistrationDate() {
-        return registrationDate;
+    /**
+     * @return the NDateOfCreation
+     */
+    public Date getNDateOfCreation() {
+        return NDateOfCreation;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
+    /**
+     * @param NDateOfCreation the NDateOfCreation to set
+     */
+    public void setNDateOfCreation(Date NDateOfCreation) {
+        this.NDateOfCreation = NDateOfCreation;
     }
 
+    /**
+     * @return the NCreatedBy
+     */
+    public UserAccount getNCreatedBy() {
+        return NCreatedBy;
+    }
+
+    /**
+     * @param NCreatedBy the NCreatedBy to set
+     */
+    public void setNCreatedBy(UserAccount NCreatedBy) {
+        this.NCreatedBy = NCreatedBy;
+    }
+
+    /**
+     * @return the enterpriseDirectory
+     */
     public EnterpriseDirectory getEnterpriseDirectory() {
         return enterpriseDirectory;
     }
 
+    /**
+     * @param enterpriseDirectory the enterpriseDirectory to set
+     */
     public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
         this.enterpriseDirectory = enterpriseDirectory;
     }
-    private Date registrationDate;
+
+    /**
+     * @return the isSelected
+     */
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * @param isSelected the isSelected to set
+     */
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+   
     
-    private EnterpriseDirectory enterpriseDirectory;
 }

@@ -5,16 +5,24 @@
  */
 package Business;
 
+import Business.Organization.Organization;
 import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Network.Network;
 import Business.Network.NetworkDirectory;
 import Business.Organization.Organization;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.WorkQueue.WorkQueue;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -25,7 +33,6 @@ public class EcoSystem extends Organization {
     private static EcoSystem business;
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
-    private DeliveryManDirectory deliveryManDirectory;
     private NetworkDirectory networkList;
     private HashMap<String, String> roleList = new HashMap<String, String>() {
         {
@@ -44,11 +51,10 @@ public class EcoSystem extends Organization {
         }
     };
 
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
+    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
 
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
-        this.deliveryManDirectory = deliveryManDirectory;
         this.networkList = networkList;
     }
 
@@ -70,8 +76,7 @@ public class EcoSystem extends Organization {
         super(null,null,null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
-        this.deliveryManDirectory = new DeliveryManDirectory();
-        // networkList=new ArrayList<Network>();
+        this.networkList = new NetworkDirectory();
     }
 
     public RestaurantDirectory getRestaurantDirectory() {
@@ -85,5 +90,26 @@ public class EcoSystem extends Organization {
 
     public HashMap<String, String> getRolesList() {
         return roleList;
+    }
+
+    public NetworkDirectory getNetwork() {
+        return networkList;
+    }
+
+    public Network createNetwork(Network network) {
+        networkList.getNetworkList().add(network);
+        return network;
+    }
+
+    public void generateBrowsingHistoryNetwork(JPanel browsingJPanel) {
+        String value = "Not Selected";
+        for (int i = 0; i < this.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.getNetwork().getNetworkList().get(i);
+            if (ongoing.getIsSelected()) {
+                value = "Selected: " + ongoing.getNCountry() + " - " + ongoing.getNName();
+            }
+        }
+        JLabel tempText = (JLabel) browsingJPanel.getComponent(0);
+        tempText.setText("Network ( " + value + " ) -->");
     }
 }

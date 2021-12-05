@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Business.Organization;
-
 import Business.Organization.Organization.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,5 +74,5 @@ public class OrganizationDirectory {
         }
         return null;
     }
-    
+
 }

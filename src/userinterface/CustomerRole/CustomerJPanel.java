@@ -5,7 +5,6 @@
  */
 package userinterface.CustomerRole;
 
-import userinterface.RestaurantAdminRole.*;
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
