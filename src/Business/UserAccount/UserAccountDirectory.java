@@ -64,4 +64,15 @@ public class UserAccountDirectory {
         }
         return accountToSend;
     }
+    
+    public UserAccount getAccountOnUsername(String name) {
+        UserAccount accountToSend = null;
+        for (int i = 0; i < this.userAccountList.size(); i++) {
+            UserAccount ongoing = this.userAccountList.get(i);
+            if(ongoing.getUsername().equals(name)){
+                accountToSend = ongoing;
+            }
+        }
+        return accountToSend;
+    }
 }

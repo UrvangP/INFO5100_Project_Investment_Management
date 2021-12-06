@@ -14,6 +14,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import userinterface.Enterprise.EnterpriseViewJPanel;
 import userinterface.Network.NetworkViewJPanel;
+import userinterface.StockMarketAdminRole.companyOrganizationPanel;
+import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
  *
@@ -338,6 +340,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void stockMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockMarketButtonActionPerformed
         // TODO add your handling code here:
+        stockMarketDashboard smDash = new stockMarketDashboard(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(smDash);
     }//GEN-LAST:event_stockMarketButtonActionPerformed
 
     private void cryptoMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoMarketButtonActionPerformed

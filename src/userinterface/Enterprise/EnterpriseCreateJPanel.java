@@ -574,7 +574,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         cardentifierJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         cardentifierJLabel3.setForeground(new java.awt.Color(67, 100, 100));
-        cardentifierJLabel3.setText("Name/Type:");
+        cardentifierJLabel3.setText("Name:");
 
         typeJLabel.setEditable(false);
         typeJLabel.setBackground(new java.awt.Color(216, 220, 228));

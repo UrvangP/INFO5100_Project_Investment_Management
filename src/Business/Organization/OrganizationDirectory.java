@@ -33,10 +33,16 @@ public class OrganizationDirectory {
         return organization;
     }
 
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc) {
+        Organization org = new CompaniesOrganization(name, doc, admin);
+        organizationList.add(org);
+        return org;
+    }
+
     public Organization createOrganization(Type type, String name, Date doc) {
         Organization organization = null;
         if (type.getValue().equals(Type.Companies.getValue())) {
-            organization = new CompaniesOrganization(name, doc);
+            //organization = new CompaniesOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.MutualFunds.getValue())) {
             organization = new MutualFundsOrganization(name, doc);
