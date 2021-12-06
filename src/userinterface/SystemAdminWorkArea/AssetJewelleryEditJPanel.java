@@ -11,10 +11,12 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
@@ -33,6 +35,8 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     Network ongoinNetwork;
     UserAccount selectedUser;
+    Organization selectedOrganization;
+    Integer selectedDelIndex;
     JewelleryOrganization selectedJewelery;
     ArrayList<JewelleryOrganization> allJewellery = new ArrayList<>();
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
@@ -50,7 +54,12 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
                 ongoinNetwork = ongoing1;
             }
         }
+        setAssetAdminUsers();
 
+        _getData();
+    }
+
+    public void _getData() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
@@ -58,14 +67,15 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
             if (ongoing instanceof AssetMarketEnterprise) {
                 for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
 
-                    Organization ongoing1 = ongoing.getOrganizationDirectory().getOrganizationList().get(i);
-                    if (ongoing1 instanceof JewelleryOrganization) {
-                        JewelleryOrganization ongoing2 = (JewelleryOrganization) ongoing1;
+                    selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
+                    if (selectedOrganization instanceof JewelleryOrganization) {
+                        JewelleryOrganization ongoing2 = (JewelleryOrganization) selectedOrganization;
                         allJewellery.add(ongoing2);
                         for (HashMap.Entry<String, HashMap<String, Object>> set
                                 : ongoing2.getJewelleries().entrySet()) {
 
                             Object[] row = {
+                                ongoing2.getCompanyName(),
                                 set.getKey(),
                                 set.getValue().get("maxPrice"),
                                 set.getValue().get("quantity"),
@@ -78,6 +88,20 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
                 }
             }
         }
+    }
+
+    public void setAssetAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof AssetAgentRole) {
+                this.assetsAdminUser.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
     }
 
     /**
@@ -134,6 +158,11 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
 
         deletejLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/delete.png"))); // NOI18N
         deletejLabel.setText("Delete");
+        deletejLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletejLabelMouseClicked(evt);
+            }
+        });
 
         serialNoJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         serialNoJLabel.setForeground(new java.awt.Color(67, 100, 100));
@@ -346,10 +375,9 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_adminComboBoxItemStateChanged
 
     public void _adminChnageHandler() {
-        Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
+        selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
             this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
-            System.out.println("!!!" + selectedUser.getUsername().toString());
         }
     }
     private void adminComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminComboBoxFocusGained
@@ -411,7 +439,8 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
         selectedJewelery.setAdmin(this.selectedUser);
         selectedJewelery.setJewelleries(jewelleries);
-
+        selectedJewelery.setCompanyName(this.compnayNameJField.getText());
+        _getData();
         JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -420,7 +449,7 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         Integer selectedIndex = this.jTable1.getSelectedRow();
         if (selectedIndex != -1) {
             selectedJewelery = this.allJewellery.get(selectedIndex);
-            this.compnayNameJField.setText(selectedJewelery.getName());
+            this.compnayNameJField.setText(selectedJewelery.getCompanyName());
             for (HashMap.Entry<String, HashMap<String, Object>> set
                     : selectedJewelery.getJewelleries().entrySet()) {
 
@@ -431,6 +460,18 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void deletejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletejLabelMouseClicked
+
+        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof AssetMarketEnterprise) {
+                ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
+            }
+        }
+        _getData();
+        JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_deletejLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

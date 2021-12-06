@@ -26,23 +26,23 @@ import javax.swing.JSplitPane;
  * @author prathameshnemade
  */
 public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
-    
+
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
     UserAccount selectedUser;
     Network ongoinNetwork;
-    
+
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
-    
+
     public AssetJewelleryCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         initComponents();
-        
+
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
@@ -52,7 +52,7 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         this.dateOfCreationJLabel.setText(new Date().toString());
         setAssetAdminUsers();
     }
-    
+
     public void setAssetAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
@@ -367,11 +367,11 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         jewelName.put("quantity", this.maxUnitJField.getText().toString());
         jewelName.put("doc", new Date());
         jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
-        
+
         for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ongoing instanceof AssetMarketEnterprise) {
-                ongoing.getOrganizationDirectory().createJewelleryOrganization(Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
+                ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
             }
         }
         JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
@@ -380,7 +380,7 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
     private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged
         _adminChnageHandler();
     }//GEN-LAST:event_adminComboBoxItemStateChanged
-    
+
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {

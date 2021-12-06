@@ -58,6 +58,7 @@ public class AssetJewelleryViewJPanel extends javax.swing.JPanel {
                                 : ongoing2.getJewelleries().entrySet()) {
 
                             Object[] row = {
+                                ongoing2.getCompanyName(),
                                 set.getKey(),
                                 set.getValue().get("maxPrice"),
                                 set.getValue().get("quantity"),
@@ -88,17 +89,17 @@ public class AssetJewelleryViewJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Company Name", "Price", "Units", "Date of creation", "Admin"
+                "Company Name", "Jewellery Name", "Price", "Units", "Date of creation", "Admin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -27,8 +27,8 @@ public class OrganizationDirectory {
         return organizationList;
     }
 
-    public Organization createJewelleryOrganization(Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
-        Organization organization = new JewelleryOrganization(type, name, admin, jewelleries, doc);
+    public Organization createJewelleryOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
+        Organization organization = new JewelleryOrganization(companyName, type, name, admin, jewelleries, doc);
         organizationList.add(organization);
         return organization;
     }

@@ -17,13 +17,15 @@ import java.util.HashMap;
  */
 public class JewelleryOrganization extends Organization {
 
+    private String companyName;
     private Organization.Type type;
     private String name;
     private UserAccount admin;
     private HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<String, HashMap<String, Object>>();
 
-    public JewelleryOrganization(Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
+    public JewelleryOrganization(String companyName,Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
         super(Organization.Type.Jewellery.getValue(), name, doc);
+        this.companyName=companyName;
         this.type = type;
         this.name = name;
         this.admin = admin;
@@ -76,6 +78,20 @@ public class JewelleryOrganization extends Organization {
      */
     public void setJewelleries(HashMap<String, HashMap<String, Object>> jewelleries) {
         this.jewelleries = jewelleries;
+    }
+
+    /**
+     * @return the companyName
+     */
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    /**
+     * @param companyName the companyName to set
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
 }
