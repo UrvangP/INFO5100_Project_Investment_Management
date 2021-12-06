@@ -268,6 +268,11 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         priceJField.setText("Enter here");
         priceJField.setToolTipText("Click to enter your name.");
         priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        priceJField.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                priceJFieldHierarchyChanged(evt);
+            }
+        });
         priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 priceJFieldFocusGained(evt);
@@ -394,7 +399,9 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_adminComboBoxPropertyChange
 
     private void jewelleryNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.jewelleryNameJField.getText().equals("Enter here")) {
+            jewelleryNameJField.setText("");
+        }
     }//GEN-LAST:event_jewelleryNameJFieldFocusGained
 
     private void jewelleryNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldnameChangeHandler
@@ -420,7 +427,9 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_maxUnitJFieldActionPerformed
 
     private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.priceJField.getText().equals("Enter here")) {
+            priceJField.setText("");
+        }
     }//GEN-LAST:event_priceJFieldFocusGained
 
     private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
@@ -448,7 +457,6 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Please select Jewellery to update !", "Jewellery", ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -483,6 +491,10 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select Jewellery to delete !", "Jewellery", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_deletejLabelMouseClicked
+
+    private void priceJFieldHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_priceJFieldHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldHierarchyChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
