@@ -40,11 +40,47 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         SystemAdminDashboard updateProfileAdmin = new SystemAdminDashboard(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(updateProfileAdmin);
-        
+
         this.browsingJPanel.setVisible(true);
         this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
 
-        //TODO- for enterprose and organization
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+
+                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")
+                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")
+                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery"))) {
+                    this.assetMarketButton.setVisible(true);
+
+                } else {
+                    this.assetMarketButton.setVisible(!true);
+                }
+                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") != null && ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket").get("Wallet")) {
+                    this.forexMarketButton.setVisible(true);
+
+                } else {
+                    this.forexMarketButton.setVisible(!true);
+
+                }
+                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")
+                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers"))) {
+                    this.cryptoMarketButton.setVisible(true);
+
+                } else {
+                    this.cryptoMarketButton.setVisible(!true);
+
+                }
+                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")
+                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds"))) {
+                    this.stockMarketButton.setVisible(true);
+
+                } else {
+                    this.stockMarketButton.setVisible(!true);
+
+                }
+            }
+        }
     }
 
     /**
@@ -63,6 +99,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
         oraganizationButton1 = new javax.swing.JButton();
+        assetMarketButton = new javax.swing.JButton();
+        stockMarketButton = new javax.swing.JButton();
+        cryptoMarketButton = new javax.swing.JButton();
+        forexMarketButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -107,6 +147,46 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        assetMarketButton.setBackground(new java.awt.Color(200, 203, 178));
+        assetMarketButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        assetMarketButton.setForeground(new java.awt.Color(67, 100, 100));
+        assetMarketButton.setText("Asset Market");
+        assetMarketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assetMarketButtonActionPerformed(evt);
+            }
+        });
+
+        stockMarketButton.setBackground(new java.awt.Color(200, 203, 178));
+        stockMarketButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        stockMarketButton.setForeground(new java.awt.Color(67, 100, 100));
+        stockMarketButton.setText("Stock Market");
+        stockMarketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockMarketButtonActionPerformed(evt);
+            }
+        });
+
+        cryptoMarketButton.setBackground(new java.awt.Color(200, 203, 178));
+        cryptoMarketButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cryptoMarketButton.setForeground(new java.awt.Color(67, 100, 100));
+        cryptoMarketButton.setText("Crypto Market");
+        cryptoMarketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cryptoMarketButtonActionPerformed(evt);
+            }
+        });
+
+        forexMarketButton.setBackground(new java.awt.Color(200, 203, 178));
+        forexMarketButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        forexMarketButton.setForeground(new java.awt.Color(67, 100, 100));
+        forexMarketButton.setText("Forex Market");
+        forexMarketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forexMarketButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +200,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(userNameJLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(networkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(oraganizationButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(oraganizationButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(assetMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stockMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cryptoMarketButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(forexMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -139,7 +223,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(networkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(oraganizationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(assetMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(stockMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(forexMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cryptoMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(85, 85, 85)
@@ -194,15 +286,34 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         if (temp1) {
             this.browsingJPanel.setVisible(true);
             this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
-            EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketButton, this.stockMarketButton, this.forexMarketButton, this.cryptoMarketButton);
             this.jSplitPane.setRightComponent(enterpriseViewJPanel);
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_oraganizationButton1ActionPerformed
 
+    private void assetMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assetMarketButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assetMarketButtonActionPerformed
+
+    private void stockMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockMarketButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stockMarketButtonActionPerformed
+
+    private void cryptoMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoMarketButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cryptoMarketButtonActionPerformed
+
+    private void forexMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexMarketButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forexMarketButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assetMarketButton;
+    private javax.swing.JButton cryptoMarketButton;
+    private javax.swing.JButton forexMarketButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,6 +322,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JButton networkButton;
     private javax.swing.JButton oraganizationButton1;
+    private javax.swing.JButton stockMarketButton;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

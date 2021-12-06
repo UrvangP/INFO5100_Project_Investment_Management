@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -30,6 +31,10 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     private String selectedEnterprise;
     JPanel browsingJPanel;
+    JButton assetMarketLeftButton;
+    JButton stockMarketLeftButton;
+    JButton forexMarketLeftButton;
+    JButton cryptoMarketLeftBUtton;
     private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
 
     private HashMap<String, Boolean> stateSelected = new HashMap<String, Boolean>() {
@@ -52,11 +57,15 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    public EnterpriseCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public EnterpriseCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, JButton assetMarketLeftButton, JButton stockMarketLeftButton, JButton forexMarketLeftButton, JButton cryptoMarketLeftBUtton) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        this.assetMarketLeftButton = assetMarketLeftButton;
+        this.stockMarketLeftButton = stockMarketLeftButton;
+        this.forexMarketLeftButton = forexMarketLeftButton;
+        this.cryptoMarketLeftBUtton = cryptoMarketLeftBUtton;
         initComponents();
         this.selectedEnterprise = "StockMarket";
         this.typeJLabel.setText("StockMarket");
@@ -805,12 +814,15 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             visibility.put("Industries", this.industriesChecked.isVisible());
             visibility.put("RealEstate", this.realestateChecked.isVisible());
             visibility.put("Jewellery", this.jewelleyChecked.isVisible());
+            this.assetMarketLeftButton.setVisible(true);
         } else if (this.selectedEnterprise == "CryptoMarket") {
             name = "CryptoMarket";
             type = Enterprise.EnterpriseType.CryptoMarket;
             enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
             HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
             visibility.put("Wallet", this.walletChecked.isVisible());
+            this.cryptoMarketLeftBUtton.setVisible(true);
+
         } else if (this.selectedEnterprise == "ForexMarket") {
             name = "ForexMarket";
             type = Enterprise.EnterpriseType.ForexMarket;
@@ -818,6 +830,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
             visibility.put("Banks", this.banksChecked.isVisible());
             visibility.put("Brokers", this.brokersChecked.isVisible());
+            this.forexMarketLeftButton.setVisible(true);
+
         } else {
             name = "StockMarket";
             type = Enterprise.EnterpriseType.StockMarket;
@@ -826,6 +840,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
             visibility.put("Companies", this.companiesChecked.isVisible());
             visibility.put("MutualFunds", this.mutualChecked.isVisible());
+            this.stockMarketLeftButton.setVisible(true);
+
         }
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
@@ -870,12 +886,12 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        EnterpriseEditJPanel enterpriseEditJPanel = new EnterpriseEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseEditJPanel enterpriseEditJPanel = new EnterpriseEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
@@ -884,7 +900,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 

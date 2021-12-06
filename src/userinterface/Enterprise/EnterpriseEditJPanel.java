@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -28,6 +29,10 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
+    JButton assetMarketLeftButton;
+    JButton stockMarketLeftButton;
+    JButton forexMarketLeftButton;
+    JButton cryptoMarketLeftBUtton;
     private String selectedEnterprise;
     JPanel browsingJPanel;
     private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
@@ -52,11 +57,15 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         }
     }
 
-    public EnterpriseEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public EnterpriseEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, JButton assetMarketLeftButton, JButton stockMarketLeftButton, JButton forexMarketLeftButton, JButton cryptoMarketLeftBUtton) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        this.assetMarketLeftButton = assetMarketLeftButton;
+        this.stockMarketLeftButton = stockMarketLeftButton;
+        this.forexMarketLeftButton = forexMarketLeftButton;
+        this.cryptoMarketLeftBUtton = cryptoMarketLeftBUtton;
         initComponents();
         this.selectedEnterprise = "StockMarket";
         this.typeJLabel.setText("StockMarket");
@@ -320,7 +329,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         stockMarketJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         stockMarketJLabel1.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel1.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel1.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel1.setText("Mutual Funds");
         stockMarketJLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -329,7 +338,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         });
 
         stockMarketJLabel3.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel3.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel3.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel3.setText("Companies");
         stockMarketJLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -373,7 +382,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         assetMarketJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         stockMarketJLabel2.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel2.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel2.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel2.setText("Real Estate");
         stockMarketJLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -382,7 +391,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         });
 
         stockMarketJLabel4.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel4.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel4.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel4.setText("Industries");
         stockMarketJLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -391,7 +400,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         });
 
         stockMarketJLabel5.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel5.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel5.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel5.setText("Jewellery");
         stockMarketJLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -454,7 +463,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         forexMarketJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         stockMarketJLabel6.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel6.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel6.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel6.setText("Banks");
         stockMarketJLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -463,7 +472,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         });
 
         stockMarketJLabel8.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel8.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel8.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel8.setText("Brokers");
         stockMarketJLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -517,7 +526,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         cryptoMarketJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         stockMarketJLabel7.setFont(new java.awt.Font("Gurmukhi MN", 1, 18)); // NOI18N
-        stockMarketJLabel7.setForeground(new java.awt.Color(238, 238, 238));
+        stockMarketJLabel7.setForeground(new java.awt.Color(153, 153, 153));
         stockMarketJLabel7.setText("Wallet");
         stockMarketJLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -673,7 +682,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.cryptoChecked.setVisible(false);
         this.stockChecked.setVisible(true);
 
-        this.stockMarketJPanel.setVisible(false);
+        this.stockMarketJPanel.setVisible(true);
         this.assetMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
         this.cryptoMarketJPanel.setVisible(false);
@@ -694,7 +703,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.stockChecked.setVisible(false);
 
         this.stockMarketJPanel.setVisible(false);
-        this.assetMarketJPanel.setVisible(false);
+        this.assetMarketJPanel.setVisible(true);
         this.cryptoMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
 
@@ -737,12 +746,12 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        EnterpriseEditJPanel enterpriseEditJPanel = new EnterpriseEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseEditJPanel enterpriseEditJPanel = new EnterpriseEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
@@ -751,7 +760,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        EnterpriseCreateJPanel enterpriseCreateJPanel = new EnterpriseCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
@@ -792,7 +801,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
 
         this.stockMarketJPanel.setVisible(false);
         this.assetMarketJPanel.setVisible(false);
-        this.forexMarketJPanel.setVisible(false);
+        this.forexMarketJPanel.setVisible(true);
         this.cryptoMarketJPanel.setVisible(false);
         this.selectedEnterprise = "ForexMarket";
         this.typeJLabel.setText("ForexMarket");
@@ -822,7 +831,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.stockMarketJPanel.setVisible(false);
         this.assetMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
-        this.cryptoMarketJPanel.setVisible(false);
+        this.cryptoMarketJPanel.setVisible(true);
         this.selectedEnterprise = "CryptoMarket";
         this.typeJLabel.setText("CryptoMarket");
         this.createdByJLabel.setText(this.account.getUsername());
@@ -848,12 +857,16 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             visibility.put("Industries", this.industriesChecked.isVisible());
             visibility.put("RealEstate", this.realestateChecked.isVisible());
             visibility.put("Jewellery", this.jewelleyChecked.isVisible());
+            this.assetMarketLeftButton.setVisible(true);
+
         } else if (this.selectedEnterprise == "CryptoMarket") {
             name = "CryptoMarket";
             type = Enterprise.EnterpriseType.CryptoMarket;
             enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
             HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
             visibility.put("Wallet", this.walletChecked.isVisible());
+            this.cryptoMarketLeftBUtton.setVisible(true);
+
         } else if (this.selectedEnterprise == "ForexMarket") {
             name = "ForexMarket";
             type = Enterprise.EnterpriseType.ForexMarket;
@@ -861,6 +874,8 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
             visibility.put("Banks", this.banksChecked.isVisible());
             visibility.put("Brokers", this.brokersChecked.isVisible());
+            this.forexMarketLeftButton.setVisible(true);
+
         } else {
             name = "StockMarket";
             type = Enterprise.EnterpriseType.StockMarket;
@@ -869,6 +884,8 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
             visibility.put("Companies", this.companiesChecked.isVisible());
             visibility.put("MutualFunds", this.mutualChecked.isVisible());
+            this.stockMarketLeftButton.setVisible(true);
+
         }
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
