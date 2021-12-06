@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -431,17 +432,24 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_priceJFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
-        HashMap<String, Object> jewelName = new HashMap<>();
-        jewelName.put("maxPrice", this.priceJField.getText().toString());
-        jewelName.put("quantity", this.maxUnitJField.getText().toString());
-        jewelName.put("doc", new Date());
-        jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
-        selectedJewelery.setAdmin(this.selectedUser);
-        selectedJewelery.setJewelleries(jewelleries);
-        selectedJewelery.setCompanyName(this.compnayNameJField.getText());
-        _getData();
-        JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+
+        if (selectedOrganization != null) {
+
+            HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
+            HashMap<String, Object> jewelName = new HashMap<>();
+            jewelName.put("maxPrice", this.priceJField.getText().toString());
+            jewelName.put("quantity", this.maxUnitJField.getText().toString());
+            jewelName.put("doc", new Date());
+            jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
+            selectedJewelery.setAdmin(this.selectedUser);
+            selectedJewelery.setJewelleries(jewelleries);
+            selectedJewelery.setCompanyName(this.compnayNameJField.getText());
+            _getData();
+            JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Jewellery to delete !", "Jewellery", ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -462,14 +470,18 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void deletejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletejLabelMouseClicked
-        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ongoing instanceof AssetMarketEnterprise) {
-                ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
+        if (selectedOrganization != null) {
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoing instanceof AssetMarketEnterprise) {
+                    ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
+                }
             }
+            _getData();
+            JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Jewellery to delete !", "Jewellery", ERROR_MESSAGE);
         }
-        _getData();
-        JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
     }//GEN-LAST:event_deletejLabelMouseClicked
 
 
