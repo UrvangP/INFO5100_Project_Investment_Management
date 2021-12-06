@@ -52,8 +52,8 @@ public abstract class Organization {
     }
 
     public Organization(String name, String type, Date doc) {
-        this.name = name;
-        this.type = type;
+        this.name = type;
+        this.type = name;
         this.doc = doc;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
