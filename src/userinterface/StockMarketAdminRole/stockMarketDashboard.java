@@ -270,7 +270,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_lbCreateCompanyFocusGained
 
     private void lbCreateCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCreateCompanyMouseClicked
-        companyOrganizationPanel companyPanel = new companyOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        companyOrganizationPanel companyPanel = new companyOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel, this);
         jSplitPane2.setRightComponent(companyPanel);
     }//GEN-LAST:event_lbCreateCompanyMouseClicked
 
@@ -290,11 +290,11 @@ public class stockMarketDashboard extends javax.swing.JPanel {
 
     private void lbCreateCompany1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCreateCompany1MouseClicked
         // TODO add your handling code here:
-        mutualFundsOrganizationPanel companyPanel = new mutualFundsOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        mutualFundsOrganizationPanel companyPanel = new mutualFundsOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel, this);
         jSplitPane1.setRightComponent(companyPanel);
     }//GEN-LAST:event_lbCreateCompany1MouseClicked
 
-    private void parseList(){
+    public void parseList(){
         EnterpriseDirectory ep = ongoing.getEnterpriseDirectory();
         ArrayList<Organization> orgs = ep.getEnterprise(0).getOrganizationDirectory().getOrganizationList();
         

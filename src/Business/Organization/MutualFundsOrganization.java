@@ -6,6 +6,7 @@
 package Business.Organization;
 
 import Business.Role.Role;
+import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,9 +16,11 @@ import java.util.Date;
  */
 public class MutualFundsOrganization extends Organization{
     
-    public MutualFundsOrganization(String name, Date doc){
+    UserAccount admin;
+    
+    public MutualFundsOrganization(String name, Date doc, UserAccount admin){
         super(Organization.Type.MutualFunds.getValue(), name, doc);
-        
+        this.admin = admin;
     }
 
     @Override
