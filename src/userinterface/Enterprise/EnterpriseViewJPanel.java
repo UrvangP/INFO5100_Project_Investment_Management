@@ -6,6 +6,11 @@
 package userinterface.Enterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.HashMap;
@@ -31,6 +36,7 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
     JButton stockMarketLeftButton;
     JButton forexMarketLeftButton;
     JButton cryptoMarketLeftBUtton;
+    Network ongoingNetwrok;
 
     private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
 
@@ -66,17 +72,16 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
         initComponents();
         this.selectedEnterprise = "StockMarket";
 
-        Network ongoing = null;
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
-                ongoing = ongoing1;
+                ongoingNetwrok = ongoing1;
             }
         }
 
-        if (ongoing != null) {
-            enterpriseSelection = ongoing.getEnterpriseDirectory().getEnterpriseSelection();
+        if (ongoingNetwrok != null) {
+            enterpriseSelection = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
             NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
@@ -96,7 +101,47 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
         this.brokersChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : enterpriseSelection.get("ForexMarket").get("Brokers"));
         this.walletChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : enterpriseSelection.get("CryptoMarket").get("Wallet"));
 
+        if (enterpriseSelection.get("AssetMarket") != null) {
+            for (int i = 0; i < ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof AssetMarketEnterprise) {
+                    AssetMarketEnterprise temp = (AssetMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.assetAdminComboBox.setText(temp.admin.getUsername());
+                }
+            }
+        }
+
+        if (enterpriseSelection.get("ForexMarket") != null) {
+            for (int i = 0; i < ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof ForexMarketEnterprise) {
+                    ForexMarketEnterprise temp = (ForexMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.forexAdminComboBox.setText(temp.admin.getUsername());
+                }
+            }
+        }
+
+        if (enterpriseSelection.get("CryptoMarket") != null) {
+            for (int i = 0; i < ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof CryptoMarketEnterprise) {
+                    CryptoMarketEnterprise temp = (CryptoMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.cryptoAdminComboBox.setText(temp.admin.getUsername());
+                }
+            }
+        }
+
+        if (enterpriseSelection.get("StockMarket") != null) {
+            for (int i = 0; i < ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof StockMarketEnterprise) {
+                    StockMarketEnterprise temp = (StockMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.stockAdminComboBox.setText(temp.admin.getUsername());
+                }
+            }
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,6 +185,14 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
         cryptoMarketJPanel = new javax.swing.JPanel();
         stockMarketJLabel7 = new javax.swing.JLabel();
         walletChecked = new javax.swing.JLabel();
+        brandJLabel1 = new javax.swing.JLabel();
+        brandJLabel2 = new javax.swing.JLabel();
+        brandJLabel3 = new javax.swing.JLabel();
+        brandJLabel4 = new javax.swing.JLabel();
+        assetAdminComboBox = new javax.swing.JTextField();
+        stockAdminComboBox = new javax.swing.JTextField();
+        cryptoAdminComboBox = new javax.swing.JTextField();
+        forexAdminComboBox = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -457,45 +510,134 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
             .addComponent(walletChecked, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Stock Admin (*):");
+
+        brandJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel2.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel2.setText("Crypto Admin (*):");
+
+        brandJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel3.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel3.setText("Forex Admin (*):");
+
+        brandJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel4.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel4.setText("Asset Admin (*):");
+
+        assetAdminComboBox.setEditable(false);
+        assetAdminComboBox.setBackground(new java.awt.Color(216, 220, 228));
+        assetAdminComboBox.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        assetAdminComboBox.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        assetAdminComboBox.setText("N/A");
+        assetAdminComboBox.setToolTipText("This is your identifier.");
+        assetAdminComboBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        assetAdminComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assetAdminComboBoxActionPerformed(evt);
+            }
+        });
+
+        stockAdminComboBox.setEditable(false);
+        stockAdminComboBox.setBackground(new java.awt.Color(216, 220, 228));
+        stockAdminComboBox.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        stockAdminComboBox.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        stockAdminComboBox.setText("N/A");
+        stockAdminComboBox.setToolTipText("This is your identifier.");
+        stockAdminComboBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        stockAdminComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockAdminComboBoxActionPerformed(evt);
+            }
+        });
+
+        cryptoAdminComboBox.setEditable(false);
+        cryptoAdminComboBox.setBackground(new java.awt.Color(216, 220, 228));
+        cryptoAdminComboBox.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cryptoAdminComboBox.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        cryptoAdminComboBox.setText("N/A");
+        cryptoAdminComboBox.setToolTipText("This is your identifier.");
+        cryptoAdminComboBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        cryptoAdminComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cryptoAdminComboBoxActionPerformed(evt);
+            }
+        });
+
+        forexAdminComboBox.setEditable(false);
+        forexAdminComboBox.setBackground(new java.awt.Color(216, 220, 228));
+        forexAdminComboBox.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        forexAdminComboBox.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        forexAdminComboBox.setText("N/A");
+        forexAdminComboBox.setToolTipText("This is your identifier.");
+        forexAdminComboBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        forexAdminComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forexAdminComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(stockMarketJLabel)
-                        .addGap(59, 59, 59)
-                        .addComponent(stockChecked))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(stockMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cryptoMarketJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cryptoMarketJLabel)
-                                .addGap(39, 39, 39)
-                                .addComponent(cryptoChecked)))))
-                .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(stockMarketJLabel)
+                                .addGap(59, 59, 59)
+                                .addComponent(stockChecked))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(stockMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cryptoMarketJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cryptoMarketJLabel)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(cryptoChecked)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(135, 135, 135)
+                                        .addComponent(assetMarketJLabel)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(assetChecked))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(137, 137, 137)
+                                        .addComponent(forexMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(112, 112, 112)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(brandJLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(brandJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(brandJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(stockAdminComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(cryptoAdminComboBox)
+                                    .addComponent(forexAdminComboBox)
+                                    .addComponent(assetAdminComboBox)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addComponent(assetMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(495, 495, 495)
                         .addComponent(forexMarketJLabel)
                         .addGap(47, 47, 47)
-                        .addComponent(forexChecked))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(assetMarketJLabel)
-                        .addGap(59, 59, 59)
-                        .addComponent(assetChecked))
-                    .addComponent(assetMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forexMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(403, Short.MAX_VALUE))
+                        .addComponent(forexChecked)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,24 +653,46 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
                         .addComponent(forexChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(forexMarketJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stockMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(forexMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cryptoChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cryptoMarketJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(assetChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(assetMarketJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(stockAdminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel1))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cryptoAdminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel2))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(brandJLabel4)
+                                    .addComponent(assetAdminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(forexAdminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(brandJLabel3)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(stockMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forexMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cryptoChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cryptoMarketJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(assetChecked, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(assetMarketJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(assetMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cryptoMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(assetMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -604,18 +768,41 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
+    private void assetAdminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assetAdminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assetAdminComboBoxActionPerformed
+
+    private void stockAdminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockAdminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stockAdminComboBoxActionPerformed
+
+    private void cryptoAdminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoAdminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cryptoAdminComboBoxActionPerformed
+
+    private void forexAdminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexAdminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forexAdminComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField assetAdminComboBox;
     private javax.swing.JLabel assetChecked;
     private javax.swing.JLabel assetMarketJLabel;
     private javax.swing.JPanel assetMarketJPanel;
     private javax.swing.JLabel banksChecked;
+    private javax.swing.JLabel brandJLabel1;
+    private javax.swing.JLabel brandJLabel2;
+    private javax.swing.JLabel brandJLabel3;
+    private javax.swing.JLabel brandJLabel4;
     private javax.swing.JLabel brokersChecked;
     private javax.swing.JLabel companiesChecked;
+    private javax.swing.JTextField cryptoAdminComboBox;
     private javax.swing.JLabel cryptoChecked;
     private javax.swing.JLabel cryptoMarketJLabel;
     private javax.swing.JPanel cryptoMarketJPanel;
     private javax.swing.JLabel exitJLabel;
+    private javax.swing.JTextField forexAdminComboBox;
     private javax.swing.JLabel forexChecked;
     private javax.swing.JLabel forexMarketJLabel;
     private javax.swing.JPanel forexMarketJPanel;
@@ -625,6 +812,7 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jewelleyChecked;
     private javax.swing.JLabel mutualChecked;
     private javax.swing.JLabel realestateChecked;
+    private javax.swing.JTextField stockAdminComboBox;
     private javax.swing.JLabel stockChecked;
     private javax.swing.JLabel stockMarketJLabel;
     private javax.swing.JLabel stockMarketJLabel1;
