@@ -11,14 +11,18 @@ import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
+import Business.Role.CompanyAgentRole;
+import Business.Role.StockMarketAdminRole;
 import Business.StockMarket.Company;
 import Business.UserAccount.UserAccount;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
@@ -38,6 +42,8 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
     Network ongoing;
+    UserAccount selectedUser;
+    ArrayList<UserAccount> selectedDropDown;
     
     public companyOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         
@@ -47,6 +53,8 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         this.browsingJPanel = browsingJPanel;
         
         initComponents();
+        
+        setStockAdminUsers();
         
         this.ongoing = null;
 
@@ -75,12 +83,12 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         brandJLabel1 = new javax.swing.JLabel();
         adminComboBox = new javax.swing.JComboBox<>();
         cardentifierJLabel3 = new javax.swing.JLabel();
-        typeJLabel = new javax.swing.JTextField();
         cardentifierJLabel1 = new javax.swing.JLabel();
         dateOfCreationJLabel = new javax.swing.JTextField();
         cardentifierJLabel2 = new javax.swing.JLabel();
         createdByJLabel = new javax.swing.JTextField();
         addJButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,18 +151,6 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         cardentifierJLabel3.setForeground(new java.awt.Color(67, 100, 100));
         cardentifierJLabel3.setText("Name:");
 
-        typeJLabel.setEditable(false);
-        typeJLabel.setBackground(new java.awt.Color(216, 220, 228));
-        typeJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        typeJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        typeJLabel.setToolTipText("This is your identifier.");
-        typeJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        typeJLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeJLabelActionPerformed(evt);
-            }
-        });
-
         cardentifierJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         cardentifierJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         cardentifierJLabel1.setText("Date of Creation:");
@@ -205,6 +201,10 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                 .addGap(337, 337, 337)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(482, 482, 482))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -215,14 +215,10 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
                             .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(typeJLabel)
                             .addComponent(dateOfCreationJLabel)
-                            .addComponent(createdByJLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)))
-                .addGap(400, 400, 400))
+                            .addComponent(createdByJLabel)
+                            .addComponent(jTextField1))
+                        .addGap(400, 400, 400))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -242,8 +238,8 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                     .addComponent(brandJLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardentifierJLabel3))
+                    .addComponent(cardentifierJLabel3)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +250,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                     .addComponent(cardentifierJLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -295,10 +291,6 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         _adminChnageHandler();
     }//GEN-LAST:event_adminComboBoxPropertyChange
 
-    private void typeJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeJLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_typeJLabelActionPerformed
-
     private void dateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfCreationJLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
@@ -308,7 +300,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_createdByJLabelActionPerformed
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-        String companyName = typeJLabel.getText();
+        String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
         String creationDate = dateOfCreationJLabel.getText();
         
@@ -320,7 +312,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createOrganization(Organization.Type.Companies, companyName, new Date(), admin);
+                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date());
             }
         }
 
@@ -332,8 +324,25 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
             System.out.println(selectedDelIndex);
-            //this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
+            this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
         }
+    }
+    
+    public void setStockAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        this.selectedDropDown = new ArrayList<>();
+
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof CompanyAgentRole) {
+                this.selectedDropDown.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
     }
 
     private void initData(){
@@ -353,6 +362,6 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     private javax.swing.JTextField createdByJLabel;
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField typeJLabel;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

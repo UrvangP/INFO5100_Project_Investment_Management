@@ -4,17 +4,19 @@
  * and open the template in the editor.
  */
 package Business.Organization;
+
 import Business.Organization.Organization.Type;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
  * @author ronak
  */
 public class OrganizationDirectory {
-    
+
     private ArrayList<Organization> organizationList;
 
     public OrganizationDirectory() {
@@ -24,52 +26,58 @@ public class OrganizationDirectory {
     public ArrayList<Organization> getOrganizationList() {
         return organizationList;
     }
+
+
+    public Organization createJewelleryOrganization(Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
+        Organization organization = new JewelleryOrganization(type, name, admin, jewelleries, doc);
+        organizationList.add(organization);
+        return organization;
+    }
     
-    public Organization createOrganization(Type type, String name, Date doc, UserAccount admin){
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc){
+        Organization org = new CompaniesOrganization(name, doc, admin);
+        organizationList.add(org);
+        return org;
+    }
+
+    public Organization createOrganization(Type type, String name, Date doc) {
         Organization organization = null;
-        if (type.getValue().equals(Type.Companies.getValue())){
-            organization = new CompaniesOrganization(name, doc, admin);
+        if (type.getValue().equals(Type.Companies.getValue())) {
+            //organization = new CompaniesOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.MutualFunds.getValue())){
+        } else if (type.getValue().equals(Type.MutualFunds.getValue())) {
             organization = new MutualFundsOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Industries.getValue())){
+        } else if (type.getValue().equals(Type.Industries.getValue())) {
             organization = new IndustriesOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.RealEstate.getValue())){
+        } else if (type.getValue().equals(Type.RealEstate.getValue())) {
             organization = new RealEstateOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Jewellery.getValue())){
-            organization = new JewelleryOrganization(name, doc);
-            organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Banks.getValue())){
+        } else if (type.getValue().equals(Type.Jewellery.getValue())) {
+//            organization = new JewelleryOrganization(name, doc);
+//            organizationList.add(organization);
+        } else if (type.getValue().equals(Type.Banks.getValue())) {
             organization = new BanksOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Brokers.getValue())){
+        } else if (type.getValue().equals(Type.Brokers.getValue())) {
             organization = new BrokersOrganization(name, doc);
             organizationList.add(organization);
-        }
-        else if (type.getValue().equals(Type.Wallet.getValue())){
+        } else if (type.getValue().equals(Type.Wallet.getValue())) {
             organization = new WalletOrganization(name, doc);
             organizationList.add(organization);
         }
 
         return organization;
     }
-    
-    public void removeOrganization(Organization org){
+
+    public void removeOrganization(Organization org) {
         organizationList.remove(org);
     }
-    
-    public Organization getOrganization(String name){
-        for(Organization o : organizationList){
-            if(o.getName().equalsIgnoreCase(name)){
+
+    public Organization getOrganization(String name) {
+        for (Organization o : organizationList) {
+            if (o.getName().equalsIgnoreCase(name)) {
                 return o;
             }
         }
