@@ -447,7 +447,7 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
             _getData();
             JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select Jewellery to delete !", "Jewellery", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select Jewellery to update !", "Jewellery", ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
