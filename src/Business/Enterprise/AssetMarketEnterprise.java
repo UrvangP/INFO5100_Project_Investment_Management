@@ -17,9 +17,19 @@ import java.util.Date;
 public class AssetMarketEnterprise extends Enterprise {
 
     private Boolean isSelected;
+    public String name;
+    public Date dateOfCreation;
+    public String country;
+    public UserAccount createdBy;
+    public UserAccount admin;
 
-    public AssetMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount admin) {
+    public AssetMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
         super(Enterprise.EnterpriseType.AssetMarket);
+        this.name = name;
+        this.dateOfCreation = dateOfCreation;
+        this.country = country;
+        this.createdBy = createdBy;
+        this.admin = admin;
     }
 
     @Override

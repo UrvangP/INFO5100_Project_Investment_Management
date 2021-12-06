@@ -9,9 +9,15 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Role.AssetMarketAdminRole;
+import Business.Role.CryptoMarketAdminRole;
+import Business.Role.ForexMarketAdminRole;
+import Business.Role.StockMarketAdminRole;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -35,6 +41,12 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     JButton stockMarketLeftButton;
     JButton forexMarketLeftButton;
     JButton cryptoMarketLeftBUtton;
+    UserAccount selectedUser;
+    ArrayList<UserAccount> assetsAdminUser = new ArrayList<UserAccount>();
+    ArrayList<UserAccount> stockAdminUser = new ArrayList<UserAccount>();
+    ArrayList<UserAccount> forexAdminUser = new ArrayList<UserAccount>();
+    ArrayList<UserAccount> cryptoAdminUser = new ArrayList<UserAccount>();
+
     private HashMap<String, HashMap<String, Boolean>> enterpriseSelection = new HashMap<String, HashMap<String, Boolean>>();
 
     private HashMap<String, Boolean> stateSelected = new HashMap<String, Boolean>() {
@@ -86,10 +98,15 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
-        this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
-        this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
-        this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
-        this.stockChecked.setVisible(enterpriseSelection.get("StockMarket") == null ? false : true);
+//        this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
+//        this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
+//        this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
+//        this.stockChecked.setVisible(enterpriseSelection.get("StockMarket") == null ? false : true);
+
+        this.assetChecked.setVisible(false);
+        this.forexChecked.setVisible(false);
+        this.cryptoChecked.setVisible(false);
+        this.stockChecked.setVisible(false);
 
         this.assetMarketJPanel.setVisible(false);
         this.forexMarketJPanel.setVisible(false);
@@ -106,8 +123,67 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.walletChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? true : enterpriseSelection.get("CryptoMarket").get("Wallet"));
 
         this.createdByJLabel.setText("Please select to see!");
-        this.dateOfCreationJLabel.setText("Please select to seeÏ!");
+        this.dateOfCreationJLabel.setText("Please select to see!");
+    }
 
+    public void setAssetAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof AssetMarketAdminRole) {
+                this.assetsAdminUser.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
+    }
+
+    public void setForexAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof ForexMarketAdminRole) {
+                this.forexAdminUser.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
+    }
+
+    public void setCryptoAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof CryptoMarketAdminRole) {
+                this.cryptoAdminUser.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
+    }
+
+    public void setStockAdminUsers() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof StockMarketAdminRole) {
+                this.stockAdminUser.add(ongoing);
+                asset.add(ongoing.getUsername());
+            }
+        }
+
+        String[] assetSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
+        this.adminComboBox.setModel(brandSDropdownModel);
     }
 
     /**
@@ -162,6 +238,8 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         exitJLabel = new javax.swing.JLabel();
         viewJLabel = new javax.swing.JLabel();
         viewJLabel1 = new javax.swing.JLabel();
+        brandJLabel1 = new javax.swing.JLabel();
+        adminComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -589,6 +667,31 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Admin (*):");
+
+        adminComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                adminComboBoxItemStateChanged(evt);
+            }
+        });
+        adminComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                adminComboBoxFocusGained(evt);
+            }
+        });
+        adminComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminComboBoxActionPerformed(evt);
+            }
+        });
+        adminComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                adminComboBoxPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -617,17 +720,22 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(typeJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(dateOfCreationJLabel)
-                    .addComponent(createdByJLabel)
-                    .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(typeJLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(adminComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(55, 55, 55))
+                        .addComponent(dateOfCreationJLabel)
+                        .addComponent(createdByJLabel))
+                    .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,10 +766,14 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(113, 113, 113)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(brandJLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(adminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(typeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -696,6 +808,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
+        this.setStockAdminUsers();
     }//GEN-LAST:event_stockMarketJLabelMouseClicked
 
     private void assetMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assetMarketJLabelMouseClicked
@@ -713,7 +826,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("AssetMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
-
+        this.setAssetAdminUsers();
     }//GEN-LAST:event_assetMarketJLabelMouseClicked
 
     private void forexMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forexMarketJLabelMouseClicked
@@ -730,7 +843,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("ForexMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
-
+        this.setForexAdminUsers();
     }//GEN-LAST:event_forexMarketJLabelMouseClicked
 
     private void cryptoMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cryptoMarketJLabelMouseClicked
@@ -747,6 +860,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("CryptoMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
+        this.setCryptoAdminUsers();
     }//GEN-LAST:event_cryptoMarketJLabelMouseClicked
 
     private void stockMarketJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMarketJLabel1MouseClicked
@@ -835,7 +949,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         } else {
             name = "StockMarket";
             type = Enterprise.EnterpriseType.StockMarket;
-            tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account);
+            tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account, this.selectedUser);
             enterpriseSelection.put("StockMarket", new HashMap<String, Boolean>());
             HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
             visibility.put("Companies", this.companiesChecked.isVisible());
@@ -850,7 +964,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
                 Integer index = this.ecosystem.getNetwork().getNetworkList().indexOf(ongoing);
                 System.out.println("dfdsf" + index);
                 System.out.println("name, new Date(), this.countryComboBox.getSelectedItem().toString(), account" + this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory());
-                this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account);
+                this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
             }
         }
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
@@ -904,14 +1018,39 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(enterpriseCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
+    private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxItemStateChanged
+
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
+        }
+    }
+
+    private void adminComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminComboBoxFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminComboBoxFocusGained
+
+    private void adminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminComboBoxActionPerformed
+
+    private void adminComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_adminComboBoxPropertyChange
+       _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJButton;
+    private javax.swing.JComboBox<String> adminComboBox;
     private javax.swing.JLabel assetChecked;
     private javax.swing.JLabel assetMarketJLabel;
     private javax.swing.JPanel assetMarketJPanel;
     private javax.swing.JLabel banksChecked;
     private javax.swing.JLabel brandJLabel;
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel brokersChecked;
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JLabel cardentifierJLabel2;
