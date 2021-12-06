@@ -50,8 +50,11 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="networkButton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="oraganizationButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="oraganizationButton1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="assetMarketButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="stockMarketButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cryptoMarketButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="forexMarketButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -77,8 +80,14 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="oraganizationButton1" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="oraganizationButton" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace pref="297" max="32767" attributes="0"/>
+                      <Component id="assetMarketButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="stockMarketButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="forexMarketButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="cryptoMarketButton" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -144,23 +153,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homeButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="oraganizationButton">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="b2" green="cb" red="c8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="64" green="64" red="43" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Organizations"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="oraganizationButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="oraganizationButton1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -176,6 +168,74 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="oraganizationButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="assetMarketButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b2" green="cb" red="c8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Grande" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="64" green="64" red="43" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Asset Market"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="assetMarketButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="stockMarketButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b2" green="cb" red="c8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Grande" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="64" green="64" red="43" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Stock Market"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stockMarketButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="cryptoMarketButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b2" green="cb" red="c8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Grande" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="64" green="64" red="43" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Crypto Market"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cryptoMarketButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="forexMarketButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b2" green="cb" red="c8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Grande" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="64" green="64" red="43" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Forex Market"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="forexMarketButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

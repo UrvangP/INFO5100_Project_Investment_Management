@@ -5,7 +5,6 @@
  */
 package Business;
 
-import Business.Organization.Organization;
 import Business.Customer.CustomerDirectory;
 import Business.Network.Network;
 import Business.Network.NetworkDirectory;
@@ -14,15 +13,11 @@ import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.WorkQueue.WorkQueue;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.BorderFactory;
+import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -73,7 +68,7 @@ public class EcoSystem extends Organization {
     }
 
     public EcoSystem() {
-        super(null,null,null);
+        super(null, null, null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
@@ -101,15 +96,56 @@ public class EcoSystem extends Organization {
         return network;
     }
 
-    public void generateBrowsingHistoryNetwork(JPanel browsingJPanel) {
+//    public void generateBrowsingHistoryNetwork(JPanel browsingJPanel) {
+//        String value = "Not Selected";
+//        for (int i = 0; i < this.getNetwork().getNetworkList().size(); i++) {
+//            Network ongoing = this.getNetwork().getNetworkList().get(i);
+//            if (ongoing.getIsSelected()) {
+//                value = "Selected: " + ongoing.getNCountry() + " - " + ongoing.getNName();
+//            }
+//        }
+//        JLabel tempText = (JLabel) browsingJPanel.getComponent(0);
+//        tempText.setText("Network ( " + value + " )");
+//    }
+    public void generateBrowsingHistoryEnterprise(JPanel browsingJPanel) {
         String value = "Not Selected";
+        Network ongoing = null;
+        Integer index = null;
         for (int i = 0; i < this.getNetwork().getNetworkList().size(); i++) {
-            Network ongoing = this.getNetwork().getNetworkList().get(i);
-            if (ongoing.getIsSelected()) {
+            Network ongoing1 = this.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoing = ongoing1;
+                index = i;
                 value = "Selected: " + ongoing.getNCountry() + " - " + ongoing.getNName();
             }
         }
+
+        if (ongoing == null || index == null) {
+            JLabel tempText = (JLabel) browsingJPanel.getComponent(0);
+            tempText.setText("Network ( " + value + " ) ---> ");
+            return;
+        }
+        value = "Network ( " + value + " ) ---> ";
+        ArrayList<String> value2 = new ArrayList<String>();
+        this.networkList.getNetworkList().get(index).getEnterpriseDirectory().getEnterpriseSelection();
+        for (HashMap.Entry<String, HashMap<String, Boolean>> out1
+                : this.networkList.getNetworkList().get(index).getEnterpriseDirectory().getEnterpriseSelection().entrySet()) {
+            ArrayList<String> temp1 = new ArrayList<String>();
+            if (out1.getValue() != null) {
+                for (Entry<String, Boolean> out2
+                        : out1.getValue().entrySet()) {
+                    if (out2.getValue()) {
+                        temp1.add(out2.getKey());
+                    }
+                }
+            }
+            if (!temp1.isEmpty()) {
+                value2.add(out1.getKey() + " : " + String.join("/", temp1));
+            }
+
+        }
         JLabel tempText = (JLabel) browsingJPanel.getComponent(0);
-        tempText.setText("Network ( " + value + " ) -->");
+        String temp = value2.isEmpty() ? "Not Selected" : String.join(", ", value2);
+        tempText.setText(value + "Enterprise ( " + temp + " )");
     }
 }

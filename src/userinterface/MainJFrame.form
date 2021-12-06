@@ -170,7 +170,7 @@
         <Component class="javax.swing.JLabel" name="browsingLevelJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Lucida Sans Typewriter" size="15" style="1"/>
+              <Font name="Lucida Sans Typewriter" size="10" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>

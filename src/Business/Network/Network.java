@@ -20,7 +20,7 @@ public class Network {
     private Date NDateOfCreation;
     private UserAccount NCreatedBy;
     private Boolean isSelected;
-    private EnterpriseDirectory enterpriseDirectory;
+    private EnterpriseDirectory enterpriseDirectory = new EnterpriseDirectory();
 
     /**
      * @return the NName

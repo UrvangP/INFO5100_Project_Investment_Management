@@ -7,6 +7,7 @@ package userinterface.Organization;
 
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
@@ -15,8 +16,18 @@ import javax.swing.JSplitPane;
  */
 public class OrganizationCreateJPanel extends javax.swing.JPanel {
 
-    public OrganizationCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
+    EcoSystem ecosystem;
+    UserAccount account;
+    JSplitPane jSplitPane;
+    JPanel browsingJPanel;
+
+    public OrganizationCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+        this.ecosystem = ecosystem;
+        this.account = account;
+        this.jSplitPane = jSplitPane;
+        this.browsingJPanel = browsingJPanel;
         initComponents();
+
     }
 
     /**

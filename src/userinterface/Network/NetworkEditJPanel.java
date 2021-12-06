@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
@@ -26,12 +27,14 @@ public class NetworkEditJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     Network selectedNetwork;
     Integer selectedNetworkIndex;
+    JPanel browsingJPanel;
 
-    public NetworkEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane) {
+    public NetworkEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
+        this.browsingJPanel = browsingJPanel;
         _getAllNetworks();
     }
 
@@ -378,17 +381,17 @@ public class NetworkEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void exitJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_exitJLabelFocusGained
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void viewJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabelFocusGained
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane);
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabelFocusGained
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
@@ -397,12 +400,12 @@ public class NetworkEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane);
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
