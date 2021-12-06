@@ -188,7 +188,7 @@ public class AssetJewelleryJPanel extends javax.swing.JPanel {
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
         AssetJewelleryCreateJPanel assetJewelleryCreateJPanel = new AssetJewelleryCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane.setRightComponent(assetJewelleryCreateJPanel);
+        this.jSplitPane1.setRightComponent(assetJewelleryCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
 
