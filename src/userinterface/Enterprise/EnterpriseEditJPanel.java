@@ -6,7 +6,10 @@
 package userinterface.Enterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Role.AssetMarketAdminRole;
@@ -43,6 +46,8 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     UserAccount selectedUser;
     Integer selectedIndex;
+    Network ongoinNetwork;
+    ArrayList<UserAccount> selectedDropDown;
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<UserAccount>();
     ArrayList<UserAccount> stockAdminUser = new ArrayList<UserAccount>();
     ArrayList<UserAccount> forexAdminUser = new ArrayList<UserAccount>();
@@ -82,17 +87,15 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.selectedEnterprise = "StockMarket";
         this.typeJLabel.setText("StockMarket");
 
-        Network ongoing = null;
-
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
-                ongoing = ongoing1;
+                ongoinNetwork = ongoing1;
             }
         }
 
-        if (ongoing != null) {
-            enterpriseSelection = ongoing.getEnterpriseDirectory().getEnterpriseSelection();
+        if (ongoinNetwork != null) {
+            enterpriseSelection = ongoinNetwork.getEnterpriseDirectory().getEnterpriseSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
             NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
@@ -119,6 +122,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
 
         this.createdByJLabel.setText("Please select to see!");
         this.dateOfCreationJLabel.setText("Please select to seeÏ!");
+
     }
 
     public void setAssetAdminUsers() {
@@ -130,10 +134,22 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                 asset.add(ongoing.getUsername());
             }
         }
-
+        selectedDropDown = assetsAdminUser;
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
+
+        if (enterpriseSelection.get("AssetMarket") != null) {
+            for (int i = 0; i < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof AssetMarketEnterprise) {
+                    AssetMarketEnterprise temp = (AssetMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.countryComboBox.setSelectedItem(temp.country);
+                    this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                }
+            }
+        }
+
     }
 
     public void setForexAdminUsers() {
@@ -145,10 +161,21 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                 asset.add(ongoing.getUsername());
             }
         }
-
+        selectedDropDown = forexAdminUser;
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
+
+        if (enterpriseSelection.get("ForexMarket") != null) {
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof ForexMarketEnterprise) {
+                    ForexMarketEnterprise temp = (ForexMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.countryComboBox.setSelectedItem(temp.country);
+                    this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                }
+            }
+        }
     }
 
     public void setCryptoAdminUsers() {
@@ -160,10 +187,21 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                 asset.add(ongoing.getUsername());
             }
         }
-
+        selectedDropDown = cryptoAdminUser;
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
+
+        if (enterpriseSelection.get("CryptoMarket") != null) {
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof CryptoMarketEnterprise) {
+                    CryptoMarketEnterprise temp = (CryptoMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.countryComboBox.setSelectedItem(temp.country);
+                    this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                }
+            }
+        }
     }
 
     public void setStockAdminUsers() {
@@ -175,10 +213,21 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                 asset.add(ongoing.getUsername());
             }
         }
-
+        selectedDropDown = stockAdminUser;
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
+
+        if (enterpriseSelection.get("StockMarket") != null) {
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof StockMarketEnterprise) {
+                    StockMarketEnterprise temp = (StockMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    this.countryComboBox.setSelectedItem(temp.country);
+                    this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                }
+            }
+        }
     }
 
     /**
@@ -314,7 +363,6 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         brandJLabel.setText("Country (*):");
 
         countryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling Islands)", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote D'Ivoire (Ivory Coast)", "Croatia (Hrvatska", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France", "Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and McDonald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and The Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovak Republic", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "S. Georgia and S. Sandwich Isls.", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom (Britain / UK)", "United States of America (USA)", "US Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City State (Holy See)", "Venezuela", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (US)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe" }));
-        countryComboBox.setEnabled(false);
         countryComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 countryComboBoxItemStateChanged(evt);
@@ -797,7 +845,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
 
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
-
+        this.setStockAdminUsers();
     }//GEN-LAST:event_stockMarketJLabelMouseClicked
 
     private void assetMarketJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assetMarketJLabelMouseClicked
@@ -815,6 +863,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("AssetMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
+        this.setAssetAdminUsers();
     }//GEN-LAST:event_assetMarketJLabelMouseClicked
 
     private void dateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfCreationJLabelActionPerformed
@@ -836,7 +885,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
-            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
+            this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
         }
     }
 
@@ -918,7 +967,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("ForexMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
-
+        this.setForexAdminUsers();
     }//GEN-LAST:event_forexMarketJLabelMouseClicked
 
     private void stockMarketJLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMarketJLabel6MouseClicked
@@ -947,6 +996,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         this.typeJLabel.setText("CryptoMarket");
         this.createdByJLabel.setText(this.account.getUsername());
         this.dateOfCreationJLabel.setText(new Date().toString());
+        this.setCryptoAdminUsers();
     }//GEN-LAST:event_cryptoMarketJLabelMouseClicked
 
     private void stockMarketJLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMarketJLabel7MouseClicked
@@ -969,15 +1019,32 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             visibility.put("RealEstate", this.realestateChecked.isVisible());
             visibility.put("Jewellery", this.jewelleyChecked.isVisible());
             this.assetMarketLeftButton.setVisible(true);
-
+            for (int i = 0; i < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof AssetMarketEnterprise) {
+                    AssetMarketEnterprise temp = (AssetMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    temp.admin = this.selectedUser;
+                    temp.country = this.countryComboBox.getSelectedItem().toString();
+                    temp.createdBy = account;
+                }
+            }
         } else if (this.selectedEnterprise == "CryptoMarket") {
             name = "CryptoMarket";
             type = Enterprise.EnterpriseType.CryptoMarket;
             enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
             HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
             visibility.put("Wallet", this.walletChecked.isVisible());
+            this.ongoinNetwork.getEnterpriseDirectory().createCryptoMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
             this.cryptoMarketLeftBUtton.setVisible(true);
-
+            for (int i = 0; i < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof CryptoMarketEnterprise) {
+                    CryptoMarketEnterprise temp = (CryptoMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    temp.admin = this.selectedUser;
+                    temp.country = this.countryComboBox.getSelectedItem().toString();
+                    temp.createdBy = account;
+                }
+            }
         } else if (this.selectedEnterprise == "ForexMarket") {
             name = "ForexMarket";
             type = Enterprise.EnterpriseType.ForexMarket;
@@ -985,8 +1052,17 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
             visibility.put("Banks", this.banksChecked.isVisible());
             visibility.put("Brokers", this.brokersChecked.isVisible());
+            this.ongoinNetwork.getEnterpriseDirectory().createForexMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
             this.forexMarketLeftButton.setVisible(true);
-
+            for (int i = 0; i < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof ForexMarketEnterprise) {
+                    ForexMarketEnterprise temp = (ForexMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    temp.admin = this.selectedUser;
+                    temp.country = this.countryComboBox.getSelectedItem().toString();
+                    temp.createdBy = account;
+                }
+            }
         } else {
             name = "StockMarket";
             type = Enterprise.EnterpriseType.StockMarket;
@@ -995,17 +1071,16 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
             visibility.put("Companies", this.companiesChecked.isVisible());
             visibility.put("MutualFunds", this.mutualChecked.isVisible());
+            this.ongoinNetwork.getEnterpriseDirectory().createStockMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
             this.stockMarketLeftButton.setVisible(true);
-
-        }
-
-        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
-            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
-            if (ongoing.getIsSelected()) {
-                Integer index = this.ecosystem.getNetwork().getNetworkList().indexOf(ongoing);
-                System.out.println("dfdsf" + index);
-                System.out.println("name, new Date(), this.countryComboBox.getSelectedItem().toString(), account" + this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory());
-                this.ecosystem.getNetwork().getNetworkList().get(index).getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account,this.selectedUser);
+            for (int i = 0; i < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoign1 = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoign1 instanceof StockMarketEnterprise) {
+                    StockMarketEnterprise temp = (StockMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                    temp.admin = this.selectedUser;
+                    temp.country = this.countryComboBox.getSelectedItem().toString();
+                    temp.createdBy = account;
+                }
             }
         }
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);

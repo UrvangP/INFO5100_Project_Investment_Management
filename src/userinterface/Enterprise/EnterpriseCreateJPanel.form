@@ -57,19 +57,18 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="typeJLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="adminComboBox" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="addJButton" min="-2" pref="89" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="dateOfCreationJLabel" max="32767" attributes="0"/>
-                      <Component id="createdByJLabel" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="countryComboBox" min="-2" pref="144" max="-2" attributes="0"/>
+                  <Component id="countryComboBox" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="adminComboBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="typeJLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="dateOfCreationJLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="createdByJLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="126" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="797" pref="797" max="-2" attributes="0"/>
+              <Component id="addJButton" min="-2" pref="89" max="-2" attributes="0"/>
+              <EmptySpace min="181" pref="181" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
