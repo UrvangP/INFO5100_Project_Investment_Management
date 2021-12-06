@@ -44,41 +44,52 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.browsingJPanel.setVisible(true);
         this.ecosystem.generateBrowsingHistoryEnterprise(browsingJPanel);
 
+        Network ongoing = null;
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
+                ongoing = ongoing1;
 
-                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")
-                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")
-                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery"))) {
-                    this.assetMarketButton.setVisible(true);
+            }
+        }
 
-                } else {
-                    this.assetMarketButton.setVisible(!true);
-                }
-                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") != null && ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket").get("Wallet")) {
-                    this.forexMarketButton.setVisible(true);
+        if (ongoing == null) {
+            this.assetMarketButton.setVisible(!true);
+            this.forexMarketButton.setVisible(!true);
+            this.cryptoMarketButton.setVisible(!true);
+            this.stockMarketButton.setVisible(!true);
 
-                } else {
-                    this.forexMarketButton.setVisible(!true);
+        } else {
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")
+                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")
+                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery"))) {
+                this.assetMarketButton.setVisible(true);
 
-                }
-                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")
-                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers"))) {
-                    this.cryptoMarketButton.setVisible(true);
+            } else {
+                this.assetMarketButton.setVisible(!true);
+            }
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket").get("Wallet")) {
+                this.forexMarketButton.setVisible(true);
 
-                } else {
-                    this.cryptoMarketButton.setVisible(!true);
+            } else {
+                this.forexMarketButton.setVisible(!true);
 
-                }
-                if (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && (ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")
-                        || ongoing1.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds"))) {
-                    this.stockMarketButton.setVisible(true);
+            }
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")
+                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers"))) {
+                this.cryptoMarketButton.setVisible(true);
 
-                } else {
-                    this.stockMarketButton.setVisible(!true);
+            } else {
+                this.cryptoMarketButton.setVisible(!true);
 
-                }
+            }
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")
+                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds"))) {
+                this.stockMarketButton.setVisible(true);
+
+            } else {
+                this.stockMarketButton.setVisible(!true);
+
             }
         }
     }
