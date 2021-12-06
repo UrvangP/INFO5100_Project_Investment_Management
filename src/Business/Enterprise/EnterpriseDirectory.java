@@ -60,5 +60,13 @@ public class EnterpriseDirectory {
     public HashMap<String, HashMap<String, Boolean>> getEnterpriseSelection() {
         return enterpriseSelection;
     }
+    
+    public int getSize(){
+        return enterpriseDir.size();
+    }
+    
+    public Enterprise getEnterprise(int pos){
+        return enterpriseDir.get(pos);
+    }
 
 }
