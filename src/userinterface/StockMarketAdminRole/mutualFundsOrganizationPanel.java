@@ -43,45 +43,27 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        seatsJLabel = new javax.swing.JLabel();
-        nameJField = new javax.swing.JTextField();
         brandJLabel = new javax.swing.JLabel();
         countryComboBox = new javax.swing.JComboBox<>();
-        cardentifierJLabel = new javax.swing.JLabel();
-        createdByJLabel = new javax.swing.JTextField();
+        brandJLabel1 = new javax.swing.JLabel();
+        adminComboBox = new javax.swing.JComboBox<>();
+        cardentifierJLabel3 = new javax.swing.JLabel();
+        typeJLabel = new javax.swing.JTextField();
         cardentifierJLabel1 = new javax.swing.JLabel();
         dateOfCreationJLabel = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        cardentifierJLabel2 = new javax.swing.JLabel();
+        createdByJLabel = new javax.swing.JTextField();
+        addJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add a Mutual Fund");
-
-        seatsJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        seatsJLabel.setForeground(new java.awt.Color(67, 100, 100));
-        seatsJLabel.setText("Name (*):");
-
-        nameJField.setBackground(new java.awt.Color(238, 238, 238));
-        nameJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        nameJField.setText("Enter here");
-        nameJField.setToolTipText("Click to enter your name.");
-        nameJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        nameJField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                nameJFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nameJFieldnameChangeHandler(evt);
-            }
-        });
-        nameJField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameJFieldActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Add Mutal Fund");
 
         brandJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         brandJLabel.setForeground(new java.awt.Color(67, 100, 100));
@@ -109,19 +91,44 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
             }
         });
 
-        cardentifierJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        cardentifierJLabel.setForeground(new java.awt.Color(67, 100, 100));
-        cardentifierJLabel.setText("Created By:");
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Admin (*):");
 
-        createdByJLabel.setEditable(false);
-        createdByJLabel.setBackground(new java.awt.Color(216, 220, 228));
-        createdByJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        createdByJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        createdByJLabel.setToolTipText("This is your identifier.");
-        createdByJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        createdByJLabel.addActionListener(new java.awt.event.ActionListener() {
+        adminComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                adminComboBoxItemStateChanged(evt);
+            }
+        });
+        adminComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                adminComboBoxFocusGained(evt);
+            }
+        });
+        adminComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createdByJLabelActionPerformed(evt);
+                adminComboBoxActionPerformed(evt);
+            }
+        });
+        adminComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                adminComboBoxPropertyChange(evt);
+            }
+        });
+
+        cardentifierJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel3.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel3.setText("Name:");
+
+        typeJLabel.setEditable(false);
+        typeJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        typeJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        typeJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        typeJLabel.setToolTipText("This is your identifier.");
+        typeJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        typeJLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeJLabelActionPerformed(evt);
             }
         });
 
@@ -141,90 +148,118 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(200, 203, 178));
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(67, 100, 100));
-        jButton2.setText("ADD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cardentifierJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel2.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel2.setText("Created By:");
+
+        createdByJLabel.setEditable(false);
+        createdByJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        createdByJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        createdByJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        createdByJLabel.setToolTipText("This is your identifier.");
+        createdByJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        createdByJLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                createdByJLabelActionPerformed(evt);
             }
         });
+
+        addJButton.setBackground(new java.awt.Color(200, 203, 178));
+        addJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        addJButton.setForeground(new java.awt.Color(67, 100, 100));
+        addJButton.setText("ADD");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(337, 337, 337)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
+                            .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(typeJLabel)
+                            .addComponent(dateOfCreationJLabel)
+                            .addComponent(createdByJLabel)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)))
+                .addGap(400, 400, 400))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(12, 12, 12)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brandJLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brandJLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardentifierJLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardentifierJLabel1))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardentifierJLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(245, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(645, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 792, Short.MAX_VALUE)
+            .addGap(0, 1034, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(12, 12, 12)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(314, 314, 314)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cardentifierJLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(41, 41, 41)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(seatsJLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(countryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameJField)
-                                    .addComponent(dateOfCreationJLabel)
-                                    .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGap(12, 12, 12)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 686, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(19, 19, 19)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(92, 92, 92)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(brandJLabel))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(seatsJLabel)
-                        .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cardentifierJLabel1))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cardentifierJLabel))
-                    .addGap(30, 30, 30)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameJFieldFocusGained
-        if (nameJField.getText().equals("Enter here")) {
-            nameJField.setText("");
-        }
-    }//GEN-LAST:event_nameJFieldFocusGained
-
-    private void nameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameJFieldnameChangeHandler
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameJFieldnameChangeHandler
-
-    private void nameJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameJFieldActionPerformed
 
     private void countryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_countryComboBoxItemStateChanged
         //TOdo
@@ -242,29 +277,59 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_countryComboBoxPropertyChange
 
-    private void createdByJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdByJLabelActionPerformed
+    private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxItemStateChanged
+
+    private void adminComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminComboBoxFocusGained
+        _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxFocusGained
+
+    private void adminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_createdByJLabelActionPerformed
+    }//GEN-LAST:event_adminComboBoxActionPerformed
+
+    private void adminComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_adminComboBoxPropertyChange
+        _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxPropertyChange
+
+    private void typeJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typeJLabelActionPerformed
 
     private void dateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfCreationJLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void createdByJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdByJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createdByJLabelActionPerformed
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        
+    }//GEN-LAST:event_addJButtonActionPerformed
 
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            System.out.println(selectedDelIndex);
+            //this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addJButton;
+    private javax.swing.JComboBox<String> adminComboBox;
     private javax.swing.JLabel brandJLabel;
-    private javax.swing.JLabel cardentifierJLabel;
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel cardentifierJLabel1;
+    private javax.swing.JLabel cardentifierJLabel2;
+    private javax.swing.JLabel cardentifierJLabel3;
     private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JTextField createdByJLabel;
     private javax.swing.JTextField dateOfCreationJLabel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField nameJField;
-    private javax.swing.JLabel seatsJLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField typeJLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package Business.Organization;
 import Business.Organization.Organization.Type;
+import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,10 +25,10 @@ public class OrganizationDirectory {
         return organizationList;
     }
     
-    public Organization createOrganization(Type type, String name, Date doc){
+    public Organization createOrganization(Type type, String name, Date doc, UserAccount admin){
         Organization organization = null;
         if (type.getValue().equals(Type.Companies.getValue())){
-            organization = new CompaniesOrganization(name, doc);
+            organization = new CompaniesOrganization(name, doc, admin);
             organizationList.add(organization);
         }
         else if (type.getValue().equals(Type.MutualFunds.getValue())){
