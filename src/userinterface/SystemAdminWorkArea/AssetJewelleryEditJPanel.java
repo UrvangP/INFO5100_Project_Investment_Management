@@ -11,6 +11,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Restaurant.RestaurantDirectory;
 import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -440,21 +441,47 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceJFieldActionPerformed
 
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9 ]+")) {
+            errorMEssage += "Invalid Comapny Name! \n";
+        }
+        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z ]+")) {
+            errorMEssage += "Invalid Jewellery Name! \n";
+        }
+        if (!this.maxUnitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Unit should be a number! \n";
+        }
+        if (!this.priceJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Price should be a number! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Jewellery Edit", ERROR_MESSAGE);
+        return false;
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (selectedOrganization != null) {
-
-            HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
-            HashMap<String, Object> jewelName = new HashMap<>();
-            jewelName.put("maxPrice", this.priceJField.getText().toString());
-            jewelName.put("quantity", this.maxUnitJField.getText().toString());
-            jewelName.put("doc", new Date());
-            jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
-            selectedJewelery.setAdmin(this.selectedUser);
-            selectedJewelery.setJewelleries(jewelleries);
-            selectedJewelery.setCompanyName(this.compnayNameJField.getText());
-            _getData();
-            JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+            Boolean valid = validateItem();
+            if (valid) {
+                HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
+                HashMap<String, Object> jewelName = new HashMap<>();
+                jewelName.put("maxPrice", this.priceJField.getText().toString());
+                jewelName.put("quantity", this.maxUnitJField.getText().toString());
+                jewelName.put("doc", new Date());
+                jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
+                selectedJewelery.setAdmin(this.selectedUser);
+                selectedJewelery.setJewelleries(jewelleries);
+                selectedJewelery.setCompanyName(this.compnayNameJField.getText());
+                _getData();
+                JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Please select Jewellery to update !", "Jewellery", ERROR_MESSAGE);
         }
@@ -513,4 +540,5 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel serialNoJLabel2;
     private javax.swing.JLabel serialNoJLabel3;
     // End of variables declaration//GEN-END:variables
+
 }
