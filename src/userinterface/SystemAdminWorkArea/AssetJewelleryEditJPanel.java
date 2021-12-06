@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
 import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
@@ -20,23 +21,27 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author prathameshnemade
  */
-public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
+public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
-    UserAccount selectedUser;
     Network ongoinNetwork;
-
+    UserAccount selectedUser;
+    Organization selectedOrganization;
+    Integer selectedDelIndex;
+    JewelleryOrganization selectedJewelery;
+    ArrayList<JewelleryOrganization> allJewellery = new ArrayList<>();
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
 
-    public AssetJewelleryCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public AssetJewelleryEditJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
@@ -49,8 +54,40 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
                 ongoinNetwork = ongoing1;
             }
         }
-        this.dateOfCreationJLabel.setText(new Date().toString());
         setAssetAdminUsers();
+
+        _getData();
+    }
+
+    public void _getData() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof AssetMarketEnterprise) {
+                for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
+
+                    selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
+                    if (selectedOrganization instanceof JewelleryOrganization) {
+                        JewelleryOrganization ongoing2 = (JewelleryOrganization) selectedOrganization;
+                        allJewellery.add(ongoing2);
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : ongoing2.getJewelleries().entrySet()) {
+
+                            Object[] row = {
+                                ongoing2.getCompanyName(),
+                                set.getKey(),
+                                set.getValue().get("maxPrice"),
+                                set.getValue().get("quantity"),
+                                set.getValue().get("doc"),
+                                ongoing2.getAdmin().getUsername().toString()
+                            };
+                            model.addRow(row);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void setAssetAdminUsers() {
@@ -76,22 +113,56 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        deletejLabel = new javax.swing.JLabel();
         serialNoJLabel = new javax.swing.JLabel();
         compnayNameJField = new javax.swing.JTextField();
-        cardentifierJLabel1 = new javax.swing.JLabel();
-        dateOfCreationJLabel = new javax.swing.JTextField();
-        serialNoJLabel1 = new javax.swing.JLabel();
-        maxUnitJField = new javax.swing.JTextField();
+        brandJLabel1 = new javax.swing.JLabel();
+        adminComboBox = new javax.swing.JComboBox<>();
         serialNoJLabel2 = new javax.swing.JLabel();
         jewelleryNameJField = new javax.swing.JTextField();
+        serialNoJLabel1 = new javax.swing.JLabel();
+        maxUnitJField = new javax.swing.JTextField();
         serialNoJLabel3 = new javax.swing.JLabel();
         priceJField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        brandJLabel1 = new javax.swing.JLabel();
-        adminComboBox = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Company Name", "Price", "Units", "Date of creation", "Admin"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        deletejLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/delete.png"))); // NOI18N
+        deletejLabel.setText("Delete");
+        deletejLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletejLabelMouseClicked(evt);
+            }
+        });
 
         serialNoJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         serialNoJLabel.setForeground(new java.awt.Color(67, 100, 100));
@@ -116,42 +187,28 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
             }
         });
 
-        cardentifierJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        cardentifierJLabel1.setForeground(new java.awt.Color(67, 100, 100));
-        cardentifierJLabel1.setText("Date of Creation:");
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Admin (*):");
 
-        dateOfCreationJLabel.setEditable(false);
-        dateOfCreationJLabel.setBackground(new java.awt.Color(216, 220, 228));
-        dateOfCreationJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        dateOfCreationJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        dateOfCreationJLabel.setToolTipText("This is your identifier.");
-        dateOfCreationJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        dateOfCreationJLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateOfCreationJLabelActionPerformed(evt);
+        adminComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                adminComboBoxItemStateChanged(evt);
             }
         });
-
-        serialNoJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        serialNoJLabel1.setForeground(new java.awt.Color(67, 100, 100));
-        serialNoJLabel1.setText("Max Unit(*):");
-
-        maxUnitJField.setBackground(new java.awt.Color(238, 238, 238));
-        maxUnitJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        maxUnitJField.setText("Enter here");
-        maxUnitJField.setToolTipText("Click to enter your name.");
-        maxUnitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        maxUnitJField.addFocusListener(new java.awt.event.FocusAdapter() {
+        adminComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                maxUnitJFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                maxUnitJFieldnameChangeHandler(evt);
+                adminComboBoxFocusGained(evt);
             }
         });
-        maxUnitJField.addActionListener(new java.awt.event.ActionListener() {
+        adminComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maxUnitJFieldActionPerformed(evt);
+                adminComboBoxActionPerformed(evt);
+            }
+        });
+        adminComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                adminComboBoxPropertyChange(evt);
             }
         });
 
@@ -175,6 +232,29 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         jewelleryNameJField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jewelleryNameJFieldActionPerformed(evt);
+            }
+        });
+
+        serialNoJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel1.setText("Max Unit(*):");
+
+        maxUnitJField.setBackground(new java.awt.Color(238, 238, 238));
+        maxUnitJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        maxUnitJField.setText("Enter here");
+        maxUnitJField.setToolTipText("Click to enter your name.");
+        maxUnitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        maxUnitJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldnameChangeHandler(evt);
+            }
+        });
+        maxUnitJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxUnitJFieldActionPerformed(evt);
             }
         });
 
@@ -204,103 +284,75 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(200, 203, 178));
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(67, 100, 100));
-        jButton1.setText("ADD");
+        jButton1.setText("EDIT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
-        brandJLabel1.setText("Admin (*):");
-
-        adminComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                adminComboBoxItemStateChanged(evt);
-            }
-        });
-        adminComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                adminComboBoxFocusGained(evt);
-            }
-        });
-        adminComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminComboBoxActionPerformed(evt);
-            }
-        });
-        adminComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                adminComboBoxPropertyChange(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create Jewellery");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(serialNoJLabel)
+                    .addComponent(brandJLabel1)
+                    .addComponent(serialNoJLabel2)
+                    .addComponent(serialNoJLabel1)
+                    .addComponent(serialNoJLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(compnayNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jewelleryNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(adminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(priceJField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(maxUnitJField, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deletejLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jewelleryNameJField, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                            .addComponent(compnayNameJField))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compnayNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(serialNoJLabel))
-                .addGap(18, 18, 18)
+                    .addComponent(serialNoJLabel)
+                    .addComponent(compnayNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brandJLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jewelleryNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(serialNoJLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel1)
                     .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel3)
                     .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardentifierJLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deletejLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -318,9 +370,39 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_compnayNameJFieldActionPerformed
 
-    private void dateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfCreationJLabelActionPerformed
+    private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxItemStateChanged
+
+    public void _adminChnageHandler() {
+        selectedDelIndex = this.adminComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
+        }
+    }
+    private void adminComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminComboBoxFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
+    }//GEN-LAST:event_adminComboBoxFocusGained
+
+    private void adminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminComboBoxActionPerformed
+
+    private void adminComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_adminComboBoxPropertyChange
+        this._adminChnageHandler();
+    }//GEN-LAST:event_adminComboBoxPropertyChange
+
+    private void jewelleryNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jewelleryNameJFieldFocusGained
+
+    private void jewelleryNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jewelleryNameJFieldnameChangeHandler
+
+    private void jewelleryNameJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jewelleryNameJFieldActionPerformed
 
     private void maxUnitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldFocusGained
         if (maxUnitJField.getText().equals("Enter here")) {
@@ -335,18 +417,6 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
     private void maxUnitJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxUnitJFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_maxUnitJFieldActionPerformed
-
-    private void jewelleryNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jewelleryNameJFieldFocusGained
-
-    private void jewelleryNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldnameChangeHandler
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jewelleryNameJFieldnameChangeHandler
-
-    private void jewelleryNameJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jewelleryNameJFieldActionPerformed
 
     private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
         // TODO add your handling code here:
@@ -367,49 +437,51 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         jewelName.put("quantity", this.maxUnitJField.getText().toString());
         jewelName.put("doc", new Date());
         jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
+        selectedJewelery.setAdmin(this.selectedUser);
+        selectedJewelery.setJewelleries(jewelleries);
+        selectedJewelery.setCompanyName(this.compnayNameJField.getText());
+        _getData();
+        JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        Integer selectedIndex = this.jTable1.getSelectedRow();
+        if (selectedIndex != -1) {
+            selectedJewelery = this.allJewellery.get(selectedIndex);
+            this.compnayNameJField.setText(selectedJewelery.getCompanyName());
+            for (HashMap.Entry<String, HashMap<String, Object>> set
+                    : selectedJewelery.getJewelleries().entrySet()) {
+
+                this.adminComboBox.setSelectedItem(selectedJewelery.getAdmin().getUsername().toString());
+                jewelleryNameJField.setText(set.getKey());
+                maxUnitJField.setText(set.getValue().get("quantity").toString());
+                priceJField.setText(set.getValue().get("maxPrice").toString());
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void deletejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletejLabelMouseClicked
 
         for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ongoing instanceof AssetMarketEnterprise) {
-                ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
+                ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
             }
         }
-        JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged
-        _adminChnageHandler();
-    }//GEN-LAST:event_adminComboBoxItemStateChanged
-
-    public void _adminChnageHandler() {
-        Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
-        if (selectedDelIndex != -1) {
-            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
-            System.out.println("!!!" + selectedUser.getUsername().toString());
-        }
-    }
-
-    private void adminComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminComboBoxFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adminComboBoxFocusGained
-
-    private void adminComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adminComboBoxActionPerformed
-
-    private void adminComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_adminComboBoxPropertyChange
-        this._adminChnageHandler();
-    }//GEN-LAST:event_adminComboBoxPropertyChange
+        _getData();
+        JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_deletejLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> adminComboBox;
     private javax.swing.JLabel brandJLabel1;
-    private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JTextField compnayNameJField;
-    private javax.swing.JTextField dateOfCreationJLabel;
+    private javax.swing.JLabel deletejLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jewelleryNameJField;
     private javax.swing.JTextField maxUnitJField;
     private javax.swing.JTextField priceJField;

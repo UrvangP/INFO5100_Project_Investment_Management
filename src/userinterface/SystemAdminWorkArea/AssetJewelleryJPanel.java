@@ -97,7 +97,7 @@ public class AssetJewelleryJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewJLabel1)
                     .addComponent(exitJLabel)
@@ -173,13 +173,13 @@ public class AssetJewelleryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-//        EnterpriseEditJPanel enterpriseEditJPanel = new EnterpriseEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
-//        this.jSplitPane.setRightComponent(enterpriseEditJPanel);
+        AssetJewelleryEditJPanel assetJewelleryEditJPanel = new AssetJewelleryEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetJewelleryEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-//        EnterpriseViewJPanel enterpriseViewJPanel = new EnterpriseViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
-//        this.jSplitPane.setRightComponent(enterpriseViewJPanel);
+        AssetJewelleryViewJPanel enterpriseViewJPanel = new AssetJewelleryViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(enterpriseViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
     private void viewJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabel1FocusGained
