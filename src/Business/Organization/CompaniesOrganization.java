@@ -17,10 +17,30 @@ import java.util.Date;
 public class CompaniesOrganization extends Organization{
     
     UserAccount admin;
+    int stockPrice;
+    long revenue;
     
-    public CompaniesOrganization(String name, Date doc, UserAccount admin, String country){
+    public CompaniesOrganization(String name, Date doc, UserAccount admin, String country, int stockPrice, long revenue){
         super(Organization.Type.Companies.getValue(), name, doc, country);
         this.admin = admin;
+        this.stockPrice = stockPrice;
+        this.revenue = revenue;
+    }
+
+    public int getStockPrice() {
+        return stockPrice;
+    }
+
+    public void setStockPrice(int stockPrice) {
+        this.stockPrice = stockPrice;
+    }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
     }
 
     @Override
