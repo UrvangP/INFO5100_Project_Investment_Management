@@ -175,8 +175,8 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        AssetJewelleryViewJPanel enterpriseViewJPanel = new AssetJewelleryViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(enterpriseViewJPanel);
+        AssetIndustryViewJPanel assetIndustryViewJPanel = new AssetIndustryViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetIndustryViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
     private void viewJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabel1FocusGained
