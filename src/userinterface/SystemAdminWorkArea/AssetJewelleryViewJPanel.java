@@ -28,6 +28,7 @@ public class AssetJewelleryViewJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
     Network ongoinNetwork;
+    Organization selectedOrganization;
 
     public AssetJewelleryViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
@@ -42,7 +43,11 @@ public class AssetJewelleryViewJPanel extends javax.swing.JPanel {
                 ongoinNetwork = ongoing1;
             }
         }
+        _getData();
 
+    }
+
+    public void _getData() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
@@ -50,10 +55,10 @@ public class AssetJewelleryViewJPanel extends javax.swing.JPanel {
             if (ongoing instanceof AssetMarketEnterprise) {
                 for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
 
-                    Organization ongoing1 = ongoing.getOrganizationDirectory().getOrganizationList().get(i);
-                    if (ongoing1 instanceof JewelleryOrganization) {
-                        JewelleryOrganization ongoing2 = (JewelleryOrganization) ongoing1;
-
+                    selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
+                    if (selectedOrganization instanceof JewelleryOrganization) {
+                        JewelleryOrganization ongoing2 = (JewelleryOrganization) selectedOrganization;
+//                        allJewellery.add(ongoing2);
                         for (HashMap.Entry<String, HashMap<String, Object>> set
                                 : ongoing2.getJewelleries().entrySet()) {
 

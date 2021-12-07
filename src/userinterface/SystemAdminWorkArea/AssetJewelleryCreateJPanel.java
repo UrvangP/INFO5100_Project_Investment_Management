@@ -365,15 +365,15 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceJFieldActionPerformed
 
-    public Boolean validateItem() {
+     public Boolean validateItem() {
         String errorMEssage = "";
         if (this.adminComboBox.getSelectedItem() == null) {
             errorMEssage += "Select Admin to proceed! \n";
         }
-        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9 ]+")) {
-            errorMEssage += "Invalid Comapny Name! \n";
+        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
         }
-        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z ]+")) {
+        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z]+")) {
             errorMEssage += "Invalid Jewellery Name! \n";
         }
         if (!this.maxUnitJField.getText().matches("[0-9]+")) {

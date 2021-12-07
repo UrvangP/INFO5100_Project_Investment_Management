@@ -446,10 +446,10 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         if (this.adminComboBox.getSelectedItem() == null) {
             errorMEssage += "Select Admin to proceed! \n";
         }
-        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9 ]+")) {
-            errorMEssage += "Invalid Comapny Name! \n";
+        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
         }
-        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z ]+")) {
+        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z]+")) {
             errorMEssage += "Invalid Jewellery Name! \n";
         }
         if (!this.maxUnitJField.getText().matches("[0-9]+")) {
@@ -488,7 +488,6 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
         Integer selectedIndex = this.jTable1.getSelectedRow();
         if (selectedIndex != -1) {
             selectedJewelery = this.allJewellery.get(selectedIndex);
@@ -505,7 +504,7 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void deletejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletejLabelMouseClicked
-        if (selectedOrganization != null) {
+        if (selectedJewelery != null) {
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof AssetMarketEnterprise) {
