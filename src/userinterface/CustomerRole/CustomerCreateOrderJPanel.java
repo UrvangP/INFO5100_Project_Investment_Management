@@ -72,6 +72,11 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Asset Market");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout assetMarketLabelLayout = new javax.swing.GroupLayout(assetMarketLabel);
         assetMarketLabel.setLayout(assetMarketLabelLayout);
@@ -212,6 +217,13 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        CustomerAssetMarketJPanel customerAssetMarketJPanel = new CustomerAssetMarketJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        this.jSplitPane.setRightComponent(customerAssetMarketJPanel);
+        
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
