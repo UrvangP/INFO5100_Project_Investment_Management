@@ -24,7 +24,7 @@ public class IndustriesOrganization extends Organization {
     private HashMap<String, HashMap<String, Object>> industries = new HashMap<String, HashMap<String, Object>>();
 
     public IndustriesOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> industries, Date doc) {
-        super(Organization.Type.Industries.getValue(), name, doc);
+        super(companyName, Organization.Type.Industries.getValue(), doc, null);
         this.companyName = companyName;
         this.type = type;
         this.name = name;

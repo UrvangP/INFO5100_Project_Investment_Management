@@ -39,8 +39,15 @@ public class OrganizationDirectory {
         return organization;
     }
 
-    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc) {
-        Organization org = new CompaniesOrganization(name, doc, admin);
+
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country) {
+        Organization org = new CompaniesOrganization(name, doc, admin, country);
+        organizationList.add(org);
+        return org;
+    }
+    
+    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country){
+        Organization org = new MutualFundsOrganization(name, doc, admin, country);
         organizationList.add(org);
         return org;
     }
@@ -57,7 +64,7 @@ public class OrganizationDirectory {
             //organization = new CompaniesOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.MutualFunds.getValue())) {
-            organization = new MutualFundsOrganization(name, doc);
+            //organization = new MutualFundsOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.Industries.getValue())) {
             //organization = new IndustriesOrganization(name, doc);

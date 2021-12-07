@@ -24,12 +24,13 @@ public class RealEstateOrganization extends Organization {
     private HashMap<String, HashMap<String, Object>> estates = new HashMap<String, HashMap<String, Object>>();
 
     public RealEstateOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> estates, Date doc) {
-        super(Organization.Type.RealEstate.getValue(), name, doc);
+        super(companyName, Organization.Type.RealEstate.getValue(), doc, null);
         this.companyName = companyName;
         this.type = type;
         this.name = name;
         this.admin = admin;
         this.estates = estates;
+
     }
 
     @Override
