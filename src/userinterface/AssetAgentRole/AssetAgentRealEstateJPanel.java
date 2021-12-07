@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.SystemAdminWorkArea;
+package userinterface.AssetAgentRole;
 
+import userinterface.SystemAdminWorkArea.*;
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -14,14 +15,14 @@ import javax.swing.JSplitPane;
  *
  * @author prathameshnemade
  */
-public class AssetRealEstateJPanel extends javax.swing.JPanel {
+public class AssetAgentRealEstateJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
 
-    public AssetRealEstateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public AssetAgentRealEstateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
@@ -167,8 +168,8 @@ public class AssetRealEstateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        AssetRealEstateViewJPanel assetRealEstateViewJPanel = new AssetRealEstateViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(assetRealEstateViewJPanel);
+        AssetAgentRealEstateViewJPanel assetAgentRealEstateViewJPanel = new AssetAgentRealEstateViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetAgentRealEstateViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
     private void viewJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabel1FocusGained

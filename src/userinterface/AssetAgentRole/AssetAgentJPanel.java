@@ -15,8 +15,19 @@ import javax.swing.JPanel;
  */
 public class AssetAgentJPanel extends javax.swing.JPanel {
 
-    public AssetAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
-        initComponents();
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    UserAccount account;
+    JPanel browsingJPanel;
+
+    public AssetAgentJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem, JPanel browsingJPanel) {
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
+        this.account = account;
+        this.browsingJPanel = browsingJPanel;
+        initComponents();  
+        this.userNameJLabel.setText(account.getUsername().toString());
+
     }
 
     /**
@@ -28,19 +39,166 @@ public class AssetAgentJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jSplitPane = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        homeButton = new javax.swing.JButton();
+        industryJButton = new javax.swing.JButton();
+        realEstateJButton = new javax.swing.JButton();
+        jewelleryJButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        userNameJLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        homeButton.setBackground(new java.awt.Color(200, 203, 178));
+        homeButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(67, 100, 100));
+        homeButton.setText("Home");
+        homeButton.setBorder(null);
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+
+        industryJButton.setBackground(new java.awt.Color(200, 203, 178));
+        industryJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        industryJButton.setForeground(new java.awt.Color(67, 100, 100));
+        industryJButton.setText("Industries");
+        industryJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                industryJButtonActionPerformed(evt);
+            }
+        });
+
+        realEstateJButton.setBackground(new java.awt.Color(200, 203, 178));
+        realEstateJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        realEstateJButton.setForeground(new java.awt.Color(67, 100, 100));
+        realEstateJButton.setText("Real Estate");
+        realEstateJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                realEstateJButtonActionPerformed(evt);
+            }
+        });
+
+        jewelleryJButton.setBackground(new java.awt.Color(200, 203, 178));
+        jewelleryJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jewelleryJButton.setForeground(new java.awt.Color(67, 100, 100));
+        jewelleryJButton.setText("Jewellery");
+        jewelleryJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jewelleryJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Noto Sans Oriya", 0, 36)); // NOI18N
+        jLabel2.setText("Hello,");
+
+        userNameJLabel.setFont(new java.awt.Font("Noto Sans Oriya", 1, 36)); // NOI18N
+        userNameJLabel.setText("System Admin!");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(industryJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(realEstateJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jewelleryJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userNameJLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(userNameJLabel))
+                .addGap(87, 87, 87)
+                .addComponent(industryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(realEstateJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jewelleryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(85, 85, 85)
+                    .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(236, Short.MAX_VALUE)))
         );
+
+        jSplitPane.setLeftComponent(jPanel1);
+
+        jLabel3.setText("DASHBOARD");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jLabel3)
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel3)
+                .addContainerGap(283, Short.MAX_VALUE))
+        );
+
+        jSplitPane.setRightComponent(jPanel3);
+
+        add(jSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
+    }//GEN-LAST:event_homeButtonActionPerformed
+
+    private void industryJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_industryJButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_industryJButtonActionPerformed
+
+    private void realEstateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realEstateJButtonActionPerformed
+        AssetAgentRealEstateJPanel assetAgentRealEstateJPanel = new AssetAgentRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(assetAgentRealEstateJPanel);
+    }//GEN-LAST:event_realEstateJButtonActionPerformed
+
+    private void jewelleryJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jewelleryJButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jewelleryJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton homeButton;
+    private javax.swing.JButton industryJButton;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JButton jewelleryJButton;
+    private javax.swing.JButton realEstateJButton;
+    private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }
