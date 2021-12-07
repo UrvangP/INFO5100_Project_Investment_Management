@@ -33,10 +33,29 @@ public class OrganizationDirectory {
         return organization;
     }
 
-    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc) {
-        Organization org = new CompaniesOrganization(name, doc, admin);
+    public Organization createRealEstateOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> estates, Date doc) {
+        Organization organization = new RealEstateOrganization(companyName, type, name, admin, estates, doc);
+        organizationList.add(organization);
+        return organization;
+    }
+
+
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country) {
+        Organization org = new CompaniesOrganization(name, doc, admin, country);
         organizationList.add(org);
         return org;
+    }
+    
+    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country){
+        Organization org = new MutualFundsOrganization(name, doc, admin, country);
+        organizationList.add(org);
+        return org;
+    }
+
+    public Organization createIndustryOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> industries, Date doc) {
+        Organization organization = new IndustriesOrganization(companyName, type, name, admin, industries, doc);
+        organizationList.add(organization);
+        return organization;
     }
 
     public Organization createOrganization(Type type, String name, Date doc) {
@@ -45,13 +64,13 @@ public class OrganizationDirectory {
             //organization = new CompaniesOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.MutualFunds.getValue())) {
-            organization = new MutualFundsOrganization(name, doc);
+            //organization = new MutualFundsOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.Industries.getValue())) {
-            organization = new IndustriesOrganization(name, doc);
+            //organization = new IndustriesOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.RealEstate.getValue())) {
-            organization = new RealEstateOrganization(name, doc);
+            //  organization = new RealEstateOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.Jewellery.getValue())) {
 //            organization = new JewelleryOrganization(name, doc);

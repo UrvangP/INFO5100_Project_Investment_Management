@@ -18,8 +18,8 @@ public class CompaniesOrganization extends Organization{
     
     UserAccount admin;
     
-    public CompaniesOrganization(String name, Date doc, UserAccount admin){
-        super(Organization.Type.Companies.getValue(), name, doc);
+    public CompaniesOrganization(String name, Date doc, UserAccount admin, String country){
+        super(Organization.Type.Companies.getValue(), name, doc, country);
         this.admin = admin;
     }
 

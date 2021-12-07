@@ -23,17 +23,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="602" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="serialNoJLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="brandJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="serialNoJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="serialNoJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="serialNoJLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="serialNoJLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="serialNoJLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="serialNoJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="brandJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="serialNoJLabel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -43,14 +44,28 @@
                       <Component id="deletejLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="priceJField" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="maxUnitJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="adminComboBox" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jewelleryNameJField" alignment="0" pref="278" max="32767" attributes="0"/>
-                          <Component id="compnayNameJField" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="realestateNameJField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="realestateComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="nameJField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="realestateLocationJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                                  <Component id="realestateAreaJField1" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="realestateUnitJField" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="serialNoJLabel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="realestateJField" min="-2" pref="114" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -63,27 +78,35 @@
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="serialNoJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="compnayNameJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="realestateNameJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="adminComboBox" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="realestateComboBox" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="brandJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jewelleryNameJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="nameJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="serialNoJLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="serialNoJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="maxUnitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="realestateLocationJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="serialNoJLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="serialNoJLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="realestateAreaJField1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="serialNoJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="realestateUnitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="serialNoJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="priceJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="realestateJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -91,7 +114,7 @@
                   <Component id="deletejLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="256" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="342" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -108,12 +131,15 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
+              <Table columnCount="8" rowCount="4">
                 <Column editable="false" title="Company Name" type="java.lang.Object"/>
+                <Column editable="false" title="Real Estate Name" type="java.lang.Object"/>
                 <Column editable="false" title="Price" type="java.lang.Object"/>
                 <Column editable="false" title="Units" type="java.lang.Object"/>
                 <Column editable="false" title="Date of creation" type="java.lang.Object"/>
                 <Column editable="false" title="Admin" type="java.lang.Object"/>
+                <Column editable="false" title="Area" type="java.lang.Object"/>
+                <Column editable="false" title="Location" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
@@ -145,7 +171,7 @@
         <Property name="text" type="java.lang.String" value="Company Name(*):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="compnayNameJField">
+    <Component class="javax.swing.JTextField" name="realestateNameJField">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -160,9 +186,9 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="compnayNameJFieldFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="compnayNameJFieldnameChangeHandler"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="compnayNameJFieldActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateNameJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateNameJFieldnameChangeHandler"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateNameJFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="brandJLabel1">
@@ -176,17 +202,17 @@
         <Property name="text" type="java.lang.String" value="Admin (*):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="adminComboBox">
+    <Component class="javax.swing.JComboBox" name="realestateComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="adminComboBoxItemStateChanged"/>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="adminComboBoxFocusGained"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminComboBoxActionPerformed"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="adminComboBoxPropertyChange"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="realestateComboBoxItemStateChanged"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateComboBoxFocusGained"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateComboBoxActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="realestateComboBoxPropertyChange"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -200,10 +226,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="64" green="64" red="43" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Jewellery Name(*):"/>
+        <Property name="text" type="java.lang.String" value=" Name(*):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jewelleryNameJField">
+    <Component class="javax.swing.JTextField" name="nameJField">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -218,9 +244,9 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jewelleryNameJFieldFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jewelleryNameJFieldnameChangeHandler"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jewelleryNameJFieldActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameJFieldnameChangeHandler"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameJFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="serialNoJLabel1">
@@ -234,7 +260,7 @@
         <Property name="text" type="java.lang.String" value="Max Unit(*):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="maxUnitJField">
+    <Component class="javax.swing.JTextField" name="realestateUnitJField">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -249,9 +275,9 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldnameChangeHandler"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maxUnitJFieldActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateUnitJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateUnitJFieldnameChangeHandler"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateUnitJFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="serialNoJLabel3">
@@ -265,7 +291,7 @@
         <Property name="text" type="java.lang.String" value="Price(*):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="priceJField">
+    <Component class="javax.swing.JTextField" name="realestateJField">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -280,10 +306,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="priceJFieldHierarchyChanged"/>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldnameChangeHandler"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceJFieldActionPerformed"/>
+        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="realestateJFieldHierarchyChanged"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateJFieldnameChangeHandler"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateJFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -302,6 +328,75 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="serialNoJLabel4">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans Caption" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="64" green="64" red="43" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Location (*):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="realestateLocationJField">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ee" green="ee" red="ee" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Enter here"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to enter your name."/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder bottom="1" left="5" right="5" top="1"/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateLocationJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateLocationJFieldnameChangeHandler"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="realestateLocationJFieldMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateLocationJFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="serialNoJLabel5">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans Caption" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="64" green="64" red="43" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Area (*):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="realestateAreaJField1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ee" green="ee" red="ee" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Enter here"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to enter your name."/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder bottom="1" left="5" right="5" top="1"/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateAreaJField1FocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="realestateAreaJField1nameChangeHandler"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="realestateAreaJField1MouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="realestateAreaJField1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="sq. ft."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
