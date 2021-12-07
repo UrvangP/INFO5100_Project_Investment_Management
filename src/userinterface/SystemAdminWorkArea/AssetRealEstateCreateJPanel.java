@@ -263,6 +263,11 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
                 realestateLocationJFieldnameChangeHandler(evt);
             }
         });
+        realestateLocationJField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                realestateLocationJFieldMouseClicked(evt);
+            }
+        });
         realestateLocationJField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 realestateLocationJFieldActionPerformed(evt);
@@ -284,6 +289,11 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 realestateAreaJField1nameChangeHandler(evt);
+            }
+        });
+        realestateAreaJField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                realestateAreaJField1MouseClicked(evt);
             }
         });
         realestateAreaJField1.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +344,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(realestateNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(serialNoJLabel))
@@ -533,6 +543,18 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
     private void realestateAreaJField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realestateAreaJField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_realestateAreaJField1ActionPerformed
+
+    private void realestateLocationJFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_realestateLocationJFieldMouseClicked
+        if (this.realestateLocationJField.getText().equals("Enter here")) {
+            realestateLocationJField.setText("");
+        }
+    }//GEN-LAST:event_realestateLocationJFieldMouseClicked
+
+    private void realestateAreaJField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_realestateAreaJField1MouseClicked
+        if (this.realestateAreaJField1.getText().equals("Enter here")) {
+            realestateAreaJField1.setText("");
+        }
+    }//GEN-LAST:event_realestateAreaJField1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

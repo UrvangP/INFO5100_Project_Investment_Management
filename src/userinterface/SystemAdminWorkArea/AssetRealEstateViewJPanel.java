@@ -9,8 +9,8 @@ import Business.EcoSystem;
 import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
-import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import java.util.HashMap;
 import javax.swing.JPanel;
@@ -56,11 +56,11 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
                 for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
 
                     selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
-                    if (selectedOrganization instanceof JewelleryOrganization) {
-                        JewelleryOrganization ongoing2 = (JewelleryOrganization) selectedOrganization;
+                    if (selectedOrganization instanceof RealEstateOrganization) {
+                        RealEstateOrganization ongoing2 = (RealEstateOrganization) selectedOrganization;
 //                        allJewellery.add(ongoing2);
                         for (HashMap.Entry<String, HashMap<String, Object>> set
-                                : ongoing2.getJewelleries().entrySet()) {
+                                : ongoing2.getEstates().entrySet()) {
 
                             Object[] row = {
                                 ongoing2.getCompanyName(),
@@ -68,7 +68,8 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
                                 set.getValue().get("maxPrice"),
                                 set.getValue().get("quantity"),
                                 set.getValue().get("doc"),
-                                ongoing2.getAdmin().getUsername().toString()
+                                ongoing2.getAdmin().getUsername().toString(),
+                                set.getValue().get("area"),
                             };
                             model.addRow(row);
                         }
@@ -94,17 +95,17 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company Name", "Jewellery Name", "Price", "Units", "Date of creation", "Admin"
+                "Company Name", "Real Estate Name", "Price", "Units", "Date of creation", "Admin", "Location"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
