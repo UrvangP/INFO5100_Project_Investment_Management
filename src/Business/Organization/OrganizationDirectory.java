@@ -33,6 +33,12 @@ public class OrganizationDirectory {
         return organization;
     }
 
+    public Organization createRealEstateOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> estates, Date doc) {
+        Organization organization = new RealEstateOrganization(companyName, type, name, admin, estates, doc);
+        organizationList.add(organization);
+        return organization;
+    }
+
     public Organization createCompanyOrganization(String name, UserAccount admin, Date doc) {
         Organization org = new CompaniesOrganization(name, doc, admin);
         organizationList.add(org);
@@ -57,7 +63,7 @@ public class OrganizationDirectory {
             //organization = new IndustriesOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.RealEstate.getValue())) {
-            organization = new RealEstateOrganization(name, doc);
+            //  organization = new RealEstateOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.Jewellery.getValue())) {
 //            organization = new JewelleryOrganization(name, doc);

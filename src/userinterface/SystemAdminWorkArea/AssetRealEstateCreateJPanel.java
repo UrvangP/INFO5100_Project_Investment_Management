@@ -93,12 +93,15 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         serialNoJLabel4 = new javax.swing.JLabel();
         realestateLocationJField = new javax.swing.JTextField();
+        serialNoJLabel5 = new javax.swing.JLabel();
+        realestateAreaJField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         serialNoJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         serialNoJLabel.setForeground(new java.awt.Color(67, 100, 100));
-        serialNoJLabel.setText("Real Estate Name(*):");
+        serialNoJLabel.setText("Company Name(*):");
 
         realestateNameJField.setBackground(new java.awt.Color(238, 238, 238));
         realestateNameJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -266,35 +269,65 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
             }
         });
 
+        serialNoJLabel5.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel5.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel5.setText("Area (*):");
+
+        realestateAreaJField1.setBackground(new java.awt.Color(238, 238, 238));
+        realestateAreaJField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        realestateAreaJField1.setText("Enter here");
+        realestateAreaJField1.setToolTipText("Click to enter your name.");
+        realestateAreaJField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        realestateAreaJField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                realestateAreaJField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                realestateAreaJField1nameChangeHandler(evt);
+            }
+        });
+        realestateAreaJField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                realestateAreaJField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("sq. ft.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(serialNoJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(serialNoJLabel)
+                    .addComponent(brandJLabel1)
+                    .addComponent(serialNoJLabel2)
+                    .addComponent(serialNoJLabel4)
+                    .addComponent(serialNoJLabel1)
+                    .addComponent(serialNoJLabel3)
+                    .addComponent(cardentifierJLabel1)
+                    .addComponent(serialNoJLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(realestateDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(realestateJField)
-                    .addComponent(realestateUnitJField)
                     .addComponent(realestateLocationJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(realestateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(realestateNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(realestateNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(realestateAreaJField1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(realestateUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(realestateJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +350,12 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(realestateLocationJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(serialNoJLabel4))
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serialNoJLabel5)
+                    .addComponent(realestateAreaJField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel1)
                     .addComponent(realestateUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -395,7 +433,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_realestateJFieldActionPerformed
 
-     public Boolean validateItem() {
+    public Boolean validateItem() {
         String errorMEssage = "";
         if (this.realestateComboBox.getSelectedItem() == null) {
             errorMEssage += "Select Admin to proceed! \n";
@@ -403,11 +441,13 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         if (!this.realestateNameJField.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Real Estate Company Name! \n";
         }
-        
+        if (!this.realestateAreaJField1.getText().matches("[0-9]+")) {
+            errorMEssage += "Invalid Real Estate Area should be a number! \n";
+        }
         if (!this.realestateLocationJField.getText().matches("[a-zA-Z0-9 ]+")) {
             errorMEssage += "Invalid Location Name! \n";
         }
-        
+
         if (!this.nameJField.getText().matches("[a-zA-Z]+")) {
             errorMEssage += "Invalid Real Estate Name! \n";
         }
@@ -420,7 +460,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         if (errorMEssage.equals("")) {
             return true;
         }
-        JOptionPane.showMessageDialog(this, errorMEssage, "Jewellery Edit", ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, errorMEssage, "Real Estate Edit", ERROR_MESSAGE);
         return false;
     }
 
@@ -428,20 +468,21 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Boolean valid = validateItem();
         if (valid) {
-            HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
-            HashMap<String, Object> jewelName = new HashMap<>();
-            jewelName.put("maxPrice", this.realestateJField.getText().toString());
-            jewelName.put("quantity", this.realestateUnitJField.getText().toString());
-            jewelName.put("doc", new Date());
-            jewelleries.put(this.nameJField.getText(), jewelName);
+            HashMap<String, HashMap<String, Object>> estates = new HashMap<>();
+            HashMap<String, Object> estate = new HashMap<>();
+            estate.put("maxPrice", this.realestateJField.getText().toString());
+            estate.put("quantity", this.realestateUnitJField.getText().toString());
+            estate.put("area", this.realestateAreaJField1.getText().toString());
+            estate.put("doc", new Date());
+            estates.put(this.nameJField.getText(), estate);
 
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof AssetMarketEnterprise) {
-                    ongoing.getOrganizationDirectory().createJewelleryOrganization(this.realestateNameJField.getText(), Organization.Type.Jewellery, this.nameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
+                    ongoing.getOrganizationDirectory().createRealEstateOrganization(this.realestateNameJField.getText(), Organization.Type.RealEstate, this.nameJField.getText().toString(), this.selectedUser, estates, new Date());
                 }
             }
-            JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Real Estate created successfully!", "Real Estate ", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -481,13 +522,27 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_realestateLocationJFieldActionPerformed
 
+    private void realestateAreaJField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_realestateAreaJField1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_realestateAreaJField1FocusGained
+
+    private void realestateAreaJField1nameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_realestateAreaJField1nameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_realestateAreaJField1nameChangeHandler
+
+    private void realestateAreaJField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realestateAreaJField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_realestateAreaJField1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField nameJField;
+    private javax.swing.JTextField realestateAreaJField1;
     private javax.swing.JComboBox<String> realestateComboBox;
     private javax.swing.JTextField realestateDateOfCreationJLabel;
     private javax.swing.JTextField realestateJField;
@@ -499,5 +554,6 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel serialNoJLabel2;
     private javax.swing.JLabel serialNoJLabel3;
     private javax.swing.JLabel serialNoJLabel4;
+    private javax.swing.JLabel serialNoJLabel5;
     // End of variables declaration//GEN-END:variables
 }
