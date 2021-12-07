@@ -11,6 +11,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Restaurant.RestaurantDirectory;
 import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -267,6 +269,11 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         priceJField.setText("Enter here");
         priceJField.setToolTipText("Click to enter your name.");
         priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        priceJField.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                priceJFieldHierarchyChanged(evt);
+            }
+        });
         priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 priceJFieldFocusGained(evt);
@@ -393,7 +400,9 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_adminComboBoxPropertyChange
 
     private void jewelleryNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.jewelleryNameJField.getText().equals("Enter here")) {
+            jewelleryNameJField.setText("");
+        }
     }//GEN-LAST:event_jewelleryNameJFieldFocusGained
 
     private void jewelleryNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldnameChangeHandler
@@ -419,7 +428,9 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_maxUnitJFieldActionPerformed
 
     private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.priceJField.getText().equals("Enter here")) {
+            priceJField.setText("");
+        }
     }//GEN-LAST:event_priceJFieldFocusGained
 
     private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
@@ -430,22 +441,53 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceJFieldActionPerformed
 
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z]+")) {
+            errorMEssage += "Invalid Jewellery Name! \n";
+        }
+        if (!this.maxUnitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Unit should be a number! \n";
+        }
+        if (!this.priceJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Price should be a number! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Jewellery Edit", ERROR_MESSAGE);
+        return false;
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
-        HashMap<String, Object> jewelName = new HashMap<>();
-        jewelName.put("maxPrice", this.priceJField.getText().toString());
-        jewelName.put("quantity", this.maxUnitJField.getText().toString());
-        jewelName.put("doc", new Date());
-        jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
-        selectedJewelery.setAdmin(this.selectedUser);
-        selectedJewelery.setJewelleries(jewelleries);
-        selectedJewelery.setCompanyName(this.compnayNameJField.getText());
-        _getData();
-        JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+
+        if (selectedOrganization != null) {
+            Boolean valid = validateItem();
+            if (valid) {
+                HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
+                HashMap<String, Object> jewelName = new HashMap<>();
+                jewelName.put("maxPrice", this.priceJField.getText().toString());
+                jewelName.put("quantity", this.maxUnitJField.getText().toString());
+                jewelName.put("doc", new Date());
+                jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
+                selectedJewelery.setAdmin(this.selectedUser);
+                selectedJewelery.setJewelleries(jewelleries);
+                selectedJewelery.setCompanyName(this.compnayNameJField.getText());
+                _getData();
+                JOptionPane.showMessageDialog(this, "Jewellery udpated successfully!", "Jewellery", INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Jewellery to update !", "Jewellery", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
         Integer selectedIndex = this.jTable1.getSelectedRow();
         if (selectedIndex != -1) {
             selectedJewelery = this.allJewellery.get(selectedIndex);
@@ -462,16 +504,23 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void deletejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletejLabelMouseClicked
-
-        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ongoing instanceof AssetMarketEnterprise) {
-                ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
+        if (selectedJewelery != null) {
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoing instanceof AssetMarketEnterprise) {
+                    ongoing.getOrganizationDirectory().getOrganizationList().remove(selectedOrganization);
+                }
             }
+            _getData();
+            JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Jewellery to delete !", "Jewellery", ERROR_MESSAGE);
         }
-        _getData();
-        JOptionPane.showMessageDialog(this, "Jewellery deleted successfully!", "Jewellery", INFORMATION_MESSAGE);
     }//GEN-LAST:event_deletejLabelMouseClicked
+
+    private void priceJFieldHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_priceJFieldHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldHierarchyChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -490,4 +539,5 @@ public class AssetJewelleryEditJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel serialNoJLabel2;
     private javax.swing.JLabel serialNoJLabel3;
     // End of variables declaration//GEN-END:variables
+
 }

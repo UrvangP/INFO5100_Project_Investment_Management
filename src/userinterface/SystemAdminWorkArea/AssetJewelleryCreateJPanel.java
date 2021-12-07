@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -337,7 +338,9 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_maxUnitJFieldActionPerformed
 
     private void jewelleryNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.jewelleryNameJField.getText().equals("Enter here")) {
+            jewelleryNameJField.setText("");
+        }
     }//GEN-LAST:event_jewelleryNameJFieldFocusGained
 
     private void jewelleryNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jewelleryNameJFieldnameChangeHandler
@@ -349,7 +352,9 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jewelleryNameJFieldActionPerformed
 
     private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
-        // TODO add your handling code here:
+        if (this.priceJField.getText().equals("Enter here")) {
+            priceJField.setText("");
+        }
     }//GEN-LAST:event_priceJFieldFocusGained
 
     private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
@@ -360,21 +365,49 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceJFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
-        HashMap<String, Object> jewelName = new HashMap<>();
-        jewelName.put("maxPrice", this.priceJField.getText().toString());
-        jewelName.put("quantity", this.maxUnitJField.getText().toString());
-        jewelName.put("doc", new Date());
-        jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
-
-        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ongoing instanceof AssetMarketEnterprise) {
-                ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
-            }
+     public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
         }
-        JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
+        if (!this.compnayNameJField.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if (!this.jewelleryNameJField.getText().matches("[a-zA-Z]+")) {
+            errorMEssage += "Invalid Jewellery Name! \n";
+        }
+        if (!this.maxUnitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Unit should be a number! \n";
+        }
+        if (!this.priceJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Jewellery Price should be a number! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Jewellery Edit", ERROR_MESSAGE);
+        return false;
+    }
+
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Boolean valid = validateItem();
+        if (valid) {
+            HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<>();
+            HashMap<String, Object> jewelName = new HashMap<>();
+            jewelName.put("maxPrice", this.priceJField.getText().toString());
+            jewelName.put("quantity", this.maxUnitJField.getText().toString());
+            jewelName.put("doc", new Date());
+            jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
+
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoing instanceof AssetMarketEnterprise) {
+                    ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged

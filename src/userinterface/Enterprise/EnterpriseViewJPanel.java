@@ -72,7 +72,6 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
         initComponents();
         this.selectedEnterprise = "StockMarket";
 
-
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
@@ -106,7 +105,9 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
                 Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoign1 instanceof AssetMarketEnterprise) {
                     AssetMarketEnterprise temp = (AssetMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
-                    this.assetAdminComboBox.setText(temp.admin.getUsername());
+                    if (temp.admin != null) {
+                        this.assetAdminComboBox.setText(temp.admin.getUsername());
+                    }
                 }
             }
         }
@@ -116,7 +117,9 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
                 Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoign1 instanceof ForexMarketEnterprise) {
                     ForexMarketEnterprise temp = (ForexMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
-                    this.forexAdminComboBox.setText(temp.admin.getUsername());
+                    if (temp.admin != null) {
+                        this.forexAdminComboBox.setText(temp.admin.getUsername());
+                    }
                 }
             }
         }
@@ -126,7 +129,9 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
                 Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoign1 instanceof CryptoMarketEnterprise) {
                     CryptoMarketEnterprise temp = (CryptoMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
-                    this.cryptoAdminComboBox.setText(temp.admin.getUsername());
+                    if (temp.admin != null) {
+                        this.cryptoAdminComboBox.setText(temp.admin.getUsername());
+                    }
                 }
             }
         }
@@ -136,12 +141,13 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
                 Enterprise ongoign1 = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoign1 instanceof StockMarketEnterprise) {
                     StockMarketEnterprise temp = (StockMarketEnterprise) ongoingNetwrok.getEnterpriseDirectory().getEnterpriseDir().get(i);
-                    this.stockAdminComboBox.setText(temp.admin.getUsername());
+                    if (temp.admin != null) {
+                        this.stockAdminComboBox.setText(temp.admin.getUsername());
+                    }
                 }
             }
         }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
