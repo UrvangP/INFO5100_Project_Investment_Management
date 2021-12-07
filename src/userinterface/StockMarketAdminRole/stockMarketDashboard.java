@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
@@ -320,9 +321,8 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         }
         
         String oName = lsOrganizationNames.getSelectedValue();
-        Organization temp = orgs.getOrganization(oName);
         
-        companyEditPanel compEdit = new companyEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        companyEditPanel compEdit = new companyEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, (CompaniesOrganization) orgs.getOrganization(oName));
         jSplitPane2.setRightComponent(compEdit);
     }//GEN-LAST:event_lsOrganizationNamesValueChanged
 

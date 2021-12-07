@@ -40,8 +40,8 @@ public class OrganizationDirectory {
     }
 
 
-    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country) {
-        Organization org = new CompaniesOrganization(name, doc, admin, country);
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country, int price, long revenue) {
+        Organization org = new CompaniesOrganization(name, doc, admin, country, price, revenue);
         organizationList.add(org);
         return org;
     }
