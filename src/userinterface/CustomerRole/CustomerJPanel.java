@@ -208,7 +208,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        CustomerCreateOrderJPanel customerCreateOrderJPanel = new CustomerCreateOrderJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        CustomerCreateOrderJPanel customerCreateOrderJPanel = new CustomerCreateOrderJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane.setRightComponent(customerCreateOrderJPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
 

@@ -14,9 +14,14 @@ import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
 import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 
 /**
@@ -29,6 +34,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
+    UserAccount selectedMarketAgent;
+    Organization selectedOraganization;
 
     public CustomerAssetViewOrderJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane1, Network selectedNetwork) {
         this.jSplitPane = jSplitPane1;
@@ -97,6 +104,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
                                     maxUnitJField.setText(set.getValue().get("quantity").toString());
                                     areaJLabel.setText("N/A");
+                                    selectedMarketAgent = ((IndustriesOrganization) temp1).getAdmin();
+                                    selectedOraganization = ((IndustriesOrganization) temp1);
                                 }
                             }
                         }
@@ -109,6 +118,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
                                     maxUnitJField.setText(set.getValue().get("quantity").toString());
                                     areaJLabel.setText("N/A");
+                                    selectedMarketAgent = ((JewelleryOrganization) temp1).getAdmin();
+                                    selectedOraganization = ((JewelleryOrganization) temp1);
                                 }
                             }
                         }
@@ -121,6 +132,9 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
                                     maxUnitJField.setText(set.getValue().get("quantity").toString());
                                     areaJLabel.setText(set.getValue().get("area").toString());
+                                    selectedMarketAgent = ((RealEstateOrganization) temp1).getAdmin();
+                                    selectedOraganization = ((RealEstateOrganization) temp1);
+
                                 }
                             }
                         }
@@ -467,7 +481,25 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_areaJLabelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //todo
+
+        AssetBuyWorkRequest newRequest = new AssetBuyWorkRequest(
+                this.account,
+                this.selectedMarketAgent,
+                WorkRequest.StatusType.Initiated,
+                new Date(),
+                null,
+                AssetBuyWorkRequest.StatusType.Initiated,
+                Integer.valueOf(this.priceJField.getText().toString()),
+                Integer.valueOf(this.unitJField.getText().toString()),
+                new Date(),
+                this.companyNameComboBox.getSelectedItem().toString(),
+                this.productNameJField.getText().toString(),
+                this.selectedOraganization
+        );
+
+        this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
+        JOptionPane.showMessageDialog(this, "Investment leveraged successfully!", "Investment", INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void productNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productNameJFieldFocusGained
