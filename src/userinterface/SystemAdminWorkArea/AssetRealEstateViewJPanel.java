@@ -70,6 +70,7 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
                                 set.getValue().get("doc"),
                                 ongoing2.getAdmin().getUsername().toString(),
                                 set.getValue().get("area"),
+                                set.getValue().get("location")
                             };
                             model.addRow(row);
                         }
@@ -95,17 +96,17 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company Name", "Real Estate Name", "Price", "Units", "Date of creation", "Admin", "Location"
+                "Company Name", "Real Estate Name", "Price", "Units", "Date of creation", "Admin", "Area", "Location"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

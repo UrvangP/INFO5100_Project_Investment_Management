@@ -484,6 +484,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
             estate.put("quantity", this.realestateUnitJField.getText().toString());
             estate.put("area", this.realestateAreaJField1.getText().toString());
             estate.put("doc", new Date());
+            estate.put("location", this.realestateLocationJField.getText().toString());
             estates.put(this.nameJField.getText(), estate);
 
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
