@@ -50,21 +50,10 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
 
                     if (this.typeComboBox.getSelectedItem().toString() == "Industries") {
                         if (temp1 instanceof IndustriesOrganization) {
-                            if (this.companyNameComboBox.getSelectedIndex() == -1) {
-                                companyName.add(((IndustriesOrganization) temp1).getCompanyName().toString());
-                                for (HashMap.Entry<String, HashMap<String, Object>> set
-                                        : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
-                                    productNameJField.setText(set.getKey());
-                                    priceJField.setText(set.getValue().get("maxPrice").toString());
-                                    areaJLabel.setText("N/A");
-                                }
-                            } else {
-                                if (this.companyNameComboBox.getSelectedItem().toString() == ((IndustriesOrganization) temp1).getCompanyName().toString()) {
-                                    for (HashMap.Entry<String, HashMap<String, Object>> set
-                                            : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
-                                        productNameJField.setText(set.getKey());
-                                    }
-                                }
+                            companyName.add(((IndustriesOrganization) temp1).getCompanyName().toString());
+                            for (HashMap.Entry<String, HashMap<String, Object>> set
+                                    : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
+                                productNameJField.setText(set.getKey());
                             }
                         }
                     } else if (this.typeComboBox.getSelectedItem().toString() == "Jewellery") {
@@ -88,9 +77,54 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
             }
         }
         String[] temp1 = companyName.toArray(new String[companyName.size()]);
-
         DefaultComboBoxModel<String> temp11 = new DefaultComboBoxModel<>(temp1);
         this.companyNameComboBox.setModel(temp11);
+    }
+
+    public void fetchFields() {
+        for (int i = 0; i < this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ongoing = this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof AssetMarketEnterprise) {
+                AssetMarketEnterprise temp = (AssetMarketEnterprise) this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                    Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                    if (this.typeComboBox.getSelectedItem().toString() == "Industries") {
+                        if (temp1 instanceof IndustriesOrganization) {
+                            if (((IndustriesOrganization) temp1).getCompanyName().toString() == this.companyNameComboBox.getSelectedItem().toString()) {
+                                for (HashMap.Entry<String, HashMap<String, Object>> set
+                                        : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
+                                    productNameJField.setText(set.getKey());
+                                    priceJField.setText(set.getValue().get("maxPrice").toString());
+                                    areaJLabel.setText("N/A");
+                                }
+                            }
+                        }
+                    } else if (this.typeComboBox.getSelectedItem().toString() == "Jewellery") {
+                        if (temp1 instanceof JewelleryOrganization) {
+                            if (((JewelleryOrganization) temp1).getCompanyName().toString() == this.companyNameComboBox.getSelectedItem().toString()) {
+                                for (HashMap.Entry<String, HashMap<String, Object>> set
+                                        : ((JewelleryOrganization) temp1).getJewelleries().entrySet()) {
+                                    productNameJField.setText(set.getKey());
+                                    priceJField.setText(set.getValue().get("maxPrice").toString());
+                                    areaJLabel.setText("N/A");
+                                }
+                            }
+                        }
+                    } else if (this.typeComboBox.getSelectedItem().toString() == "Real Estate") {
+                        if (temp1 instanceof RealEstateOrganization) {
+                            if (((RealEstateOrganization) temp1).getCompanyName().toString() == this.companyNameComboBox.getSelectedItem().toString()) {
+                                for (HashMap.Entry<String, HashMap<String, Object>> set
+                                        : ((RealEstateOrganization) temp1).getEstates().entrySet()) {
+                                    productNameJField.setText(set.getKey());
+                                    priceJField.setText(set.getValue().get("maxPrice").toString());
+                                    areaJLabel.setText("N/A");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -337,11 +371,11 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_typeComboBoxActionPerformed
 
     private void typeComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_typeComboBoxPropertyChange
-        fetchData();
+//        todo();
     }//GEN-LAST:event_typeComboBoxPropertyChange
 
     private void companyNameComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_companyNameComboBoxItemStateChanged
-        fetchData();
+        fetchFields();
     }//GEN-LAST:event_companyNameComboBoxItemStateChanged
 
     private void companyNameComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_companyNameComboBoxFocusGained
@@ -353,7 +387,7 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_companyNameComboBoxActionPerformed
 
     private void companyNameComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_companyNameComboBoxPropertyChange
-        fetchData();
+//        fetchData();
     }//GEN-LAST:event_companyNameComboBoxPropertyChange
 
     private void unitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_unitJFieldFocusGained
