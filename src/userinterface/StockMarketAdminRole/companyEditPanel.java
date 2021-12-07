@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Role.CompanyAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -37,14 +38,16 @@ public class companyEditPanel extends javax.swing.JPanel {
     UserAccount selectedUser;
     ArrayList<UserAccount> selectedDropDown;
     stockMarketDashboard parent;
+    Organization org;
     
-    public companyEditPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
+    public companyEditPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent, Organization org) {
         
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         this.parent = parent;
+        this.org = org;
         
         initComponents();
         
@@ -80,8 +83,6 @@ public class companyEditPanel extends javax.swing.JPanel {
         cardentifierJLabel3 = new javax.swing.JLabel();
         cardentifierJLabel1 = new javax.swing.JLabel();
         dateOfCreationJLabel = new javax.swing.JTextField();
-        cardentifierJLabel2 = new javax.swing.JLabel();
-        createdByJLabel = new javax.swing.JTextField();
         addJButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
 
@@ -165,22 +166,6 @@ public class companyEditPanel extends javax.swing.JPanel {
             }
         });
 
-        cardentifierJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        cardentifierJLabel2.setForeground(new java.awt.Color(67, 100, 100));
-        cardentifierJLabel2.setText("Created By:");
-
-        createdByJLabel.setEditable(false);
-        createdByJLabel.setBackground(new java.awt.Color(216, 220, 228));
-        createdByJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        createdByJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        createdByJLabel.setToolTipText("This is your identifier.");
-        createdByJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        createdByJLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createdByJLabelActionPerformed(evt);
-            }
-        });
-
         addJButton.setBackground(new java.awt.Color(200, 203, 178));
         addJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         addJButton.setForeground(new java.awt.Color(67, 100, 100));
@@ -207,14 +192,12 @@ public class companyEditPanel extends javax.swing.JPanel {
                             .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
                             .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dateOfCreationJLabel)
-                            .addComponent(createdByJLabel)
                             .addComponent(jTextField1))
                         .addGap(400, 400, 400))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,11 +225,7 @@ public class companyEditPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardentifierJLabel1))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardentifierJLabel2))
-                .addGap(18, 18, 18)
+                .addGap(70, 70, 70)
                 .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(254, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,29 +293,19 @@ public class companyEditPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
 
-    private void createdByJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdByJLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createdByJLabelActionPerformed
-
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
-        String creationDate = dateOfCreationJLabel.getText();
-
-        UserAccount createdBy = account;
-        UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
+        
+        //UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
 
         //Company comp = new Company(companyName, companyCountry, createdBy, admin);
-
-        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date());
-            }
-        }
+        
+        org.setName(companyName);
+        org.setCountry(companyCountry);
 
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
     }//GEN-LAST:event_addJButtonActionPerformed
 
     public void _adminChnageHandler() {
@@ -365,8 +334,11 @@ public class companyEditPanel extends javax.swing.JPanel {
     }
 
     private void initData(){
-        dateOfCreationJLabel.setText(new Date().toString());
-        createdByJLabel.setText(account.getUsername());
+        if(org!=null){
+        jTextField1.setText(org.getName());
+        countryComboBox.setSelectedItem(org.getCountry());
+        dateOfCreationJLabel.setText(org.getDoc().toString());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -375,10 +347,8 @@ public class companyEditPanel extends javax.swing.JPanel {
     private javax.swing.JLabel brandJLabel;
     private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel cardentifierJLabel1;
-    private javax.swing.JLabel cardentifierJLabel2;
     private javax.swing.JLabel cardentifierJLabel3;
     private javax.swing.JComboBox<String> countryComboBox;
-    private javax.swing.JTextField createdByJLabel;
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

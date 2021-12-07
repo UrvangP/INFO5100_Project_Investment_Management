@@ -330,7 +330,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date());
+                ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date(), companyCountry);
             }
         }
         

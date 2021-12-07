@@ -18,8 +18,8 @@ public class MutualFundsOrganization extends Organization{
     
     UserAccount admin;
     
-    public MutualFundsOrganization(String name, Date doc, UserAccount admin){
-        super(Organization.Type.MutualFunds.getValue(), name, doc);
+    public MutualFundsOrganization(String name, Date doc, UserAccount admin, String country){
+        super(Organization.Type.MutualFunds.getValue(), name, doc, country);
         this.admin = admin;
     }
 

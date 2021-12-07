@@ -33,14 +33,14 @@ public class OrganizationDirectory {
         return organization;
     }
 
-    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc) {
-        Organization org = new CompaniesOrganization(name, doc, admin);
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country) {
+        Organization org = new CompaniesOrganization(name, doc, admin, country);
         organizationList.add(org);
         return org;
     }
     
-    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc){
-        Organization org = new MutualFundsOrganization(name, doc, admin);
+    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country){
+        Organization org = new MutualFundsOrganization(name, doc, admin, country);
         organizationList.add(org);
         return org;
     }

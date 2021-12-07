@@ -24,7 +24,7 @@ public class JewelleryOrganization extends Organization {
     private HashMap<String, HashMap<String, Object>> jewelleries = new HashMap<String, HashMap<String, Object>>();
 
     public JewelleryOrganization(String companyName,Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc) {
-        super(Organization.Type.Jewellery.getValue(), name, doc);
+        super(Organization.Type.Jewellery.getValue(), name, doc, "");
         this.companyName=companyName;
         this.type = type;
         this.name = name;

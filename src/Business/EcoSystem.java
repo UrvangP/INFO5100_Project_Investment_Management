@@ -68,7 +68,7 @@ public class EcoSystem extends Organization {
     }
 
     public EcoSystem() {
-        super(null, null, null);
+        super(null, null, null, null);
         this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
