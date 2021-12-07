@@ -45,8 +45,8 @@ public class OrganizationDirectory {
         return org;
     }
 
-    public Organization createIndustryOrganization(String name, UserAccount admin, Date doc) {
-        Organization organization = new IndustriesOrganization(name, doc);
+    public Organization createIndustryOrganization(String companyName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> industries, Date doc) {
+        Organization organization = new IndustriesOrganization(companyName, type, name, admin, industries, doc);
         organizationList.add(organization);
         return organization;
     }
