@@ -19,6 +19,7 @@ import userinterface.CompanyAgentRole.CompanyAgentJPanel;
 import userinterface.CryptoAgentRole.CryptoAgentJPanel;
 import userinterface.CryptoMarketAdminRole.CryptoMarketAdminJPanel;
 import userinterface.CustomerRole.CustomerAreaJPanel;
+import userinterface.CustomerRole.CustomerJPanel;
 import userinterface.ForexAgentRole.ForexAgentJPanel;
 import userinterface.ForexMarketAdminRole.ForexMarketAdminJPanel;
 import userinterface.MutualFundsAgentRole.MutualFundsAgentJPanel;
@@ -52,7 +53,7 @@ public class LoginPage extends javax.swing.JPanel {
         this.logoutJButton = logoutJButton;
         this.browsingJPanel = browsingJPanel;
         this.system = system;
-        this.emailIDJField.setText("assetagent1");
+        this.emailIDJField.setText("customer1");
         this.passwordJField.setText("M#rcury01");
         this.browsingJPanel.setVisible(false);
     }
@@ -170,8 +171,7 @@ public class LoginPage extends javax.swing.JPanel {
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         if (passwordJField != null && emailIDJField != null) {
             UserAccount account = system.getUserAccountDirectory().authenticateUser(emailIDJField.getText(), passwordJField.getText());
-            
-            
+
             if (account != null) {
                 redirectToPanel(account);
             } else {
@@ -215,8 +215,8 @@ public class LoginPage extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("CustomerRole"))) {
-            CustomerAreaJPanel customerAreaJPanel = new CustomerAreaJPanel(this.rootJPanel, account, system, browsingJPanel);
-            this.rootJPanel.add(customerAreaJPanel);
+            CustomerJPanel customerJPanel = new CustomerJPanel(this.rootJPanel, account, system, browsingJPanel);
+            this.rootJPanel.add(customerJPanel);
             CardLayout layout = (CardLayout) this.rootJPanel.getLayout();
             layout.next(this.rootJPanel);
         } else if (account.getRole().toString().equals(this.system.getRolesList().get("ForexAgentRole"))) {

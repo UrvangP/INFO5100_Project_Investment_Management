@@ -6,7 +6,10 @@
 package userinterface.CustomerRole;
 
 import Business.EcoSystem;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 /**
@@ -17,17 +20,32 @@ public class CustomerJPanel extends javax.swing.JPanel {
 
     JPanel rootJPanel;
     UserAccount account;
-    EcoSystem system;
+    EcoSystem ecosystem;
+    ArrayList<Network> allNetworks = new ArrayList<>();
+    Network selectedNetwork;
 
-    public CustomerJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system) {
+    public CustomerJPanel(JPanel rootJPanel, UserAccount account, EcoSystem ecosystem, JPanel browsingJPanel) {
         initComponents();
         this.rootJPanel = rootJPanel;
         this.account = account;
-        this.system = system;
+        this.ecosystem = ecosystem;
         userNameJLabel.setText(account.getUsername());
-
-        CustomerDashboardJPanel updateProfileAdmin = new CustomerDashboardJPanel(system, account, jSplitPane);
+        CustomerDashboardJPanel updateProfileAdmin = new CustomerDashboardJPanel(ecosystem, account, jSplitPane);
         this.jSplitPane.setRightComponent(updateProfileAdmin);
+        getNetwork();
+    }
+
+    public void getNetwork() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            asset.add(ongoing1.getNName());
+            this.allNetworks.add(ongoing1);
+        }
+        String[] netwrokSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(netwrokSDropdown);
+        this.networkComboBox.setModel(brandSDropdownModel);
+
     }
 
     /**
@@ -46,6 +64,8 @@ public class CustomerJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        brandJLabel1 = new javax.swing.JLabel();
+        networkComboBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -90,6 +110,31 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Select Network (*):");
+
+        networkComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                networkComboBoxItemStateChanged(evt);
+            }
+        });
+        networkComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                networkComboBoxFocusGained(evt);
+            }
+        });
+        networkComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                networkComboBoxActionPerformed(evt);
+            }
+        });
+        networkComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                networkComboBoxPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,12 +143,17 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userNameJLabel))
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(networkComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userNameJLabel))
+                            .addComponent(brandJLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,13 +163,17 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(userNameJLabel))
+                .addGap(25, 25, 25)
+                .addComponent(brandJLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -149,20 +203,45 @@ public class CustomerJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        CustomerDashboardJPanel createAdmin = new CustomerDashboardJPanel(this.system, account, jSplitPane);
+        CustomerDashboardJPanel createAdmin = new CustomerDashboardJPanel(this.ecosystem, account, jSplitPane);
         this.jSplitPane.setRightComponent(createAdmin);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+        CustomerCreateOrderJPanel customerCreateOrderJPanel = new CustomerCreateOrderJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        this.jSplitPane.setRightComponent(customerCreateOrderJPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void networkComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxItemStateChanged
+
+    private void networkComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_networkComboBoxFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_networkComboBoxFocusGained
+
+    private void networkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_networkComboBoxActionPerformed
+
+    private void networkComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_networkComboBoxPropertyChange
+        this._adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxPropertyChange
+
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -171,6 +250,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JComboBox<String> networkComboBox;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }
