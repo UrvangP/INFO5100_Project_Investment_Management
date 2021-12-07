@@ -17,16 +17,30 @@ import java.util.Date;
 public class MutualFundsOrganization extends Organization{
     
     UserAccount admin;
+    ArrayList<Organization> companyStocks;
+
+    public ArrayList<Organization> getCompanyStocks() {
+        return companyStocks;
+    }
+
+    public void setCompanyStocks(ArrayList<Organization> companyStocks) {
+        this.companyStocks = companyStocks;
+    }
     
-    public MutualFundsOrganization(String name, Date doc, UserAccount admin, String country){
+    public MutualFundsOrganization(String name, Date doc, UserAccount admin, String country, ArrayList<Organization> funds){
         super(Organization.Type.MutualFunds.getValue(), name, doc, country);
         this.admin = admin;
+        this.companyStocks = funds;
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
 
         return null;    
+    }
+    
+    public MutualFundsOrganization(){
+        companyStocks = new ArrayList();
     }
     
 }

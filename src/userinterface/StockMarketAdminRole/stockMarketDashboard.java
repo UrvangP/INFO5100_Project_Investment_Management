@@ -11,6 +11,7 @@ import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.CompaniesOrganization;
+import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
@@ -339,9 +340,8 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         }
         
         String oName = lsOrganizationNames2.getSelectedValue();
-        Organization temp = orgs.getOrganization(oName);
         
-        mutualFundsEditPanel compEdit = new mutualFundsEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        mutualFundsEditPanel compEdit = new mutualFundsEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, (MutualFundsOrganization) orgs.getOrganization(oName));
         jSplitPane1.setRightComponent(compEdit);
     }//GEN-LAST:event_lsOrganizationNames2ValueChanged
 
@@ -382,6 +382,9 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         
         lsOrganizationNames.setModel(model);
         lsOrganizationNames2.setModel(model1);
+        
+        JPanel jp = new JPanel();
+        jSplitPane1.setRightComponent(jp);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

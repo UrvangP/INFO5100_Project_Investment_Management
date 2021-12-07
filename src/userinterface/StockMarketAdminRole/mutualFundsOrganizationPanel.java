@@ -9,16 +9,22 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.Role.CompanyAgentRole;
 import Business.Role.MutualFundsAgentRole;
 import Business.UserAccount.UserAccount;
+import static java.nio.file.Files.list;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.ListModel;
 
 /**
  *
@@ -37,6 +43,8 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     UserAccount selectedUser;
     ArrayList<UserAccount> selectedDropDown;
     stockMarketDashboard parent;
+    ArrayList<Organization> marketData;
+    ArrayList<Organization> selectedFunds;
     
     public mutualFundsOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
         
@@ -45,6 +53,8 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         this.parent = parent;
+        this.marketData = new ArrayList();
+        this.selectedFunds = new ArrayList();
         
         initComponents();
         
@@ -60,6 +70,8 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         }
         
         initData();
+        
+        getMarketData();
     }
 
     /**
@@ -84,6 +96,14 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         createdByJLabel = new javax.swing.JTextField();
         addJButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        addJButton1 = new javax.swing.JButton();
+        addJButton2 = new javax.swing.JButton();
+        cardentifierJLabel4 = new javax.swing.JLabel();
+        cardentifierJLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -183,25 +203,67 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         addJButton.setBackground(new java.awt.Color(200, 203, 178));
         addJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         addJButton.setForeground(new java.awt.Color(67, 100, 100));
-        addJButton.setText("ADD");
+        addJButton.setText("Create");
         addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addJButtonActionPerformed(evt);
             }
         });
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        addJButton1.setBackground(new java.awt.Color(200, 203, 178));
+        addJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        addJButton1.setForeground(new java.awt.Color(67, 100, 100));
+        addJButton1.setText("Add selected Stock");
+        addJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButton1ActionPerformed(evt);
+            }
+        });
+
+        addJButton2.setBackground(new java.awt.Color(200, 203, 178));
+        addJButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        addJButton2.setForeground(new java.awt.Color(67, 100, 100));
+        addJButton2.setText("Drop selected Stock");
+        addJButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButton2ActionPerformed(evt);
+            }
+        });
+
+        cardentifierJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel4.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel4.setText("Stocks in Fund:");
+
+        cardentifierJLabel5.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel5.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel5.setText("Stocks in Market:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(337, 337, 337)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(440, 440, 440))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(482, 482, 482))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -211,11 +273,25 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
-                            .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(adminComboBox, 0, 183, Short.MAX_VALUE)
                             .addComponent(dateOfCreationJLabel)
                             .addComponent(createdByJLabel)
-                            .addComponent(jTextField1))
-                        .addGap(400, 400, 400))))
+                            .addComponent(jTextField1)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cardentifierJLabel5)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addJButton1)
+                                    .addComponent(addJButton2))))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cardentifierJLabel4)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(210, 210, 210))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -245,9 +321,25 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardentifierJLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cardentifierJLabel4)
+                            .addComponent(cardentifierJLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(227, 227, 227))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(addJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addJButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(132, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -268,7 +360,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGap(0, 801, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -330,7 +422,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date(), companyCountry);
+                ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date(), companyCountry, selectedFunds);
             }
         }
         
@@ -339,6 +431,78 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
         JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
     }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void addJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel model = new DefaultListModel();
+        
+        ListModel model1 = jList2.getModel();
+
+        for(int i=0; i < model1.getSize(); i++){
+             model.addElement(model1.getElementAt(i));  
+        }
+        
+        String selection = jList1.getSelectedValue();
+        
+        model.addElement(selection);
+        
+        for(Organization o: marketData){
+            if(o.getName().equals(selection)){
+                selectedFunds.add(o);
+                marketData.remove(o);
+                break;
+            }
+        }
+        
+        DefaultListModel model2 = new DefaultListModel();
+        
+        for(Organization o: marketData){
+            model2.addElement(o.getName());
+        }
+        
+        jList2.setModel(model);
+        jList1.setModel(model2);
+    }//GEN-LAST:event_addJButton1ActionPerformed
+
+    private void addJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButton2ActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel model = new DefaultListModel();
+        
+        ListModel model1 = jList2.getModel();
+        
+        String selection = jList2.getSelectedValue();
+
+        for(int i=0; i < model1.getSize(); i++){
+            if(model1.getElementAt(i) != selection)
+                model.addElement(model1.getElementAt(i));  
+        }
+        
+        OrganizationDirectory orgs = null;
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory();
+                break;
+            }
+        }
+        
+        for(Organization o: orgs.getOrganizationList()){
+            if(o.getType().equals(Organization.Type.Companies.toString()) && o.getName().equals(selection)){
+                marketData.add(o);
+                selectedFunds.remove(o);
+            }
+        }
+        
+        DefaultListModel model2 = new DefaultListModel();
+        
+        for(Organization o: marketData){
+            model2.addElement(o.getName());
+        }
+        
+        jList2.setModel(model);
+        jList1.setModel(model2);
+    }//GEN-LAST:event_addJButton2ActionPerformed
 
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
@@ -369,20 +533,57 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         dateOfCreationJLabel.setText(new Date().toString());
         createdByJLabel.setText(account.getUsername());
     }
+    
+    public void getMarketData(){
+        OrganizationDirectory orgs = null;
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory();
+                break;
+            }
+        }
+        
+        DefaultListModel model = new DefaultListModel();
+        DefaultListModel model1 = new DefaultListModel();
+        
+        for(Organization o: orgs.getOrganizationList()){
+            if(o.getType().equals(Organization.Type.Companies.toString())){
+                marketData.add(o);
+            }
+        }
+        
+        for(Organization o: marketData){
+            model.addElement(o.getName());
+        }
+        
+        jList1.setModel(model);
+        jList2.setModel(model1);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJButton;
+    private javax.swing.JButton addJButton1;
+    private javax.swing.JButton addJButton2;
     private javax.swing.JComboBox<String> adminComboBox;
     private javax.swing.JLabel brandJLabel;
     private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JLabel cardentifierJLabel2;
     private javax.swing.JLabel cardentifierJLabel3;
+    private javax.swing.JLabel cardentifierJLabel4;
+    private javax.swing.JLabel cardentifierJLabel5;
     private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JTextField createdByJLabel;
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
