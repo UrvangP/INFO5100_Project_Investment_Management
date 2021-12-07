@@ -95,6 +95,7 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                         : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
                                     productNameJField.setText(set.getKey());
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
+                                    maxUnitJField.setText(set.getValue().get("quantity").toString());
                                     areaJLabel.setText("N/A");
                                 }
                             }
@@ -106,6 +107,7 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                         : ((JewelleryOrganization) temp1).getJewelleries().entrySet()) {
                                     productNameJField.setText(set.getKey());
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
+                                    maxUnitJField.setText(set.getValue().get("quantity").toString());
                                     areaJLabel.setText("N/A");
                                 }
                             }
@@ -117,7 +119,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                         : ((RealEstateOrganization) temp1).getEstates().entrySet()) {
                                     productNameJField.setText(set.getKey());
                                     priceJField.setText(set.getValue().get("maxPrice").toString());
-                                    areaJLabel.setText("N/A");
+                                    maxUnitJField.setText(set.getValue().get("quantity").toString());
+                                    areaJLabel.setText(set.getValue().get("area").toString());
                                 }
                             }
                         }
@@ -149,6 +152,9 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
         areaJLabel = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         productNameJField = new javax.swing.JTextField();
+        maxUnitJField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -301,34 +307,72 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        maxUnitJField.setBackground(new java.awt.Color(238, 238, 238));
+        maxUnitJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        maxUnitJField.setText("Enter here");
+        maxUnitJField.setToolTipText("Click to enter your name.");
+        maxUnitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        maxUnitJField.setEnabled(false);
+        maxUnitJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldnameChangeHandler(evt);
+            }
+        });
+        maxUnitJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxUnitJFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("/");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Create a Asset Investment");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(brandJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(brandJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(typeComboBox, 0, 359, Short.MAX_VALUE)
-                    .addComponent(companyNameComboBox, 0, 359, Short.MAX_VALUE)
-                    .addComponent(unitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productNameJField))
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 130, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(serialNoJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(serialNoJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(brandJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(brandJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(typeComboBox, 0, 359, Short.MAX_VALUE)
+                            .addComponent(companyNameComboBox, 0, 359, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(unitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(areaJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(productNameJField))
+                        .addGap(0, 131, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brandJLabel1))
@@ -343,7 +387,9 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel1)
-                    .addComponent(unitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(unitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel2)
@@ -438,6 +484,18 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_productNameJFieldActionPerformed
 
+    private void maxUnitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldFocusGained
+
+    private void maxUnitJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldnameChangeHandler
+
+    private void maxUnitJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxUnitJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField areaJLabel;
@@ -447,6 +505,9 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JComboBox<String> companyNameComboBox;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField maxUnitJField;
     private javax.swing.JTextField priceJField;
     private javax.swing.JTextField productNameJField;
     private javax.swing.JLabel serialNoJLabel1;

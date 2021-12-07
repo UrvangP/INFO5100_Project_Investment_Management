@@ -21,34 +21,49 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="141" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cardentifierJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="serialNoJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="serialNoJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="brandJLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="brandJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="brandJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="130" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cardentifierJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="serialNoJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="serialNoJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="brandJLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="brandJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="brandJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="typeComboBox" alignment="0" pref="359" max="32767" attributes="0"/>
+                          <Component id="companyNameComboBox" alignment="0" pref="359" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="unitJField" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="maxUnitJField" min="-2" pref="112" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="priceJField" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="areaJLabel" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="productNameJField" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="typeComboBox" alignment="0" pref="359" max="32767" attributes="0"/>
-                  <Component id="companyNameComboBox" alignment="0" pref="359" max="32767" attributes="0"/>
-                  <Component id="unitJField" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                  <Component id="priceJField" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                  <Component id="areaJLabel" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                  <Component id="productNameJField" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="132" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="typeComboBox" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="brandJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -67,6 +82,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="serialNoJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="unitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="maxUnitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -288,6 +305,41 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="productNameJFieldnameChangeHandler"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productNameJFieldActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="maxUnitJField">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ee" green="ee" red="ee" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Enter here"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to enter your name."/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder bottom="1" left="5" right="5" top="1"/>
+          </Border>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldnameChangeHandler"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maxUnitJFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="24" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Create a Asset Investment"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
