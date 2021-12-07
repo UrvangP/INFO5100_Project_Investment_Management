@@ -46,8 +46,8 @@ public class OrganizationDirectory {
         return org;
     }
     
-    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country){
-        Organization org = new MutualFundsOrganization(name, doc, admin, country);
+    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country, ArrayList<Organization> funds){
+        Organization org = new MutualFundsOrganization(name, doc, admin, country, funds);
         organizationList.add(org);
         return org;
     }
