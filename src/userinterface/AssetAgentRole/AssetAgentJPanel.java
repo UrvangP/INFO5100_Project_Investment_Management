@@ -8,6 +8,7 @@ package userinterface.AssetAgentRole;
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.SystemAdminWorkArea.AssetMarketViewJPanel;
 
 /**
  *
@@ -180,7 +181,7 @@ public class AssetAgentJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_industryJButtonActionPerformed
 
     private void realEstateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realEstateJButtonActionPerformed
-        AssetAgentRealEstateJPanel assetAgentRealEstateJPanel = new AssetAgentRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        AssetMarketViewJPanel assetAgentRealEstateJPanel = new AssetMarketViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(assetAgentRealEstateJPanel);
     }//GEN-LAST:event_realEstateJButtonActionPerformed
 
