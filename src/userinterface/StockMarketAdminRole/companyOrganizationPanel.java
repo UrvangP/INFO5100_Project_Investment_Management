@@ -91,6 +91,10 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         createdByJLabel = new javax.swing.JTextField();
         addJButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        cardentifierJLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        cardentifierJLabel5 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -195,32 +199,42 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
             }
         });
 
+        cardentifierJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel4.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel4.setText("Stock Price:");
+
+        cardentifierJLabel5.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel5.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel5.setText("Revenue:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(467, 467, 467)
+                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(337, 337, 337)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(482, 482, 482))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
-                            .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateOfCreationJLabel)
-                            .addComponent(createdByJLabel)
-                            .addComponent(jTextField1))
-                        .addGap(400, 400, 400))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(brandJLabel)
+                    .addComponent(brandJLabel1)
+                    .addComponent(cardentifierJLabel3)
+                    .addComponent(cardentifierJLabel1)
+                    .addComponent(cardentifierJLabel2)
+                    .addComponent(cardentifierJLabel4)
+                    .addComponent(cardentifierJLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField3)
+                    .addComponent(countryComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                    .addComponent(adminComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 183, Short.MAX_VALUE)
+                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(createdByJLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(400, 400, 400))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -250,9 +264,17 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createdByJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardentifierJLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardentifierJLabel4)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardentifierJLabel5)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -305,6 +327,8 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
         String creationDate = dateOfCreationJLabel.getText();
+        String price = jTextField2.getText();
+        String revenue = jTextField3.getText();
         
         UserAccount createdBy = account;
         UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
@@ -314,7 +338,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date(), companyCountry);
+                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date(), companyCountry, Integer.parseInt(price), Long.parseLong(revenue));
             }
         }
 
@@ -362,10 +386,14 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JLabel cardentifierJLabel2;
     private javax.swing.JLabel cardentifierJLabel3;
+    private javax.swing.JLabel cardentifierJLabel4;
+    private javax.swing.JLabel cardentifierJLabel5;
     private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JTextField createdByJLabel;
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
