@@ -50,7 +50,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
                 ongoinNetwork = ongoing1;
             }
         }
-        this.realestateDateOfCreationJLabel.setText(new Date().toString());
+        this.industryDateOfCreationJLabel.setText(new Date().toString());
         setAssetAdminUsers();
     }
 
@@ -80,7 +80,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
         serialNoJLabel = new javax.swing.JLabel();
         industryNameJField = new javax.swing.JTextField();
         cardentifierJLabel1 = new javax.swing.JLabel();
-        realestateDateOfCreationJLabel = new javax.swing.JTextField();
+        industryDateOfCreationJLabel = new javax.swing.JTextField();
         serialNoJLabel1 = new javax.swing.JLabel();
         industryUnitJField = new javax.swing.JTextField();
         serialNoJLabel2 = new javax.swing.JLabel();
@@ -123,15 +123,15 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
         cardentifierJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         cardentifierJLabel1.setText("Date of Creation:");
 
-        realestateDateOfCreationJLabel.setEditable(false);
-        realestateDateOfCreationJLabel.setBackground(new java.awt.Color(216, 220, 228));
-        realestateDateOfCreationJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        realestateDateOfCreationJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        realestateDateOfCreationJLabel.setToolTipText("This is your identifier.");
-        realestateDateOfCreationJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        realestateDateOfCreationJLabel.addActionListener(new java.awt.event.ActionListener() {
+        industryDateOfCreationJLabel.setEditable(false);
+        industryDateOfCreationJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        industryDateOfCreationJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        industryDateOfCreationJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        industryDateOfCreationJLabel.setToolTipText("This is your identifier.");
+        industryDateOfCreationJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        industryDateOfCreationJLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                realestateDateOfCreationJLabelActionPerformed(evt);
+                industryDateOfCreationJLabelActionPerformed(evt);
             }
         });
 
@@ -241,7 +241,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create a Real Estate");
+        jLabel1.setText("Create a Industry");
 
         serialNoJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         serialNoJLabel4.setForeground(new java.awt.Color(67, 100, 100));
@@ -292,7 +292,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(realestateDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(industryDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(industryLocationJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(industryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +332,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
                     .addComponent(industryJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(realestateDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(industryDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardentifierJLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,9 +354,9 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_industryNameJFieldActionPerformed
 
-    private void realestateDateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realestateDateOfCreationJLabelActionPerformed
+    private void industryDateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_industryDateOfCreationJLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_realestateDateOfCreationJLabelActionPerformed
+    }//GEN-LAST:event_industryDateOfCreationJLabelActionPerformed
 
     private void industryUnitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_industryUnitJFieldFocusGained
         if (industryUnitJField.getText().equals("Enter here")) {
@@ -408,9 +408,6 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
         if (!this.industryNameJField.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Real Estate Company Name! \n";
         }
-        if (!this.realestateAreaJField1.getText().matches("[0-9]+")) {
-            errorMEssage += "Invalid Real Estate Area should be a number! \n";
-        }
         if (!this.industryLocationJField.getText().matches("[a-zA-Z0-9 ]+")) {
             errorMEssage += "Invalid Location Name! \n";
         }
@@ -439,7 +436,6 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
             HashMap<String, Object> estate = new HashMap<>();
             estate.put("maxPrice", this.industryJField.getText().toString());
             estate.put("quantity", this.industryUnitJField.getText().toString());
-            estate.put("area", this.realestateAreaJField1.getText().toString());
             estate.put("doc", new Date());
             estate.put("location", this.industryLocationJField.getText().toString());
             estates.put(this.nameJField.getText(), estate);
@@ -447,10 +443,10 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof AssetMarketEnterprise) {
-                    ongoing.getOrganizationDirectory().createRealEstateOrganization(this.industryNameJField.getText(), Organization.Type.RealEstate, this.nameJField.getText().toString(), this.selectedUser, estates, new Date());
+                    ongoing.getOrganizationDirectory().createIndustryOrganization(this.industryNameJField.getText(), Organization.Type.RealEstate, this.nameJField.getText().toString(), this.selectedUser, estates, new Date());
                 }
             }
-            JOptionPane.showMessageDialog(this, "Real Estate created successfully!", "Real Estate ", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Industry created successfully!", "Industry", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -501,6 +497,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel cardentifierJLabel1;
     private javax.swing.JComboBox<String> industryComboBox;
+    private javax.swing.JTextField industryDateOfCreationJLabel;
     private javax.swing.JTextField industryJField;
     private javax.swing.JTextField industryLocationJField;
     private javax.swing.JTextField industryNameJField;
@@ -508,7 +505,6 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField nameJField;
-    private javax.swing.JTextField realestateDateOfCreationJLabel;
     private javax.swing.JLabel serialNoJLabel;
     private javax.swing.JLabel serialNoJLabel1;
     private javax.swing.JLabel serialNoJLabel2;
