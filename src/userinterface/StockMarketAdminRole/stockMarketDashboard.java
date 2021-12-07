@@ -385,6 +385,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         
         JPanel jp = new JPanel();
         jSplitPane1.setRightComponent(jp);
+        jSplitPane2.setRightComponent(jp);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
