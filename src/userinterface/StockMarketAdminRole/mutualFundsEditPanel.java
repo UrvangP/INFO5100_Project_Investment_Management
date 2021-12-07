@@ -6,8 +6,11 @@
 package userinterface.StockMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.Role.CompanyAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -81,6 +84,9 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
         dateOfCreationJLabel = new javax.swing.JTextField();
         addJButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -170,6 +176,13 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/delete.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,7 +193,9 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(482, 482, 482))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -190,7 +205,7 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
-                            .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(adminComboBox, 0, 183, Short.MAX_VALUE)
                             .addComponent(dateOfCreationJLabel)
                             .addComponent(jTextField1))
                         .addGap(400, 400, 400))))
@@ -220,7 +235,9 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
                     .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardentifierJLabel1))
                 .addGap(70, 70, 70)
-                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap(254, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -298,9 +315,26 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
         org.setName(companyName);
         org.setCountry(companyCountry);
 
-        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        parent.parseList();
+        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
     }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        
+        OrganizationDirectory orgs = null;
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory();
+                break;
+            }
+        }
+        orgs.removeOrganization(org);
+        
+        parent.parseList();
+        JOptionPane.showMessageDialog(this, "Organization deleted successfully!", "Delete Organization", INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
@@ -345,6 +379,7 @@ public class mutualFundsEditPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JTextField dateOfCreationJLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

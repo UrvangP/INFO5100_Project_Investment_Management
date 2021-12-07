@@ -319,7 +319,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         }
 
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
         
         parent.parseList();
     }//GEN-LAST:event_addJButtonActionPerformed

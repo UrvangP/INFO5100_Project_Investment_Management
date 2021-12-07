@@ -337,7 +337,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         parent.parseList();
 
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
     }//GEN-LAST:event_addJButtonActionPerformed
 
     public void _adminChnageHandler() {
