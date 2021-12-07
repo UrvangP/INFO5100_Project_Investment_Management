@@ -13,8 +13,9 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 import javax.swing.JPanel;
 import userinterface.Enterprise.EnterpriseViewJPanel;
-import userinterface.Network.NetworkCreateJPanel;
 import userinterface.Network.NetworkViewJPanel;
+import userinterface.StockMarketAdminRole.companyOrganizationPanel;
+import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
  *
@@ -114,6 +115,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         stockMarketButton = new javax.swing.JButton();
         cryptoMarketButton = new javax.swing.JButton();
         forexMarketButton = new javax.swing.JButton();
+        AccountCreationJButton = new javax.swing.JButton();
+        AccountCreationJButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -198,6 +201,26 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        AccountCreationJButton.setBackground(new java.awt.Color(200, 203, 178));
+        AccountCreationJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        AccountCreationJButton.setForeground(new java.awt.Color(67, 100, 100));
+        AccountCreationJButton.setText("Account Creation");
+        AccountCreationJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccountCreationJButtonActionPerformed(evt);
+            }
+        });
+
+        AccountCreationJButton1.setBackground(new java.awt.Color(200, 203, 178));
+        AccountCreationJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        AccountCreationJButton1.setForeground(new java.awt.Color(67, 100, 100));
+        AccountCreationJButton1.setText("Account Update");
+        AccountCreationJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccountCreationJButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,7 +238,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(assetMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stockMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cryptoMarketButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(forexMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(forexMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -230,7 +255,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(userNameJLabel))
-                .addGap(78, 78, 78)
+                .addGap(74, 74, 74)
+                .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(networkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(oraganizationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,12 +271,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(forexMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cryptoMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(85, 85, 85)
                     .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(483, Short.MAX_VALUE)))
+                    .addContainerGap(646, Short.MAX_VALUE)))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -268,7 +297,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jLabel3)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addContainerGap(693, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel3);
@@ -305,11 +334,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_oraganizationButton1ActionPerformed
 
     private void assetMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assetMarketButtonActionPerformed
-        // TODO add your handling code here:
+        AssetMarketViewJPanel assetMarketViewJPanel = new AssetMarketViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(assetMarketViewJPanel);
     }//GEN-LAST:event_assetMarketButtonActionPerformed
 
     private void stockMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockMarketButtonActionPerformed
         // TODO add your handling code here:
+        stockMarketDashboard smDash = new stockMarketDashboard(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(smDash);
     }//GEN-LAST:event_stockMarketButtonActionPerformed
 
     private void cryptoMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoMarketButtonActionPerformed
@@ -320,8 +352,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_forexMarketButtonActionPerformed
 
+    private void AccountCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButtonActionPerformed
+        AccountCreateJPanel_1 createAdmin = new AccountCreateJPanel_1(ecosystem, account);
+        this.jSplitPane.setRightComponent(createAdmin);
+    }//GEN-LAST:event_AccountCreationJButtonActionPerformed
+
+    private void AccountCreationJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButton1ActionPerformed
+        AccountUpdateJPanel updateProfileAdmin = new AccountUpdateJPanel(ecosystem, account, jSplitPane);
+        this.jSplitPane.setRightComponent(updateProfileAdmin);
+    }//GEN-LAST:event_AccountCreationJButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AccountCreationJButton;
+    private javax.swing.JButton AccountCreationJButton1;
     private javax.swing.JButton assetMarketButton;
     private javax.swing.JButton cryptoMarketButton;
     private javax.swing.JButton forexMarketButton;

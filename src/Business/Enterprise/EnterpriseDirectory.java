@@ -32,33 +32,40 @@ public class EnterpriseDirectory {
         enterpriseDir = new ArrayList();
     }
 
-    public Enterprise createAssetMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount admin) {
-        System.out.println("SDSD" + name + Enterprise.EnterpriseType.AssetMarket + dateOfCreation + country + admin);
-        AssetMarketEnterprise enterprise = new AssetMarketEnterprise(name, Enterprise.EnterpriseType.AssetMarket, dateOfCreation, country, admin);
+    public Enterprise createAssetMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
+        AssetMarketEnterprise enterprise = new AssetMarketEnterprise(name, Enterprise.EnterpriseType.AssetMarket, dateOfCreation, country, createdBy, admin);
         this.enterpriseDir.add(enterprise);
         return enterprise;
     }
 
-    public Enterprise createCryptoMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount admin) {
-        CryptoMarketEnterprise enterprise = new CryptoMarketEnterprise(name, Enterprise.EnterpriseType.CryptoMarket, dateOfCreation, country, admin);
+    public Enterprise createCryptoMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
+        CryptoMarketEnterprise enterprise = new CryptoMarketEnterprise(name, Enterprise.EnterpriseType.CryptoMarket, dateOfCreation, country, createdBy, admin);
         this.enterpriseDir.add(enterprise);
         return enterprise;
     }
 
-    public Enterprise createForexMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount admin) {
-        ForexMarketEnterprise enterprise = new ForexMarketEnterprise(name, Enterprise.EnterpriseType.ForexMarket, dateOfCreation, country, admin);
+    public Enterprise createForexMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
+        ForexMarketEnterprise enterprise = new ForexMarketEnterprise(name, Enterprise.EnterpriseType.ForexMarket, dateOfCreation, country, createdBy, admin);
         this.enterpriseDir.add(enterprise);
         return enterprise;
     }
 
-    public Enterprise createStockMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount admin) {
-        StockMarketEnterprise enterprise = new StockMarketEnterprise(name, Enterprise.EnterpriseType.StockMarket, dateOfCreation, country, admin);
+    public Enterprise createStockMarketEnterprise(String name, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
+        StockMarketEnterprise enterprise = new StockMarketEnterprise(name, Enterprise.EnterpriseType.StockMarket, dateOfCreation, country, createdBy, admin);
         this.enterpriseDir.add(enterprise);
         return enterprise;
     }
 
     public HashMap<String, HashMap<String, Boolean>> getEnterpriseSelection() {
         return enterpriseSelection;
+    }
+    
+    public int getSize(){
+        return enterpriseDir.size();
+    }
+    
+    public Enterprise getEnterprise(int pos){
+        return enterpriseDir.get(pos);
     }
 
 }

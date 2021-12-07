@@ -17,16 +17,26 @@ import java.util.Date;
 public class CryptoMarketEnterprise extends Enterprise {
 
     private Boolean isSelected;
-    
-    public CryptoMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount admin) {
+    public String name;
+    public Date dateOfCreation;
+    public String country;
+    public UserAccount createdBy;
+    public UserAccount admin;
+
+    public CryptoMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
         super(Enterprise.EnterpriseType.CryptoMarket);
+        this.name = name;
+        this.dateOfCreation = dateOfCreation;
+        this.country = country;
+        this.createdBy = createdBy;
+        this.admin = admin;
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         return null; //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     /**
      * @return the isSelected
      */
