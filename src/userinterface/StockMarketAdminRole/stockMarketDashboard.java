@@ -8,10 +8,14 @@ package userinterface.StockMarketAdminRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -99,6 +103,11 @@ public class stockMarketDashboard extends javax.swing.JPanel {
                 lsOrganizationNamesPropertyChange(evt);
             }
         });
+        lsOrganizationNames.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lsOrganizationNamesValueChanged(evt);
+            }
+        });
         jScrollPane6.setViewportView(lsOrganizationNames);
 
         lbCreateCompany.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
@@ -163,6 +172,11 @@ public class stockMarketDashboard extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        lsOrganizationNames2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lsOrganizationNames2ValueChanged(evt);
+            }
         });
         jScrollPane8.setViewportView(lsOrganizationNames2);
 
@@ -270,13 +284,12 @@ public class stockMarketDashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_lbCreateCompanyFocusGained
 
     private void lbCreateCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCreateCompanyMouseClicked
-        companyOrganizationPanel companyPanel = new companyOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        companyOrganizationPanel companyPanel = new companyOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel, this);
         jSplitPane2.setRightComponent(companyPanel);
     }//GEN-LAST:event_lbCreateCompanyMouseClicked
 
     private void lsOrganizationNamesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lsOrganizationNamesPropertyChange
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_lsOrganizationNamesPropertyChange
 
     private void jTabbedPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1PropertyChange
@@ -290,13 +303,62 @@ public class stockMarketDashboard extends javax.swing.JPanel {
 
     private void lbCreateCompany1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCreateCompany1MouseClicked
         // TODO add your handling code here:
-        mutualFundsOrganizationPanel companyPanel = new mutualFundsOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        mutualFundsOrganizationPanel companyPanel = new mutualFundsOrganizationPanel(ecosystem, account, jSplitPane, browsingJPanel, this);
         jSplitPane1.setRightComponent(companyPanel);
     }//GEN-LAST:event_lbCreateCompany1MouseClicked
 
-    private void parseList(){
-        EnterpriseDirectory ep = ongoing.getEnterpriseDirectory();
-        ArrayList<Organization> orgs = ep.getEnterprise(0).getOrganizationDirectory().getOrganizationList();
+    private void lsOrganizationNamesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsOrganizationNamesValueChanged
+        // TODO add your handling code here:
+        OrganizationDirectory orgs = null;
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory();
+                break;
+            }
+        }
+        
+        String oName = lsOrganizationNames.getSelectedValue();
+        Organization temp = orgs.getOrganization(oName);
+        
+        companyEditPanel compEdit = new companyEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        jSplitPane2.setRightComponent(compEdit);
+    }//GEN-LAST:event_lsOrganizationNamesValueChanged
+
+    private void lsOrganizationNames2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsOrganizationNames2ValueChanged
+        // TODO add your handling code here:
+        OrganizationDirectory orgs = null;
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory();
+                break;
+            }
+        }
+        
+        String oName = lsOrganizationNames2.getSelectedValue();
+        Organization temp = orgs.getOrganization(oName);
+        
+        mutualFundsEditPanel compEdit = new mutualFundsEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        jSplitPane1.setRightComponent(compEdit);
+    }//GEN-LAST:event_lsOrganizationNames2ValueChanged
+
+    public void parseList(){
+        ArrayList<Organization> orgs = new ArrayList();
+        
+        DefaultListModel model = new DefaultListModel();
+        DefaultListModel model1 = new DefaultListModel();
+        
+        
+        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ep instanceof StockMarketEnterprise) {
+                orgs = ep.getOrganizationDirectory().getOrganizationList();
+                break;
+            }
+        }
         
         ArrayList<String> listData= new ArrayList();
         ArrayList<String> listData1= new ArrayList();
@@ -310,40 +372,22 @@ public class stockMarketDashboard extends javax.swing.JPanel {
             }
         }
         
-        String[] liData = new String[listData.size()];
-        String[] liData1 = new String[listData.size()];
-        
         for(int i=0; i<listData.size(); i++){
-            liData[i] = listData.get(i);
+            model.addElement(listData.get(i));
         }
         
         for(int i=0; i<listData1.size(); i++){
-            liData1[i] = listData1.get(i);
+            model1.addElement(listData1.get(i));
         }
         
-        lsOrganizationNames.setListData(liData);
-        lsOrganizationNames2.setListData(liData1);
+        lsOrganizationNames.setModel(model);
+        lsOrganizationNames2.setModel(model1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
-    private javax.swing.JList<String> jList4;
-    private javax.swing.JList<String> jList5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSplitPane jSplitPane1;
@@ -355,10 +399,5 @@ public class stockMarketDashboard extends javax.swing.JPanel {
     private javax.swing.JList<String> lsOrganizationNames2;
     private javax.swing.JPanel paneContent;
     private javax.swing.JPanel paneNavigation;
-    private javax.swing.JLabel viewJLabel1;
-    private javax.swing.JLabel viewJLabel2;
-    private javax.swing.JLabel viewJLabel3;
-    private javax.swing.JLabel viewJLabel4;
-    private javax.swing.JLabel viewJLabel5;
     // End of variables declaration//GEN-END:variables
 }

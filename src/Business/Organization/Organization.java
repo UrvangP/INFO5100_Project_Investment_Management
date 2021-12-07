@@ -51,10 +51,11 @@ public abstract class Organization {
         }
     }
 
-    public Organization(String name, String type, Date doc) {
+    public Organization(String name, String type, Date doc, String country) {
         this.name = type;
         this.type = name;
         this.doc = doc;
+        this.country = country;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
@@ -114,5 +115,14 @@ public abstract class Organization {
     public String toString() {
         return name;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
     
 }

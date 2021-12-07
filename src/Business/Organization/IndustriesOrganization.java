@@ -16,7 +16,7 @@ import java.util.Date;
 public class IndustriesOrganization extends Organization{
     
     public IndustriesOrganization(String name, Date doc){
-        super(Organization.Type.Industries.getValue(), name, doc);
+        super(Organization.Type.Industries.getValue(), name, doc, "");
         
     }
 

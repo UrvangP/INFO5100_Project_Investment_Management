@@ -44,13 +44,15 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     Network ongoing;
     UserAccount selectedUser;
     ArrayList<UserAccount> selectedDropDown;
+    stockMarketDashboard parent;
     
-    public companyOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public companyOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
         
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        this.parent = parent;
         
         initComponents();
         
@@ -312,12 +314,14 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date());
+                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date(), companyCountry);
             }
         }
 
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+        
+        parent.parseList();
     }//GEN-LAST:event_addJButtonActionPerformed
 
     public void _adminChnageHandler() {

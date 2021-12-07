@@ -16,7 +16,7 @@ import java.util.Date;
 public class WalletOrganization extends Organization{
     
     public WalletOrganization(String name, Date doc){
-        super(Organization.Type.Wallet.getValue(), name, doc);
+        super(Organization.Type.Wallet.getValue(), name, doc, "");
         
     }
 
