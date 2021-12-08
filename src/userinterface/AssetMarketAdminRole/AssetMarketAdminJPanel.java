@@ -6,13 +6,17 @@
 package userinterface.AssetMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import userinterface.AssetAgentRole.AssetAgentDashboardJPanel;
-import userinterface.AssetAgentRole.AssetAgentStatusJPanel;
 import userinterface.SystemAdminWorkArea.AssetMarketViewJPanel;
 
 /**
@@ -27,6 +31,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     ArrayList<Network> allNetworks = new ArrayList<>();
     Network selectedNetwork;
+    ArrayList<Enterprise> enterpriseSelection = new ArrayList<>();
 
     public AssetMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         this.userProcessContainer = rootJPanel;
@@ -37,6 +42,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         this.userNameJLabel.setText(account.getUsername());
 
         getNetwork();
+        getLeftButtonStatus();
     }
 
     public void getNetwork() {
@@ -45,17 +51,55 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             asset.add(ongoing1.getNName());
             this.allNetworks.add(ongoing1);
+            enterpriseSelection = ongoing1.getEnterpriseDirectory().getEnterpriseDir();
         }
         String[] netwrokSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(netwrokSDropdown);
         this.networkComboBox.setModel(brandSDropdownModel);
 
-        
-        this.assetJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") == null ? false : true);
-        this.forexJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") == null ? false : true);
-        this.cryptoJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") == null ? false : true);
-        this.stockJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") == null ? false : true);
-        
+//        this.assetJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") == null ? false : true);
+//        this.forexJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") == null ? false : true);
+//        this.cryptoJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") == null ? false : true);
+//        this.stockJButton.setVisible(selectedNetwork.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") == null ? false : true);
+    }
+
+    public void getLeftButtonStatus() {
+        Boolean isAssetFound = false;
+        Boolean isForexFound = false;
+        Boolean isStockFound = false;
+        Boolean isCryptoFound = false;
+        for (int i = 0; i < this.enterpriseSelection.size(); i++) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise) {
+                isAssetFound = true;
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise) {
+                isCryptoFound = true;
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise) {
+                isForexFound = true;
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise) {
+                isStockFound = true;
+            }
+        }
+        if (isAssetFound) {
+            this.assetJButton.setVisible(true);
+        } else {
+            this.assetJButton.setVisible(!true);
+        }
+//        if (isForexFound) {
+//            this.forexJButton.setVisible(true);
+//        } else {
+//            this.forexJButton.setVisible(!true);
+//        }
+//
+//        if (isStockFound) {
+//            this.stockJButton.setVisible(true);
+//        } else {
+//            this.stockJButton.setVisible(!true);
+//        }
+//        if (isCryptoFound) {
+//            this.cryptoJButton.setVisible(true);
+//        } else {
+//            this.cryptoJButton.setVisible(!true);
+//        }
     }
 
     /**
@@ -75,10 +119,6 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         networkComboBox = new javax.swing.JComboBox<>();
         brandJLabel1 = new javax.swing.JLabel();
-        industryJButton1 = new javax.swing.JButton();
-        forexJButton = new javax.swing.JButton();
-        stockJButton = new javax.swing.JButton();
-        cryptoJButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -138,46 +178,6 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Select Network (*):");
 
-        industryJButton1.setBackground(new java.awt.Color(200, 203, 178));
-        industryJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        industryJButton1.setForeground(new java.awt.Color(67, 100, 100));
-        industryJButton1.setText("Requests");
-        industryJButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                industryJButton1ActionPerformed(evt);
-            }
-        });
-
-        forexJButton.setBackground(new java.awt.Color(200, 203, 178));
-        forexJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        forexJButton.setForeground(new java.awt.Color(67, 100, 100));
-        forexJButton.setText("Forex Market");
-        forexJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forexJButtonActionPerformed(evt);
-            }
-        });
-
-        stockJButton.setBackground(new java.awt.Color(200, 203, 178));
-        stockJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        stockJButton.setForeground(new java.awt.Color(67, 100, 100));
-        stockJButton.setText("Stock Market");
-        stockJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockJButtonActionPerformed(evt);
-            }
-        });
-
-        cryptoJButton.setBackground(new java.awt.Color(200, 203, 178));
-        cryptoJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        cryptoJButton.setForeground(new java.awt.Color(67, 100, 100));
-        cryptoJButton.setText("Crypto Market");
-        cryptoJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cryptoJButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -195,11 +195,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(userNameJLabel))
                             .addComponent(brandJLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(industryJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(forexJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(stockJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cryptoJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,15 +213,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(assetJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(forexJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stockJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cryptoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(industryJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -239,14 +227,14 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addComponent(jLabel3)
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jLabel3)
-                .addContainerGap(499, Short.MAX_VALUE))
+                .addContainerGap(471, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel3);
@@ -280,44 +268,25 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         this._adminChnageHandler();
     }//GEN-LAST:event_networkComboBoxPropertyChange
 
-    private void industryJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_industryJButton1ActionPerformed
-        AssetAgentStatusJPanel assetAgentStatusJPanel = new AssetAgentStatusJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane.setRightComponent(assetAgentStatusJPanel);
-    }//GEN-LAST:event_industryJButton1ActionPerformed
-
-    private void forexJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexJButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_forexJButtonActionPerformed
-
-    private void stockJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockJButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stockJButtonActionPerformed
-
-    private void cryptoJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoJButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cryptoJButtonActionPerformed
-
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
             this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+            enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
+            getLeftButtonStatus();
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assetJButton;
     private javax.swing.JLabel brandJLabel1;
-    private javax.swing.JButton cryptoJButton;
-    private javax.swing.JButton forexJButton;
     private javax.swing.JButton homeButton;
-    private javax.swing.JButton industryJButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JComboBox<String> networkComboBox;
-    private javax.swing.JButton stockJButton;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

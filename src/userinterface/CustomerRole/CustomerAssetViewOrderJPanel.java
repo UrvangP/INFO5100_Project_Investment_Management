@@ -15,7 +15,6 @@ import Business.Organization.Organization;
 import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
-import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
