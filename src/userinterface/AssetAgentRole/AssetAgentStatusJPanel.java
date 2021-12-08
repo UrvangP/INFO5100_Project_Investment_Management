@@ -66,6 +66,7 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                     allRequests.add(temp);
                     Object[] row = {
                         "BUY",
+                        temp.getCompanyName(),
                         temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
                         temp.getQuantity(),
                         temp.getPrice(),
@@ -133,17 +134,17 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "BUY/SELL", "Product Name", "Quantity", "Price", "Date of creation", "Status"
+                "BUY/SELL", "Company Name", "Product Name", "Quantity", "Price", "Date of creation", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

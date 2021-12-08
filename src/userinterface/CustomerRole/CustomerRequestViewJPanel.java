@@ -41,6 +41,7 @@ public class CustomerRequestViewJPanel extends javax.swing.JPanel {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
                 Object[] row = {
                     temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                    temp.getCompanyName(),
                     temp.getQuantity(),
                     temp.getPrice(),
                     temp.getModifiedAt(),
@@ -68,17 +69,17 @@ public class CustomerRequestViewJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Market Type", "Unit", "Price", "Date", "Status"
+                "Market Type", "Company Name", "Unit", "Price", "Date", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

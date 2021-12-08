@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 
@@ -169,6 +170,7 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
         maxUnitJField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -347,6 +349,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Create a Asset Investment");
 
+        jLabel3.setText("/ unit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -373,7 +377,10 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
                             .addComponent(areaJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(productNameJField))
@@ -407,7 +414,8 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel2)
-                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(areaJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,26 +488,53 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_areaJLabelActionPerformed
 
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.companyNameComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Company to proceed! \n";
+        }
+        if (!this.unitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Units should be a number! \n";
+        }
+
+        if (this.unitJField.getText().matches("[0-9]+") && this.maxUnitJField.getText().matches("[0-9]+")) {
+            if (Integer.valueOf(this.unitJField.getText()) > Integer.valueOf(this.maxUnitJField.getText())) {
+                errorMEssage += "Entered units exceeds available \n";
+            }
+        }
+
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+
+        JOptionPane.showMessageDialog(this, errorMEssage, "Invest", ERROR_MESSAGE);
+
+        return false;
+    }
+
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        AssetBuyWorkRequest newRequest = new AssetBuyWorkRequest(
-                this.account,
-                this.selectedMarketAgent,
-                WorkRequest.StatusType.Initiated,
-                new Date(),
-                null,
-                AssetBuyWorkRequest.StatusType.Initiated,
-                Integer.valueOf(this.priceJField.getText().toString()),
-                Integer.valueOf(this.unitJField.getText().toString()),
-                new Date(),
-                this.companyNameComboBox.getSelectedItem().toString(),
-                this.productNameJField.getText().toString(),
-                this.selectedOraganization
-        );
+        Boolean valid = validateItem();
+        if (valid) {
+            AssetBuyWorkRequest newRequest = new AssetBuyWorkRequest(
+                    this.account,
+                    this.selectedMarketAgent,
+                    WorkRequest.StatusType.Initiated,
+                    new Date(),
+                    null,
+                    AssetBuyWorkRequest.StatusType.Initiated,
+                    Integer.valueOf(this.priceJField.getText().toString()),
+                    Integer.valueOf(this.unitJField.getText().toString()),
+                    new Date(),
+                    this.companyNameComboBox.getSelectedItem().toString(),
+                    this.productNameJField.getText().toString(),
+                    this.selectedOraganization
+            );
 
-        this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
-        JOptionPane.showMessageDialog(this, "Investment leveraged successfully!", "Investment", INFORMATION_MESSAGE);
-
+            this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
+            JOptionPane.showMessageDialog(this, "Investment leveraged successfully!", "Investment", INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void productNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productNameJFieldFocusGained
@@ -539,6 +574,7 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField maxUnitJField;
     private javax.swing.JTextField priceJField;
     private javax.swing.JTextField productNameJField;
