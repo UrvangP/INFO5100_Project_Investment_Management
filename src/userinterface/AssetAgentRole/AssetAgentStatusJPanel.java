@@ -62,7 +62,7 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getRaisedTo() == this.account) {
+                if (temp.getRaisedTo() == this.account && temp.getOverAllStatus().toString() != "CANCELLED") {
                     allRequests.add(temp);
                     Object[] row = {
                         "BUY",
@@ -234,7 +234,7 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                 }
 
             }
-
+            getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
 
         } else {
