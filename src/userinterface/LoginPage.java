@@ -53,7 +53,7 @@ public class LoginPage extends javax.swing.JPanel {
         this.logoutJButton = logoutJButton;
         this.browsingJPanel = browsingJPanel;
         this.system = system;
-        this.emailIDJField.setText("assetagent1");
+        this.emailIDJField.setText("customer1");
         this.passwordJField.setText("M#rcury01");
         this.browsingJPanel.setVisible(false);
     }

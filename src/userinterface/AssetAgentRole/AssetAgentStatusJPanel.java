@@ -6,13 +6,14 @@
 package userinterface.AssetAgentRole;
 
 import Business.EcoSystem;
-import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.AssetSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,15 +63,31 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getRaisedTo() == this.account) {
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == AssetBuyWorkRequest.StatusType.Initiated) {
                     allRequests.add(temp);
                     Object[] row = {
                         "BUY",
+                        temp.getCompanyName(),
                         temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
                         temp.getQuantity(),
                         temp.getPrice(),
                         temp.getModifiedAt(),
-                        temp.getOverAllStatus()
+                        temp.getStatusType()
+                    };
+                    model.addRow(row);
+                }
+            } else if (ongoing instanceof AssetSellWorkRequest) {
+                AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == AssetSellWorkRequest.StatusType.Initiated) {
+                    allRequests.add(temp);
+                    Object[] row = {
+                        "SELL",
+                        temp.getCompanyName(),
+                        temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                        temp.getQuantity(),
+                        temp.getPrice(),
+                        temp.getModifiedAt(),
+                        temp.getStatusType()
                     };
                     model.addRow(row);
                 }
@@ -133,17 +150,17 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "BUY/SELL", "Product Name", "Quantity", "Price", "Date of creation", "Status"
+                "BUY/SELL", "Company Name", "Product Name", "Quantity", "Price", "Date of creation", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -212,7 +229,6 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             if (this.selectedRequest instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest request = (AssetBuyWorkRequest) this.selectedRequest;
                 request.setStatusType(statusSelected == "Approve" ? AssetBuyWorkRequest.StatusType.Completed : AssetBuyWorkRequest.StatusType.Rejected);
-                request.setOverAllStatus(statusSelected == "Approve" ? WorkRequest.StatusType.Completed : WorkRequest.StatusType.Cancelled);
 
                 if (request.getOraganization() instanceof JewelleryOrganization) {
                     JewelleryOrganization temp = (JewelleryOrganization) request.getOraganization();
@@ -228,12 +244,80 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                     }
                 } else if (request.getOraganization() instanceof IndustriesOrganization) {
 
+                    IndustriesOrganization temp = (IndustriesOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getIndustries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                    }
+
                 } else {
 
+                    RealEstateOrganization temp = (RealEstateOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getEstates().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                    }
+                }
+            } else {
+
+                AssetSellWorkRequest request = (AssetSellWorkRequest) this.selectedRequest;
+                request.setStatusType(statusSelected == "Approve" ? AssetSellWorkRequest.StatusType.Completed : AssetSellWorkRequest.StatusType.Rejected);
+
+                if (request.getOraganization() instanceof JewelleryOrganization) {
+                    JewelleryOrganization temp = (JewelleryOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getJewelleries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getJewelleries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
+                } else if (request.getOraganization() instanceof IndustriesOrganization) {
+
+                    IndustriesOrganization temp = (IndustriesOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getIndustries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
+
+                } else {
+
+                    RealEstateOrganization temp = (RealEstateOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getEstates().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
                 }
 
             }
-
+            getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
 
         } else {

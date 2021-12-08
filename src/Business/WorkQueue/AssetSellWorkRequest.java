@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author prathameshnemade
  */
-public class AssetBuyWorkRequest extends WorkRequest {
+public class AssetSellWorkRequest extends WorkRequest {
 
     public enum StatusType {
         Initiated("INITIATED"),
@@ -44,7 +44,7 @@ public class AssetBuyWorkRequest extends WorkRequest {
     private String assetName;
     private Object oraganization;
 
-    public AssetBuyWorkRequest(
+    public AssetSellWorkRequest(
             UserAccount raisedBy,
             UserAccount raisedTo,
             Date requestDate,

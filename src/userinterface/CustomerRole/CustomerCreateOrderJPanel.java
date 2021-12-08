@@ -11,7 +11,6 @@ import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JSplitPane;
-import userinterface.Network.NetworkCreateJPanel;
 
 /**
  *

@@ -21,6 +21,7 @@ public abstract class WorkRequest {
     public enum StatusType {
         Initiated("INITIATED"),
         Completed("COMPLETED"),
+        Sold("SOLD"),
         Cancelled("CANCELLED");
 
         private String value;
@@ -39,12 +40,10 @@ public abstract class WorkRequest {
         }
     }
 
-    private StatusType overAllStatus;
 
-    public WorkRequest(UserAccount raisedBy, UserAccount raisedTo, StatusType overAllStatus, Date requestDate, Date resolveDate) {
+    public WorkRequest(UserAccount raisedBy, UserAccount raisedTo, Date requestDate, Date resolveDate) {
         this.raisedBy = raisedBy;
         this.raisedTo = raisedTo;
-        this.overAllStatus = overAllStatus;
         this.requestDate = requestDate;
         this.resolveDate = resolveDate;
     }
@@ -76,21 +75,6 @@ public abstract class WorkRequest {
     public void setRaisedTo(UserAccount raisedTo) {
         this.raisedTo = raisedTo;
     }
-
-    /**
-     * @return the overAllStatus
-     */
-    public StatusType getOverAllStatus() {
-        return overAllStatus;
-    }
-
-    /**
-     * @param overAllStatus the overAllStatus to set
-     */
-    public void setOverAllStatus(StatusType overAllStatus) {
-        this.overAllStatus = overAllStatus;
-    }
-
     /**
      * @return the requestDate
      */
