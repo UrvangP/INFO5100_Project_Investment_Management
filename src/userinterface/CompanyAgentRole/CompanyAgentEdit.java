@@ -40,26 +40,14 @@ public class CompanyAgentEdit extends javax.swing.JPanel {
     stockMarketDashboard parent;
     CompaniesOrganization org;
     
-    public CompanyAgentEdit(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, CompaniesOrganization org) {
+    public CompanyAgentEdit(EcoSystem ecosystem, UserAccount account, CompaniesOrganization org) {
         
         this.ecosystem = ecosystem;
         this.account = account;
-        this.jSplitPane = jSplitPane;
-        this.browsingJPanel = browsingJPanel;
-        this.parent = parent;
         this.org = org;
         
         initComponents();
         setStockAdminUsers();
-        
-        this.ongoing = null;
-
-        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
-            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
-            if (ongoing1.getIsSelected()) {
-                ongoing = ongoing1;
-            }
-        }
         
         initData();
     }

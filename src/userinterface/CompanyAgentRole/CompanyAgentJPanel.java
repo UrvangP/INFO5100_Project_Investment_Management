@@ -28,13 +28,16 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
     CompaniesOrganization company;
     
     public CompanyAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
-        this.ecosystem = ecosystem;
+        this.ecosystem = system;
         this.account = account;
         this.browsingJPanel = browsingJPanel;
         
         initComponents();
         
         this.company = getOrganization();
+        
+        CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
+        jSplitPane.setRightComponent(home);
     }
 
     /**
@@ -169,12 +172,12 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-        //cryptoMarketAdminHome home = new cryptoMarketAdminHome(ecosystem, account);
-        //jSplitPane.setRightComponent(home);
+        CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
+        jSplitPane.setRightComponent(home);
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void AccountCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButtonActionPerformed
-        CompanyAgentEdit createAdmin = new CompanyAgentEdit(ecosystem, account, this.jSplitPane, browsingJPanel, company);
+        CompanyAgentEdit createAdmin = new CompanyAgentEdit(ecosystem, account, company);
         this.jSplitPane.setRightComponent(createAdmin);
     }//GEN-LAST:event_AccountCreationJButtonActionPerformed
 
