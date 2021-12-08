@@ -6,7 +6,10 @@
 package userinterface.Enterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Role.AssetMarketAdminRole;
@@ -133,8 +136,21 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof AssetMarketAdminRole) {
-                this.assetsAdminUser.add(ongoing);
-                asset.add(ongoing.getUsername());
+                Boolean found = false;
+                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                    if (temp instanceof AssetMarketEnterprise) {
+                        AssetMarketEnterprise temp1 = (AssetMarketEnterprise) temp;
+                        if (temp1.admin == ongoing) {
+                            found = true;
+                        }
+                    }
+
+                }
+                if (!found) {
+                    this.assetsAdminUser.add(ongoing);
+                    asset.add(ongoing.getUsername());
+                }
             }
         }
         selectedDropDown = assetsAdminUser;
@@ -150,8 +166,22 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof ForexMarketAdminRole) {
-                this.forexAdminUser.add(ongoing);
-                asset.add(ongoing.getUsername());
+
+                Boolean found = false;
+                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                    if (temp instanceof ForexMarketEnterprise) {
+                        ForexMarketEnterprise temp1 = (ForexMarketEnterprise) temp;
+                        if (temp1.admin == ongoing) {
+                            found = true;
+                        }
+                    }
+
+                }
+                if (!found) {
+                    this.forexAdminUser.add(ongoing);
+                    asset.add(ongoing.getUsername());
+                }
             }
         }
         selectedDropDown = forexAdminUser;
@@ -167,8 +197,22 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof CryptoMarketAdminRole) {
-                this.cryptoAdminUser.add(ongoing);
-                asset.add(ongoing.getUsername());
+
+                Boolean found = false;
+                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                    if (temp instanceof CryptoMarketEnterprise) {
+                        CryptoMarketEnterprise temp1 = (CryptoMarketEnterprise) temp;
+                        if (temp1.admin == ongoing) {
+                            found = true;
+                        }
+                    }
+
+                }
+                if (!found) {
+                    this.cryptoAdminUser.add(ongoing);
+                    asset.add(ongoing.getUsername());
+                }
             }
         }
         selectedDropDown = cryptoAdminUser;
@@ -185,8 +229,22 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof StockMarketAdminRole) {
-                this.stockAdminUser.add(ongoing);
-                asset.add(ongoing.getUsername());
+
+                Boolean found = false;
+                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                    if (temp instanceof StockMarketEnterprise) {
+                        StockMarketEnterprise temp1 = (StockMarketEnterprise) temp;
+                        if (temp1.admin == ongoing) {
+                            found = true;
+                        }
+                    }
+
+                }
+                if (!found) {
+                    this.stockAdminUser.add(ongoing);
+                    asset.add(ongoing.getUsername());
+                }
             }
         }
         selectedDropDown = stockAdminUser;
