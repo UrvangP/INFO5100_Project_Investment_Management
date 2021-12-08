@@ -5,7 +5,6 @@
  */
 package Business.Network;
 
-import Business.Restaurant.Restaurant;
 import java.util.ArrayList;
 
 /**
