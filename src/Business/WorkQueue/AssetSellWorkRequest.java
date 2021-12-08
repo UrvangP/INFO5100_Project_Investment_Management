@@ -47,7 +47,6 @@ public class AssetSellWorkRequest extends WorkRequest {
     public AssetSellWorkRequest(
             UserAccount raisedBy,
             UserAccount raisedTo,
-            WorkRequest.StatusType overAllStatus,
             Date requestDate,
             Date resolveDate,
             StatusType status,
@@ -57,7 +56,7 @@ public class AssetSellWorkRequest extends WorkRequest {
             String companyName,
             String assetName,
             Object oraganization) {
-        super(raisedBy, raisedTo, overAllStatus, requestDate, resolveDate);
+        super(raisedBy, raisedTo, requestDate, resolveDate);
         this.statusType = status;
         this.price = price;
         this.quantity = quantity;

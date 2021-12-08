@@ -523,7 +523,6 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
             AssetBuyWorkRequest newRequest = new AssetBuyWorkRequest(
                     this.account,
                     this.selectedMarketAgent,
-                    WorkRequest.StatusType.Initiated,
                     new Date(),
                     null,
                     AssetBuyWorkRequest.StatusType.Initiated,

@@ -63,7 +63,7 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getRaisedTo() == this.account && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Sold) {
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == AssetBuyWorkRequest.StatusType.Initiated) {
                     allRequests.add(temp);
                     Object[] row = {
                         "BUY",
@@ -72,13 +72,13 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         temp.getQuantity(),
                         temp.getPrice(),
                         temp.getModifiedAt(),
-                        temp.getOverAllStatus()
+                        temp.getStatusType()
                     };
                     model.addRow(row);
                 }
             } else if (ongoing instanceof AssetSellWorkRequest) {
                 AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
-                if (temp.getRaisedTo() == this.account && temp.getStatusType() != AssetSellWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetSellWorkRequest.StatusType.Sold) {
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == AssetSellWorkRequest.StatusType.Initiated) {
                     allRequests.add(temp);
                     Object[] row = {
                         "SELL",
@@ -87,7 +87,7 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         temp.getQuantity(),
                         temp.getPrice(),
                         temp.getModifiedAt(),
-                        temp.getOverAllStatus()
+                        temp.getStatusType()
                     };
                     model.addRow(row);
                 }
@@ -229,7 +229,6 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             if (this.selectedRequest instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest request = (AssetBuyWorkRequest) this.selectedRequest;
                 request.setStatusType(statusSelected == "Approve" ? AssetBuyWorkRequest.StatusType.Completed : AssetBuyWorkRequest.StatusType.Rejected);
-                request.setOverAllStatus(statusSelected == "Approve" ? WorkRequest.StatusType.Completed : WorkRequest.StatusType.Cancelled);
 
                 if (request.getOraganization() instanceof JewelleryOrganization) {
                     JewelleryOrganization temp = (JewelleryOrganization) request.getOraganization();
@@ -271,6 +270,52 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
                     }
                 }
+            } else {
+
+                AssetSellWorkRequest request = (AssetSellWorkRequest) this.selectedRequest;
+                request.setStatusType(statusSelected == "Approve" ? AssetSellWorkRequest.StatusType.Completed : AssetSellWorkRequest.StatusType.Rejected);
+
+                if (request.getOraganization() instanceof JewelleryOrganization) {
+                    JewelleryOrganization temp = (JewelleryOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getJewelleries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getJewelleries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
+                } else if (request.getOraganization() instanceof IndustriesOrganization) {
+
+                    IndustriesOrganization temp = (IndustriesOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getIndustries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
+
+                } else {
+
+                    RealEstateOrganization temp = (RealEstateOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getEstates().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                    }
+                }
+
             }
             getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);

@@ -62,7 +62,7 @@ public class CustomerAssetEditOrderJPanel extends javax.swing.JPanel {
                     temp.getQuantity(),
                     temp.getPrice(),
                     temp.getModifiedAt(),
-                    temp.getOverAllStatus()
+                    temp.getStatusType()
                 };
                 model.addRow(row);
             }

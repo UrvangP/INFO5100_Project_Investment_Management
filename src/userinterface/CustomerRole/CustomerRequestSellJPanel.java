@@ -53,7 +53,7 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getStatusType() != AssetBuyWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Sold) {
+                if (temp.getStatusType() == AssetBuyWorkRequest.StatusType.Completed) {
                     allRequests.add(temp);
                     Object[] row = {
                         temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
@@ -61,7 +61,7 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
                         temp.getQuantity(),
                         temp.getPrice(),
                         temp.getModifiedAt(),
-                        temp.getOverAllStatus()
+                        temp.getStatusType()
                     };
                     model.addRow(row);
                 }
@@ -159,7 +159,7 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
         Organization temp1 = (Organization) selectedRequest.getOraganization();
         if (selectedRequest.getOraganization() instanceof IndustriesOrganization) {
             if (temp1 instanceof IndustriesOrganization) {
-                if (((IndustriesOrganization) temp1).getCompanyName().toString() == "Industries") {
+//                if (((IndustriesOrganization) temp1).getType().toString() == "Industries") {
                     selectedMarketAgent = ((IndustriesOrganization) temp1).getAdmin();
                     company = ((IndustriesOrganization) temp1).getCompanyName();
                     for (HashMap.Entry<String, HashMap<String, Object>> set
@@ -169,26 +169,26 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
                         price = Integer.valueOf(set.getValue().get("maxPrice").toString());
                         unit = Integer.valueOf(set.getValue().get("quantity").toString());
                     }
-                }
+//                }
             }
         } else if (selectedRequest.getOraganization() instanceof JewelleryOrganization) {
             if (temp1 instanceof JewelleryOrganization) {
-                if (((JewelleryOrganization) temp1).getCompanyName().toString() == "Jewellery") {
+//                if (((JewelleryOrganization) temp1).getType().toString() == "Jewellery") {
                     selectedMarketAgent = ((JewelleryOrganization) temp1).getAdmin();
-                    company = ((IndustriesOrganization) temp1).getCompanyName();
+                    company = ((JewelleryOrganization) temp1).getCompanyName();
                     for (HashMap.Entry<String, HashMap<String, Object>> set
                             : ((JewelleryOrganization) temp1).getJewelleries().entrySet()) {
                         productName = set.getKey();
                         price = Integer.valueOf(set.getValue().get("maxPrice").toString());
                         unit = Integer.valueOf(set.getValue().get("quantity").toString());
                     }
-                }
+//                }
             }
         } else if (selectedRequest.getOraganization() instanceof RealEstateOrganization) {
             if (temp1 instanceof RealEstateOrganization) {
-                if (((RealEstateOrganization) temp1).getCompanyName().toString() == "Real Estate") {
+//                if (((RealEstateOrganization) temp1).getType().toString() == "Real Estate") {
                     selectedMarketAgent = ((RealEstateOrganization) temp1).getAdmin();
-                    company = ((IndustriesOrganization) temp1).getCompanyName();
+                    company = ((RealEstateOrganization) temp1).getCompanyName();
                     for (HashMap.Entry<String, HashMap<String, Object>> set
                             : ((RealEstateOrganization) temp1).getEstates().entrySet()) {
                         productName = set.getKey();
@@ -197,15 +197,13 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
 
                     }
                 }
-            }
+//            }
         }
         selectedRequest.setStatusType(AssetBuyWorkRequest.StatusType.Sold);
-        selectedRequest.setOverAllStatus(WorkRequest.StatusType.Sold);
 
         AssetSellWorkRequest newRequest = new AssetSellWorkRequest(
                 this.account,
                 selectedMarketAgent,
-                WorkRequest.StatusType.Initiated,
                 new Date(),
                 null,
                 AssetSellWorkRequest.StatusType.Initiated,
