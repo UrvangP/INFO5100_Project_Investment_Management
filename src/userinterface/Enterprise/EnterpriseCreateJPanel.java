@@ -101,6 +101,17 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
+
+        initSetup();
+
+    }
+
+    public void initSetup() {
+        this.assetMarketJLabel.setVisible(enterpriseSelection.get("AssetMarket") != null ? false : true);
+        this.forexMarketJLabel.setVisible(enterpriseSelection.get("ForexMarket") != null ? false : true);
+        this.cryptoMarketJLabel.setVisible(enterpriseSelection.get("CryptoMarket") != null ? false : true);
+        this.stockMarketJLabel.setVisible(enterpriseSelection.get("StockMarket") != null ? false : true);
+//        
 //        this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
 //        this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
 //        this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
@@ -127,7 +138,6 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
 
         this.createdByJLabel.setText("Please select to see!");
         this.dateOfCreationJLabel.setText("Please select to see!");
-
     }
 
     public void setAssetAdminUsers() {
@@ -137,15 +147,17 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof AssetMarketAdminRole) {
                 Boolean found = false;
-                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
-                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
-                    if (temp instanceof AssetMarketEnterprise) {
-                        AssetMarketEnterprise temp1 = (AssetMarketEnterprise) temp;
-                        if (temp1.admin == ongoing) {
-                            found = true;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof AssetMarketEnterprise) {
+                            AssetMarketEnterprise temp1 = (AssetMarketEnterprise) temp;
+                            if (temp1.admin == ongoing) {
+                                found = true;
+                            }
                         }
-                    }
 
+                    }
                 }
                 if (!found) {
                     this.assetsAdminUser.add(ongoing);
@@ -168,15 +180,16 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             if (ongoing.getRole() instanceof ForexMarketAdminRole) {
 
                 Boolean found = false;
-                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
-                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
-                    if (temp instanceof ForexMarketEnterprise) {
-                        ForexMarketEnterprise temp1 = (ForexMarketEnterprise) temp;
-                        if (temp1.admin == ongoing) {
-                            found = true;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof ForexMarketEnterprise) {
+                            ForexMarketEnterprise temp1 = (ForexMarketEnterprise) temp;
+                            if (temp1.admin == ongoing) {
+                                found = true;
+                            }
                         }
                     }
-
                 }
                 if (!found) {
                     this.forexAdminUser.add(ongoing);
@@ -199,15 +212,16 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             if (ongoing.getRole() instanceof CryptoMarketAdminRole) {
 
                 Boolean found = false;
-                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
-                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
-                    if (temp instanceof CryptoMarketEnterprise) {
-                        CryptoMarketEnterprise temp1 = (CryptoMarketEnterprise) temp;
-                        if (temp1.admin == ongoing) {
-                            found = true;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof CryptoMarketEnterprise) {
+                            CryptoMarketEnterprise temp1 = (CryptoMarketEnterprise) temp;
+                            if (temp1.admin == ongoing) {
+                                found = true;
+                            }
                         }
                     }
-
                 }
                 if (!found) {
                     this.cryptoAdminUser.add(ongoing);
@@ -229,17 +243,17 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof StockMarketAdminRole) {
-
                 Boolean found = false;
-                for (int j = 0; j < this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
-                    Enterprise temp = this.ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(j);
-                    if (temp instanceof StockMarketEnterprise) {
-                        StockMarketEnterprise temp1 = (StockMarketEnterprise) temp;
-                        if (temp1.admin == ongoing) {
-                            found = true;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof StockMarketEnterprise) {
+                            StockMarketEnterprise temp1 = (StockMarketEnterprise) temp;
+                            if (temp1.admin == ongoing) {
+                                found = true;
+                            }
                         }
                     }
-
                 }
                 if (!found) {
                     this.stockAdminUser.add(ongoing);
@@ -983,54 +997,79 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
 
-    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-        Enterprise tempStorage;
-        String name = null;
-        Enterprise.EnterpriseType type = null;
-
-        if (this.selectedEnterprise == "AssetMarket") {
-            name = "AssetMarket";
-            type = Enterprise.EnterpriseType.AssetMarket;
-            enterpriseSelection.put("AssetMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = enterpriseSelection.get("AssetMarket");
-            visibility.put("Industries", this.industriesChecked.isVisible());
-            visibility.put("RealEstate", this.realestateChecked.isVisible());
-            visibility.put("Jewellery", this.jewelleyChecked.isVisible());
-            this.ongoinNetwork.getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
-            this.assetMarketLeftButton.setVisible(true);
-        } else if (this.selectedEnterprise == "CryptoMarket") {
-            name = "CryptoMarket";
-            type = Enterprise.EnterpriseType.CryptoMarket;
-            enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
-            visibility.put("Wallet", this.walletChecked.isVisible());
-            this.ongoinNetwork.getEnterpriseDirectory().createCryptoMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
-            this.cryptoMarketLeftBUtton.setVisible(true);
-
-        } else if (this.selectedEnterprise == "ForexMarket") {
-            name = "ForexMarket";
-            type = Enterprise.EnterpriseType.ForexMarket;
-            enterpriseSelection.put("ForexMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
-            visibility.put("Banks", this.banksChecked.isVisible());
-            visibility.put("Brokers", this.brokersChecked.isVisible());
-            this.ongoinNetwork.getEnterpriseDirectory().createForexMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
-            this.forexMarketLeftButton.setVisible(true);
-
-        } else {
-            name = "StockMarket";
-            type = Enterprise.EnterpriseType.StockMarket;
-            tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account, this.selectedUser);
-            enterpriseSelection.put("StockMarket", new HashMap<String, Boolean>());
-            HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
-            visibility.put("Companies", this.companiesChecked.isVisible());
-            visibility.put("MutualFunds", this.mutualChecked.isVisible());
-            this.ongoinNetwork.getEnterpriseDirectory().createStockMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
-            this.stockMarketLeftButton.setVisible(true);
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.countryComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Country to proceed! \n";
+        }
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
         }
 
-        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Jewellery Edit", ERROR_MESSAGE);
+        return false;
+    }
+
+
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+
+        Boolean isValid = validateItem();
+        if (isValid) {
+            Enterprise tempStorage;
+            String name = null;
+            Enterprise.EnterpriseType type = null;
+
+            if (this.selectedEnterprise == "AssetMarket") {
+                name = "AssetMarket";
+                type = Enterprise.EnterpriseType.AssetMarket;
+                enterpriseSelection.put("AssetMarket", new HashMap<String, Boolean>());
+                HashMap<String, Boolean> visibility = enterpriseSelection.get("AssetMarket");
+                visibility.put("Industries", this.industriesChecked.isVisible());
+                visibility.put("RealEstate", this.realestateChecked.isVisible());
+                visibility.put("Jewellery", this.jewelleyChecked.isVisible());
+                this.ongoinNetwork.getEnterpriseDirectory().createAssetMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
+                this.assetMarketLeftButton.setVisible(true);
+            } else if (this.selectedEnterprise == "CryptoMarket") {
+                name = "CryptoMarket";
+                type = Enterprise.EnterpriseType.CryptoMarket;
+                enterpriseSelection.put("CryptoMarket", new HashMap<String, Boolean>());
+                HashMap<String, Boolean> visibility = enterpriseSelection.get("CryptoMarket");
+                visibility.put("Wallet", this.walletChecked.isVisible());
+                this.ongoinNetwork.getEnterpriseDirectory().createCryptoMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
+                this.cryptoMarketLeftBUtton.setVisible(true);
+
+            } else if (this.selectedEnterprise == "ForexMarket") {
+                name = "ForexMarket";
+                type = Enterprise.EnterpriseType.ForexMarket;
+                enterpriseSelection.put("ForexMarket", new HashMap<String, Boolean>());
+                HashMap<String, Boolean> visibility = enterpriseSelection.get("ForexMarket");
+                visibility.put("Banks", this.banksChecked.isVisible());
+                visibility.put("Brokers", this.brokersChecked.isVisible());
+                this.ongoinNetwork.getEnterpriseDirectory().createForexMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
+                this.forexMarketLeftButton.setVisible(true);
+
+            } else {
+                name = "StockMarket";
+                type = Enterprise.EnterpriseType.StockMarket;
+                tempStorage = new StockMarketEnterprise("StockMarket", Enterprise.EnterpriseType.StockMarket, new Date(), this.countryComboBox.getSelectedItem().toString(), this.account, this.selectedUser);
+                enterpriseSelection.put("StockMarket", new HashMap<String, Boolean>());
+                HashMap<String, Boolean> visibility = enterpriseSelection.get("StockMarket");
+                visibility.put("Companies", this.companiesChecked.isVisible());
+                visibility.put("MutualFunds", this.mutualChecked.isVisible());
+                this.ongoinNetwork.getEnterpriseDirectory().createStockMarketEnterprise(name, new Date(), this.countryComboBox.getSelectedItem().toString(), account, this.selectedUser);
+                this.stockMarketLeftButton.setVisible(true);
+            }
+            this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
+            JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+            initSetup();
+            this.setAssetAdminUsers();
+            this.setCryptoAdminUsers();
+            this.setForexAdminUsers();
+            this.setStockAdminUsers();
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void createdByJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdByJLabelActionPerformed

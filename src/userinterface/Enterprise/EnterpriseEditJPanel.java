@@ -101,6 +101,13 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
+        
+        
+        this.assetMarketJLabel.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
+        this.forexMarketJLabel.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
+        this.cryptoMarketJLabel.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
+        this.stockMarketJLabel.setVisible(enterpriseSelection.get("StockMarket") == null ? false : true);
+        
         this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
         this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
         this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
@@ -688,6 +695,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Admin (*):");
 
+        adminComboBox.setEnabled(false);
         adminComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 adminComboBoxItemStateChanged(evt);
@@ -746,22 +754,20 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                         .addComponent(assetChecked))
                     .addComponent(assetMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(forexMarketJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(typeJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                        .addComponent(dateOfCreationJLabel)
-                        .addComponent(createdByJLabel)
-                        .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(adminComboBox, 0, 225, Short.MAX_VALUE)))
+                    .addComponent(countryComboBox, 0, 228, Short.MAX_VALUE)
+                    .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(typeJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                    .addComponent(dateOfCreationJLabel)
+                    .addComponent(createdByJLabel)
                     .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -777,7 +783,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(brandJLabel))
-                        .addGap(1, 1, 1)
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(adminComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(brandJLabel1))
