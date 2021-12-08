@@ -98,16 +98,44 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
             enterpriseSelection = ongoinNetwork.getEnterpriseDirectory().getEnterpriseSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
-            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
-        
-        
+
+        initSetup();
+    }
+
+    public void initSetup() {
+
+        if (enterpriseSelection.get("AssetMarket") != null) {
+            this.assetMarketLeftButton.setVisible(true);
+        } else {
+            this.assetMarketLeftButton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("ForexMarket") != null) {
+            this.forexMarketLeftButton.setVisible(true);
+        } else {
+            this.forexMarketLeftButton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("CryptoMarket") != null) {
+            this.cryptoMarketLeftBUtton.setVisible(true);
+        } else {
+            this.cryptoMarketLeftBUtton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("StockMarket") != null) {
+            this.stockMarketLeftButton.setVisible(true);
+        } else {
+            this.stockMarketLeftButton.setVisible(!true);
+        }
+
         this.assetMarketJLabel.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
         this.forexMarketJLabel.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
         this.cryptoMarketJLabel.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
         this.stockMarketJLabel.setVisible(enterpriseSelection.get("StockMarket") == null ? false : true);
-        
+
         this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
         this.forexChecked.setVisible(enterpriseSelection.get("ForexMarket") == null ? false : true);
         this.cryptoChecked.setVisible(enterpriseSelection.get("CryptoMarket") == null ? false : true);
@@ -1091,6 +1119,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
         }
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
         JOptionPane.showMessageDialog(this, "Enterprise edited successfully!", "Add Enterprise", INFORMATION_MESSAGE);
+        initSetup();
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void adminComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_adminComboBoxItemStateChanged

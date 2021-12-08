@@ -98,7 +98,7 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
             enterpriseSelection = ongoinNetwork.getEnterpriseDirectory().getEnterpriseSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
-            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
 
@@ -107,6 +107,30 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
     }
 
     public void initSetup() {
+        if (enterpriseSelection.get("AssetMarket") != null) {
+            this.assetMarketLeftButton.setVisible(true);
+        } else {
+            this.assetMarketLeftButton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("ForexMarket") != null) {
+            this.forexMarketLeftButton.setVisible(true);
+        } else {
+            this.forexMarketLeftButton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("CryptoMarket") != null) {
+            this.cryptoMarketLeftBUtton.setVisible(true);
+        } else {
+            this.cryptoMarketLeftBUtton.setVisible(!true);
+        }
+
+        if (enterpriseSelection.get("StockMarket") != null) {
+            this.stockMarketLeftButton.setVisible(true);
+        } else {
+            this.stockMarketLeftButton.setVisible(!true);
+        }
+
         this.assetMarketJLabel.setVisible(enterpriseSelection.get("AssetMarket") != null ? false : true);
         this.forexMarketJLabel.setVisible(enterpriseSelection.get("ForexMarket") != null ? false : true);
         this.cryptoMarketJLabel.setVisible(enterpriseSelection.get("CryptoMarket") != null ? false : true);
@@ -140,6 +164,10 @@ public class EnterpriseCreateJPanel extends javax.swing.JPanel {
         this.dateOfCreationJLabel.setText("Please select to see!");
     }
 
+    
+     
+     
+     
     public void setAssetAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
         this.assetsAdminUser = new ArrayList<>();

@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
@@ -25,13 +26,21 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     Network network;
     JPanel browsingJPanel;
+    JButton assetMarketLeftButton;
+    JButton stockMarketLeftButton;
+    JButton forexMarketLeftButton;
+    JButton cryptoMarketLeftBUtton;
 
-    public NetworkCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public NetworkCreateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, JButton assetMarketLeftButton, JButton stockMarketLeftButton, JButton forexMarketLeftButton, JButton cryptoMarketLeftBUtton) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        this.assetMarketLeftButton = assetMarketLeftButton;
+        this.stockMarketLeftButton = stockMarketLeftButton;
+        this.forexMarketLeftButton = forexMarketLeftButton;
+        this.cryptoMarketLeftBUtton = cryptoMarketLeftBUtton;
         _init();
     }
 
@@ -334,17 +343,17 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
         network.setIsSelected(false);
         this.ecosystem.createNetwork(network);
         JOptionPane.showMessageDialog(this, "Network created successfully!", "Create Network", INFORMATION_MESSAGE);
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void exitJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_exitJLabelFocusGained
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelFocusGained
 
@@ -353,12 +362,12 @@ public class NetworkCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 

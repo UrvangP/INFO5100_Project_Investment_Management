@@ -83,7 +83,7 @@ public class EnterpriseViewJPanel extends javax.swing.JPanel {
             enterpriseSelection = ongoingNetwrok.getEnterpriseDirectory().getEnterpriseSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select/create a network first!", "Setup", ERROR_MESSAGE);
-            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
             this.jSplitPane.setRightComponent(networkCreateJPanel);
         }
         this.assetChecked.setVisible(enterpriseSelection.get("AssetMarket") == null ? false : true);
