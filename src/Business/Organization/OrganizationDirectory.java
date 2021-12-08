@@ -57,6 +57,12 @@ public class OrganizationDirectory {
         organizationList.add(organization);
         return organization;
     }
+    
+    public Organization createWalletOrganization(String name, Date doc, String country, UserAccount admin, int price, long revenue) {
+        Organization org = new WalletOrganization(name, doc, country, admin, price, revenue);
+        organizationList.add(org);
+        return org;
+    }
 
     public Organization createOrganization(Type type, String name, Date doc) {
         Organization organization = null;
@@ -82,7 +88,7 @@ public class OrganizationDirectory {
             organization = new BrokersOrganization(name, doc);
             organizationList.add(organization);
         } else if (type.getValue().equals(Type.Wallet.getValue())) {
-            organization = new WalletOrganization(name, doc);
+            //organization = new WalletOrganization(name, doc);
             organizationList.add(organization);
         }
 
