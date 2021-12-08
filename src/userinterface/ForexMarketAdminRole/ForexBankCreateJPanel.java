@@ -6,9 +6,19 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.ForexAgentRole;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -25,6 +35,8 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
     Network ongoinNetwork;
     UserAccount selectedUser;
     Organization selectedOrganization;
+    
+    ArrayList<UserAccount> forexAdminUser = new ArrayList<>();
 
     /**
      * Creates new form ForexBankCreateJPanel
@@ -35,8 +47,30 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoinNetwork = ongoing1;
+            }
+        }
+        this.bankDateOfCreationJLabel.setText(new Date().toString());
+        setForexAdminUsers();
     }
 
+    private void setForexAdminUsers() {
+        ArrayList<String> forex = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing.getRole() instanceof ForexAgentRole) {
+                this.forexAdminUser.add(ongoing);
+                forex.add(ongoing.getUsername());
+            }
+        }
+        String[] forexDropdown = forex.toArray(new String[forex.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(forexDropdown);
+        this.bankComboBox.setModel(brandSDropdownModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,19 +80,452 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        serialNoJLabel = new javax.swing.JLabel();
+        bankNameJField = new javax.swing.JTextField();
+        cardentifierJLabel1 = new javax.swing.JLabel();
+        bankDateOfCreationJLabel = new javax.swing.JTextField();
+        serialNoJLabel1 = new javax.swing.JLabel();
+        bankContactJField = new javax.swing.JTextField();
+        serialNoJLabel2 = new javax.swing.JLabel();
+        nameJField = new javax.swing.JTextField();
+        serialNoJLabel3 = new javax.swing.JLabel();
+        bankEmailJField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        brandJLabel1 = new javax.swing.JLabel();
+        bankComboBox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        serialNoJLabel4 = new javax.swing.JLabel();
+        IfscCodeJField = new javax.swing.JTextField();
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        serialNoJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel.setText("Bank Name(*):");
+
+        bankNameJField.setBackground(new java.awt.Color(238, 238, 238));
+        bankNameJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        bankNameJField.setText("Enter here");
+        bankNameJField.setToolTipText("Click to enter your name.");
+        bankNameJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        bankNameJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bankNameJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                bankNameJFieldnameChangeHandler(evt);
+            }
+        });
+        bankNameJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankNameJFieldActionPerformed(evt);
+            }
+        });
+
+        cardentifierJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        cardentifierJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        cardentifierJLabel1.setText("Date of Creation:");
+
+        bankDateOfCreationJLabel.setEditable(false);
+        bankDateOfCreationJLabel.setBackground(new java.awt.Color(216, 220, 228));
+        bankDateOfCreationJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        bankDateOfCreationJLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        bankDateOfCreationJLabel.setToolTipText("This is your identifier.");
+        bankDateOfCreationJLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        bankDateOfCreationJLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankDateOfCreationJLabelActionPerformed(evt);
+            }
+        });
+
+        serialNoJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel1.setText("Contact(*):");
+
+        bankContactJField.setBackground(new java.awt.Color(238, 238, 238));
+        bankContactJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        bankContactJField.setText("Enter here");
+        bankContactJField.setToolTipText("Click to enter your name.");
+        bankContactJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        bankContactJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bankContactJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                bankContactJFieldnameChangeHandler(evt);
+            }
+        });
+        bankContactJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankContactJFieldActionPerformed(evt);
+            }
+        });
+
+        serialNoJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel2.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel2.setText("Name (*):");
+
+        nameJField.setBackground(new java.awt.Color(238, 238, 238));
+        nameJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        nameJField.setText("Enter here");
+        nameJField.setToolTipText("Click to enter your name.");
+        nameJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        nameJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nameJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nameJFieldnameChangeHandler(evt);
+            }
+        });
+        nameJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameJFieldActionPerformed(evt);
+            }
+        });
+
+        serialNoJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel3.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel3.setText("Email(*):");
+
+        bankEmailJField.setBackground(new java.awt.Color(238, 238, 238));
+        bankEmailJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        bankEmailJField.setText("Enter here");
+        bankEmailJField.setToolTipText("Click to enter your name.");
+        bankEmailJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        bankEmailJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bankEmailJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                bankEmailJFieldnameChangeHandler(evt);
+            }
+        });
+        bankEmailJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankEmailJFieldActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(200, 203, 178));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(67, 100, 100));
+        jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Admin (*):");
+
+        bankComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                bankComboBoxItemStateChanged(evt);
+            }
+        });
+        bankComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bankComboBoxFocusGained(evt);
+            }
+        });
+        bankComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankComboBoxActionPerformed(evt);
+            }
+        });
+        bankComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                bankComboBoxPropertyChange(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Create a Bank");
+
+        serialNoJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel4.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel4.setText("IFSC Code  (*):");
+
+        IfscCodeJField.setBackground(new java.awt.Color(238, 238, 238));
+        IfscCodeJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        IfscCodeJField.setText("Enter here");
+        IfscCodeJField.setToolTipText("Click to enter your name.");
+        IfscCodeJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        IfscCodeJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                IfscCodeJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                IfscCodeJFieldnameChangeHandler(evt);
+            }
+        });
+        IfscCodeJField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IfscCodeJFieldMouseClicked(evt);
+            }
+        });
+        IfscCodeJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IfscCodeJFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(serialNoJLabel)
+                    .addComponent(brandJLabel1)
+                    .addComponent(serialNoJLabel2)
+                    .addComponent(serialNoJLabel4)
+                    .addComponent(serialNoJLabel1)
+                    .addComponent(serialNoJLabel3)
+                    .addComponent(cardentifierJLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IfscCodeJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bankNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serialNoJLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brandJLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serialNoJLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IfscCodeJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serialNoJLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serialNoJLabel1)
+                    .addComponent(bankContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serialNoJLabel3)
+                    .addComponent(bankEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bankDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardentifierJLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 830, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bankNameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankNameJFieldFocusGained
+        if (bankNameJField.getText().equals("Enter here")) {
+            bankNameJField.setText("");
+        }
+    }//GEN-LAST:event_bankNameJFieldFocusGained
+
+    private void bankNameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankNameJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankNameJFieldnameChangeHandler
+
+    private void bankNameJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankNameJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankNameJFieldActionPerformed
+
+    private void bankDateOfCreationJLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankDateOfCreationJLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankDateOfCreationJLabelActionPerformed
+
+    private void bankContactJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankContactJFieldFocusGained
+        if (bankContactJField.getText().equals("Enter here")) {
+            bankContactJField.setText("");
+        }
+    }//GEN-LAST:event_bankContactJFieldFocusGained
+
+    private void bankContactJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankContactJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankContactJFieldnameChangeHandler
+
+    private void bankContactJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankContactJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankContactJFieldActionPerformed
+
+    private void nameJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameJFieldFocusGained
+        if (this.nameJField.getText().equals("Enter here")) {
+            nameJField.setText("");
+        }
+    }//GEN-LAST:event_nameJFieldFocusGained
+
+    private void nameJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameJFieldnameChangeHandler
+
+    private void nameJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameJFieldActionPerformed
+
+    private void bankEmailJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankEmailJFieldFocusGained
+        if (this.bankEmailJField.getText().equals("Enter here")) {
+            bankEmailJField.setText("");
+        }
+    }//GEN-LAST:event_bankEmailJFieldFocusGained
+
+    private void bankEmailJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankEmailJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankEmailJFieldnameChangeHandler
+
+    private void bankEmailJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankEmailJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankEmailJFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Boolean valid = validateItem();
+        if (valid) {
+            HashMap<String, HashMap<String, Object>> banks = new HashMap<>();
+            HashMap<String, Object> bank = new HashMap<>();
+            bank.put("maxPrice", this.bankEmailJField.getText().toString());
+            bank.put("quantity", this.bankContactJField.getText().toString());
+            bank.put("doc", new Date());
+            bank.put("location", this.IfscCodeJField.getText().toString());
+            banks.put(this.nameJField.getText(), bank);
+
+            for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ongoing instanceof ForexMarketEnterprise) {
+                    ongoing.getOrganizationDirectory().createIndustryOrganization(this.bankNameJField.getText(), Organization.Type.Banks, this.nameJField.getText().toString(), this.selectedUser, banks, new Date());
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Bank created successfully!", "Bank", INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.bankComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.bankNameJField.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Bank Name! \n";
+        }
+        if (!this.IfscCodeJField.getText().matches("[a-zA-Z0-9 ]+")) {
+            errorMEssage += "Invalid Ifsc code! \n";
+        }
+
+        if (!this.nameJField.getText().matches("[a-zA-Z]+")) {
+            errorMEssage += "Invalid Name! \n";
+        }
+        if (!this.bankContactJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Contact should be a number! \n";
+        }
+        if (!this.bankEmailJField.getText().matches("[a-zA-Z0-9@.]+")) {
+            errorMEssage += "Invali Email! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Bank Edit", ERROR_MESSAGE);
+        return false;
+    }
+    private void bankComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bankComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_bankComboBoxItemStateChanged
+
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.bankComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedUser = this.forexAdminUser.get(selectedDelIndex);
+            System.out.println("!!!" + selectedUser.getUsername().toString());
+        }
+    }
+    private void bankComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankComboBoxFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankComboBoxFocusGained
+
+    private void bankComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankComboBoxActionPerformed
+
+    private void bankComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_bankComboBoxPropertyChange
+        this._adminChnageHandler();
+    }//GEN-LAST:event_bankComboBoxPropertyChange
+
+    private void IfscCodeJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_IfscCodeJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IfscCodeJFieldFocusGained
+
+    private void IfscCodeJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_IfscCodeJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IfscCodeJFieldnameChangeHandler
+
+    private void IfscCodeJFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IfscCodeJFieldMouseClicked
+        if (this.IfscCodeJField.getText().equals("Enter here")) {
+            IfscCodeJField.setText("");
+        }
+    }//GEN-LAST:event_IfscCodeJFieldMouseClicked
+
+    private void IfscCodeJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IfscCodeJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IfscCodeJFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField IfscCodeJField;
+    private javax.swing.JComboBox<String> bankComboBox;
+    private javax.swing.JTextField bankContactJField;
+    private javax.swing.JTextField bankDateOfCreationJLabel;
+    private javax.swing.JTextField bankEmailJField;
+    private javax.swing.JTextField bankNameJField;
+    private javax.swing.JLabel brandJLabel1;
+    private javax.swing.JLabel cardentifierJLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField nameJField;
+    private javax.swing.JLabel serialNoJLabel;
+    private javax.swing.JLabel serialNoJLabel1;
+    private javax.swing.JLabel serialNoJLabel2;
+    private javax.swing.JLabel serialNoJLabel3;
+    private javax.swing.JLabel serialNoJLabel4;
     // End of variables declaration//GEN-END:variables
 }
