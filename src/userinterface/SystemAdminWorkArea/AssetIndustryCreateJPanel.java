@@ -9,7 +9,10 @@ import Business.EcoSystem;
 import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.IndustriesOrganization;
+import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -59,8 +62,39 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof AssetAgentRole) {
-                this.assetsAdminUser.add(ongoing);
-                asset.add(ongoing.getUsername());
+                Boolean found = false;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof AssetMarketEnterprise) {
+                            for (int p = 0; p < temp.getOrganizationDirectory().getOrganizationList().size(); p++) {
+                                Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(p);
+                                if (temp1 instanceof IndustriesOrganization) {
+                                    IndustriesOrganization temp3 = ((IndustriesOrganization) temp1);
+                                    if (temp3.getAdmin() == ongoing) {
+                                        found = true;
+                                    }
+                                } else if (temp1 instanceof JewelleryOrganization) {
+                                    JewelleryOrganization temp4 = ((JewelleryOrganization) temp1);
+                                    if (temp4.getAdmin() == ongoing) {
+                                        found = true;
+                                    }
+
+                                } else if (temp1 instanceof RealEstateOrganization) {
+                                    RealEstateOrganization temp5 = ((RealEstateOrganization) temp1);
+                                    if (temp5.getAdmin() == ongoing) {
+                                        found = true;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!found) {
+                    this.assetsAdminUser.add(ongoing);
+                    asset.add(ongoing.getUsername());
+                }
             }
         }
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
@@ -336,7 +370,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
                     .addComponent(cardentifierJLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -446,6 +480,7 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
                     ongoing.getOrganizationDirectory().createIndustryOrganization(this.industryNameJField.getText(), Organization.Type.RealEstate, this.nameJField.getText().toString(), this.selectedUser, estates, new Date());
                 }
             }
+            setAssetAdminUsers();
             JOptionPane.showMessageDialog(this, "Industry created successfully!", "Industry", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
