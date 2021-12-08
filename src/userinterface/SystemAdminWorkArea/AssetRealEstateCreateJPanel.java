@@ -527,6 +527,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
                     ongoing.getOrganizationDirectory().createRealEstateOrganization(this.realestateNameJField.getText(), Organization.Type.RealEstate, this.nameJField.getText().toString(), this.selectedUser, estates, new Date());
                 }
             }
+            setAssetAdminUsers();
             JOptionPane.showMessageDialog(this, "Real Estate created successfully!", "Real Estate ", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

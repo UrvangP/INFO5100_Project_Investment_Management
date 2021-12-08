@@ -440,6 +440,7 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
                     ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());
                 }
             }
+            setAssetAdminUsers();
             JOptionPane.showMessageDialog(this, "Jewellery created successfully!", "Jewellery", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
