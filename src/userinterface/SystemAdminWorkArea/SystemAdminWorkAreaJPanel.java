@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import userinterface.CryptoMarketAdminRole.cryptoMarketDashboard;
 import userinterface.Enterprise.EnterpriseViewJPanel;
 import userinterface.Network.NetworkViewJPanel;
-import userinterface.StockMarketAdminRole.companyOrganizationPanel;
 import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
