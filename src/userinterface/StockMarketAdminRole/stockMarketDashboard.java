@@ -15,6 +15,7 @@ import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -167,6 +168,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
 
         jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
         jSplitPane1.setDividerLocation(220);
+        jSplitPane1.setEnabled(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -384,8 +386,15 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         lsOrganizationNames2.setModel(model1);
         
         JPanel jp = new JPanel();
-        jSplitPane1.setRightComponent(jp);
+        jp.setBackground(Color.white);
+        
+        JPanel jp1 = new JPanel();
+        jp1.setBackground(Color.white);
+        
+        jSplitPane1.setRightComponent(jp1);
+        jSplitPane1.setDividerLocation(220);
         jSplitPane2.setRightComponent(jp);
+        jSplitPane2.setDividerLocation(220);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
