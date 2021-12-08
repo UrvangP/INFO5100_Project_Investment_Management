@@ -9,9 +9,17 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
+import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.AssetSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +33,8 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
+    AssetBuyWorkRequest selectedRequest;
+    ArrayList<AssetBuyWorkRequest> allRequests = new ArrayList<>();
 
     public CustomerRequestSellJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
         this.jSplitPane = jSplitPane;
@@ -33,21 +43,28 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
         this.selectedNetwork = selectedNetwork;
         initComponents();
 
+        getData();
+    }
+
+    public void getData() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                Object[] row = {
-                    temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
-                    temp.getCompanyName(),
-                    temp.getQuantity(),
-                    temp.getPrice(),
-                    temp.getModifiedAt(),
-                    temp.getOverAllStatus()
-                };
-                model.addRow(row);
+                if (temp.getStatusType() != AssetBuyWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Sold) {
+                    allRequests.add(temp);
+                    Object[] row = {
+                        temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                        temp.getCompanyName(),
+                        temp.getQuantity(),
+                        temp.getPrice(),
+                        temp.getModifiedAt(),
+                        temp.getOverAllStatus()
+                    };
+                    model.addRow(row);
+                }
             }
         }
     }
@@ -86,10 +103,20 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/output-onlinepngtools (1) copy.png"))); // NOI18N
         jLabel1.setText("SELL");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,13 +134,94 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Integer selectedIndex = this.jTable1.getSelectedRow();
+        if (selectedIndex != -1) {
+            selectedRequest = this.allRequests.get(selectedIndex);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+
+        UserAccount selectedMarketAgent = null;
+        Integer price = null;
+        Integer unit = null;
+        String company = null;
+        String productName = null;
+        Organization temp1 = (Organization) selectedRequest.getOraganization();
+        if (selectedRequest.getOraganization() instanceof IndustriesOrganization) {
+            if (temp1 instanceof IndustriesOrganization) {
+                if (((IndustriesOrganization) temp1).getCompanyName().toString() == "Industries") {
+                    selectedMarketAgent = ((IndustriesOrganization) temp1).getAdmin();
+                    company = ((IndustriesOrganization) temp1).getCompanyName();
+                    for (HashMap.Entry<String, HashMap<String, Object>> set
+                            : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
+                        productName = set.getKey();
+
+                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
+                    }
+                }
+            }
+        } else if (selectedRequest.getOraganization() instanceof JewelleryOrganization) {
+            if (temp1 instanceof JewelleryOrganization) {
+                if (((JewelleryOrganization) temp1).getCompanyName().toString() == "Jewellery") {
+                    selectedMarketAgent = ((JewelleryOrganization) temp1).getAdmin();
+                    company = ((IndustriesOrganization) temp1).getCompanyName();
+                    for (HashMap.Entry<String, HashMap<String, Object>> set
+                            : ((JewelleryOrganization) temp1).getJewelleries().entrySet()) {
+                        productName = set.getKey();
+                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
+                    }
+                }
+            }
+        } else if (selectedRequest.getOraganization() instanceof RealEstateOrganization) {
+            if (temp1 instanceof RealEstateOrganization) {
+                if (((RealEstateOrganization) temp1).getCompanyName().toString() == "Real Estate") {
+                    selectedMarketAgent = ((RealEstateOrganization) temp1).getAdmin();
+                    company = ((IndustriesOrganization) temp1).getCompanyName();
+                    for (HashMap.Entry<String, HashMap<String, Object>> set
+                            : ((RealEstateOrganization) temp1).getEstates().entrySet()) {
+                        productName = set.getKey();
+                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
+
+                    }
+                }
+            }
+        }
+        selectedRequest.setStatusType(AssetBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setOverAllStatus(WorkRequest.StatusType.Sold);
+
+        AssetSellWorkRequest newRequest = new AssetSellWorkRequest(
+                this.account,
+                selectedMarketAgent,
+                WorkRequest.StatusType.Initiated,
+                new Date(),
+                null,
+                AssetSellWorkRequest.StatusType.Initiated,
+                price,
+                unit,
+                new Date(),
+                company,
+                productName,
+                selectedRequest.getOraganization()
+        );
+        this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
+        getData();
+        JOptionPane.showMessageDialog(this, "Investment sold successfully!", "Investment", INFORMATION_MESSAGE);
+
+
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

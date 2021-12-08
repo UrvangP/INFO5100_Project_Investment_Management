@@ -21,6 +21,7 @@ public abstract class WorkRequest {
     public enum StatusType {
         Initiated("INITIATED"),
         Completed("COMPLETED"),
+        Sold("SOLD"),
         Cancelled("CANCELLED");
 
         private String value;

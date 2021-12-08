@@ -6,13 +6,14 @@
 package userinterface.AssetAgentRole;
 
 import Business.EcoSystem;
-import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.AssetSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,10 +63,25 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
             if (ongoing instanceof AssetBuyWorkRequest) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getRaisedTo() == this.account && temp.getOverAllStatus().toString() != "CANCELLED") {
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetBuyWorkRequest.StatusType.Sold) {
                     allRequests.add(temp);
                     Object[] row = {
                         "BUY",
+                        temp.getCompanyName(),
+                        temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                        temp.getQuantity(),
+                        temp.getPrice(),
+                        temp.getModifiedAt(),
+                        temp.getOverAllStatus()
+                    };
+                    model.addRow(row);
+                }
+            } else if (ongoing instanceof AssetSellWorkRequest) {
+                AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() != AssetSellWorkRequest.StatusType.Rejected && temp.getStatusType() != AssetSellWorkRequest.StatusType.Sold) {
+                    allRequests.add(temp);
+                    Object[] row = {
+                        "SELL",
                         temp.getCompanyName(),
                         temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
                         temp.getQuantity(),
@@ -229,10 +245,32 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                     }
                 } else if (request.getOraganization() instanceof IndustriesOrganization) {
 
+                    IndustriesOrganization temp = (IndustriesOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getIndustries().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                    }
+
                 } else {
 
-                }
+                    RealEstateOrganization temp = (RealEstateOrganization) request.getOraganization();
+                    if (temp.getCompanyName().toString() == request.getCompanyName().toString()) {
 
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getEstates().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                    }
+                }
             }
             getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
