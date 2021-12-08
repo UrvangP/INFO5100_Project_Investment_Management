@@ -164,7 +164,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
 
         serialNoJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         serialNoJLabel2.setForeground(new java.awt.Color(67, 100, 100));
-        serialNoJLabel2.setText("Name (*):");
+        serialNoJLabel2.setText("Forex Name (*):");
 
         nameJField.setBackground(new java.awt.Color(238, 238, 238));
         nameJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -424,8 +424,8 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         if (valid) {
             HashMap<String, HashMap<String, Object>> banks = new HashMap<>();
             HashMap<String, Object> bank = new HashMap<>();
-            bank.put("maxPrice", this.bankEmailJField.getText().toString());
-            bank.put("quantity", this.bankContactJField.getText().toString());
+            bank.put("bsnkemail", this.bankEmailJField.getText().toString());
+            bank.put("bankcontact", this.bankContactJField.getText().toString());
             bank.put("doc", new Date());
             bank.put("location", this.IfscCodeJField.getText().toString());
             banks.put(this.nameJField.getText(), bank);
