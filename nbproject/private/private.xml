@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/userinterface/Enterprise/EnterpriseViewJPanel.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/userinterface/Network/NetworkViewJPanel.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/Business/Organization/CompaniesOrganization.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/Business/Enterprise/Enterprise.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/userinterface/Network/NetworkCreateJPanel.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/userinterface/SystemAdminWorkArea/SystemAdminWorkAreaJPanel.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/Business/Organization/OrganizationDirectory.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/Business/Organization/Organization.java</file>
-            <file>file:/C:/Users/urvan/Documents/Masters/AED/Project/INFO5100_Project_RobinHood/src/userinterface/Organization/OrganizationCreateJPanel.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

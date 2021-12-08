@@ -6,9 +6,16 @@
 package userinterface.Network;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -27,13 +34,23 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     Network selectedNetwork;
     Integer selectedNetworkIndex;
     JPanel browsingJPanel;
+    JButton assetMarketLeftButton;
+    JButton stockMarketLeftButton;
+    JButton forexMarketLeftButton;
+    JButton cryptoMarketLeftBUtton;
+    Network ongoingNetwrok;
+    ArrayList<Enterprise> enterpriseSelection = new ArrayList<>();
 
-    public NetworkViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public NetworkViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, JButton assetMarketLeftButton, JButton stockMarketLeftButton, JButton forexMarketLeftButton, JButton cryptoMarketLeftBUtton) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        this.assetMarketLeftButton = assetMarketLeftButton;
+        this.stockMarketLeftButton = stockMarketLeftButton;
+        this.forexMarketLeftButton = forexMarketLeftButton;
+        this.cryptoMarketLeftBUtton = cryptoMarketLeftBUtton;
         if (this.ecosystem.getNetwork().getNetworkList().isEmpty()) {
             JOptionPane.showMessageDialog(this, "No Network Found. Please create one!", "Network", ERROR_MESSAGE);
         } else {
@@ -88,7 +105,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add a Network");
+        jLabel1.setText("View a Network");
 
         seatsJLabel.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         seatsJLabel.setForeground(new java.awt.Color(67, 100, 100));
@@ -370,22 +387,22 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_dateOfCreationJLabelActionPerformed
 
     private void exitJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_exitJLabelFocusGained
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkEditJPanel networkEditJPanel = new NetworkEditJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabelFocusGained
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabelFocusGained
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
@@ -394,7 +411,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkCreateJPanel networkCreateJPanel = new NetworkCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketLeftButton, this.stockMarketLeftButton, this.forexMarketLeftButton, this.cryptoMarketLeftBUtton);
         this.jSplitPane.setRightComponent(networkCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
@@ -407,6 +424,7 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing == this.selectedNetwork) {
+                enterpriseSelection = ongoing.getEnterpriseDirectory().getEnterpriseDir();
                 ongoing.setIsSelected(true);
             } else {
                 ongoing.setIsSelected(!true);
@@ -414,8 +432,50 @@ public class NetworkViewJPanel extends javax.swing.JPanel {
         }
         this.browsingJPanel.setVisible(true);
         this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
+
+        getLeftButtonStatus();
+
         JOptionPane.showMessageDialog(this, "Network selected successfully!", "Network", INFORMATION_MESSAGE);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    public void getLeftButtonStatus() {
+        Boolean isAssetFound = false;
+        Boolean isForexFound = false;
+        Boolean isStockFound = false;
+        Boolean isCryptoFound = false;
+        for (int i = 0; i < this.enterpriseSelection.size(); i++) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise) {
+                isAssetFound = true;
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise) {
+                isCryptoFound = true;
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise) {
+                isForexFound = true;
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise) {
+                isStockFound = true;
+            }
+        }
+        if (isAssetFound) {
+            this.assetMarketLeftButton.setVisible(true);
+        } else {
+            this.assetMarketLeftButton.setVisible(!true);
+        }
+        if (isForexFound) {
+            this.forexMarketLeftButton.setVisible(true);
+        } else {
+            this.forexMarketLeftButton.setVisible(!true);
+        }
+
+        if (isStockFound) {
+            this.stockMarketLeftButton.setVisible(true);
+        } else {
+            this.stockMarketLeftButton.setVisible(!true);
+        }
+        if (isCryptoFound) {
+            this.cryptoMarketLeftBUtton.setVisible(true);
+        } else {
+            this.cryptoMarketLeftBUtton.setVisible(!true);
+        }
+    }
 
     public void openSelectedNetwork() {
         selectedNetworkIndex = this.networkJList.getSelectedIndex();

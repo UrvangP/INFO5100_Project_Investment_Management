@@ -18,7 +18,6 @@ import userinterface.AssetMarketAdminRole.AssetMarketAdminJPanel;
 import userinterface.CompanyAgentRole.CompanyAgentJPanel;
 import userinterface.CryptoAgentRole.CryptoAgentJPanel;
 import userinterface.CryptoMarketAdminRole.CryptoMarketAdminJPanel;
-import userinterface.CustomerRole.CustomerAreaJPanel;
 import userinterface.CustomerRole.CustomerJPanel;
 import userinterface.ForexAgentRole.ForexAgentJPanel;
 import userinterface.ForexMarketAdminRole.ForexMarketAdminJPanel;
@@ -53,8 +52,8 @@ public class LoginPage extends javax.swing.JPanel {
         this.logoutJButton = logoutJButton;
         this.browsingJPanel = browsingJPanel;
         this.system = system;
-        this.emailIDJField.setText("customer1");
-        this.passwordJField.setText("M#rcury01");
+        this.emailIDJField.setText("sysadmin");
+        this.passwordJField.setText("sysadmin");
         this.browsingJPanel.setVisible(false);
     }
 

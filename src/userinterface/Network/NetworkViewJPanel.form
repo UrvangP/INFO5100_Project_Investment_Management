@@ -119,7 +119,7 @@
           <Font name="Lucida Grande" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Add a Network"/>
+        <Property name="text" type="java.lang.String" value="View a Network"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="seatsJLabel">
