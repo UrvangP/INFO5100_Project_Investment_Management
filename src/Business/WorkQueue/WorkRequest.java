@@ -20,7 +20,8 @@ public abstract class WorkRequest {
 
     public enum StatusType {
         Initiated("INITIATED"),
-        Completed("COMPLETED");
+        Completed("COMPLETED"),
+        Cancelled("CANCELLED");
 
         private String value;
 

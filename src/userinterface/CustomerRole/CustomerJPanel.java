@@ -30,8 +30,10 @@ public class CustomerJPanel extends javax.swing.JPanel {
         this.account = account;
         this.ecosystem = ecosystem;
         userNameJLabel.setText(account.getUsername());
+        
         CustomerDashboardJPanel updateProfileAdmin = new CustomerDashboardJPanel(ecosystem, account, jSplitPane);
         this.jSplitPane.setRightComponent(updateProfileAdmin);
+        
         getNetwork();
     }
 

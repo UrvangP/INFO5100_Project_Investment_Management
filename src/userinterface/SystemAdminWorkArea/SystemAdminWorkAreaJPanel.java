@@ -14,7 +14,6 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import userinterface.Enterprise.EnterpriseViewJPanel;
 import userinterface.Network.NetworkViewJPanel;
-import userinterface.StockMarketAdminRole.companyOrganizationPanel;
 import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
