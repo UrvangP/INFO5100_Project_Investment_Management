@@ -23,7 +23,7 @@ public class AssetMarketViewJPanel extends javax.swing.JPanel {
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
-
+    String isAssetAgent;
     public AssetMarketViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
@@ -44,18 +44,14 @@ public class AssetMarketViewJPanel extends javax.swing.JPanel {
             if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
                 AssetIndustiesJPanel industriesPanel = new AssetIndustiesJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Industries", industriesPanel);
-
             };
             if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
                 AssetRealEstateJPanel realEstatePanel = new AssetRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Real Estate", realEstatePanel);
-
             };
-
             if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
                 AssetJewelleryJPanel jewellery = new AssetJewelleryJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Jewellery", jewellery);
-
             };
         } else {
             JOptionPane.showMessageDialog(this, "Please create an enterprise first!", "Setup", ERROR_MESSAGE);

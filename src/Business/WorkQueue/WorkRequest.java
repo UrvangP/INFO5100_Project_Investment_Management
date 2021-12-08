@@ -4,10 +4,8 @@
  */
 package Business.WorkQueue;
 
-import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  *
@@ -15,105 +13,110 @@ import java.util.HashMap;
  */
 public abstract class WorkRequest {
 
-    private String message; //use this for comments
-    private Restaurant sender; //from order
-    private UserAccount receiver; //to order
-    private String status; //overall status of order - inprogress/completed
-    private Date requestDate; //ordered date
-    private Date resolveDate; //order completed date
-    private HashMap<HashMap<String, Double>, Integer> orderedMenu; //ordered items
-    private String address; //address to deliver
+    private UserAccount raisedBy;
+    private UserAccount raisedTo;
+    private Date requestDate;
+    private Date resolveDate;
 
-    public WorkRequest(String address,
-            UserAccount customerName,
-            HashMap<HashMap<String, Double>, Integer> orderGenerated,
-            Restaurant selectedRestaurant,
-            String mainOrderMessage,
-            String overAllStatus,
-            Date requestDate) {
-        this.message = mainOrderMessage;
-        this.sender = selectedRestaurant;
-        this.receiver = customerName;
-        this.status = overAllStatus;
+    public enum StatusType {
+        Initiated("INITIATED"),
+        Completed("COMPLETED"),
+        Cancelled("CANCELLED");
+
+        private String value;
+
+        private StatusType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
+    private StatusType overAllStatus;
+
+    public WorkRequest(UserAccount raisedBy, UserAccount raisedTo, StatusType overAllStatus, Date requestDate, Date resolveDate) {
+        this.raisedBy = raisedBy;
+        this.raisedTo = raisedTo;
+        this.overAllStatus = overAllStatus;
         this.requestDate = requestDate;
-        this.resolveDate = null;
-        this.orderedMenu = orderGenerated;
-        this.address = address;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Restaurant getSender() {
-        return sender;
-    }
-
-    public void setSender(Restaurant sender) {
-        this.sender = sender;
-    }
-
-    public UserAccount getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public Date getResolveDate() {
-        return resolveDate;
-    }
-
-    public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
 
     /**
-     * @return the orderedMenu
+     * @return the raisedBy
      */
-    public HashMap<HashMap<String, Double>, Integer> getOrderedMenu() {
-        return orderedMenu;
+    public UserAccount getRaisedBy() {
+        return raisedBy;
     }
 
     /**
-     * @param orderedMenu the orderedMenu to set
+     * @param raisedBy the raisedBy to set
      */
-    public void setOrderedMenu(HashMap<HashMap<String, Double>, Integer> orderedMenu) {
-        this.orderedMenu = orderedMenu;
+    public void setRaisedBy(UserAccount raisedBy) {
+        this.raisedBy = raisedBy;
     }
 
     /**
-     * @return the address
+     * @return the raisedTo
      */
-    public String getAddress() {
-        return address;
+    public UserAccount getRaisedTo() {
+        return raisedTo;
     }
 
     /**
-     * @param address the address to set
+     * @param raisedTo the raisedTo to set
      */
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRaisedTo(UserAccount raisedTo) {
+        this.raisedTo = raisedTo;
     }
+
+    /**
+     * @return the overAllStatus
+     */
+    public StatusType getOverAllStatus() {
+        return overAllStatus;
+    }
+
+    /**
+     * @param overAllStatus the overAllStatus to set
+     */
+    public void setOverAllStatus(StatusType overAllStatus) {
+        this.overAllStatus = overAllStatus;
+    }
+
+    /**
+     * @return the requestDate
+     */
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    /**
+     * @param requestDate the requestDate to set
+     */
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    /**
+     * @return the resolveDate
+     */
+    public Date getResolveDate() {
+        return resolveDate;
+    }
+
+    /**
+     * @param resolveDate the resolveDate to set
+     */
+    public void setResolveDate(Date resolveDate) {
+        this.resolveDate = resolveDate;
+    }
+
 }
