@@ -14,9 +14,20 @@ import javax.swing.JPanel;
  * @author prathameshnemade
  */
 public class StockMarketAdminJPanel extends javax.swing.JPanel {
+    
+    EcoSystem ecosystem;
+    UserAccount account;
+    JPanel browsingJPanel;
 
     public StockMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
+        
+        this.ecosystem = system;
+        this.account = account;
+        this.browsingJPanel = browsingJPanel;
+        
+        stockMarketAdminHome home = new stockMarketAdminHome(ecosystem, account);
+        jSplitPane.setRightComponent(home);
     }
 
     /**
@@ -28,19 +39,140 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        userNameJLabel = new javax.swing.JLabel();
+        homeButton = new javax.swing.JButton();
+        AccountCreationJButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Noto Sans Oriya", 0, 36)); // NOI18N
+        jLabel2.setText("Hello,");
+
+        userNameJLabel.setFont(new java.awt.Font("Noto Sans Oriya", 1, 36)); // NOI18N
+        userNameJLabel.setText("Stock Market Admin!");
+
+        homeButton.setBackground(new java.awt.Color(200, 203, 178));
+        homeButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        homeButton.setForeground(new java.awt.Color(67, 100, 100));
+        homeButton.setText("Home");
+        homeButton.setBorder(null);
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+
+        AccountCreationJButton.setBackground(new java.awt.Color(200, 203, 178));
+        AccountCreationJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        AccountCreationJButton.setForeground(new java.awt.Color(67, 100, 100));
+        AccountCreationJButton.setText("Manage Stock Market");
+        AccountCreationJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccountCreationJButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(userNameJLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameJLabel)
+                .addGap(18, 18, 18)
+                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(586, Short.MAX_VALUE))
+        );
+
+        jSplitPane.setLeftComponent(jPanel1);
+
+        jLabel1.setText("Dashb");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(335, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(208, 208, 208))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(jLabel1)
+                .addContainerGap(595, Short.MAX_VALUE))
+        );
+
+        jSplitPane.setRightComponent(jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 968, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSplitPane)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 840, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        stockMarketAdminHome home = new stockMarketAdminHome(ecosystem, account);
+        jSplitPane.setRightComponent(home);
+    }//GEN-LAST:event_homeButtonActionPerformed
 
+    private void AccountCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButtonActionPerformed
+        stockMarketDashboard createAdmin = new stockMarketDashboard(ecosystem, account, this.jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(createAdmin);
+    }//GEN-LAST:event_AccountCreationJButtonActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AccountCreationJButton;
+    private javax.swing.JButton homeButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

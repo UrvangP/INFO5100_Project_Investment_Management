@@ -10,9 +10,12 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.CompaniesOrganization;
+import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -165,6 +168,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
 
         jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
         jSplitPane1.setDividerLocation(220);
+        jSplitPane1.setEnabled(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -320,9 +324,8 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         }
         
         String oName = lsOrganizationNames.getSelectedValue();
-        Organization temp = orgs.getOrganization(oName);
         
-        companyEditPanel compEdit = new companyEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        companyEditPanel compEdit = new companyEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, (CompaniesOrganization) orgs.getOrganization(oName));
         jSplitPane2.setRightComponent(compEdit);
     }//GEN-LAST:event_lsOrganizationNamesValueChanged
 
@@ -339,9 +342,8 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         }
         
         String oName = lsOrganizationNames2.getSelectedValue();
-        Organization temp = orgs.getOrganization(oName);
         
-        mutualFundsEditPanel compEdit = new mutualFundsEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, orgs.getOrganization(oName));
+        mutualFundsEditPanel compEdit = new mutualFundsEditPanel(ecosystem, account, jSplitPane, browsingJPanel, this, (MutualFundsOrganization) orgs.getOrganization(oName));
         jSplitPane1.setRightComponent(compEdit);
     }//GEN-LAST:event_lsOrganizationNames2ValueChanged
 
@@ -382,6 +384,17 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         
         lsOrganizationNames.setModel(model);
         lsOrganizationNames2.setModel(model1);
+        
+        JPanel jp = new JPanel();
+        jp.setBackground(Color.white);
+        
+        JPanel jp1 = new JPanel();
+        jp1.setBackground(Color.white);
+        
+        jSplitPane1.setRightComponent(jp1);
+        jSplitPane1.setDividerLocation(220);
+        jSplitPane2.setRightComponent(jp);
+        jSplitPane2.setDividerLocation(220);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

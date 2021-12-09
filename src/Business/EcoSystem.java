@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 public class EcoSystem extends Organization {
 
     private static EcoSystem business;
-    private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
     private NetworkDirectory networkList;
     private HashMap<String, String> roleList = new HashMap<String, String>() {
@@ -47,8 +46,6 @@ public class EcoSystem extends Organization {
     };
 
     public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
-
-        this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.networkList = networkList;
     }
@@ -69,13 +66,8 @@ public class EcoSystem extends Organization {
 
     public EcoSystem() {
         super(null, null, null, null);
-        this.restaurantDirectory = new RestaurantDirectory();
         this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
-    }
-
-    public RestaurantDirectory getRestaurantDirectory() {
-        return this.restaurantDirectory;
     }
 
     public boolean checkIfUserIsUnique(String userName) {

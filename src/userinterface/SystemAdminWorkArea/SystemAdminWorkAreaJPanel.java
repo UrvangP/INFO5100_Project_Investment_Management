@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 import javax.swing.JPanel;
+import userinterface.CryptoMarketAdminRole.cryptoMarketDashboard;
 import userinterface.Enterprise.EnterpriseViewJPanel;
 import userinterface.ForexMarketAdminRole.ForexMarketViewJPanel;
 import userinterface.Network.NetworkViewJPanel;
-import userinterface.StockMarketAdminRole.companyOrganizationPanel;
 import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
@@ -307,7 +307,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void networkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkButtonActionPerformed
-        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        NetworkViewJPanel networkViewJPanel = new NetworkViewJPanel(ecosystem, account, jSplitPane, browsingJPanel, this.assetMarketButton, this.stockMarketButton, this.forexMarketButton, this.cryptoMarketButton);
         this.jSplitPane.setRightComponent(networkViewJPanel);
     }//GEN-LAST:event_networkButtonActionPerformed
 
@@ -347,6 +347,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void cryptoMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cryptoMarketButtonActionPerformed
         // TODO add your handling code here:
+        cryptoMarketDashboard smDash = new cryptoMarketDashboard(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(smDash);
     }//GEN-LAST:event_cryptoMarketButtonActionPerformed
 
     private void forexMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexMarketButtonActionPerformed

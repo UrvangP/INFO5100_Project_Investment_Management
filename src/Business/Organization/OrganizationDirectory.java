@@ -40,14 +40,14 @@ public class OrganizationDirectory {
     }
 
 
-    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country) {
-        Organization org = new CompaniesOrganization(name, doc, admin, country);
+    public Organization createCompanyOrganization(String name, UserAccount admin, Date doc, String country, int price, long revenue) {
+        Organization org = new CompaniesOrganization(name, doc, admin, country, price, revenue);
         organizationList.add(org);
         return org;
     }
     
-    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country){
-        Organization org = new MutualFundsOrganization(name, doc, admin, country);
+    public Organization createMutualFundOrganization(String name, UserAccount admin, Date doc, String country, ArrayList<Organization> funds){
+        Organization org = new MutualFundsOrganization(name, doc, admin, country, funds);
         organizationList.add(org);
         return org;
     }
@@ -68,6 +68,12 @@ public class OrganizationDirectory {
         Organization organization = new BrokersOrganization(brokerName, type, name, admin, broker, doc);
         organizationList.add(organization);
         return organization;
+    }
+    
+    public Organization createWalletOrganization(String name, Date doc, String country, UserAccount admin, int price, long revenue) {
+        Organization org = new WalletOrganization(name, doc, country, admin, price, revenue);
+        organizationList.add(org);
+        return org;
     }
 
     public Organization createOrganization(Type type, String name, Date doc) {
@@ -94,7 +100,7 @@ public class OrganizationDirectory {
 //            organization = new BrokersOrganization(name, doc);
 //            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Wallet.getValue())) {
-            organization = new WalletOrganization(name, doc);
+            //organization = new WalletOrganization(name, doc);
             organizationList.add(organization);
         }
 

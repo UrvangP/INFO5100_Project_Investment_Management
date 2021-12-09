@@ -198,6 +198,7 @@ public class AssetRealEstateEditJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Admin (*):");
 
+        realestateComboBox.setEnabled(false);
         realestateComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 realestateComboBoxItemStateChanged(evt);
