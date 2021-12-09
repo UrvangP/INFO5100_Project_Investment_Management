@@ -23,6 +23,14 @@ public class StockMarketEnterprise extends Enterprise {
     public UserAccount createdBy;
     public UserAccount admin;
 
+    public UserAccount getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(UserAccount admin) {
+        this.admin = admin;
+    }
+
     public StockMarketEnterprise(String name, Enterprise.EnterpriseType type, Date dateOfCreation, String country, UserAccount createdBy, UserAccount admin) {
         super(EnterpriseType.StockMarket);
         this.name = name;

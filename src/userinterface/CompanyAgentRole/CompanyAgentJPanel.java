@@ -13,6 +13,8 @@ import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import userinterface.StockMarketAdminRole.companyEditPanel;
 
@@ -36,8 +38,17 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
         
         this.company = getOrganization();
         
-        CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
-        jSplitPane.setRightComponent(home);
+        if(this.company == null){
+            homeButton.setEnabled(false);
+            AccountCreationJButton.setEnabled(false);
+            AccountCreationJButton1.setEnabled(false);
+            
+            JOptionPane.showMessageDialog(this, "No Organization linked to this account!", "Error", INFORMATION_MESSAGE);
+        }
+        else{
+            CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
+            jSplitPane.setRightComponent(home);
+        }
     }
 
     /**

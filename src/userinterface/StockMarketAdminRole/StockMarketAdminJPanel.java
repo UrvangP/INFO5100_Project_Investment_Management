@@ -6,6 +6,9 @@
 package userinterface.StockMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.StockMarketEnterprise;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -26,8 +29,32 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
         this.account = account;
         this.browsingJPanel = browsingJPanel;
         
+        Network ongoing = null;
+        boolean check = false;
+        
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoing = ongoing1;
+            }
+        }
+        
+        if(ongoing !=null)
+            for(Enterprise e: ongoing.getEnterpriseDirectory().getEnterpriseDir()){
+                if(e instanceof StockMarketEnterprise){
+                    StockMarketEnterprise sme = (StockMarketEnterprise) e;
+                    if(sme.getAdmin().getUsername().equals(account.getUsername()))
+                        check = true;
+                }
+            }
+        
+        if(!check){
+            AccountCreationJButton.setEnabled(check);
+        }
+        
         stockMarketAdminHome home = new stockMarketAdminHome(ecosystem, account);
         jSplitPane.setRightComponent(home);
+        
     }
 
     /**

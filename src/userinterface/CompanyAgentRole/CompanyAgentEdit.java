@@ -79,6 +79,8 @@ public class CompanyAgentEdit extends javax.swing.JPanel {
         cardentifierJLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
