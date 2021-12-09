@@ -15,6 +15,14 @@ import java.util.Date;
  * @author ronak
  */
 public class CompaniesOrganization extends Organization{
+
+    public UserAccount getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(UserAccount admin) {
+        this.admin = admin;
+    }
     
     UserAccount admin;
     int stockPrice;

@@ -55,6 +55,22 @@ public class stockMarketDashboard extends javax.swing.JPanel {
             }
         }
         
+        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")) {
+            jPanel1.setEnabled(true);
+        }
+        else{
+            //jPanel2.setEnabled(false);
+            jTabbedPane1.remove(jPanel1);
+        }
+        
+        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds")) {
+            jPanel2.setEnabled(true);
+        }
+        else{
+            jTabbedPane1.remove(jPanel2);
+            //jPanel2.setEnabled(false);
+        }
+        
         parseList();
         
     }
@@ -69,6 +85,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
         paneNavigation = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -85,6 +102,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jTabbedPane1PropertyChange(evt);
@@ -159,16 +177,30 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         );
         paneContentLayout.setVerticalGroup(
             paneContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
 
         jSplitPane2.setRightComponent(paneContent);
 
-        jTabbedPane1.addTab("Companies", jSplitPane2);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1045, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1045, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Companies", jPanel1);
 
         jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
         jSplitPane1.setDividerLocation(220);
-        jSplitPane1.setEnabled(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -216,17 +248,17 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(395, Short.MAX_VALUE)))
+                    .addContainerGap(455, Short.MAX_VALUE)))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(339, 339, 339)
                     .addComponent(lbCreateCompany1)
-                    .addContainerGap(339, Short.MAX_VALUE)))
+                    .addContainerGap(399, Short.MAX_VALUE)))
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -237,11 +269,11 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel8);
@@ -250,17 +282,11 @@ public class stockMarketDashboard extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+            .addComponent(jSplitPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+            .addComponent(jSplitPane1)
         );
 
         jTabbedPane1.addTab("Mutual Funds", jPanel2);
@@ -398,6 +424,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
