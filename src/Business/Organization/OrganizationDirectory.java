@@ -63,6 +63,12 @@ public class OrganizationDirectory {
         organizationList.add(organization);
         return organization;
     }
+    
+    public Organization createBrokerOrganization(String brokerName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> broker, Date doc) {
+        Organization organization = new BrokersOrganization(brokerName, type, name, admin, broker, doc);
+        organizationList.add(organization);
+        return organization;
+    }
 
     public Organization createOrganization(Type type, String name, Date doc) {
         Organization organization = null;
@@ -85,8 +91,8 @@ public class OrganizationDirectory {
 //            organization = new BanksOrganization(name, doc);
 //            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Brokers.getValue())) {
-            organization = new BrokersOrganization(name, doc);
-            organizationList.add(organization);
+//            organization = new BrokersOrganization(name, doc);
+//            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Wallet.getValue())) {
             organization = new WalletOrganization(name, doc);
             organizationList.add(organization);

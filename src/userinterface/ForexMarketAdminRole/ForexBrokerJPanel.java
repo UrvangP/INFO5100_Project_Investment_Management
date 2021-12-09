@@ -192,13 +192,13 @@ public class ForexBrokerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editBankJLabelFocusGained
 
     private void editBankJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBankJLabelMouseClicked
-        ForexBankEditJPanel forexBankEditJPanel = new ForexBankEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(forexBankEditJPanel);
+        ForexBrokerEditJPanel forexBrokerEditJPanel = new ForexBrokerEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(forexBrokerEditJPanel);
     }//GEN-LAST:event_editBankJLabelMouseClicked
 
     private void viewBankJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewBankJLabelMouseClicked
-        ForexBankViewJPanel forexBankViewJPanel = new ForexBankViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(forexBankViewJPanel);
+        ForexBrokerViewJPanel forexBrokerViewJPanel = new ForexBrokerViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(forexBrokerViewJPanel);
     }//GEN-LAST:event_viewBankJLabelMouseClicked
 
     private void createBankJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createBankJLabel1FocusGained

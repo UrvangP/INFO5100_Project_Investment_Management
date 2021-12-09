@@ -388,20 +388,20 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Boolean valid = validateItem();
         if (valid) {
-            HashMap<String, HashMap<String, Object>> banks = new HashMap<>();
-            HashMap<String, Object> bank = new HashMap<>();
-            bank.put("bsnkemail", this.brokerEmailJField.getText().toString());
-            bank.put("bankcontact", this.brokerContactJField.getText().toString());
-            bank.put("doc", new Date());
-            banks.put(this.forexnameJField.getText(), bank);
+            HashMap<String, HashMap<String, Object>> brokers = new HashMap<>();
+            HashMap<String, Object> broker = new HashMap<>();
+            broker.put("brokeremail", this.brokerEmailJField.getText().toString());
+            broker.put("brokercontact", this.brokerContactJField.getText().toString());
+            broker.put("doc", new Date());
+            brokers.put(this.forexnameJField.getText(), broker);
 
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof ForexMarketEnterprise) {
-                    ongoing.getOrganizationDirectory().createIndustryOrganization(this.brokerNameJField.getText(), Organization.Type.Banks, this.forexnameJField.getText().toString(), this.selectedUser, banks, new Date());
+                    ongoing.getOrganizationDirectory().createBrokerOrganization(this.brokerNameJField.getText(), Organization.Type.Brokers, this.forexnameJField.getText().toString(), this.selectedUser, brokers, new Date());
                 }
             }
-            JOptionPane.showMessageDialog(this, "Bank created successfully!", "Bank", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Broker created successfully!", "Broker", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -411,7 +411,7 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
             errorMEssage += "Select Admin to proceed! \n";
         }
         if (!this.brokerNameJField.getText().matches("[a-zA-Z0-9]+")) {
-            errorMEssage += "Invalid Bank Name! \n";
+            errorMEssage += "Invalid Broker Name! \n";
         }
 
         if (!this.forexnameJField.getText().matches("[a-zA-Z]+")) {
@@ -426,7 +426,7 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         if (errorMEssage.equals("")) {
             return true;
         }
-        JOptionPane.showMessageDialog(this, errorMEssage, "Bank Edit", ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, errorMEssage, "Broker Edit", ERROR_MESSAGE);
         return false;
     }
     private void brokerComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_brokerComboBoxItemStateChanged
