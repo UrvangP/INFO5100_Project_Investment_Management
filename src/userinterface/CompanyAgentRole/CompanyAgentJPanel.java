@@ -36,14 +36,14 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
         
         initComponents();
         
+        userNameJLabel.setText(account.getUsername());
+        
         this.company = getOrganization();
         
         if(this.company == null){
             homeButton.setEnabled(false);
             AccountCreationJButton.setEnabled(false);
             AccountCreationJButton1.setEnabled(false);
-            
-            JOptionPane.showMessageDialog(this, "No Organization linked to this account!", "Error", INFORMATION_MESSAGE);
         }
         else{
             CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
