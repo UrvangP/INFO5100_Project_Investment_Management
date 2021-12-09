@@ -23,7 +23,7 @@ public class BanksOrganization extends Organization{
     private UserAccount admin;
     private HashMap<String, HashMap<String, Object>> bank = new HashMap<String, HashMap<String, Object>>();
     
-    public BanksOrganization(String bankName,Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> jewelleries, Date doc){
+    public BanksOrganization(String bankName,Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> bank, Date doc){
         super(Organization.Type.Banks.getValue(), name, doc, "");
         this.bankName=bankName;
         this.type = type;

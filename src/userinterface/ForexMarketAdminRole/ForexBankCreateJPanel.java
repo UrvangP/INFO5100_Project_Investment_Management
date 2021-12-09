@@ -433,7 +433,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof ForexMarketEnterprise) {
-                    ongoing.getOrganizationDirectory().createIndustryOrganization(this.bankNameJField.getText(), Organization.Type.Banks, this.nameJField.getText().toString(), this.selectedUser, banks, new Date());
+                    ongoing.getOrganizationDirectory().createBankOrganization(this.bankNameJField.getText(), Organization.Type.Banks, this.nameJField.getText().toString(), this.selectedUser, banks, new Date());
                 }
             }
             JOptionPane.showMessageDialog(this, "Bank created successfully!", "Bank", INFORMATION_MESSAGE);

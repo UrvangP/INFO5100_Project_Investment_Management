@@ -6,11 +6,16 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.util.HashMap;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,6 +40,50 @@ public class ForexBankViewJPanel extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoinNetwork = ongoing1;
+            }
+        }
+        
+        _getDataforViewBank();
+    }
+    
+    private void _getDataforViewBank() {
+    
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+            System.out.println("entprise list size :: "+ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size());
+            Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof ForexMarketEnterprise) {
+                for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
+
+                    selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
+                    if (selectedOrganization instanceof BanksOrganization) {
+                        BanksOrganization ongoing2 = (BanksOrganization) selectedOrganization;
+//                        allJewellery.add(ongoing2);
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : ongoing2.getBank().entrySet()) {
+
+                            Object[] row = {
+                                ongoing2.getBankName(),
+                                set.getKey(),
+                                set.getValue().get("ifscCode"),
+                                set.getValue().get("doc"),                                                          
+                                ongoing2.getAdmin().getUsername().toString(),
+                                set.getValue().get("bankcontact"),
+                                set.getValue().get("bsnkemail")
+                            };
+                            model.addRow(row);
+                        }
+                    }
+                }
+            }
+        }
+    
     }
 
     /**
@@ -46,19 +95,42 @@ public class ForexBankViewJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bank Name", "Forex Name", "Ifsc Code", "Date of creation", "Admin", "Contact", "Email"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
