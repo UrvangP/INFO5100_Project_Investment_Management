@@ -58,6 +58,18 @@ public class OrganizationDirectory {
         return organization;
     }
     
+    public Organization createBankOrganization(String bankName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> bank, Date doc) {
+        Organization organization = new BanksOrganization(bankName, type, name, admin, bank, doc);
+        organizationList.add(organization);
+        return organization;
+    }
+    
+    public Organization createBrokerOrganization(String brokerName, Organization.Type type, String name, UserAccount admin, HashMap<String, HashMap<String, Object>> broker, Date doc) {
+        Organization organization = new BrokersOrganization(brokerName, type, name, admin, broker, doc);
+        organizationList.add(organization);
+        return organization;
+    }
+    
     public Organization createWalletOrganization(String name, Date doc, String country, UserAccount admin, int price, long revenue) {
         Organization org = new WalletOrganization(name, doc, country, admin, price, revenue);
         organizationList.add(org);
@@ -82,11 +94,11 @@ public class OrganizationDirectory {
 //            organization = new JewelleryOrganization(name, doc);
 //            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Banks.getValue())) {
-            organization = new BanksOrganization(name, doc);
-            organizationList.add(organization);
+//            organization = new BanksOrganization(name, doc);
+//            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Brokers.getValue())) {
-            organization = new BrokersOrganization(name, doc);
-            organizationList.add(organization);
+//            organization = new BrokersOrganization(name, doc);
+//            organizationList.add(organization);
         } else if (type.getValue().equals(Type.Wallet.getValue())) {
             //organization = new WalletOrganization(name, doc);
             organizationList.add(organization);

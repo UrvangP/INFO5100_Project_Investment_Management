@@ -6,8 +6,10 @@
 package Business.Organization;
 
 import Business.Role.Role;
+import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -15,9 +17,19 @@ import java.util.Date;
  */
 public class BanksOrganization extends Organization{
     
-    public BanksOrganization(String name, Date doc){
+    private String bankName;
+    private Organization.Type type;
+    private String name;
+    private UserAccount admin;
+    private HashMap<String, HashMap<String, Object>> bank = new HashMap<String, HashMap<String, Object>>();
+    
+    public BanksOrganization(String bankName,Organization.Type type,String name, UserAccount admin, HashMap<String, HashMap<String, Object>> bank, Date doc){
         super(Organization.Type.Banks.getValue(), name, doc, "");
-        
+        this.bankName=bankName;
+        this.type = type;
+        this.name = name;
+        this.admin = admin;
+        this.bank = bank;
     }
 
     @Override
@@ -25,5 +37,38 @@ public class BanksOrganization extends Organization{
 
         return null;    
     }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserAccount getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(UserAccount admin) {
+        this.admin = admin;
+    }
+
+    public HashMap<String, HashMap<String, Object>> getBank() {
+        return bank;
+    }
+
+    public void setBank(HashMap<String, HashMap<String, Object>> bank) {
+        this.bank = bank;
+    }
+    
     
 }

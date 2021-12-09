@@ -14,6 +14,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import userinterface.CryptoMarketAdminRole.cryptoMarketDashboard;
 import userinterface.Enterprise.EnterpriseViewJPanel;
+import userinterface.ForexMarketAdminRole.ForexMarketViewJPanel;
 import userinterface.Network.NetworkViewJPanel;
 import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
@@ -351,7 +352,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cryptoMarketButtonActionPerformed
 
     private void forexMarketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexMarketButtonActionPerformed
-        // TODO add your handling code here:
+        ForexMarketViewJPanel forexMarketViewJPanel = new ForexMarketViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(forexMarketViewJPanel);
     }//GEN-LAST:event_forexMarketButtonActionPerformed
 
     private void AccountCreationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButtonActionPerformed
