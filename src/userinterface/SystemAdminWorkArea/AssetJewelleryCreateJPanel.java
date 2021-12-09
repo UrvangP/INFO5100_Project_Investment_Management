@@ -401,6 +401,7 @@ public class AssetJewelleryCreateJPanel extends javax.swing.JPanel {
             jewelleries.put(this.jewelleryNameJField.getText(), jewelName);
 
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                System.out.println("Three Entried");
                 Enterprise ongoing = ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ongoing instanceof AssetMarketEnterprise) {
                     ongoing.getOrganizationDirectory().createJewelleryOrganization(this.compnayNameJField.getText(), Organization.Type.Jewellery, this.jewelleryNameJField.getText().toString(), this.selectedUser, jewelleries, new Date());

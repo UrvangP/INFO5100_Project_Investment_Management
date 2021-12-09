@@ -424,10 +424,10 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         if (valid) {
             HashMap<String, HashMap<String, Object>> banks = new HashMap<>();
             HashMap<String, Object> bank = new HashMap<>();
-            bank.put("bsnkemail", this.bankEmailJField.getText().toString());
+            bank.put("ifsc", this.IfscCodeJField.getText().toString());
             bank.put("bankcontact", this.bankContactJField.getText().toString());
+            bank.put("bankemail", this.bankEmailJField.getText().toString());
             bank.put("doc", new Date());
-            bank.put("location", this.IfscCodeJField.getText().toString());
             banks.put(this.nameJField.getText(), bank);
 
             for (int i = 0; i < ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {

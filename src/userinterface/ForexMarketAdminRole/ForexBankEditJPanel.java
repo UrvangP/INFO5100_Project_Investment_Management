@@ -84,8 +84,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
                             Object[] row = {
                                 ongoing2.getBankName(),
                                 set.getKey(),
-                                set.getValue().get("email"),
-                                set.getValue().get("contact"),
+                                set.getValue().get("bankemail"),
+                                set.getValue().get("bankcontact"),
                                 set.getValue().get("doc"),
                                 ongoing2.getAdmin().getUsername().toString()
                             };
@@ -140,17 +140,17 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Bank Name", "Email", "Contact", "Date of creation", "Admin"
+                "Bank Name", "Forex Name", "Email", "Contact", "Date of creation", "Admin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -394,8 +394,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
 
                 this.adminComboBox.setSelectedItem(selectedBank.getAdmin().getUsername().toString());
                 forexNameJField.setText(set.getKey());
-                bankContactJField.setText(set.getValue().get("contact").toString());
-                bankEmailJField.setText(set.getValue().get("email").toString());
+                bankContactJField.setText(set.getValue().get("bankcontact").toString());
+                bankEmailJField.setText(set.getValue().get("bankemail").toString());
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -504,8 +504,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
             if (valid) {
                 HashMap<String, HashMap<String, Object>> bank = new HashMap<>();
                 HashMap<String, Object> bankName = new HashMap<>();
-                bankName.put("email", this.bankEmailJField.getText().toString());
-                bankName.put("contact", this.bankContactJField.getText().toString());
+                bankName.put("bankemail", this.bankEmailJField.getText().toString());
+                bankName.put("bankcontact", this.bankContactJField.getText().toString());
                 bankName.put("doc", new Date());
                 bank.put(this.forexNameJField.getText(), bankName);
                 selectedBank.setAdmin(this.selectedUser);

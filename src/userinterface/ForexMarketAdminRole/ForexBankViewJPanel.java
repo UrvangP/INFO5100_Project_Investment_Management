@@ -71,11 +71,11 @@ public class ForexBankViewJPanel extends javax.swing.JPanel {
                             Object[] row = {
                                 ongoing2.getBankName(),
                                 set.getKey(),
-                                set.getValue().get("ifscCode"),
+                                set.getValue().get("ifsc"),
                                 set.getValue().get("doc"),                                                          
                                 ongoing2.getAdmin().getUsername().toString(),
                                 set.getValue().get("bankcontact"),
-                                set.getValue().get("bsnkemail")
+                                set.getValue().get("bankemail")
                             };
                             model.addRow(row);
                         }
