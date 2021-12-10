@@ -65,8 +65,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="brokerEmailJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="brokerContactJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="priceJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="maxUnitJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                               <Component id="adminComboBox" alignment="0" max="32767" attributes="0"/>
                               <Component id="forexNameJField" alignment="0" pref="278" max="32767" attributes="0"/>
                               <Component id="brokerNameJField" alignment="0" max="32767" attributes="0"/>
@@ -99,12 +99,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="brokerContactJlabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="brokerContactJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="maxUnitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="brokerEmailJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="brokerEmailJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="priceJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -132,8 +132,8 @@
                   <Table columnCount="6" rowCount="0">
                     <Column editable="true" title="Broker Name" type="java.lang.Object"/>
                     <Column editable="false" title="Forex Name" type="java.lang.Object"/>
-                    <Column editable="false" title="Email" type="java.lang.Object"/>
-                    <Column editable="false" title="Contact" type="java.lang.Object"/>
+                    <Column editable="false" title="Price" type="java.lang.Object"/>
+                    <Column editable="false" title="Units" type="java.lang.Object"/>
                     <Column editable="false" title="Date of creation" type="java.lang.Object"/>
                     <Column editable="false" title="Admin" type="java.lang.Object"/>
                   </Table>
@@ -256,10 +256,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="64" red="43" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Contact(*)"/>
+            <Property name="text" type="java.lang.String" value="Max unit(*)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="brokerContactJField">
+        <Component class="javax.swing.JTextField" name="maxUnitJField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -274,9 +274,9 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="brokerContactJFieldFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="brokerContactJFieldnameChangeHandler"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brokerContactJFieldActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldnameChangeHandler"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maxUnitJFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="brokerEmailJLabel3">
@@ -287,10 +287,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="64" red="43" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Email(*):"/>
+            <Property name="text" type="java.lang.String" value="Price(*):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="brokerEmailJField">
+        <Component class="javax.swing.JTextField" name="priceJField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -305,10 +305,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="brokerEmailJFieldHierarchyChanged"/>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="brokerEmailJFieldFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="brokerEmailJFieldnameChangeHandler"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brokerEmailJFieldActionPerformed"/>
+            <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="priceJFieldHierarchyChanged"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldnameChangeHandler"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceJFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">

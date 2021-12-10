@@ -18,7 +18,7 @@ import javax.swing.JSplitPane;
  * @author ronak
  */
 public class ForexMarketViewJPanel extends javax.swing.JPanel {
-    
+
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
@@ -28,13 +28,13 @@ public class ForexMarketViewJPanel extends javax.swing.JPanel {
      * Creates new form ForexMarketViewJPanel
      */
     public ForexMarketViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
-        
+
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         initComponents();
-        
+
         Network ongoing = null;
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
@@ -45,12 +45,12 @@ public class ForexMarketViewJPanel extends javax.swing.JPanel {
         }
 
         if (ongoing != null) {
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {//Banks
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {//Banks
                 ForexBankJPanel forexBankJpanel = new ForexBankJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 forexJTabbedPane.addTab("Banks", forexBankJpanel);
 
             };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers")) {//Brokers
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers")) {//Brokers
                 ForexBrokerJPanel forexBrokerPanel = new ForexBrokerJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 forexJTabbedPane.addTab("Brokers", forexBrokerPanel);
 
@@ -60,7 +60,6 @@ public class ForexMarketViewJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please create an enterprise first!", "Setup", ERROR_MESSAGE);
         }
 
-    
     }
 
     /**

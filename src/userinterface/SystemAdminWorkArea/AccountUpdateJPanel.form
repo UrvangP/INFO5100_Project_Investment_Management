@@ -222,7 +222,7 @@
                     <StringItem index="8" value="Mutual Funds Agent"/>
                     <StringItem index="9" value="Customer"/>
                     <StringItem index="10" value="System Admin"/>
-                    <StringItem index="11" value=" "/>
+                    <StringItem index="11" value=""/>
                   </StringArray>
                 </Property>
               </Properties>

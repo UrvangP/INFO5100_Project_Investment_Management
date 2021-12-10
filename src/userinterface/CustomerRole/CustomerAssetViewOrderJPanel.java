@@ -446,11 +446,11 @@ public class CustomerAssetViewOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_companyNameComboBoxItemStateChanged
 
     private void companyNameComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_companyNameComboBoxFocusGained
-        // TODO add your handling code here:
+        fetchFields();
     }//GEN-LAST:event_companyNameComboBoxFocusGained
 
     private void companyNameComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyNameComboBoxActionPerformed
-        // TODO add your handling code here:
+        fetchFields();
     }//GEN-LAST:event_companyNameComboBoxActionPerformed
 
     private void companyNameComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_companyNameComboBoxPropertyChange

@@ -125,6 +125,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 559));
 
         homeButton.setBackground(new java.awt.Color(200, 203, 178));
         homeButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -185,16 +186,14 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(assetJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(assetJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                     .addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(networkComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(userNameJLabel))
-                            .addComponent(brandJLabel1))
+                            .addComponent(jLabel2)
+                            .addComponent(brandJLabel1)
+                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -202,9 +201,9 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(userNameJLabel))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameJLabel)
                 .addGap(18, 18, 18)
                 .addComponent(brandJLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,7 +212,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(assetJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -272,8 +271,18 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
             this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+            for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+                Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+                if (ongoing == this.selectedNetwork) {
+                    ongoing.setIsSelected(true);
+                } else {
+                    ongoing.setIsSelected(!true);
+                }
+            }
             enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
             getLeftButtonStatus();
+            AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
         }
     }
 

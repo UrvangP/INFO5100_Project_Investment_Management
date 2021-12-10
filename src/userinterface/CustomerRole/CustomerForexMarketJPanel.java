@@ -12,23 +12,27 @@ import javax.swing.JSplitPane;
 
 /**
  *
- * @author prathameshnemade
+ * @author ronak
  */
-public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
-
+public class CustomerForexMarketJPanel extends javax.swing.JPanel {
+    
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
 
-    public CustomerAssetMarketJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+    /**
+     * Creates new form CustomerForexMarketJPanel
+     */
+    public CustomerForexMarketJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+        initComponents();
         this.jSplitPane = jSplitPane;
         this.account = account;
         this.ecosystem = ecosystem;
         this.selectedNetwork = selectedNetwork;
         initComponents();
-        CustomerAssetViewOrderJPanel customerAssetViewOrderJPanel = new CustomerAssetViewOrderJPanel(this.ecosystem, account, jSplitPane1, selectedNetwork);
-        this.jSplitPane1.setRightComponent(customerAssetViewOrderJPanel);
+        CustomerForexViewOrderJPanel customerForexViewOrderJPanel = new CustomerForexViewOrderJPanel(this.ecosystem, account, jSplitPane1, selectedNetwork);
+        this.jSplitPane1.setRightComponent(customerForexViewOrderJPanel);
     }
 
     /**
@@ -48,9 +52,6 @@ public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -106,32 +107,28 @@ public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 29, Short.MAX_VALUE))
+            .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -142,11 +139,11 @@ public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGap(0, 674, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 574, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -164,13 +161,13 @@ public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        CustomerAssetEditOrderJPanel customerAssetEditOrderJPanel = new CustomerAssetEditOrderJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        CustomerForexViewOrderJPanel customerAssetEditOrderJPanel = new CustomerForexViewOrderJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane1.setRightComponent(customerAssetEditOrderJPanel);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        CustomerAssetViewOrderJPanel customerAssetViewOrderJPanel = new CustomerAssetViewOrderJPanel(this.ecosystem, account, jSplitPane1, selectedNetwork);
-        this.jSplitPane1.setRightComponent(customerAssetViewOrderJPanel);
+        CustomerAssetViewOrderJPanel customerForexViewOrderJPanel = new CustomerAssetViewOrderJPanel(this.ecosystem, account, jSplitPane1, selectedNetwork);
+        this.jSplitPane1.setRightComponent(customerForexViewOrderJPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked

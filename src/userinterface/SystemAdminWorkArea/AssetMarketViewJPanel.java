@@ -41,15 +41,15 @@ public class AssetMarketViewJPanel extends javax.swing.JPanel {
         }
 
         if (ongoing != null) {
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
                 AssetIndustiesJPanel industriesPanel = new AssetIndustiesJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Industries", industriesPanel);
             };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
                 AssetRealEstateJPanel realEstatePanel = new AssetRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Real Estate", realEstatePanel);
             };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
                 AssetJewelleryJPanel jewellery = new AssetJewelleryJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                 assetJTabbedPane.addTab("Jewellery", jewellery);
             };

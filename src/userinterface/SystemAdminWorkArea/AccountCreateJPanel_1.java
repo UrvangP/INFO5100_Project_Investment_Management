@@ -168,7 +168,7 @@ public class AccountCreateJPanel_1 extends javax.swing.JPanel {
     public String validateregister() {
         String isValid = "";
 
-        if (!this.emailIDJField.getText().matches("[a-zA-Z0-9]{8,20}")) {
+        if (!this.emailIDJField.getText().matches("[a-zA-Z0-9]+[._a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]*[a-zA-Z]*@[a-zA-Z0-9]{2,8}.[a-zA-Z.]{2,6}")) {
             isValid += "Invalid Email Id! Should be minimum 8 and maximum 20 characters! \n";
         }
         if (!new String(this.JPasswordField.getPassword()).matches("[a-zA-Z0-9@#$%]{8,20}")) {
@@ -222,9 +222,9 @@ public class AccountCreateJPanel_1 extends javax.swing.JPanel {
                         }
                         this.system.getUserAccountDirectory().createUserAccount(this.emailIDJField.getText(), password, employee, role);
                         JOptionPane.showMessageDialog(this, "User registered successfully!!", "Register", INFORMATION_MESSAGE);
-                        this.emailIDJField.setText("Enter email id");
-                        this.JPasswordField.setText("");
-                        this.confirmJPasswordField.setText("");
+//                        this.emailIDJField.setText("Enter email id");
+//                        this.JPasswordField.setText("");
+//                        this.confirmJPasswordField.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "EmailId already used!!", "Register", ERROR_MESSAGE);
                     }
