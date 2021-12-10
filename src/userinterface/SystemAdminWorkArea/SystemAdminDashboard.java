@@ -6,6 +6,16 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
+import Business.Network.Network;
+import Business.Organization.IndustriesOrganization;
+import Business.Organization.JewelleryOrganization;
+import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
@@ -13,28 +23,82 @@ import Business.WorkQueue.AssetSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
  * @author prathameshnemade
  */
 public class SystemAdminDashboard extends javax.swing.JPanel {
-    
+
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
-    
+
     SystemAdminDashboard(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         initComponents();
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
-        getdata();
+        _populateTree();
+        _getdata();
     }
-    
-    public void getdata() {
+
+    public void _populateTree() {
+        DefaultMutableTreeNode assets = new DefaultMutableTreeNode("network");
+
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            DefaultMutableTreeNode temp = new DefaultMutableTreeNode(ongoing.getNName());
+            assets.add(temp);
+            for (int j = 0; j < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                Enterprise temp1 = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                if (temp1 instanceof AssetMarketEnterprise) {
+                    AssetMarketEnterprise temp2 = (AssetMarketEnterprise) temp1;
+                    DefaultMutableTreeNode assetTemp = new DefaultMutableTreeNode("Asset Market");
+                    temp.add(assetTemp);
+                    for (int k = 0; k < temp2.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp3 = temp2.getOrganizationDirectory().getOrganizationList().get(k);
+                        if (temp3 instanceof IndustriesOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((IndustriesOrganization) temp3).getCompanyName().toString());
+                            assetTemp.add(nameTemp);
+                        } else if (temp3 instanceof JewelleryOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((JewelleryOrganization) temp3).getCompanyName().toString());
+                            assetTemp.add(nameTemp);
+                        } else if (temp3 instanceof RealEstateOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((RealEstateOrganization) temp3).getCompanyName().toString());
+                            assetTemp.add(nameTemp);
+                        }
+                    }
+
+                } else if (temp1 instanceof CryptoMarketEnterprise) {
+                    CryptoMarketEnterprise temp2 = (CryptoMarketEnterprise) temp1;
+                    DefaultMutableTreeNode cryptoTemp = new DefaultMutableTreeNode("Crypto Market");
+                    temp.add(cryptoTemp);
+                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
+                    cryptoTemp.add(nameTemp);
+                } else if (temp1 instanceof ForexMarketEnterprise) {
+                    ForexMarketEnterprise temp2 = (ForexMarketEnterprise) temp1;
+                    DefaultMutableTreeNode forexTemp = new DefaultMutableTreeNode("Forex Market");
+                    temp.add(forexTemp);
+                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
+                    forexTemp.add(nameTemp);
+                } else if (temp1 instanceof StockMarketEnterprise) {
+                    StockMarketEnterprise temp2 = (StockMarketEnterprise) temp1;
+                    DefaultMutableTreeNode stockTemp = new DefaultMutableTreeNode("Stock Market");
+                    temp.add(stockTemp);
+                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
+                    nameTemp.add(nameTemp);
+                }
+            }
+        }
+
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(assets));
+    }
+
+    public void _getdata() {
         Integer networks = 0;
         Integer totalUsers = 0;
         Integer totalCustomers = 0;
@@ -57,7 +121,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 investments -= ((AssetSellWorkRequest) temp).getPrice() * ((AssetSellWorkRequest) temp).getQuantity();
             }
         }
-        
+
         this.totalNetwrokJLabel.setText(networks.toString());
         this.totalInvestmentsJLabel.setText(investments.toString());
         this.totalUsers.setText(totalUsers.toString());
@@ -232,31 +296,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         );
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("JTree");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("sysadmin");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("sysadmin");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("restaurants");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Hotel Taj");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Hotel Seta");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("customer");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("customer111");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("customer222");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("customer333");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("deliverymen");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("delivery111");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("delivery222");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("delivery333");
-        treeNode2.add(treeNode3);
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("network");
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
