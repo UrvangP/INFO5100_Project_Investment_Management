@@ -19,6 +19,14 @@ public class MutualFundsOrganization extends Organization{
     UserAccount admin;
     ArrayList<Organization> companyStocks;
 
+    public UserAccount getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(UserAccount admin) {
+        this.admin = admin;
+    }
+
     public ArrayList<Organization> getCompanyStocks() {
         return companyStocks;
     }
