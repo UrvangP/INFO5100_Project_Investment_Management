@@ -6,6 +6,7 @@
 package userinterface;
 
 import Business.EcoSystem;
+import Business.SendEmail;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JButton;
