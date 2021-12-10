@@ -222,9 +222,9 @@ public class AccountCreateJPanel_1 extends javax.swing.JPanel {
                         }
                         this.system.getUserAccountDirectory().createUserAccount(this.emailIDJField.getText(), password, employee, role);
                         JOptionPane.showMessageDialog(this, "User registered successfully!!", "Register", INFORMATION_MESSAGE);
-                        this.emailIDJField.setText("Enter email id");
-                        this.JPasswordField.setText("");
-                        this.confirmJPasswordField.setText("");
+//                        this.emailIDJField.setText("Enter email id");
+//                        this.JPasswordField.setText("");
+//                        this.confirmJPasswordField.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "EmailId already used!!", "Register", ERROR_MESSAGE);
                     }
