@@ -64,12 +64,18 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                         if (temp3 instanceof IndustriesOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((IndustriesOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((IndustriesOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         } else if (temp3 instanceof JewelleryOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((JewelleryOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((JewelleryOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         } else if (temp3 instanceof RealEstateOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((RealEstateOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((RealEstateOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         }
                     }
 
