@@ -6,6 +6,7 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -27,6 +28,22 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        getdata();
+    }
+
+    public void getdata() {
+        Integer networks = 0;
+        Integer totalUsers = 0;
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            networks += 1;
+        }
+        for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            totalUsers += 1;
+            UserAccount temp = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (temp instanceof CustomerRole) {
+                totalUsers += 1;
+            }
+        }
     }
 
     /**
@@ -40,16 +57,16 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        totalRestaurantJLabel = new javax.swing.JLabel();
+        totalNetwrokJLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        totalDeliveryMenJLabel = new javax.swing.JLabel();
+        totalCustBoardedJLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        totalOrdersJLabel = new javax.swing.JLabel();
+        totalUsers = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        totalCustomersJLabel = new javax.swing.JLabel();
+        totalInvestmentsJLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
 
@@ -63,12 +80,12 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Noto Sans Myanmar", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Total Restaurants:");
+        jLabel3.setText("No. of Networks");
 
-        totalRestaurantJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
-        totalRestaurantJLabel.setForeground(new java.awt.Color(255, 255, 255));
-        totalRestaurantJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalRestaurantJLabel.setText("0");
+        totalNetwrokJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
+        totalNetwrokJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        totalNetwrokJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalNetwrokJLabel.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,7 +94,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(totalRestaurantJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalNetwrokJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -87,7 +104,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalRestaurantJLabel)
+                .addComponent(totalNetwrokJLabel)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -98,12 +115,12 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Noto Sans Myanmar", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Total DeliveryMen:");
+        jLabel6.setText("No. of Customers boarded");
 
-        totalDeliveryMenJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
-        totalDeliveryMenJLabel.setForeground(new java.awt.Color(255, 255, 255));
-        totalDeliveryMenJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalDeliveryMenJLabel.setText("0");
+        totalCustBoardedJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
+        totalCustBoardedJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        totalCustBoardedJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalCustBoardedJLabel.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,7 +130,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                    .addComponent(totalDeliveryMenJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(totalCustBoardedJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -122,7 +139,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalDeliveryMenJLabel)
+                .addComponent(totalCustBoardedJLabel)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -133,12 +150,12 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Noto Sans Myanmar", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Total Orders:");
+        jLabel8.setText("Total Users:");
 
-        totalOrdersJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
-        totalOrdersJLabel.setForeground(new java.awt.Color(255, 255, 255));
-        totalOrdersJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalOrdersJLabel.setText("0");
+        totalUsers.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
+        totalUsers.setForeground(new java.awt.Color(255, 255, 255));
+        totalUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalUsers.setText("0");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -148,7 +165,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                    .addComponent(totalOrdersJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(totalUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -157,7 +174,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalOrdersJLabel)
+                .addComponent(totalUsers)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -168,12 +185,12 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Noto Sans Myanmar", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Total Customers:");
+        jLabel7.setText("Total Investments:");
 
-        totalCustomersJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
-        totalCustomersJLabel.setForeground(new java.awt.Color(255, 255, 255));
-        totalCustomersJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalCustomersJLabel.setText("0");
+        totalInvestmentsJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 60)); // NOI18N
+        totalInvestmentsJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        totalInvestmentsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalInvestmentsJLabel.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -183,7 +200,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                    .addComponent(totalCustomersJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(totalInvestmentsJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -192,7 +209,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalCustomersJLabel)
+                .addComponent(totalInvestmentsJLabel)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -274,9 +291,9 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
-    private javax.swing.JLabel totalCustomersJLabel;
-    private javax.swing.JLabel totalDeliveryMenJLabel;
-    private javax.swing.JLabel totalOrdersJLabel;
-    private javax.swing.JLabel totalRestaurantJLabel;
+    private javax.swing.JLabel totalCustBoardedJLabel;
+    private javax.swing.JLabel totalInvestmentsJLabel;
+    private javax.swing.JLabel totalNetwrokJLabel;
+    private javax.swing.JLabel totalUsers;
     // End of variables declaration//GEN-END:variables
 }
