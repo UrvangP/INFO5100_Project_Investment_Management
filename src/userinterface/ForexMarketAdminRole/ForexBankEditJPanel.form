@@ -65,8 +65,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="bankEmailJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="bankContactJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="priceJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="maxUnitJField" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                               <Component id="adminComboBox" alignment="0" max="32767" attributes="0"/>
                               <Component id="forexNameJField" alignment="0" pref="278" max="32767" attributes="0"/>
                               <Component id="bankNameJField" alignment="0" max="32767" attributes="0"/>
@@ -99,12 +99,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bankContactJlabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bankContactJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="maxUnitJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bankEmailJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bankEmailJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="priceJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -112,7 +112,7 @@
                       <Component id="deletejLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="283" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="283" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -132,8 +132,8 @@
                   <Table columnCount="6" rowCount="4">
                     <Column editable="false" title="Bank Name" type="java.lang.Object"/>
                     <Column editable="false" title="Forex Name" type="java.lang.Object"/>
-                    <Column editable="false" title="Email" type="java.lang.Object"/>
-                    <Column editable="false" title="Contact" type="java.lang.Object"/>
+                    <Column editable="false" title="Price" type="java.lang.Object"/>
+                    <Column editable="false" title="Units" type="java.lang.Object"/>
                     <Column editable="false" title="Date of creation" type="java.lang.Object"/>
                     <Column editable="false" title="Admin" type="java.lang.Object"/>
                   </Table>
@@ -253,10 +253,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="64" red="43" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Contact(*)"/>
+            <Property name="text" type="java.lang.String" value="Max Unit(*)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="bankContactJField">
+        <Component class="javax.swing.JTextField" name="maxUnitJField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -271,9 +271,9 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bankContactJFieldFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bankContactJFieldnameChangeHandler"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bankContactJFieldActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldnameChangeHandler"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maxUnitJFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="bankEmailJLabel3">
@@ -284,10 +284,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="64" red="43" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Email(*):"/>
+            <Property name="text" type="java.lang.String" value="Price(*):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="bankEmailJField">
+        <Component class="javax.swing.JTextField" name="priceJField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -302,10 +302,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="bankEmailJFieldHierarchyChanged"/>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bankEmailJFieldFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="bankEmailJFieldnameChangeHandler"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bankEmailJFieldActionPerformed"/>
+            <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="priceJFieldHierarchyChanged"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldnameChangeHandler"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceJFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">

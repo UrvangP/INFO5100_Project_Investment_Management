@@ -84,8 +84,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
                             Object[] row = {
                                 ongoing2.getBankName(),
                                 set.getKey(),
-                                set.getValue().get("bankemail"),
-                                set.getValue().get("bankcontact"),
+                                set.getValue().get("maxPrice"),
+                                set.getValue().get("quantity"),
                                 set.getValue().get("doc"),
                                 ongoing2.getAdmin().getUsername().toString()
                             };
@@ -131,9 +131,9 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
         forexNameJLabel2 = new javax.swing.JLabel();
         forexNameJField = new javax.swing.JTextField();
         bankContactJlabel1 = new javax.swing.JLabel();
-        bankContactJField = new javax.swing.JTextField();
+        maxUnitJField = new javax.swing.JTextField();
         bankEmailJLabel3 = new javax.swing.JLabel();
-        bankEmailJField = new javax.swing.JTextField();
+        priceJField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -146,7 +146,7 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Bank Name", "Forex Name", "Email", "Contact", "Date of creation", "Admin"
+                "Bank Name", "Forex Name", "Price", "Units", "Date of creation", "Admin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -245,52 +245,52 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
 
         bankContactJlabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         bankContactJlabel1.setForeground(new java.awt.Color(67, 100, 100));
-        bankContactJlabel1.setText("Contact(*)");
+        bankContactJlabel1.setText("Max Unit(*)");
 
-        bankContactJField.setBackground(new java.awt.Color(238, 238, 238));
-        bankContactJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        bankContactJField.setText("Enter here");
-        bankContactJField.setToolTipText("Click to enter your name.");
-        bankContactJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        bankContactJField.addFocusListener(new java.awt.event.FocusAdapter() {
+        maxUnitJField.setBackground(new java.awt.Color(238, 238, 238));
+        maxUnitJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        maxUnitJField.setText("Enter here");
+        maxUnitJField.setToolTipText("Click to enter your name.");
+        maxUnitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        maxUnitJField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                bankContactJFieldFocusGained(evt);
+                maxUnitJFieldFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                bankContactJFieldnameChangeHandler(evt);
+                maxUnitJFieldnameChangeHandler(evt);
             }
         });
-        bankContactJField.addActionListener(new java.awt.event.ActionListener() {
+        maxUnitJField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bankContactJFieldActionPerformed(evt);
+                maxUnitJFieldActionPerformed(evt);
             }
         });
 
         bankEmailJLabel3.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         bankEmailJLabel3.setForeground(new java.awt.Color(67, 100, 100));
-        bankEmailJLabel3.setText("Email(*):");
+        bankEmailJLabel3.setText("Price(*):");
 
-        bankEmailJField.setBackground(new java.awt.Color(238, 238, 238));
-        bankEmailJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        bankEmailJField.setText("Enter here");
-        bankEmailJField.setToolTipText("Click to enter your name.");
-        bankEmailJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        bankEmailJField.addHierarchyListener(new java.awt.event.HierarchyListener() {
+        priceJField.setBackground(new java.awt.Color(238, 238, 238));
+        priceJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        priceJField.setText("Enter here");
+        priceJField.setToolTipText("Click to enter your name.");
+        priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        priceJField.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                bankEmailJFieldHierarchyChanged(evt);
+                priceJFieldHierarchyChanged(evt);
             }
         });
-        bankEmailJField.addFocusListener(new java.awt.event.FocusAdapter() {
+        priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                bankEmailJFieldFocusGained(evt);
+                priceJFieldFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                bankEmailJFieldnameChangeHandler(evt);
+                priceJFieldnameChangeHandler(evt);
             }
         });
-        bankEmailJField.addActionListener(new java.awt.event.ActionListener() {
+        priceJField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bankEmailJFieldActionPerformed(evt);
+                priceJFieldActionPerformed(evt);
             }
         });
 
@@ -328,8 +328,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
                         .addComponent(deletejLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bankEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bankContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(forexNameJField, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                             .addComponent(bankNameJField))
@@ -354,17 +354,17 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bankContactJlabel1)
-                    .addComponent(bankContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bankEmailJLabel3)
-                    .addComponent(bankEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deletejLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -394,8 +394,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
 
                 this.adminComboBox.setSelectedItem(selectedBank.getAdmin().getUsername().toString());
                 forexNameJField.setText(set.getKey());
-                bankContactJField.setText(set.getValue().get("bankcontact").toString());
-                bankEmailJField.setText(set.getValue().get("bankemail").toString());
+                maxUnitJField.setText(set.getValue().get("quantity").toString());
+                priceJField.setText(set.getValue().get("maxPrice").toString());
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -465,37 +465,37 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_forexNameJFieldActionPerformed
 
-    private void bankContactJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankContactJFieldFocusGained
-        if (bankContactJField.getText().equals("Enter here")) {
-            bankContactJField.setText("");
+    private void maxUnitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldFocusGained
+        if (maxUnitJField.getText().equals("Enter here")) {
+            maxUnitJField.setText("");
         }
-    }//GEN-LAST:event_bankContactJFieldFocusGained
+    }//GEN-LAST:event_maxUnitJFieldFocusGained
 
-    private void bankContactJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankContactJFieldnameChangeHandler
+    private void maxUnitJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldnameChangeHandler
         // TODO add your handling code here:
-    }//GEN-LAST:event_bankContactJFieldnameChangeHandler
+    }//GEN-LAST:event_maxUnitJFieldnameChangeHandler
 
-    private void bankContactJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankContactJFieldActionPerformed
+    private void maxUnitJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxUnitJFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bankContactJFieldActionPerformed
+    }//GEN-LAST:event_maxUnitJFieldActionPerformed
 
-    private void bankEmailJFieldHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_bankEmailJFieldHierarchyChanged
+    private void priceJFieldHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_priceJFieldHierarchyChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_bankEmailJFieldHierarchyChanged
+    }//GEN-LAST:event_priceJFieldHierarchyChanged
 
-    private void bankEmailJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankEmailJFieldFocusGained
-        if (this.bankEmailJField.getText().equals("Enter here")) {
-            bankEmailJField.setText("");
+    private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
+        if (this.priceJField.getText().equals("Enter here")) {
+            priceJField.setText("");
         }
-    }//GEN-LAST:event_bankEmailJFieldFocusGained
+    }//GEN-LAST:event_priceJFieldFocusGained
 
-    private void bankEmailJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_bankEmailJFieldnameChangeHandler
+    private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
         // TODO add your handling code here:
-    }//GEN-LAST:event_bankEmailJFieldnameChangeHandler
+    }//GEN-LAST:event_priceJFieldnameChangeHandler
 
-    private void bankEmailJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankEmailJFieldActionPerformed
+    private void priceJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceJFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bankEmailJFieldActionPerformed
+    }//GEN-LAST:event_priceJFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -504,8 +504,8 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
             if (valid) {
                 HashMap<String, HashMap<String, Object>> bank = new HashMap<>();
                 HashMap<String, Object> bankName = new HashMap<>();
-                bankName.put("bankemail", this.bankEmailJField.getText().toString());
-                bankName.put("bankcontact", this.bankContactJField.getText().toString());
+                bankName.put("maxPrice", this.priceJField.getText().toString());
+                bankName.put("quantity", this.maxUnitJField.getText().toString());
                 bankName.put("doc", new Date());
                 bank.put(this.forexNameJField.getText(), bankName);
                 selectedBank.setAdmin(this.selectedUser);
@@ -530,11 +530,11 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
         if (!this.forexNameJField.getText().matches("[a-zA-Z]+")) {
             errorMEssage += "Invalid Forex Name! \n";
         }
-        if (!this.bankContactJField.getText().matches("[0-9]+")) {
-            errorMEssage += "Bank contact should be a number! \n";
+        if (!this.maxUnitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Max unit should be a number! \n";
         }
-        if (!this.bankEmailJField.getText().matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")) {
-            errorMEssage += "Forex email should be a number! \n";
+        if (!this.priceJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Price should be a number! \n";
         }
         if (errorMEssage.equals("")) {
             return true;
@@ -546,9 +546,7 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> adminComboBox;
     private javax.swing.JLabel bankAdminJLabel1;
-    private javax.swing.JTextField bankContactJField;
     private javax.swing.JLabel bankContactJlabel1;
-    private javax.swing.JTextField bankEmailJField;
     private javax.swing.JLabel bankEmailJLabel3;
     private javax.swing.JTextField bankNameJField;
     private javax.swing.JLabel bankNameJLabel;
@@ -559,5 +557,7 @@ public class ForexBankEditJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField maxUnitJField;
+    private javax.swing.JTextField priceJField;
     // End of variables declaration//GEN-END:variables
 }
