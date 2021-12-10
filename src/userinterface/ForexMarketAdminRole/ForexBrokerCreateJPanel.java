@@ -97,6 +97,10 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         brandJLabel1 = new javax.swing.JLabel();
         brokerComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        serialNoJLabel4 = new javax.swing.JLabel();
+        maxUnitJField = new javax.swing.JTextField();
+        serialNoJLabel5 = new javax.swing.JLabel();
+        priceJField = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -247,6 +251,62 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create a Broker");
 
+        serialNoJLabel4.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel4.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel4.setText("Max unit  (*):");
+
+        maxUnitJField.setBackground(new java.awt.Color(238, 238, 238));
+        maxUnitJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        maxUnitJField.setText("Enter here");
+        maxUnitJField.setToolTipText("Click to enter your name.");
+        maxUnitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        maxUnitJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                maxUnitJFieldnameChangeHandler(evt);
+            }
+        });
+        maxUnitJField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maxUnitJFieldMouseClicked(evt);
+            }
+        });
+        maxUnitJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxUnitJFieldActionPerformed(evt);
+            }
+        });
+
+        serialNoJLabel5.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        serialNoJLabel5.setForeground(new java.awt.Color(67, 100, 100));
+        serialNoJLabel5.setText("Price (*):");
+
+        priceJField.setBackground(new java.awt.Color(238, 238, 238));
+        priceJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        priceJField.setText("Enter here");
+        priceJField.setToolTipText("Click to enter your name.");
+        priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                priceJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                priceJFieldnameChangeHandler(evt);
+            }
+        });
+        priceJField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                priceJFieldMouseClicked(evt);
+            }
+        });
+        priceJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceJFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -258,21 +318,30 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(serialNoJLabel)
-                    .addComponent(brandJLabel1)
-                    .addComponent(serialNoJLabel2)
-                    .addComponent(serialNoJLabel1)
-                    .addComponent(serialNoJLabel3)
-                    .addComponent(cardentifierJLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokerDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forexnameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokerNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokerContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokerEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(serialNoJLabel)
+                            .addComponent(brandJLabel1)
+                            .addComponent(serialNoJLabel2)
+                            .addComponent(serialNoJLabel1)
+                            .addComponent(serialNoJLabel3)
+                            .addComponent(cardentifierJLabel1)
+                            .addComponent(serialNoJLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brokerDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(forexnameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brokerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brokerNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brokerContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brokerEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(serialNoJLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -292,21 +361,29 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(forexnameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(serialNoJLabel2))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maxUnitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serialNoJLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serialNoJLabel5)
+                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel1)
                     .addComponent(brokerContactJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serialNoJLabel3)
                     .addComponent(brokerEmailJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardentifierJLabel1)
                     .addComponent(brokerDateOfCreationJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(15, 15, 15)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -390,6 +467,8 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         if (valid) {
             HashMap<String, HashMap<String, Object>> brokers = new HashMap<>();
             HashMap<String, Object> broker = new HashMap<>();
+            broker.put("maxPrice", this.priceJField.getText().toString());
+            broker.put("quantity", this.maxUnitJField.getText().toString());
             broker.put("brokeremail", this.brokerEmailJField.getText().toString());
             broker.put("brokercontact", this.brokerContactJField.getText().toString());
             broker.put("doc", new Date());
@@ -412,6 +491,12 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         }
         if (!this.brokerNameJField.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Broker Name! \n";
+        }
+        if (!this.maxUnitJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Forex Unit should be a number! \n";
+        }
+        if (!this.priceJField.getText().matches("[0-9]+")) {
+            errorMEssage += "Forex Price should be a number! \n";
         }
 
         if (!this.forexnameJField.getText().matches("[a-zA-Z]+")) {
@@ -445,6 +530,40 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
         this._adminChnageHandler();
     }//GEN-LAST:event_brokerComboBoxPropertyChange
 
+    private void maxUnitJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldFocusGained
+
+    private void maxUnitJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxUnitJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldnameChangeHandler
+
+    private void maxUnitJFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxUnitJFieldMouseClicked
+        if (this.maxUnitJField.getText().equals("Enter here")) {
+            maxUnitJField.setText("");
+        }
+    }//GEN-LAST:event_maxUnitJFieldMouseClicked
+
+    private void maxUnitJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxUnitJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maxUnitJFieldActionPerformed
+
+    private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldFocusGained
+
+    private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldnameChangeHandler
+
+    private void priceJFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceJFieldMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldMouseClicked
+
+    private void priceJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldActionPerformed
+
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.brokerComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
@@ -465,9 +584,13 @@ public class ForexBrokerCreateJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField maxUnitJField;
+    private javax.swing.JTextField priceJField;
     private javax.swing.JLabel serialNoJLabel;
     private javax.swing.JLabel serialNoJLabel1;
     private javax.swing.JLabel serialNoJLabel2;
     private javax.swing.JLabel serialNoJLabel3;
+    private javax.swing.JLabel serialNoJLabel4;
+    private javax.swing.JLabel serialNoJLabel5;
     // End of variables declaration//GEN-END:variables
 }

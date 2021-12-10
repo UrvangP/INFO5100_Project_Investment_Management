@@ -24,7 +24,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="575" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="583" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -50,6 +50,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="serialNoJLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="serialNoJLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="brandJLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="serialNoJLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -62,12 +63,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton1" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="bankDateOfCreationJLabel" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
-                      <Component id="IfscCodeJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                      <Component id="maxUnitJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                       <Component id="nameJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                       <Component id="bankComboBox" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                       <Component id="bankNameJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                       <Component id="bankContactJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                       <Component id="bankEmailJField" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                      <Component id="priceJField" min="-2" pref="359" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="211" max="32767" attributes="0"/>
               </Group>
@@ -95,27 +97,32 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="IfscCodeJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="maxUnitJField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="serialNoJLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="serialNoJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="priceJField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="serialNoJLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bankContactJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="serialNoJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="serialNoJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bankEmailJField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="serialNoJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bankDateOfCreationJLabel" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="cardentifierJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -338,10 +345,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="64" green="64" red="43" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="IFSC Code  (*):"/>
+            <Property name="text" type="java.lang.String" value="Max unit  (*):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="IfscCodeJField">
+        <Component class="javax.swing.JTextField" name="maxUnitJField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ee" green="ee" red="ee" type="rgb"/>
@@ -356,10 +363,42 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="IfscCodeJFieldFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="IfscCodeJFieldnameChangeHandler"/>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IfscCodeJFieldMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IfscCodeJFieldActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maxUnitJFieldnameChangeHandler"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="maxUnitJFieldMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maxUnitJFieldActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serialNoJLabel5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="PT Sans Caption" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="64" green="64" red="43" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Price (*):"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="priceJField">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ee" green="ee" red="ee" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="text" type="java.lang.String" value="Enter here"/>
+            <Property name="toolTipText" type="java.lang.String" value="Click to enter your name."/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="1" left="5" right="5" top="1"/>
+              </Border>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceJFieldnameChangeHandler"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="priceJFieldMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceJFieldActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

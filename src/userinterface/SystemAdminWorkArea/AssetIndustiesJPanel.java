@@ -59,6 +59,9 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setEnabled(false);
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -105,22 +108,21 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewJLabel1)
-                    .addComponent(exitJLabel)
-                    .addComponent(viewJLabel))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE)
+                .addComponent(viewJLabel)
+                .addGap(18, 18, 18)
+                .addComponent(exitJLabel)
+                .addGap(18, 18, 18)
+                .addComponent(viewJLabel1))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(viewJLabel)
-                .addGap(18, 18, 18)
-                .addComponent(exitJLabel)
-                .addGap(18, 18, 18)
-                .addComponent(viewJLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewJLabel)
+                    .addComponent(viewJLabel1)
+                    .addComponent(exitJLabel))
                 .addContainerGap())
         );
 
@@ -129,14 +131,14 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(338, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -149,11 +151,11 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         jewelleryRightJPanel.setLayout(jewelleryRightJPanelLayout);
         jewelleryRightJPanelLayout.setHorizontalGroup(
             jewelleryRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGap(0, 704, Short.MAX_VALUE)
         );
         jewelleryRightJPanelLayout.setVerticalGroup(
             jewelleryRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 47, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jewelleryRightJPanel);

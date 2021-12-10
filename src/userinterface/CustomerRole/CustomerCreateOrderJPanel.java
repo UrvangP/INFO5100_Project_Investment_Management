@@ -107,7 +107,7 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
             cryptoMarketLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cryptoMarketLabelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -142,6 +142,11 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Forex Market");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout forexMarketLabelLayout = new javax.swing.GroupLayout(forexMarketLabel);
         forexMarketLabel.setLayout(forexMarketLabelLayout);
@@ -223,6 +228,12 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        CustomerForexMarketJPanel customerForexMarketJPanel = new CustomerForexMarketJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        this.jSplitPane.setRightComponent(customerForexMarketJPanel);
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
