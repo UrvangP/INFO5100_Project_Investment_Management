@@ -162,6 +162,11 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Stock Market");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout stockMarketLabelLayout = new javax.swing.GroupLayout(stockMarketLabel);
         stockMarketLabel.setLayout(stockMarketLabelLayout);
@@ -220,10 +225,15 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         CustomerAssetMarketJPanel customerAssetMarketJPanel = new CustomerAssetMarketJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
         this.jSplitPane.setRightComponent(customerAssetMarketJPanel);
-        
-        
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        CustomerStockMarketJPanel customerAssetMarketJPanel = new CustomerStockMarketJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        this.jSplitPane.setRightComponent(customerAssetMarketJPanel);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel assetMarketLabel;
