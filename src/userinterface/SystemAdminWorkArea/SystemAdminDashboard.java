@@ -8,6 +8,9 @@ package userinterface.SystemAdminWorkArea;
 import Business.EcoSystem;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.AssetSellWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -16,12 +19,12 @@ import javax.swing.JSplitPane;
  * @author prathameshnemade
  */
 public class SystemAdminDashboard extends javax.swing.JPanel {
-
+    
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
-
+    
     SystemAdminDashboard(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         initComponents();
         this.ecosystem = ecosystem;
@@ -30,20 +33,35 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         this.browsingJPanel = browsingJPanel;
         getdata();
     }
-
+    
     public void getdata() {
         Integer networks = 0;
         Integer totalUsers = 0;
+        Integer totalCustomers = 0;
+        Integer investments = 0;
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             networks += 1;
         }
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             totalUsers += 1;
             UserAccount temp = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
-            if (temp instanceof CustomerRole) {
-                totalUsers += 1;
+            if (temp.getRole() instanceof CustomerRole) {
+                totalCustomers += 1;
             }
         }
+        for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+            WorkRequest temp = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+            if (temp instanceof AssetBuyWorkRequest) {
+                investments += ((AssetBuyWorkRequest) temp).getPrice() * ((AssetBuyWorkRequest) temp).getQuantity();
+            } else if (temp instanceof AssetSellWorkRequest) {
+                investments -= ((AssetSellWorkRequest) temp).getPrice() * ((AssetSellWorkRequest) temp).getQuantity();
+            }
+        }
+        
+        this.totalNetwrokJLabel.setText(networks.toString());
+        this.totalInvestmentsJLabel.setText(investments.toString());
+        this.totalUsers.setText(totalUsers.toString());
+        this.totalCustBoardedJLabel.setText(totalCustomers.toString());
     }
 
     /**
