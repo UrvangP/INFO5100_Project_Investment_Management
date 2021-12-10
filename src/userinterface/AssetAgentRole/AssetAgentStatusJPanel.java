@@ -11,6 +11,7 @@ import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
 import Business.Organization.RealEstateOrganization;
+import Business.SendEmail;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
 import Business.WorkQueue.AssetSellWorkRequest;
@@ -241,6 +242,9 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getJewelleries().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent purchase of Jewellery.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent purchase " + temp.getJewelleries().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
                     }
                 } else if (request.getOraganization() instanceof IndustriesOrganization) {
 
@@ -254,6 +258,8 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent purchase of Industry asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent purchase " + temp.getIndustries().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
                     }
 
                 } else {
@@ -268,8 +274,11 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits - request.getQuantity());
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent purchase of Real Estate asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent purchase " + temp.getEstates().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
                     }
                 }
+
             } else {
 
                 AssetSellWorkRequest request = (AssetSellWorkRequest) this.selectedRequest;
@@ -286,6 +295,10 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getJewelleries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Jewellery.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of  " + temp.getJewelleries().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
+
                     }
                 } else if (request.getOraganization() instanceof IndustriesOrganization) {
 
@@ -299,6 +312,9 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getIndustries().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Industry asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of " + temp.getIndustries().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
                     }
 
                 } else {
@@ -313,9 +329,11 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                         }
 
                         temp.getEstates().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Real Estate asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of " + temp.getEstates().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
                     }
                 }
-
             }
             getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);

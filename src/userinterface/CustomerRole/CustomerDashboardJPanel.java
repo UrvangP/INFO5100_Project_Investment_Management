@@ -7,9 +7,7 @@ package userinterface.CustomerRole;
 
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.WorkRequest;
 import javax.swing.JSplitPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
