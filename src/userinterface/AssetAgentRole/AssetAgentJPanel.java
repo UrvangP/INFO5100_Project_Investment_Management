@@ -74,6 +74,7 @@ public class AssetAgentJPanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 587));
 
         homeButton.setBackground(new java.awt.Color(200, 203, 178));
         homeButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N

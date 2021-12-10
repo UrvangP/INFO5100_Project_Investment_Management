@@ -19,7 +19,6 @@ import Business.Role.MutualFundsAgentRole;
 import Business.Role.Role;
 import Business.Role.StockMarketAdminRole;
 import Business.UserAccount.UserAccount;
-import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -28,16 +27,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSplitPane;
-import userinterface.AssetAgentRole.AssetAgentJPanel;
-import userinterface.AssetMarketAdminRole.AssetMarketAdminJPanel;
-import userinterface.CompanyAgentRole.CompanyAgentJPanel;
-import userinterface.CryptoAgentRole.CryptoAgentJPanel;
-import userinterface.CryptoMarketAdminRole.CryptoMarketAdminJPanel;
-import userinterface.CustomerRole.CustomerAreaJPanel;
-import userinterface.ForexAgentRole.ForexAgentJPanel;
-import userinterface.ForexMarketAdminRole.ForexMarketAdminJPanel;
-import userinterface.MutualFundsAgentRole.MutualFundsAgentJPanel;
-import userinterface.StockMarketAdminRole.StockMarketAdminJPanel;
 
 /**
  *
@@ -71,11 +60,31 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
         DefaultListModel model = new DefaultListModel();
         ArrayList<UserAccount> accountList = this.system.getUserAccountDirectory().getUserAccountList();
         accountList.forEach(user -> {
-            String role = user.getRole().toString()
-                    .replace("Business.Role.SystemAdminRole", "SystemAdminRole")
-                    .replace("Business.Role.AdminRole", "AdminRole")
-                    .replace("Business.Role.DeliverManRole", "DeliverManRole")
-                    .replace("Business.Role.CustomerRole", "CustomerRole");
+            String role = "";
+            if (user.getRole().toString().equals(this.system.getRolesList().get("SystemAdminRole"))) {
+                role = "System Admin";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("AssetAgentRole"))) {
+                role = "Asset Agent";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("AssetMarketAdminRole"))) {
+                role = "Asset Market Admin";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("CompanyAgentRole"))) {
+                role = "Company Agent";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("CryptoAgentRole"))) {
+                role = "Crypto Agent";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("CryptoMarketAdminRole"))) {
+                role = "Crypto Market Admin";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("CustomerRole"))) {
+                role = "Customer";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("ForexAgentRole"))) {
+                role = "Forex Agent";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("ForexMarketAdminRole"))) {
+                role = "Forex Market Admin";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("MutualFundsAgentRole"))) {
+                role = "Mutual Funds Agent";
+            } else if (user.getRole().toString().equals(this.system.getRolesList().get("StockMarketAdminRole"))) {
+                role = "Stock Market Admin";
+            }
+
             model.addElement(user.getUsername() + " - " + role);
         });
         if (model.isEmpty()) {
@@ -169,7 +178,7 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
         brandJLabel.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel.setText("Role (*):");
 
-        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Stock Market Admin", "Asset Market Admin", "Crypto Market Admin", "Forex Market Admin", "Asset Agent", "Company Agent", "Crypto Agent", "Forex Agent", "Mutual Funds Agent", "Customer", "System Admin", " " }));
+        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Stock Market Admin", "Asset Market Admin", "Crypto Market Admin", "Forex Market Admin", "Asset Agent", "Company Agent", "Crypto Agent", "Forex Agent", "Mutual Funds Agent", "Customer", "System Admin", "" }));
         roleComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 roleComboBoxItemStateChanged(evt);
@@ -309,27 +318,27 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
             if (null == selectedAccount.getRole().toString()) {
 //                JOptionPane.showMessageDialog(this, "No Profiles Created Yet!!", "View Profiles Details", ERROR_MESSAGE);
             } else {
-                if (account.getRole().toString().equals(this.system.getRolesList().get("SystemAdminRole"))) {
+                if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("SystemAdminRole"))) {
                     this.roleComboBox.setSelectedItem("System Admin");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("AssetAgentRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("AssetAgentRole"))) {
                     this.roleComboBox.setSelectedItem("Asset Agent");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("AssetMarketAdminRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("AssetMarketAdminRole"))) {
                     this.roleComboBox.setSelectedItem("Asset Market Admin");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("CompanyAgentRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("CompanyAgentRole"))) {
                     this.roleComboBox.setSelectedItem("Company Agent");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("CryptoAgentRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("CryptoAgentRole"))) {
                     this.roleComboBox.setSelectedItem("Crypto Agent");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("CryptoMarketAdminRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("CryptoMarketAdminRole"))) {
                     this.roleComboBox.setSelectedItem("Crypto Market Admin");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("CustomerRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("CustomerRole"))) {
                     this.roleComboBox.setSelectedItem("Customer");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("ForexAgentRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("ForexAgentRole"))) {
                     this.roleComboBox.setSelectedItem("Forex Agent");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("ForexMarketAdminRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("ForexMarketAdminRole"))) {
                     this.roleComboBox.setSelectedItem("Forex Market Admin");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("MutualFundsAgentRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("MutualFundsAgentRole"))) {
                     this.roleComboBox.setSelectedItem("Mutual Funds Agent");
-                } else if (account.getRole().toString().equals(this.system.getRolesList().get("StockMarketAdminRole"))) {
+                } else if (selectedAccount.getRole().toString().equals(this.system.getRolesList().get("StockMarketAdminRole"))) {
                     this.roleComboBox.setSelectedItem("Stock Market Admin");
                 }
 
