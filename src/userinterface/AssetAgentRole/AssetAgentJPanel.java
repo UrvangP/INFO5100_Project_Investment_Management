@@ -237,6 +237,14 @@ public class AssetAgentJPanel extends javax.swing.JPanel {
         Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
             this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+            for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+                Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+                if (ongoing == this.selectedNetwork) {
+                    ongoing.setIsSelected(true);
+                } else {
+                    ongoing.setIsSelected(!true);
+                }
+            }
         }
     }
 
