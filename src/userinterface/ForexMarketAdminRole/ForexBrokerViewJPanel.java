@@ -72,6 +72,8 @@ public class ForexBrokerViewJPanel extends javax.swing.JPanel {
                             Object[] row = {
                                 ongoing2.getBrokerName(),
                                 set.getKey(),
+                                set.getValue().get("maxPrice"),
+                                set.getValue().get("quantity"),
                                 set.getValue().get("doc"),                                                          
                                 ongoing2.getAdmin().getUsername().toString(),
                                 set.getValue().get("brokercontact"),
@@ -103,11 +105,11 @@ public class ForexBrokerViewJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Broker Name", "Forex Name", "Date of creation", "Admin", "Contact", "Email"
+                "Broker Name", "Forex Name", "Price", "Units", "Date of creation", "Admin", "Contact", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
