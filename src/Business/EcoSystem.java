@@ -5,11 +5,9 @@
  */
 package Business;
 
-import Business.Customer.CustomerDirectory;
 import Business.Network.Network;
 import Business.Network.NetworkDirectory;
 import Business.Organization.Organization;
-import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.WorkQueue.WorkQueue;
@@ -26,7 +24,6 @@ import javax.swing.JPanel;
 public class EcoSystem extends Organization {
 
     private static EcoSystem business;
-    private CustomerDirectory customerDirectory;
     private NetworkDirectory networkList;
     private HashMap<String, String> roleList = new HashMap<String, String>() {
         {
@@ -45,8 +42,7 @@ public class EcoSystem extends Organization {
         }
     };
 
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, WorkQueue workQueue, NetworkDirectory networkList) {
-        this.customerDirectory = customerDirectory;
+    public EcoSystem( WorkQueue workQueue, NetworkDirectory networkList) {
         this.networkList = networkList;
     }
 
@@ -66,7 +62,6 @@ public class EcoSystem extends Organization {
 
     public EcoSystem() {
         super(null, null, null, null);
-        this.customerDirectory = new CustomerDirectory();
         this.networkList = new NetworkDirectory();
     }
 
