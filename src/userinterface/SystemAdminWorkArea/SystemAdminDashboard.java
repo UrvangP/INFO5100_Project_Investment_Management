@@ -12,6 +12,8 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.ForexMarketEnterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
+import Business.Organization.BrokersOrganization;
 import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
@@ -64,12 +66,18 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                         if (temp3 instanceof IndustriesOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((IndustriesOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((IndustriesOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         } else if (temp3 instanceof JewelleryOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((JewelleryOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((JewelleryOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         } else if (temp3 instanceof RealEstateOrganization) {
                             DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((RealEstateOrganization) temp3).getCompanyName().toString());
                             assetTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((RealEstateOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
                         }
                     }
 
@@ -83,14 +91,28 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                     ForexMarketEnterprise temp2 = (ForexMarketEnterprise) temp1;
                     DefaultMutableTreeNode forexTemp = new DefaultMutableTreeNode("Forex Market");
                     temp.add(forexTemp);
-                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
-                    forexTemp.add(nameTemp);
+
+                    for (int k = 0; k < temp2.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp3 = temp2.getOrganizationDirectory().getOrganizationList().get(k);
+                        if (temp3 instanceof BanksOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((BanksOrganization) temp3).getBankName().toString());
+                            forexTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((BanksOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
+                        } else if (temp3 instanceof BrokersOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((BrokersOrganization) temp3).getBrokerName().toString());
+                            forexTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((BrokersOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
+                        }
+                    }
+
                 } else if (temp1 instanceof StockMarketEnterprise) {
                     StockMarketEnterprise temp2 = (StockMarketEnterprise) temp1;
                     DefaultMutableTreeNode stockTemp = new DefaultMutableTreeNode("Stock Market");
                     temp.add(stockTemp);
                     DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
-                    nameTemp.add(nameTemp);
+                    stockTemp.add(nameTemp);
                 }
             }
         }

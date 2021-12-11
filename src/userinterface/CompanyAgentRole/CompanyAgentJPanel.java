@@ -13,10 +13,7 @@ import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
-import userinterface.StockMarketAdminRole.companyEditPanel;
 
 /**
  *
@@ -214,6 +211,9 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
                 orgs = ep.getOrganizationDirectory();
                 break;
             }
+        }
+        if(orgs == null){
+            return null;
         }
         
         for(Organization o: orgs.getOrganizationList()){
