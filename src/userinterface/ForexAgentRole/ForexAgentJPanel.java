@@ -33,8 +33,11 @@ public class ForexAgentJPanel extends javax.swing.JPanel {
         this.browsingJPanel = browsingJPanel;
         initComponents();
         this.userNameJLabel.setText(account.getUsername());
-
+        
         getNetwork();
+
+        ForexAgentDashboardJPanel forexAgentDashboardJPanel = new ForexAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(forexAgentDashboardJPanel);
     }
 
     public void getNetwork() {
