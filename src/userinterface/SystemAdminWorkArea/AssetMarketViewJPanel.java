@@ -5,6 +5,9 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import userinterface.AssetMarketAdminRole.AssetRealEstateJPanel;
+import userinterface.AssetMarketAdminRole.AssetIndustiesJPanel;
+import userinterface.AssetMarketAdminRole.AssetJewelleryJPanel;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
