@@ -6,7 +6,13 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.IndustriesOrganization;
+import Business.Organization.JewelleryOrganization;
+import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
+import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -24,6 +30,7 @@ public class AssetMarketViewJPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
     String isAssetAgent;
+
     public AssetMarketViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
@@ -41,18 +48,66 @@ public class AssetMarketViewJPanel extends javax.swing.JPanel {
         }
 
         if (ongoing != null) {
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
-                AssetIndustiesJPanel industriesPanel = new AssetIndustiesJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-                assetJTabbedPane.addTab("Industries", industriesPanel);
-            };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
-                AssetRealEstateJPanel realEstatePanel = new AssetRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-                assetJTabbedPane.addTab("Real Estate", realEstatePanel);
-            };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
-                AssetJewelleryJPanel jewellery = new AssetJewelleryJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-                assetJTabbedPane.addTab("Jewellery", jewellery);
-            };
+            if (!(this.account.getRole() instanceof AssetAgentRole) && ongoing != null) {
+
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
+                    AssetIndustiesJPanel industriesPanel = new AssetIndustiesJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                    assetJTabbedPane.addTab("Industries", industriesPanel);
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
+                    AssetRealEstateJPanel realEstatePanel = new AssetRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                    assetJTabbedPane.addTab("Real Estate", realEstatePanel);
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
+
+                    AssetJewelleryJPanel jewellery = new AssetJewelleryJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                    assetJTabbedPane.addTab("Jewellery", jewellery);
+                };
+            } else {
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Industries")) {
+                    for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                        Enterprise temp = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                        for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                            Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                            if (temp1 instanceof IndustriesOrganization) {
+                                if (((IndustriesOrganization) temp1).getAdmin().getUsername().toString() == this.account.getUsername().toString()) {
+                                    AssetIndustiesJPanel industriesPanel = new AssetIndustiesJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                                    assetJTabbedPane.addTab("Industries", industriesPanel);
+                                }
+                            }
+                        }
+                    }
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("RealEstate")) {
+                    for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                        Enterprise temp = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                        for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                            Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                            if (temp1 instanceof RealEstateOrganization) {
+                                if (((RealEstateOrganization) temp1).getAdmin().getUsername().toString() == this.account.getUsername().toString()) {
+                                    AssetRealEstateJPanel realEstatePanel = new AssetRealEstateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                                    assetJTabbedPane.addTab("Real Estate", realEstatePanel);
+                                }
+                            }
+                        }
+                    }
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("AssetMarket").get("Jewellery")) {
+                    for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                        Enterprise temp = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                        for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                            Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                            if (temp1 instanceof JewelleryOrganization) {
+                                if (((JewelleryOrganization) temp1).getAdmin().getUsername().toString() == this.account.getUsername().toString()) {
+                                    AssetJewelleryJPanel jewellery = new AssetJewelleryJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                                    assetJTabbedPane.addTab("Jewellery", jewellery);
+                                }
+                            }
+                        }
+                    }
+
+                };
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Please create an enterprise first!", "Setup", ERROR_MESSAGE);
         }
