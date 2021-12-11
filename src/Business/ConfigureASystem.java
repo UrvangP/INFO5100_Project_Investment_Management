@@ -23,7 +23,7 @@ public class ConfigureASystem {
         
         Employee employee = system.getEmployeeDirectory().createEmployee("RRH");
         
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "Qwerty@123", employee, new SystemAdminRole());
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         return system;
     }
     
