@@ -96,6 +96,11 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Crypto Market");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout cryptoMarketLabelLayout = new javax.swing.GroupLayout(cryptoMarketLabel);
         cryptoMarketLabel.setLayout(cryptoMarketLabelLayout);
@@ -107,7 +112,7 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
             cryptoMarketLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cryptoMarketLabelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -243,6 +248,12 @@ public class CustomerCreateOrderJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(customerForexMarketJPanel);
         
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        CustomerCryptoMarketJPanel customerAssetMarketJPanel = new CustomerCryptoMarketJPanel(this.ecosystem, account, jSplitPane,selectedNetwork);
+        this.jSplitPane.setRightComponent(customerAssetMarketJPanel);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel assetMarketLabel;

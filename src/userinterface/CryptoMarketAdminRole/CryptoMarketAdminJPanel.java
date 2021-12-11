@@ -74,7 +74,7 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
         AccountCreationJButton.setBackground(new java.awt.Color(200, 203, 178));
         AccountCreationJButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         AccountCreationJButton.setForeground(new java.awt.Color(67, 100, 100));
-        AccountCreationJButton.setText("Manage Stock Market");
+        AccountCreationJButton.setText("Manage Crypto Market");
         AccountCreationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AccountCreationJButtonActionPerformed(evt);

@@ -6,14 +6,16 @@
 package userinterface.CustomerRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.CryptoMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.CompaniesOrganization;
 import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
+import Business.Organization.WalletOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.StockBuyWorkQueue;
+import Business.WorkQueue.CryptoBuyWorkRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -26,10 +28,10 @@ import javax.swing.JSplitPane;
  *
  * @author urvang
  */
-public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
+public class CustomerCryptoCreateOrderJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CustomerStockViewOrderJPanel
+     * Creates new form CustomerCryptoCreateOrderJPanel
      */
     JSplitPane jSplitPane;
     UserAccount account;
@@ -38,7 +40,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
     UserAccount selectedMarketAgent;
     Organization selectedOraganization;
 
-    public CustomerStockCreateOrderJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane1, Network selectedNetwork) {
+    public CustomerCryptoCreateOrderJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane1, Network selectedNetwork) {
         this.jSplitPane = jSplitPane1;
         this.account = account;
         this.ecosystem = ecosystem;
@@ -57,8 +59,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        brandJLabel1 = new javax.swing.JLabel();
-        typeComboBox = new javax.swing.JComboBox<>();
         brandJLabel2 = new javax.swing.JLabel();
         companyNameComboBox = new javax.swing.JComboBox<>();
         serialNoJLabel1 = new javax.swing.JLabel();
@@ -72,35 +72,9 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
-        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
-        brandJLabel1.setText("Select Type (*):");
-
-        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Companies", "Mututal Funds" }));
-        typeComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                typeComboBoxItemStateChanged(evt);
-            }
-        });
-        typeComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                typeComboBoxFocusGained(evt);
-            }
-        });
-        typeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeComboBoxActionPerformed(evt);
-            }
-        });
-        typeComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                typeComboBoxPropertyChange(evt);
-            }
-        });
-
         brandJLabel2.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
         brandJLabel2.setForeground(new java.awt.Color(67, 100, 100));
-        brandJLabel2.setText("Company Name (*):");
+        brandJLabel2.setText("Coin Name (*):");
 
         companyNameComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -183,7 +157,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Create a Stock Investment");
+        jLabel2.setText("Create a Crypto Investment");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,13 +168,9 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 130, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(brandJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(brandJLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(typeComboBox, 0, 359, Short.MAX_VALUE)
-                            .addComponent(companyNameComboBox, 0, 359, Short.MAX_VALUE))
+                        .addComponent(companyNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 131, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -221,11 +191,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel2)
-                .addGap(53, 53, 53)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brandJLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(103, 103, 103)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(companyNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brandJLabel2))
@@ -255,7 +221,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -263,22 +229,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void typeComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typeComboBoxItemStateChanged
-        fetchData();
-    }//GEN-LAST:event_typeComboBoxItemStateChanged
-
-    private void typeComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_typeComboBoxFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_typeComboBoxFocusGained
-
-    private void typeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_typeComboBoxActionPerformed
-
-    private void typeComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_typeComboBoxPropertyChange
-        //        todo();
-    }//GEN-LAST:event_typeComboBoxPropertyChange
 
     private void companyNameComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_companyNameComboBoxItemStateChanged
         fetchFields();
@@ -326,17 +276,17 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
 
         Boolean valid = validateItem();
         if (valid) {
-            StockBuyWorkQueue newRequest = new StockBuyWorkQueue(
+            CryptoBuyWorkRequest newRequest = new CryptoBuyWorkRequest(
                 this.account,
                 this.selectedMarketAgent,
                 new Date(),
                 null,
-                StockBuyWorkQueue.StatusType.Initiated,
+                CryptoBuyWorkRequest.StatusType.Initiated,
                 Integer.valueOf(this.unitJField.getText().toString()) * Integer.valueOf(this.priceJField.getText().toString()),
                 Integer.valueOf(this.unitJField.getText().toString()),
                 new Date(),
                 this.companyNameComboBox.getSelectedItem().toString(),
-                this.typeComboBox.getSelectedItem().toString(),
+                "Wallet",
                 this.selectedOraganization
             );
 
@@ -350,19 +300,12 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         companyName.add("");
         for (int i = 0; i < this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ongoing = this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ongoing instanceof StockMarketEnterprise) {
-                StockMarketEnterprise temp = (StockMarketEnterprise) this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof CryptoMarketEnterprise) {
+                CryptoMarketEnterprise temp = (CryptoMarketEnterprise) this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
                     Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
-
-                    if (this.typeComboBox.getSelectedItem().toString().equals("Companies")) {
-                        if (temp1 instanceof CompaniesOrganization) {
-                            companyName.add(((CompaniesOrganization) temp1).getName());
-                        }
-                    } else if (this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
-                        if (temp1 instanceof MutualFundsOrganization) {
-                            companyName.add(((MutualFundsOrganization) temp1).getName());
-                        }
+                    if (temp1 instanceof WalletOrganization) {
+                        companyName.add(((WalletOrganization) temp1).getName());
                     }
                 }
             }
@@ -376,29 +319,18 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
     public void fetchFields() {
         for (int i = 0; i < this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ongoing = this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ongoing instanceof StockMarketEnterprise) {
-                StockMarketEnterprise temp = (StockMarketEnterprise) this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
+            if (ongoing instanceof CryptoMarketEnterprise) {
+                CryptoMarketEnterprise temp = (CryptoMarketEnterprise) this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
                     Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
-                    if (this.typeComboBox.getSelectedItem().toString().equals("Companies")) {
-                        if (temp1 instanceof CompaniesOrganization) {
-                            if (((CompaniesOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
-                                selectedOraganization = temp1;
-                                selectedMarketAgent = ((CompaniesOrganization) temp1).getAdmin();
-                                priceJField.setText(String.valueOf(((CompaniesOrganization) temp1).getStockPrice()));
-                                break;
-                            }
+                    if (temp1 instanceof WalletOrganization) {
+                        if (((WalletOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
+                            selectedOraganization = temp1;
+                            selectedMarketAgent = ((WalletOrganization) temp1).getAdmin();
+                            priceJField.setText(String.valueOf(((WalletOrganization) temp1).getPrice()));
+                            break;
                         }
-                    } else if (this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
-                        if (temp1 instanceof MutualFundsOrganization) {
-                            if (((MutualFundsOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
-                                unitJField.setText("1");
-                                unitJField.setEnabled(false);
-                                selectedOraganization = temp1;
-                                selectedMarketAgent = ((MutualFundsOrganization) temp1).getAdmin();
-                                break;
-                            }
-                        }
+                        
                     } 
                     
                 }
@@ -411,7 +343,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         if (this.companyNameComboBox.getSelectedItem() == null) {
             errorMEssage += "Select Company to proceed! \n";
         }
-        if (!this.unitJField.getText().matches("[0-9]+") && !this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
+        if (!this.unitJField.getText().matches("[0-9]+")) {
             errorMEssage += "Units should be a number! \n";
         }
         if (!this.priceJField.getText().matches("[0-9]+")) {
@@ -428,7 +360,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JLabel brandJLabel2;
     private javax.swing.JComboBox<String> companyNameComboBox;
     private javax.swing.JButton jButton1;
@@ -437,7 +368,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField priceJField;
     private javax.swing.JLabel serialNoJLabel1;
     private javax.swing.JLabel serialNoJLabel2;
-    private javax.swing.JComboBox<String> typeComboBox;
     private javax.swing.JTextField unitJField;
     // End of variables declaration//GEN-END:variables
 }
