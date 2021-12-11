@@ -202,6 +202,8 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setText("DASHBOARD");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -211,7 +213,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addComponent(jLabel3)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,8 +229,8 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-        AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
+        AssetMarketDashboardJPanel assetMarketDashboardJPanel = new AssetMarketDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(assetMarketDashboardJPanel);
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void assetJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assetJButtonActionPerformed
@@ -266,8 +268,8 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             }
             enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
             getLeftButtonStatus();
-            AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-            this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
+            AssetMarketDashboardJPanel assetMarketDashboardJPanel = new AssetMarketDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(assetMarketDashboardJPanel);
         }
     }
 
