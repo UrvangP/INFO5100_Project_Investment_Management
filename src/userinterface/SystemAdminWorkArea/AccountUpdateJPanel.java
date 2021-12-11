@@ -153,6 +153,7 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
         confirmJPasswordField.setBackground(new java.awt.Color(238, 238, 238));
         confirmJPasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        emailIDJField.setEditable(false);
         emailIDJField.setBackground(new java.awt.Color(238, 238, 238));
         emailIDJField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         emailIDJField.setText("Enter email id");
@@ -353,7 +354,7 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
                 String password = new String(JPasswordField.getPassword());
                 String confirmPassword = new String(confirmJPasswordField.getPassword());
                 if (password.equals(confirmPassword)) {
-                    if (this.system.getUserAccountDirectory().checkIfUsernameIsUnique(this.emailIDJField.getText())) {
+//                    if (this.system.getUserAccountDirectory().checkIfUsernameIsUnique(this.emailIDJField.getText())) {
                         Role role;
                         Employee employee = new Employee();
                         employee.setName(this.emailIDJField.getText());
@@ -385,9 +386,9 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
                         temp1.sendMail();
                         JOptionPane.showMessageDialog(this, "User updated successfully!!", "Register", INFORMATION_MESSAGE);
 
-                    } else {
-                        JOptionPane.showMessageDialog(this, "EmailId already used!!", "Register", ERROR_MESSAGE);
-                    }
+//                    } else {
+//                        JOptionPane.showMessageDialog(this, "EmailId already used!!", "Register", ERROR_MESSAGE);
+//                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Password and Confirm Password should match!", "Register", ERROR_MESSAGE);
                 }

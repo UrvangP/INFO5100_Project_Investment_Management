@@ -31,6 +31,10 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         this.browsingJPanel = browsingJPanel;
         initComponents();
         checkIfAssetAgent();
+
+        if ((this.account.getRole() instanceof AssetAgentRole)) {
+            viewJLabel1.setVisible(false);
+        }
     }
 
     public void checkIfAssetAgent() {

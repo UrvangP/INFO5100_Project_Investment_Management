@@ -69,13 +69,13 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         Boolean isStockFound = false;
         Boolean isCryptoFound = false;
         for (int i = 0; i < this.enterpriseSelection.size(); i++) {
-            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise && ((AssetMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isAssetFound = true;
-            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise && ((CryptoMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isCryptoFound = true;
-            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise && ((ForexMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isForexFound = true;
-            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise && ((StockMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isStockFound = true;
             }
         }

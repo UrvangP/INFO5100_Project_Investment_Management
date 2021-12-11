@@ -6,6 +6,7 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -27,6 +28,10 @@ public class AssetRealEstateJPanel extends javax.swing.JPanel {
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         initComponents();
+        
+         if ((this.account.getRole() instanceof AssetAgentRole)) {
+            viewJLabel1.setVisible(false);
+        }
     }
 
     /**
