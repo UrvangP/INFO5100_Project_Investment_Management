@@ -151,18 +151,13 @@ public class CustomerStockMarketJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //CustomerStockEditOrderJPanel customerAssetEditOrderJPanel = new CustomerAssetEditOrderJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
-        //this.jSplitPane1.setRightComponent(customerAssetEditOrderJPanel);
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         CustomerStockCreateOrderJPanel customerAssetViewOrderJPanel = new CustomerStockCreateOrderJPanel(this.ecosystem, account, jSplitPane1, selectedNetwork);
@@ -175,14 +170,19 @@ public class CustomerStockMarketJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        CustomerRequestViewJPanel customerRequestViewJPanel = new CustomerRequestViewJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        CustomerStockRequestHistory customerRequestViewJPanel = new CustomerStockRequestHistory(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane1.setRightComponent(customerRequestViewJPanel);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        CustomerRequestSellJPanel customerRequestSellJPanel = new CustomerRequestSellJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        CustomerStockSell customerRequestSellJPanel = new CustomerStockSell(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane1.setRightComponent(customerRequestSellJPanel);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        //CustomerStockEditOrderJPanel customerAssetEditOrderJPanel = new CustomerAssetEditOrderJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        //this.jSplitPane1.setRightComponent(customerAssetEditOrderJPanel);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

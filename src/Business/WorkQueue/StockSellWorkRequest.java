@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author urvang
  */
-public class StockBuyWorkQueue extends WorkRequest {
+public class StockSellWorkRequest extends WorkRequest {
     public enum StatusType {
         Initiated("INITIATED"),
         Completed("COMPLETED"),
@@ -44,11 +44,11 @@ public class StockBuyWorkQueue extends WorkRequest {
     private String assetName;
     private Organization oraganization;
     
-    public StockBuyWorkQueue(UserAccount raisedBy,
+    public StockSellWorkRequest(UserAccount raisedBy,
             UserAccount raisedTo,
             Date requestDate,
             Date resolveDate,
-            StockBuyWorkQueue.StatusType status,
+            StockSellWorkRequest.StatusType status,
             Integer price,
             Integer quantity,
             Date modifiedAt,
@@ -120,5 +120,4 @@ public class StockBuyWorkQueue extends WorkRequest {
     public void setOraganization(Organization oraganization) {
         this.oraganization = oraganization;
     }
-
 }

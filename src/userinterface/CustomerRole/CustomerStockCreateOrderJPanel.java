@@ -358,7 +358,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                         if (temp1 instanceof CompaniesOrganization) {
                             companyName.add(((CompaniesOrganization) temp1).getName());
                         }
-                    } else if (this.typeComboBox.getSelectedItem().toString().equals("MutualFunds")) {
+                    } else if (this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
                         if (temp1 instanceof MutualFundsOrganization) {
                             companyName.add(((MutualFundsOrganization) temp1).getName());
                         }
@@ -383,16 +383,18 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                         if (temp1 instanceof CompaniesOrganization) {
                             if (((CompaniesOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
                                 selectedOraganization = temp1;
+                                selectedMarketAgent = ((CompaniesOrganization) temp1).getAdmin();
                                 priceJField.setText(String.valueOf(((CompaniesOrganization) temp1).getStockPrice()));
                                 break;
                             }
                         }
-                    } else if (this.typeComboBox.getSelectedItem().toString().equals("MutualFunds")) {
+                    } else if (this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
                         if (temp1 instanceof MutualFundsOrganization) {
                             if (((MutualFundsOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
                                 unitJField.setText("0");
                                 unitJField.setEnabled(false);
                                 selectedOraganization = temp1;
+                                selectedMarketAgent = ((MutualFundsOrganization) temp1).getAdmin();
                                 break;
                             }
                         }
@@ -408,7 +410,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         if (this.companyNameComboBox.getSelectedItem() == null) {
             errorMEssage += "Select Company to proceed! \n";
         }
-        if (!this.unitJField.getText().matches("[0-9]+") && !this.typeComboBox.getSelectedItem().toString().equals("MutualFunds")) {
+        if (!this.unitJField.getText().matches("[0-9]+") && !this.typeComboBox.getSelectedItem().toString().equals("Mutual Funds")) {
             errorMEssage += "Units should be a number! \n";
         }
         if (!this.priceJField.getText().matches("[0-9]+")) {
