@@ -18,6 +18,7 @@ import Business.Role.ForexMarketAdminRole;
 import Business.Role.MutualFundsAgentRole;
 import Business.Role.Role;
 import Business.Role.StockMarketAdminRole;
+import Business.SendEmail;
 import Business.UserAccount.UserAccount;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -380,6 +381,8 @@ public class AccountUpdateJPanel extends javax.swing.JPanel {
                         }
                         this.selectedAccount.setPassword(password);
                         this.selectedAccount.setUsername(this.emailIDJField.getText());
+                        SendEmail temp1 = new SendEmail("prathameshnemade95@gmail.com", "Welcome!!", "Hi " + this.emailIDJField.getText() + ", Your account was updated successfully for role " + value +" !");
+                        temp1.sendMail();
                         JOptionPane.showMessageDialog(this, "User updated successfully!!", "Register", INFORMATION_MESSAGE);
 
                     } else {
