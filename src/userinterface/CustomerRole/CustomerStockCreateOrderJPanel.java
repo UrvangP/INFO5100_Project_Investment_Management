@@ -64,9 +64,9 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         serialNoJLabel1 = new javax.swing.JLabel();
         unitJField = new javax.swing.JTextField();
         serialNoJLabel2 = new javax.swing.JLabel();
-        priceJField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        priceJField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -76,7 +76,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Select Type (*):");
 
-        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Companies", "Mututal Funds" }));
+        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Companies", "Mutual Funds" }));
         typeComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 typeComboBoxItemStateChanged(evt);
@@ -150,27 +150,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         serialNoJLabel2.setForeground(new java.awt.Color(67, 100, 100));
         serialNoJLabel2.setText("Price (*):");
 
-        priceJField.setEditable(false);
-        priceJField.setBackground(new java.awt.Color(238, 238, 238));
-        priceJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        priceJField.setText("Enter here");
-        priceJField.setToolTipText("Click to enter your name.");
-        priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        priceJField.setEnabled(false);
-        priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                priceJFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                priceJFieldnameChangeHandler(evt);
-            }
-        });
-        priceJField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceJFieldActionPerformed(evt);
-            }
-        });
-
         jButton1.setBackground(new java.awt.Color(200, 203, 178));
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(67, 100, 100));
@@ -184,6 +163,25 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Create a Stock Investment");
+
+        priceJField.setBackground(new java.awt.Color(238, 238, 238));
+        priceJField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        priceJField.setText("Enter here");
+        priceJField.setToolTipText("Click to enter your name.");
+        priceJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        priceJField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                priceJFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                priceJFieldnameChangeHandler(evt);
+            }
+        });
+        priceJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceJFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,10 +208,10 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                     .addComponent(serialNoJLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(serialNoJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(unitJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -239,7 +237,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                     .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -310,18 +308,6 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_unitJFieldActionPerformed
 
-    private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceJFieldFocusGained
-
-    private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceJFieldnameChangeHandler
-
-    private void priceJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceJFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceJFieldActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Boolean valid = validateItem();
@@ -344,6 +330,18 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Investment leveraged successfully!", "Investment", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void priceJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldFocusGained
+
+    private void priceJFieldnameChangeHandler(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceJFieldnameChangeHandler
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldnameChangeHandler
+
+    private void priceJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceJFieldActionPerformed
 
     public void fetchData() {
         ArrayList<String> companyName = new ArrayList<>();
@@ -394,6 +392,7 @@ public class CustomerStockCreateOrderJPanel extends javax.swing.JPanel {
                             if (((MutualFundsOrganization) temp1).getName().equals(this.companyNameComboBox.getSelectedItem().toString())) {
                                 unitJField.setText("1");
                                 unitJField.setEnabled(false);
+                                priceJField.setEnabled(true);
                                 selectedOraganization = temp1;
                                 selectedMarketAgent = ((MutualFundsOrganization) temp1).getAdmin();
                                 break;

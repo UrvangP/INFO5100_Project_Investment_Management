@@ -193,6 +193,8 @@ public class MutualFundsAgentJPanel extends javax.swing.JPanel {
 
     private void AccountCreationJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountCreationJButton1ActionPerformed
         // TODO add your handling code here:
+        MutualFundsAllocation allocation = new MutualFundsAllocation(ecosystem, account);
+        this.jSplitPane.setRightComponent(allocation);
     }//GEN-LAST:event_AccountCreationJButton1ActionPerformed
 
      public MutualFundsOrganization getOrganization(){
