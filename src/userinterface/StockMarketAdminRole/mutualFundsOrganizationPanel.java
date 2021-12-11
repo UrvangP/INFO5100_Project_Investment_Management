@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.CompanyAgentRole;
@@ -21,6 +22,7 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -45,6 +47,8 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     stockMarketDashboard parent;
     ArrayList<Organization> marketData;
     ArrayList<Organization> selectedFunds;
+    
+    ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
     
     public mutualFundsOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
         
@@ -414,23 +418,26 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
         String creationDate = dateOfCreationJLabel.getText();
-
-        UserAccount createdBy = account;
-        UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
-
-        //Company comp = new Company(companyName, companyCountry, createdBy, admin);
-
-        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date(), companyCountry, selectedFunds);
-            }
-        }
         
-        parent.parseList();
+        if(validateItem()){
 
-        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+            UserAccount createdBy = account;
+            UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
+
+            //Company comp = new Company(companyName, companyCountry, createdBy, admin);
+
+            for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ep instanceof StockMarketEnterprise) {
+                    ep.getOrganizationDirectory().createMutualFundOrganization(companyName, admin, new Date(), companyCountry, selectedFunds);
+                }
+            }
+
+            parent.parseList();
+
+            this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
+            JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void addJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButton1ActionPerformed
@@ -515,16 +522,32 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     
     public void setStockAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
-        this.selectedDropDown = new ArrayList<>();
-
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
-            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
-            if (ongoing.getRole() instanceof MutualFundsAgentRole) {
-                this.selectedDropDown.add(ongoing);
-                asset.add(ongoing.getUsername());
+            UserAccount ongoing1 = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing1.getRole() instanceof MutualFundsAgentRole) {
+                Boolean found = false;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof StockMarketEnterprise) {
+                            for (int p = 0; p < temp.getOrganizationDirectory().getOrganizationList().size(); p++) {
+                                Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(p);
+                                if (temp1 instanceof MutualFundsOrganization) {
+                                    MutualFundsOrganization temp3 = ((MutualFundsOrganization) temp1);
+                                    if (temp3.getAdmin() == ongoing1) {
+                                        found = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!found) {
+                    this.assetsAdminUser.add(ongoing1);
+                    asset.add(ongoing1.getUsername());
+                }
             }
         }
-
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
@@ -562,6 +585,24 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         jList1.setModel(model);
         jList2.setModel(model1);
         
+    }
+    
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.jTextField1.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if(jList2.getModel().getSize()==0){
+            errorMEssage += "Stock list cannot be empty! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Real Estate Edit", ERROR_MESSAGE);
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

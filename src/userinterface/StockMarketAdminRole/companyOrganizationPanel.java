@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -45,6 +46,8 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     UserAccount selectedUser;
     ArrayList<UserAccount> selectedDropDown;
     stockMarketDashboard parent;
+    
+    ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
     
     public companyOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
         
@@ -330,22 +333,23 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         String price = jTextField2.getText();
         String revenue = jTextField3.getText();
         
-        UserAccount createdBy = account;
-        UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
+        if(validateItem()){      
         
-        //Company comp = new Company(companyName, companyCountry, createdBy, admin);
-        
-        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ep instanceof StockMarketEnterprise) {
-                ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date(), companyCountry, Integer.parseInt(price), Long.parseLong(revenue));
-            }
-        }
+            UserAccount createdBy = account;
+            UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
 
-        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
-        
-        parent.parseList();
+            for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ep instanceof StockMarketEnterprise) {
+                    ep.getOrganizationDirectory().createCompanyOrganization(companyName, admin, new Date(), companyCountry, Integer.parseInt(price), Long.parseLong(revenue));
+                }
+            }
+
+            this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
+            JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+
+            parent.parseList();
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     public void _adminChnageHandler() {
@@ -358,16 +362,32 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     
     public void setStockAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
-        this.selectedDropDown = new ArrayList<>();
-
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
-            UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
-            if (ongoing.getRole() instanceof CompanyAgentRole) {
-                this.selectedDropDown.add(ongoing);
-                asset.add(ongoing.getUsername());
+            UserAccount ongoing1 = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
+            if (ongoing1.getRole() instanceof CompanyAgentRole) {
+                Boolean found = false;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof StockMarketEnterprise) {
+                            for (int p = 0; p < temp.getOrganizationDirectory().getOrganizationList().size(); p++) {
+                                Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(p);
+                                if (temp1 instanceof CompaniesOrganization) {
+                                    CompaniesOrganization temp3 = ((CompaniesOrganization) temp1);
+                                    if (temp3.getAdmin() == ongoing1) {
+                                        found = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!found) {
+                    this.assetsAdminUser.add(ongoing1);
+                    asset.add(ongoing1.getUsername());
+                }
             }
         }
-
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
@@ -376,6 +396,27 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     private void initData(){
         dateOfCreationJLabel.setText(new Date().toString());
         createdByJLabel.setText(account.getUsername());
+    }
+    
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.jTextField1.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if (!this.jTextField3.getText().matches("[0-9]+")) {
+            errorMEssage += "Revenue should be a number! \n";
+        }
+        if (!this.jTextField2.getText().matches("[0-9]+")) {
+            errorMEssage += "Stock Price should be a number! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Real Estate Edit", ERROR_MESSAGE);
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

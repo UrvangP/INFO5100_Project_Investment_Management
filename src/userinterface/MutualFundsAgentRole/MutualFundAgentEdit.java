@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -388,15 +389,13 @@ public class MutualFundAgentEdit extends javax.swing.JPanel {
         String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
 
-        //UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
+        if(validateItem()){
+            org.setName(companyName);
+            org.setCountry(companyCountry);
+            org.setCompanyStocks(tempFundsData);
 
-        //Company comp = new Company(companyName, companyCountry, createdBy, admin);
-
-        org.setName(companyName);
-        org.setCountry(companyCountry);
-        org.setCompanyStocks(tempFundsData);
-
-        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -586,6 +585,24 @@ public class MutualFundAgentEdit extends javax.swing.JPanel {
             }
         }
         
+    }
+    
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.jTextField1.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if(jList2.getModel().getSize()==0){
+            errorMEssage += "Stock list cannot be empty! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Real Estate Edit", ERROR_MESSAGE);
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -38,8 +38,7 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
         this.account = account;
         this.browsingJPanel = browsingJPanel;
         
-        Network ongoing = null;
-        boolean check = false;
+        userNameJLabel.setText(account.getUsername());
         
         getNetwork();
         getLeftButtonStatus();

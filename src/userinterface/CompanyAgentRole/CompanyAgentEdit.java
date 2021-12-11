@@ -16,6 +16,7 @@ import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -347,13 +348,15 @@ public class CompanyAgentEdit extends javax.swing.JPanel {
         String price = jTextField2.getText();
         String revenue = jTextField3.getText();
 
-        org.setName(companyName);
-        org.setCountry(companyCountry);
-        org.setStockPrice(Integer.parseInt(price));
-        org.setRevenue(Long.parseLong(revenue));
+        if(validateItem()){
+            org.setName(companyName);
+            org.setCountry(companyCountry);
+            org.setStockPrice(Integer.parseInt(price));
+            org.setRevenue(Long.parseLong(revenue));
 
-        this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
-        JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+            this.ecosystem.generateBrowsingHistoryEnterprise(this.browsingJPanel);
+            JOptionPane.showMessageDialog(this, "Organization edited successfully!", "Add Organization", INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -395,6 +398,27 @@ public class CompanyAgentEdit extends javax.swing.JPanel {
         String[] assetSDropdown = asset.toArray(new String[asset.size()]);
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(assetSDropdown);
         this.adminComboBox.setModel(brandSDropdownModel);
+    }
+    
+    public Boolean validateItem() {
+        String errorMEssage = "";
+        if (this.adminComboBox.getSelectedItem() == null) {
+            errorMEssage += "Select Admin to proceed! \n";
+        }
+        if (!this.jTextField1.getText().matches("[a-zA-Z0-9]+")) {
+            errorMEssage += "Invalid Company Name! \n";
+        }
+        if (!this.jTextField3.getText().matches("[0-9]+")) {
+            errorMEssage += "Revenue should be a number! \n";
+        }
+        if (!this.jTextField2.getText().matches("[0-9]+")) {
+            errorMEssage += "Stock Price should be a number! \n";
+        }
+        if (errorMEssage.equals("")) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(this, errorMEssage, "Real Estate Edit", ERROR_MESSAGE);
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
