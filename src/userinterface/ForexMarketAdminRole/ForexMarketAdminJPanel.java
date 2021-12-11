@@ -247,8 +247,8 @@ public class ForexMarketAdminJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-        ForexAgentDashboardJPanel forexAgentDashboardJPanel = new ForexAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane.setRightComponent(forexAgentDashboardJPanel);
+        ForexMarketDashboardJPanel forexMarketDashboardJPanel = new ForexMarketDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(forexMarketDashboardJPanel);
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void forexJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forexJButtonActionPerformed
@@ -286,8 +286,8 @@ public class ForexMarketAdminJPanel extends javax.swing.JPanel {
             }
             enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
             getLeftButtonStatus();
-            ForexAgentDashboardJPanel forexAgentDashboardJPanel = new ForexAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-            this.jSplitPane.setRightComponent(forexAgentDashboardJPanel);
+            ForexMarketDashboardJPanel forexMarketDashboardJPanel = new ForexMarketDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(forexMarketDashboardJPanel);
         }
     }
 
