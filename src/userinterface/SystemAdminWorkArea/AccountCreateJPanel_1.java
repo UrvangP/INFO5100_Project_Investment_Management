@@ -19,6 +19,7 @@ import Business.Role.MutualFundsAgentRole;
 import Business.Role.Role;
 import Business.Role.StockMarketAdminRole;
 import Business.Role.SystemAdminRole;
+import Business.SendEmail;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -220,6 +221,9 @@ public class AccountCreateJPanel_1 extends javax.swing.JPanel {
                         } else {
                             role = new CustomerRole();
                         }
+                        
+                        SendEmail temp1 = new SendEmail("prathameshnemade95@gmail.com", "Welcome!!", "Hi " + this.emailIDJField.getText() + ", Your account was updated successfully for role " + value +" !");
+                        temp1.sendMail();
                         this.system.getUserAccountDirectory().createUserAccount(this.emailIDJField.getText(), password, employee, role);
                         JOptionPane.showMessageDialog(this, "User registered successfully!!", "Register", INFORMATION_MESSAGE);
 //                        this.emailIDJField.setText("Enter email id");
