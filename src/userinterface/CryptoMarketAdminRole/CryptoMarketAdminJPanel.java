@@ -6,7 +6,15 @@
 package userinterface.CryptoMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import userinterface.StockMarketAdminRole.stockMarketAdminHome;
 
@@ -19,6 +27,10 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
     EcoSystem ecosystem;
     UserAccount account;
     JPanel browsingJPanel;
+    
+    ArrayList<Network> allNetworks = new ArrayList<>();
+    Network selectedNetwork;
+    ArrayList<Enterprise> enterpriseSelection = new ArrayList<>();
 
     public CryptoMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
@@ -27,8 +39,50 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
         this.account = account;
         this.browsingJPanel = browsingJPanel;
         
+        userNameJLabel.setText(account.getUsername());
+        
+        getNetwork();
+        getLeftButtonStatus();
+        
         cryptoMarketAdminHome home = new cryptoMarketAdminHome(ecosystem, account);
         jSplitPane.setRightComponent(home);
+    }
+    
+    public void getNetwork() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            asset.add(ongoing1.getNName());
+            this.allNetworks.add(ongoing1);
+            enterpriseSelection = ongoing1.getEnterpriseDirectory().getEnterpriseDir();
+        }
+        String[] netwrokSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(netwrokSDropdown);
+        this.networkComboBox.setModel(brandSDropdownModel);
+
+    }
+
+    public void getLeftButtonStatus() {
+        Boolean isAssetFound = false;
+        Boolean isForexFound = false;
+        Boolean isStockFound = false;
+        Boolean isCryptoFound = false;
+        for (int i = 0; i < this.enterpriseSelection.size(); i++) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise && ((AssetMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isAssetFound = true;
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise && ((CryptoMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isCryptoFound = true;
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise && ((ForexMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isForexFound = true;
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise && ((StockMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isStockFound = true;
+            }
+        }
+        if (isCryptoFound) {
+            this.AccountCreationJButton.setVisible(true);
+        } else {
+            this.AccountCreationJButton.setVisible(!true);
+        }
     }
 
     /**
@@ -46,6 +100,8 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
         AccountCreationJButton = new javax.swing.JButton();
+        brandJLabel1 = new javax.swing.JLabel();
+        networkComboBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -81,6 +137,10 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
             }
         });
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Select Network (*):");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -91,9 +151,11 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
                     .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel1)
+                            .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 15, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -104,11 +166,15 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userNameJLabel)
+                .addGap(33, 33, 33)
+                .addComponent(brandJLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addContainerGap(410, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -161,11 +227,13 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AccountCreationJButton;
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JComboBox<String> networkComboBox;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }

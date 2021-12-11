@@ -6,10 +6,15 @@
 package userinterface.StockMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
+import Business.Enterprise.CryptoMarketEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
 import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +26,10 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
     EcoSystem ecosystem;
     UserAccount account;
     JPanel browsingJPanel;
+    
+    ArrayList<Network> allNetworks = new ArrayList<>();
+    Network selectedNetwork;
+    ArrayList<Enterprise> enterpriseSelection = new ArrayList<>();
 
     public StockMarketAdminJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         initComponents();
@@ -32,29 +41,49 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
         Network ongoing = null;
         boolean check = false;
         
-        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
-            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
-            if (ongoing1.getIsSelected()) {
-                ongoing = ongoing1;
-            }
-        }
-        
-        if(ongoing !=null)
-            for(Enterprise e: ongoing.getEnterpriseDirectory().getEnterpriseDir()){
-                if(e instanceof StockMarketEnterprise){
-                    StockMarketEnterprise sme = (StockMarketEnterprise) e;
-                    if(sme.getAdmin().getUsername().equals(account.getUsername()))
-                        check = true;
-                }
-            }
-        
-        if(!check){
-            AccountCreationJButton.setEnabled(check);
-        }
+        getNetwork();
+        getLeftButtonStatus();
         
         stockMarketAdminHome home = new stockMarketAdminHome(ecosystem, account);
         jSplitPane.setRightComponent(home);
         
+    }
+    
+    public void getNetwork() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            asset.add(ongoing1.getNName());
+            this.allNetworks.add(ongoing1);
+            enterpriseSelection = ongoing1.getEnterpriseDirectory().getEnterpriseDir();
+        }
+        String[] netwrokSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(netwrokSDropdown);
+        this.networkComboBox.setModel(brandSDropdownModel);
+
+    }
+
+    public void getLeftButtonStatus() {
+        Boolean isAssetFound = false;
+        Boolean isForexFound = false;
+        Boolean isStockFound = false;
+        Boolean isCryptoFound = false;
+        for (int i = 0; i < this.enterpriseSelection.size(); i++) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise && ((AssetMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isAssetFound = true;
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise && ((CryptoMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isCryptoFound = true;
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise && ((ForexMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isForexFound = true;
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise && ((StockMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isStockFound = true;
+            }
+        }
+        if (isStockFound) {
+            this.AccountCreationJButton.setVisible(true);
+        } else {
+            this.AccountCreationJButton.setVisible(!true);
+        }
     }
 
     /**
@@ -72,6 +101,8 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
         userNameJLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
         AccountCreationJButton = new javax.swing.JButton();
+        brandJLabel1 = new javax.swing.JLabel();
+        networkComboBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -106,21 +137,24 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
             }
         });
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Select Network (*):");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(userNameJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(brandJLabel1)
+                    .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +163,15 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userNameJLabel)
+                .addGap(38, 38, 38)
+                .addComponent(brandJLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(586, Short.MAX_VALUE))
+                .addContainerGap(483, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -194,12 +232,14 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AccountCreationJButton;
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JComboBox<String> networkComboBox;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }
