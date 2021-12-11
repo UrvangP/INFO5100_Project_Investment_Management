@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.SystemAdminWorkArea;
+package userinterface.AssetMarketAdminRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.IndustriesOrganization;
 import Business.Organization.Organization;
-import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import java.util.HashMap;
 import javax.swing.JPanel;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author prathameshnemade
  */
-public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
+public class AssetIndustryViewJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
@@ -30,7 +30,7 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
     Network ongoinNetwork;
     Organization selectedOrganization;
 
-    public AssetRealEstateViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public AssetIndustryViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
@@ -56,11 +56,11 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
                 for (int j = 0; j < ongoing.getOrganizationDirectory().getOrganizationList().size(); j++) {
 
                     selectedOrganization = ongoing.getOrganizationDirectory().getOrganizationList().get(j);
-                    if (selectedOrganization instanceof RealEstateOrganization) {
-                        RealEstateOrganization ongoing2 = (RealEstateOrganization) selectedOrganization;
+                    if (selectedOrganization instanceof IndustriesOrganization) {
+                        IndustriesOrganization ongoing2 = (IndustriesOrganization) selectedOrganization;
 //                        allJewellery.add(ongoing2);
                         for (HashMap.Entry<String, HashMap<String, Object>> set
-                                : ongoing2.getEstates().entrySet()) {
+                                : ongoing2.getIndustries().entrySet()) {
 
                             Object[] row = {
                                 ongoing2.getCompanyName(),
@@ -69,7 +69,6 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
                                 set.getValue().get("quantity"),
                                 set.getValue().get("doc"),
                                 ongoing2.getAdmin().getUsername().toString(),
-                                set.getValue().get("area"),
                                 set.getValue().get("location")
                             };
                             model.addRow(row);
@@ -96,17 +95,17 @@ public class AssetRealEstateViewJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company Name", "Real Estate Name", "Price", "Units", "Date of creation", "Admin", "Area", "Location"
+                "Company Name", "Industry Name", "Price", "Units", "Date of creation", "Admin", "Location"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -69,13 +69,13 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         Boolean isStockFound = false;
         Boolean isCryptoFound = false;
         for (int i = 0; i < this.enterpriseSelection.size(); i++) {
-            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise && ((AssetMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isAssetFound = true;
-            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise && ((CryptoMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isCryptoFound = true;
-            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise && ((ForexMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isForexFound = true;
-            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise) {
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise && ((StockMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
                 isStockFound = true;
             }
         }
@@ -84,22 +84,6 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         } else {
             this.assetJButton.setVisible(!true);
         }
-//        if (isForexFound) {
-//            this.forexJButton.setVisible(true);
-//        } else {
-//            this.forexJButton.setVisible(!true);
-//        }
-//
-//        if (isStockFound) {
-//            this.stockJButton.setVisible(true);
-//        } else {
-//            this.stockJButton.setVisible(!true);
-//        }
-//        if (isCryptoFound) {
-//            this.cryptoJButton.setVisible(true);
-//        } else {
-//            this.cryptoJButton.setVisible(!true);
-//        }
     }
 
     /**
@@ -122,6 +106,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -186,7 +171,7 @@ public class AssetMarketAdminJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(assetJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                    .addComponent(assetJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(networkComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()

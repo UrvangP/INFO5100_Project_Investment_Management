@@ -10,9 +10,9 @@ import java.util.Date;
 
 /**
  *
- * @author ronak
+ * @author prathameshnemade
  */
-public class ForexBuyWorkRequest extends WorkRequest{
+public class ForexSellWorkRequest extends WorkRequest {
 
     public enum StatusType {
         Initiated("INITIATED"),
@@ -35,16 +35,16 @@ public class ForexBuyWorkRequest extends WorkRequest{
             return value;
         }
     }
-    
+
     private StatusType statusType;
     private Integer price;
     private Integer quantity;
     private Date modifiedAt;
     private String companyName;
-    private String forexName;
+    private String assetName;
     private Object oraganization;
 
-    public ForexBuyWorkRequest(
+    public ForexSellWorkRequest(
             UserAccount raisedBy,
             UserAccount raisedTo,
             Date requestDate,
@@ -62,66 +62,106 @@ public class ForexBuyWorkRequest extends WorkRequest{
         this.quantity = quantity;
         this.modifiedAt = modifiedAt;
         this.companyName = companyName;
-        this.forexName = forexName;
+        this.assetName = assetName;
         this.oraganization = oraganization;
     }
 
+    /**
+     * @return the statusType
+     */
     public StatusType getStatusType() {
         return statusType;
     }
 
+    /**
+     * @param statusType the statusType to set
+     */
     public void setStatusType(StatusType statusType) {
         this.statusType = statusType;
     }
 
+    /**
+     * @return the price
+     */
     public Integer getPrice() {
         return price;
     }
 
+    /**
+     * @param price the price to set
+     */
     public void setPrice(Integer price) {
         this.price = price;
     }
 
+    /**
+     * @return the quantity
+     */
     public Integer getQuantity() {
         return quantity;
     }
 
+    /**
+     * @param quantity the quantity to set
+     */
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * @return the modifiedAt
+     */
     public Date getModifiedAt() {
         return modifiedAt;
     }
 
+    /**
+     * @param modifiedAt the modifiedAt to set
+     */
     public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 
+    /**
+     * @return the companyName
+     */
     public String getCompanyName() {
         return companyName;
     }
 
+    /**
+     * @param companyName the companyName to set
+     */
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
-    public String getForexName() {
-        return forexName;
+    /**
+     * @return the assetName
+     */
+    public String getAssetName() {
+        return assetName;
     }
 
-    public void setForexName(String forexName) {
-        this.forexName = forexName;
+    /**
+     * @param assetName the assetName to set
+     */
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
+    /**
+     * @return the oraganization
+     */
     public Object getOraganization() {
         return oraganization;
     }
 
+    /**
+     * @param oraganization the oraganization to set
+     */
     public void setOraganization(Object oraganization) {
         this.oraganization = oraganization;
     }
-    
-    
-    
+
 }

@@ -3,40 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.SystemAdminWorkArea;
+package userinterface.AssetMarketAdminRole;
 
 import Business.EcoSystem;
 import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import userinterface.AssetAgentRole.AssetAgentStatusJPanel;
 
 /**
  *
  * @author prathameshnemade
  */
-public class AssetIndustiesJPanel extends javax.swing.JPanel {
+public class AssetRealEstateJPanel extends javax.swing.JPanel {
 
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
     JPanel browsingJPanel;
-    Boolean isAssetAgent = false;
 
-    public AssetIndustiesJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
+    public AssetRealEstateJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel) {
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         initComponents();
-        checkIfAssetAgent();
-    }
-
-    public void checkIfAssetAgent() {
-        if (this.account.getRole() instanceof AssetAgentRole) {
-//            requestsJLabel2.setVisible(true);
-            isAssetAgent = true;
+        
+         if ((this.account.getRole() instanceof AssetAgentRole)) {
+            viewJLabel1.setVisible(false);
         }
     }
 
@@ -55,20 +49,19 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         exitJLabel = new javax.swing.JLabel();
         viewJLabel = new javax.swing.JLabel();
         viewJLabel1 = new javax.swing.JLabel();
-        jewelleryRightJPanel = new javax.swing.JPanel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
+        realestateRightJPanel = new javax.swing.JPanel();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setEnabled(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         exitJLabel.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
         exitJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/edit_all.png"))); // NOI18N
-        exitJLabel.setText(" Edit Industries");
+        exitJLabel.setText(" Edit Real Estate");
         exitJLabel.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 exitJLabelFocusGained(evt);
@@ -82,7 +75,7 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
 
         viewJLabel.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
         viewJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/view_all.png"))); // NOI18N
-        viewJLabel.setText(" View Industries");
+        viewJLabel.setText(" View Real Estate");
         viewJLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewJLabelMouseClicked(evt);
@@ -91,7 +84,7 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
 
         viewJLabel1.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
         viewJLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/create.png"))); // NOI18N
-        viewJLabel1.setText(" Create Industries");
+        viewJLabel1.setText(" Create Real Estate");
         viewJLabel1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 viewJLabel1FocusGained(evt);
@@ -108,12 +101,13 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
+                .addContainerGap(225, Short.MAX_VALUE)
                 .addComponent(viewJLabel)
                 .addGap(18, 18, 18)
                 .addComponent(exitJLabel)
                 .addGap(18, 18, 18)
-                .addComponent(viewJLabel1))
+                .addComponent(viewJLabel1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,14 +117,14 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
                     .addComponent(viewJLabel)
                     .addComponent(viewJLabel1)
                     .addComponent(exitJLabel))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -145,36 +139,30 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
-        jewelleryRightJPanel.setBackground(new java.awt.Color(255, 255, 255));
+        realestateRightJPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jewelleryRightJPanelLayout = new javax.swing.GroupLayout(jewelleryRightJPanel);
-        jewelleryRightJPanel.setLayout(jewelleryRightJPanelLayout);
-        jewelleryRightJPanelLayout.setHorizontalGroup(
-            jewelleryRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+        javax.swing.GroupLayout realestateRightJPanelLayout = new javax.swing.GroupLayout(realestateRightJPanel);
+        realestateRightJPanel.setLayout(realestateRightJPanelLayout);
+        realestateRightJPanelLayout.setHorizontalGroup(
+            realestateRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 727, Short.MAX_VALUE)
         );
-        jewelleryRightJPanelLayout.setVerticalGroup(
-            jewelleryRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
+        realestateRightJPanelLayout.setVerticalGroup(
+            realestateRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setRightComponent(jewelleryRightJPanel);
+        jSplitPane1.setRightComponent(realestateRightJPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,13 +171,13 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitJLabelFocusGained
 
     private void exitJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitJLabelMouseClicked
-        AssetIndustriesEditJPanel assetIndustriesEditJPanel = new AssetIndustriesEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(assetIndustriesEditJPanel);
+        AssetRealEstateEditJPanel assetRealEstateEditJPanel = new AssetRealEstateEditJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetRealEstateEditJPanel);
     }//GEN-LAST:event_exitJLabelMouseClicked
 
     private void viewJLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabelMouseClicked
-        AssetIndustryViewJPanel assetIndustryViewJPanel = new AssetIndustryViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(assetIndustryViewJPanel);
+        AssetRealEstateViewJPanel assetRealEstateViewJPanel = new AssetRealEstateViewJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetRealEstateViewJPanel);
     }//GEN-LAST:event_viewJLabelMouseClicked
 
     private void viewJLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewJLabel1FocusGained
@@ -197,8 +185,8 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_viewJLabel1FocusGained
 
     private void viewJLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewJLabel1MouseClicked
-        AssetIndustryCreateJPanel assetIndustryCreateJPanel = new AssetIndustryCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-        this.jSplitPane1.setRightComponent(assetIndustryCreateJPanel);
+        AssetRealEstateCreateJPanel assetRealEstateCreateJPanel = new AssetRealEstateCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane1.setRightComponent(assetRealEstateCreateJPanel);
     }//GEN-LAST:event_viewJLabel1MouseClicked
 
 
@@ -207,7 +195,7 @@ public class AssetIndustiesJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel jewelleryRightJPanel;
+    private javax.swing.JPanel realestateRightJPanel;
     private javax.swing.JLabel viewJLabel;
     private javax.swing.JLabel viewJLabel1;
     // End of variables declaration//GEN-END:variables

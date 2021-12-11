@@ -44,7 +44,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
-        //_populateTree();
+        _populateTree();
         _getdata();
     }
 

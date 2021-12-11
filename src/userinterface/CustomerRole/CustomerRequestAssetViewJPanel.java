@@ -7,28 +7,27 @@ package userinterface.CustomerRole;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.Organization.IndustriesOrganization;
+import Business.Organization.JewelleryOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.CryptoBuyWorkRequest;
-import Business.WorkQueue.CryptoSellWorkRequest;
+import Business.WorkQueue.AssetBuyWorkRequest;
+import Business.WorkQueue.AssetSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author urvang
+ * @author prathameshnemade
  */
-public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
+public class CustomerRequestAssetViewJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CustomerCryptoRequestHistory
-     */
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
 
-    public CustomerCryptoRequestHistory(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+    public CustomerRequestAssetViewJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
         this.jSplitPane = jSplitPane;
         this.account = account;
         this.ecosystem = ecosystem;
@@ -39,11 +38,11 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
         model.setRowCount(0);
         for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof CryptoBuyWorkRequest) {
-                CryptoBuyWorkRequest temp = (CryptoBuyWorkRequest) ongoing;
+            if (ongoing instanceof AssetBuyWorkRequest) {
+                AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
                 Object[] row = {
                     "BUY",
-                    temp.getOraganization(),
+                    temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
                     temp.getCompanyName(),
                     temp.getQuantity(),
                     temp.getPrice(),
@@ -51,12 +50,12 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
                     temp.getStatusType()
                 };
                 model.addRow(row);
-            } else if (ongoing instanceof CryptoSellWorkRequest) {
-                CryptoSellWorkRequest temp = (CryptoSellWorkRequest) ongoing;
+            } else if (ongoing instanceof AssetSellWorkRequest) {
+                AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
                 Object[] row = {
                     "SELL",
                     temp.getCompanyName(),
-                    temp.getOraganization(),
+                    temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
                     temp.getQuantity(),
                     temp.getPrice(),
                     temp.getModifiedAt(),
@@ -106,16 +105,16 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

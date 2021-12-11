@@ -6,7 +6,6 @@
 package userinterface;
 
 import Business.EcoSystem;
-import Business.SendEmail;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JButton;
@@ -68,10 +67,10 @@ public class LoginPage extends javax.swing.JPanel {
     private void initComponents() {
 
         loginJButton = new javax.swing.JButton();
-        passwordJField = new javax.swing.JTextField();
         emailIDJField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         createAccountButton = new javax.swing.JButton();
+        passwordJField = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -82,25 +81,6 @@ public class LoginPage extends javax.swing.JPanel {
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginJButtonActionPerformed(evt);
-            }
-        });
-
-        passwordJField.setBackground(new java.awt.Color(238, 238, 238));
-        passwordJField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        passwordJField.setText("Enter password");
-        passwordJField.setToolTipText("Click to enter your Password.");
-        passwordJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        passwordJField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordJFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                passwordJFieldFocusLost(evt);
-            }
-        });
-        passwordJField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordJFieldActionPerformed(evt);
             }
         });
 
@@ -137,6 +117,9 @@ public class LoginPage extends javax.swing.JPanel {
             }
         });
 
+        passwordJField.setBackground(new java.awt.Color(238, 238, 238));
+        passwordJField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,9 +129,9 @@ public class LoginPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(createAccountButton)
                     .addComponent(loginJButton)
-                    .addComponent(passwordJField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailIDJField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(passwordJField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(299, 299, 299))
         );
         layout.setVerticalGroup(
@@ -158,19 +141,19 @@ public class LoginPage extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(174, 174, 174)
                 .addComponent(emailIDJField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordJField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createAccountButton)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        if (passwordJField != null && emailIDJField != null) {
-            UserAccount account = system.getUserAccountDirectory().authenticateUser(emailIDJField.getText(), passwordJField.getText());
+        if (passwordJField.getPassword() != null && emailIDJField != null) {
+            UserAccount account = system.getUserAccountDirectory().authenticateUser(emailIDJField.getText(), new String(passwordJField.getPassword()));
 
             if (account != null) {
                 redirectToPanel(account);
@@ -242,20 +225,6 @@ public class LoginPage extends javax.swing.JPanel {
         }
     }
 
-    private void passwordJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordJFieldFocusGained
-        if (passwordJField.getText().equals("Enter password")) {
-            passwordJField.setText("");
-        }
-    }//GEN-LAST:event_passwordJFieldFocusGained
-
-    private void passwordJFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordJFieldFocusLost
-
-    }//GEN-LAST:event_passwordJFieldFocusLost
-
-    private void passwordJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordJFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordJFieldActionPerformed
-
     private void emailIDJFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailIDJFieldFocusGained
         if (emailIDJField.getText().equals("Enter email id")) {
             emailIDJField.setText("");
@@ -283,6 +252,6 @@ public class LoginPage extends javax.swing.JPanel {
     private javax.swing.JTextField emailIDJField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginJButton;
-    private javax.swing.JTextField passwordJField;
+    private javax.swing.JPasswordField passwordJField;
     // End of variables declaration//GEN-END:variables
 }

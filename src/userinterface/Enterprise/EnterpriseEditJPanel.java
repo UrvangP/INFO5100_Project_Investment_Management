@@ -181,6 +181,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                     AssetMarketEnterprise temp = (AssetMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                     this.countryComboBox.setSelectedItem(temp.country);
                     this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                    this.selectedUser = temp.admin;
                 }
             }
         }
@@ -208,6 +209,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                     ForexMarketEnterprise temp = (ForexMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                     this.countryComboBox.setSelectedItem(temp.country);
                     this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                    this.selectedUser = temp.admin;
                 }
             }
         }
@@ -234,6 +236,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                     CryptoMarketEnterprise temp = (CryptoMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                     this.countryComboBox.setSelectedItem(temp.country);
                     this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                    this.selectedUser = temp.admin;
                 }
             }
         }
@@ -260,6 +263,7 @@ public class EnterpriseEditJPanel extends javax.swing.JPanel {
                     StockMarketEnterprise temp = (StockMarketEnterprise) ongoinNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
                     this.countryComboBox.setSelectedItem(temp.country);
                     this.adminComboBox.setSelectedItem(temp.admin.getUsername());
+                    this.selectedUser = temp.admin;
                 }
             }
         }

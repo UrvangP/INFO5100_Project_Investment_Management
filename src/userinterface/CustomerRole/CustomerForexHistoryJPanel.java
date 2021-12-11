@@ -7,43 +7,44 @@ package userinterface.CustomerRole;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.CryptoBuyWorkRequest;
-import Business.WorkQueue.CryptoSellWorkRequest;
+import Business.WorkQueue.ForexBuyWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author urvang
+ * @author ronak
  */
-public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
-
-    /**
-     * Creates new form CustomerCryptoRequestHistory
-     */
+public class CustomerForexHistoryJPanel extends javax.swing.JPanel {
+    
+    
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
 
-    public CustomerCryptoRequestHistory(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+    /**
+     * Creates new form CustomerForexHistoryJPanel
+     */
+    public CustomerForexHistoryJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+        initComponents();
         this.jSplitPane = jSplitPane;
         this.account = account;
         this.ecosystem = ecosystem;
         this.selectedNetwork = selectedNetwork;
-        initComponents();
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof CryptoBuyWorkRequest) {
-                CryptoBuyWorkRequest temp = (CryptoBuyWorkRequest) ongoing;
+            if (ongoing instanceof ForexBuyWorkRequest) {
+                ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
                 Object[] row = {
                     "BUY",
-                    temp.getOraganization(),
+                    temp.getOraganization() instanceof BanksOrganization ? "Banks" : "Brokers",
                     temp.getCompanyName(),
                     temp.getQuantity(),
                     temp.getPrice(),
@@ -51,13 +52,12 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
                     temp.getStatusType()
                 };
                 model.addRow(row);
-            } else if (ongoing instanceof CryptoSellWorkRequest) {
-                CryptoSellWorkRequest temp = (CryptoSellWorkRequest) ongoing;
+            } else if (ongoing instanceof ForexBuyWorkRequest) {
+                ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
                 Object[] row = {
                     "SELL",
                     temp.getCompanyName(),
-                    temp.getOraganization(),
-                    temp.getQuantity(),
+                    temp.getOraganization() instanceof BanksOrganization ? "Banks" : "Brokers",
                     temp.getPrice(),
                     temp.getModifiedAt(),
                     temp.getStatusType()
@@ -65,6 +65,7 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
                 model.addRow(row);
             }
         }
+    
     }
 
     /**
@@ -76,10 +77,11 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,26 +104,42 @@ public class CustomerCryptoRequestHistory extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

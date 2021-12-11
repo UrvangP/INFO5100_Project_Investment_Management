@@ -27,7 +27,7 @@ import javax.swing.JSplitPane;
  * @author ronak
  */
 public class ForexBankCreateJPanel extends javax.swing.JPanel {
-    
+
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
@@ -35,7 +35,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
     Network ongoinNetwork;
     UserAccount selectedUser;
     Organization selectedOrganization;
-    
+
     ArrayList<UserAccount> forexAdminUser = new ArrayList<>();
 
     /**
@@ -47,7 +47,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
-        
+
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
             Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
             if (ongoing1.getIsSelected()) {
@@ -71,6 +71,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(forexDropdown);
         this.bankComboBox.setModel(brandSDropdownModel);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -557,7 +558,10 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_priceJFieldnameChangeHandler
 
     private void priceJFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_priceJFieldMouseClicked
-        // TODO add your handling code here:
+
+        if (this.priceJField.getText().equals("Enter here")) {
+            priceJField.setText("");
+        }
     }//GEN-LAST:event_priceJFieldMouseClicked
 
     private void priceJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceJFieldActionPerformed

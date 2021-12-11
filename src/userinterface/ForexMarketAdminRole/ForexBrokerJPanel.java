@@ -6,6 +6,7 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Role.ForexAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -33,6 +34,10 @@ public class ForexBrokerJPanel extends javax.swing.JPanel {
         
         ForexBankCreateJPanel forexBankCreateJPanel = new ForexBankCreateJPanel(ecosystem, account, jSplitPane, browsingJPanel);
         this.jSplitPane.setRightComponent(forexBankCreateJPanel);
+        
+        if ((this.account.getRole() instanceof ForexAgentRole)) {
+            createBankJLabel1.setVisible(false);
+        }
     }
 
     /**

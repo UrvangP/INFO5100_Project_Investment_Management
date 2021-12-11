@@ -6,7 +6,12 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
+import Business.Organization.BrokersOrganization;
+import Business.Organization.Organization;
+import Business.Role.AssetAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -45,17 +50,47 @@ public class ForexMarketViewJPanel extends javax.swing.JPanel {
         }
 
         if (ongoing != null) {
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {//Banks
-                ForexBankJPanel forexBankJpanel = new ForexBankJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-                forexJTabbedPane.addTab("Banks", forexBankJpanel);
+            if (!(this.account.getRole() instanceof AssetAgentRole) && ongoing != null) {
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {//Banks
+                    ForexBankJPanel forexBankJpanel = new ForexBankJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                    forexJTabbedPane.addTab("Banks", forexBankJpanel);
 
-            };
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers")) {//Brokers
-                ForexBrokerJPanel forexBrokerPanel = new ForexBrokerJPanel(ecosystem, account, jSplitPane, browsingJPanel);
-                forexJTabbedPane.addTab("Brokers", forexBrokerPanel);
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers")) {//Brokers
+                    ForexBrokerJPanel forexBrokerPanel = new ForexBrokerJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                    forexJTabbedPane.addTab("Brokers", forexBrokerPanel);
 
-            };
-
+                };
+            } else {
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {
+                    for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                        Enterprise temp = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                        for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                            Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                            if (temp1 instanceof BanksOrganization) {
+                                if (((BanksOrganization) temp1).getAdmin().getUsername().toString() == this.account.getUsername().toString()) {
+                                    ForexBankJPanel forexBankJpanel = new ForexBankJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                                    forexJTabbedPane.addTab("Banks", forexBankJpanel);
+                                }
+                            }
+                        }
+                    }
+                };
+                if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers")) {
+                    for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                        Enterprise temp = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                        for (int j = 0; j < temp.getOrganizationDirectory().getOrganizationList().size(); j++) {
+                            Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(j);
+                            if (temp1 instanceof BrokersOrganization) {
+                                if (((BrokersOrganization) temp1).getAdmin().getUsername().toString() == this.account.getUsername().toString()) {
+                                    ForexBrokerJPanel forexBrokerPanel = new ForexBrokerJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+                                    forexJTabbedPane.addTab("Brokers", forexBrokerPanel);
+                                }
+                            }
+                        }
+                    }
+                };
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Please create an enterprise first!", "Setup", ERROR_MESSAGE);
         }

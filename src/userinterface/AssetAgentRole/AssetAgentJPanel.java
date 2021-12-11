@@ -35,6 +35,8 @@ public class AssetAgentJPanel extends javax.swing.JPanel {
         this.userNameJLabel.setText(account.getUsername());
 
         getNetwork();
+        AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+        this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
     }
 
     public void getNetwork() {

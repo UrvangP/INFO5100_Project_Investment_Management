@@ -7,19 +7,29 @@ package userinterface.ForexAgentRole;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
+import Business.Organization.BrokersOrganization;
 import Business.Organization.Organization;
+import Business.SendEmail;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ForexBuyWorkRequest;
+import Business.WorkQueue.ForexSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ronak
  */
 public class ForexAgentStatusJPanel extends javax.swing.JPanel {
-    
+
     EcoSystem ecosystem;
     UserAccount account;
     JSplitPane jSplitPane;
@@ -38,6 +48,52 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            if (ongoing1.getIsSelected()) {
+                ongoinNetwork = ongoing1;
+            }
+        }
+        getStatus();
+    }
+
+    public void getStatus() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+            WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+            if (ongoing instanceof ForexBuyWorkRequest) {
+                ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == ForexBuyWorkRequest.StatusType.Initiated) {
+                    allRequests.add(temp);
+                    Object[] row = {
+                        "BUY",
+                        temp.getCompanyName(),
+                        temp.getOraganization() instanceof BanksOrganization ? "Bank" : "Broker",
+                        temp.getQuantity(),
+                        temp.getPrice(),
+                        temp.getModifiedAt(),
+                        temp.getStatusType()
+                    };
+                    model.addRow(row);
+                }
+            } else if (ongoing instanceof ForexSellWorkRequest) {
+                ForexSellWorkRequest temp = (ForexSellWorkRequest) ongoing;
+                if (temp.getRaisedTo() == this.account && temp.getStatusType() == ForexSellWorkRequest.StatusType.Initiated) {
+                    allRequests.add(temp);
+                    Object[] row = {
+                        "SELL",
+                        temp.getCompanyName(),
+                        temp.getOraganization() instanceof BanksOrganization ? "Bank" : "Broker",
+                        temp.getQuantity(),
+                        temp.getPrice(),
+                        temp.getModifiedAt(),
+                        temp.getStatusType()
+                    };
+                    model.addRow(row);
+                }
+            }
+        }
     }
 
     /**
@@ -49,19 +105,219 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        brandJLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        statusComboBox = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Change Status to :");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "BUY/SELL", "Company Name", "Product Name", "Quantity", "Price", "Date of creation", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approve", "Deny" }));
+        statusComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                statusComboBoxItemStateChanged(evt);
+            }
+        });
+        statusComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                statusComboBoxFocusGained(evt);
+            }
+        });
+        statusComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusComboBoxActionPerformed(evt);
+            }
+        });
+        statusComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                statusComboBoxPropertyChange(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(200, 203, 178));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(67, 100, 100));
+        jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(brandJLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(brandJLabel1))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Integer selectedIndex = this.jTable1.getSelectedRow();
+        if (selectedIndex != -1) {
+            selectedRequest = this.allRequests.get(selectedIndex);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void statusComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_statusComboBoxItemStateChanged
+        //todo
+    }//GEN-LAST:event_statusComboBoxItemStateChanged
+
+    private void statusComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_statusComboBoxFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusComboBoxFocusGained
+
+    private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusComboBoxActionPerformed
+
+    private void statusComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_statusComboBoxPropertyChange
+        //tpdp
+    }//GEN-LAST:event_statusComboBoxPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (selectedRequest != null) {
+            String statusSelected = this.statusComboBox.getSelectedItem().toString();
+
+            if (this.selectedRequest instanceof ForexBuyWorkRequest) {
+                ForexBuyWorkRequest request = (ForexBuyWorkRequest) this.selectedRequest;
+                request.setStatusType(statusSelected == "Approve" ? ForexBuyWorkRequest.StatusType.Completed : ForexBuyWorkRequest.StatusType.Rejected);
+
+                if (request.getOraganization() instanceof BanksOrganization) {
+                    BanksOrganization temp = (BanksOrganization) request.getOraganization();
+                    if (temp.getBankName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getBank().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getBank().get(request.getForexName()).replace("quantity", intialUnits - request.getQuantity());
+
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent purchase of Jewellery.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent purchase " + temp.getBank().get(request.getForexName()).toString() + "  was successful.");
+                        temp1.sendMail();
+                    }
+                } else if (request.getOraganization() instanceof BrokersOrganization) {
+
+                    BrokersOrganization temp = (BrokersOrganization) request.getOraganization();
+                    if (temp.getBrokerName().toString() == request.getCompanyName().toString()) {
+
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getBroker().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+
+                        temp.getBroker().get(request.getForexName()).replace("quantity", intialUnits - request.getQuantity());
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent purchase of Industry asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent purchase " + temp.getBroker().get(request.getForexName()).toString() + "  was successful.");
+                        temp1.sendMail();
+                    }
+                }
+            } else {
+
+                ForexSellWorkRequest request = (ForexSellWorkRequest) this.selectedRequest;
+                request.setStatusType(statusSelected == "Approve" ? ForexSellWorkRequest.StatusType.Completed : ForexSellWorkRequest.StatusType.Rejected);
+
+                if (request.getOraganization() instanceof BanksOrganization) {
+                    BanksOrganization temp = (BanksOrganization) request.getOraganization();
+                    if (temp.getBankName().toString() == request.getCompanyName().toString()) {
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getBank().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+                        temp.getBank().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Jewellery.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of  " + temp.getBank().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
+                    }
+                } else if (request.getOraganization() instanceof BrokersOrganization) {
+
+                    BrokersOrganization temp = (BrokersOrganization) request.getOraganization();
+                    if (temp.getBrokerName().toString() == request.getCompanyName().toString()) {
+                        Integer intialUnits = 0;
+                        for (HashMap.Entry<String, HashMap<String, Object>> set
+                                : temp.getBroker().entrySet()) {
+                            intialUnits = Integer.valueOf(set.getValue().get("quantity").toString());
+                        }
+                        temp.getBroker().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
+                        SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Industry asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of " + temp.getBroker().get(request.getAssetName()).toString() + "  was successful.");
+                        temp1.sendMail();
+                    }
+                }
+            }
+            getStatus();
+            JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a record to update!", "Request Status", ERROR_MESSAGE);
+
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel brandJLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> statusComboBox;
     // End of variables declaration//GEN-END:variables
 }

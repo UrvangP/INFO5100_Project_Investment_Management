@@ -7,13 +7,13 @@ package userinterface.CustomerRole;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
+import Business.Organization.BrokersOrganization;
 import Business.Organization.IndustriesOrganization;
-import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
-import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.AssetBuyWorkRequest;
-import Business.WorkQueue.AssetSellWorkRequest;
+import Business.WorkQueue.ForexBuyWorkRequest;
+import Business.WorkQueue.ForexSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,16 +27,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author prathameshnemade
  */
-public class CustomerRequestSellJPanel extends javax.swing.JPanel {
+public class CustomerForexRequestSellJPanel extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
     Network selectedNetwork;
-    AssetBuyWorkRequest selectedRequest;
-    ArrayList<AssetBuyWorkRequest> allRequests = new ArrayList<>();
+    ForexBuyWorkRequest selectedRequest;
+    ArrayList<ForexBuyWorkRequest> allRequests = new ArrayList<>();
 
-    public CustomerRequestSellJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
+    public CustomerForexRequestSellJPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, Network selectedNetwork) {
         this.jSplitPane = jSplitPane;
         this.account = account;
         this.ecosystem = ecosystem;
@@ -51,12 +51,12 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof AssetBuyWorkRequest) {
-                AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
-                if (temp.getStatusType() == AssetBuyWorkRequest.StatusType.Completed) {
+            if (ongoing instanceof ForexBuyWorkRequest) {
+                ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
+                if (temp.getStatusType() == ForexBuyWorkRequest.StatusType.Completed) {
                     allRequests.add(temp);
                     Object[] row = {
-                        temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                        temp.getOraganization() instanceof BanksOrganization ? "Banks" : "Brokers",
                         temp.getCompanyName(),
                         temp.getQuantity(),
                         temp.getPrice(),
@@ -157,56 +157,41 @@ public class CustomerRequestSellJPanel extends javax.swing.JPanel {
         String company = null;
         String productName = null;
         Organization temp1 = (Organization) selectedRequest.getOraganization();
-        if (selectedRequest.getOraganization() instanceof IndustriesOrganization) {
-            if (temp1 instanceof IndustriesOrganization) {
+        if (selectedRequest.getOraganization() instanceof BanksOrganization) {
+            if (temp1 instanceof BanksOrganization) {
 //                if (((IndustriesOrganization) temp1).getType().toString() == "Industries") {
-                    selectedMarketAgent = ((IndustriesOrganization) temp1).getAdmin();
-                    company = ((IndustriesOrganization) temp1).getCompanyName();
-                    for (HashMap.Entry<String, HashMap<String, Object>> set
-                            : ((IndustriesOrganization) temp1).getIndustries().entrySet()) {
-                        productName = set.getKey();
+                selectedMarketAgent = ((BanksOrganization) temp1).getAdmin();
+                company = ((BanksOrganization) temp1).getBankName();
+                for (HashMap.Entry<String, HashMap<String, Object>> set
+                        : ((BanksOrganization) temp1).getBank().entrySet()) {
+                    productName = set.getKey();
 
-                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
-                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
-                    }
-//                }
-            }
-        } else if (selectedRequest.getOraganization() instanceof JewelleryOrganization) {
-            if (temp1 instanceof JewelleryOrganization) {
-//                if (((JewelleryOrganization) temp1).getType().toString() == "Jewellery") {
-                    selectedMarketAgent = ((JewelleryOrganization) temp1).getAdmin();
-                    company = ((JewelleryOrganization) temp1).getCompanyName();
-                    for (HashMap.Entry<String, HashMap<String, Object>> set
-                            : ((JewelleryOrganization) temp1).getJewelleries().entrySet()) {
-                        productName = set.getKey();
-                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
-                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
-                    }
-//                }
-            }
-        } else if (selectedRequest.getOraganization() instanceof RealEstateOrganization) {
-            if (temp1 instanceof RealEstateOrganization) {
-//                if (((RealEstateOrganization) temp1).getType().toString() == "Real Estate") {
-                    selectedMarketAgent = ((RealEstateOrganization) temp1).getAdmin();
-                    company = ((RealEstateOrganization) temp1).getCompanyName();
-                    for (HashMap.Entry<String, HashMap<String, Object>> set
-                            : ((RealEstateOrganization) temp1).getEstates().entrySet()) {
-                        productName = set.getKey();
-                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
-                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
-
-                    }
+                    price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                    unit = Integer.valueOf(set.getValue().get("quantity").toString());
                 }
-//            }
+//                }
+            }
+        } else if (selectedRequest.getOraganization() instanceof BrokersOrganization) {
+            if (temp1 instanceof BrokersOrganization) {
+//                if (((JewelleryOrganization) temp1).getType().toString() == "Jewellery") {
+                selectedMarketAgent = ((BrokersOrganization) temp1).getAdmin();
+                company = ((BrokersOrganization) temp1).getBrokerName();
+                for (HashMap.Entry<String, HashMap<String, Object>> set
+                        : ((BrokersOrganization) temp1).getBroker().entrySet()) {
+                    productName = set.getKey();
+                    price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                    unit = Integer.valueOf(set.getValue().get("quantity").toString());
+                }
+            }
         }
-        selectedRequest.setStatusType(AssetBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setStatusType(ForexBuyWorkRequest.StatusType.Sold);
 
-        AssetSellWorkRequest newRequest = new AssetSellWorkRequest(
+        ForexSellWorkRequest newRequest = new ForexSellWorkRequest(
                 this.account,
                 selectedMarketAgent,
                 new Date(),
                 null,
-                AssetSellWorkRequest.StatusType.Initiated,
+                ForexSellWorkRequest.StatusType.Initiated,
                 price,
                 unit,
                 new Date(),
