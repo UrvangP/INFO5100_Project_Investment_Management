@@ -179,12 +179,12 @@ public class CustomerAssetMarketJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        CustomerRequestViewJPanel customerRequestViewJPanel = new CustomerRequestViewJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        CustomerRequestAssetViewJPanel customerRequestViewJPanel = new CustomerRequestAssetViewJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane1.setRightComponent(customerRequestViewJPanel);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        CustomerRequestSellJPanel customerRequestSellJPanel = new CustomerRequestSellJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
+        CustomerAssetRequestSellJPanel customerRequestSellJPanel = new CustomerAssetRequestSellJPanel(this.ecosystem, account, jSplitPane, selectedNetwork);
         this.jSplitPane1.setRightComponent(customerRequestSellJPanel);
     }//GEN-LAST:event_jButton9ActionPerformed
 

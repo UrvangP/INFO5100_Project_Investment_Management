@@ -17,6 +17,7 @@ import Business.WorkQueue.ForexBuyWorkRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -27,7 +28,7 @@ import javax.swing.JSplitPane;
  * @author ronak
  */
 public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
-    
+
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
@@ -46,7 +47,7 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
         this.selectedNetwork = selectedNetwork;
         fetchData();
     }
-    
+
     public void fetchData() {
         ArrayList<String> companyName = new ArrayList<>();
         for (int i = 0; i < this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
@@ -76,8 +77,11 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        String[] temp1 = companyName.toArray(new String[companyName.size()]);
+        DefaultComboBoxModel<String> temp11 = new DefaultComboBoxModel<>(temp1);
+        this.companyNameComboBox.setModel(temp11);
     }
-    
+
     public void fetchFields() {
         for (int i = 0; i < this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ongoing = this.selectedNetwork.getEnterpriseDirectory().getEnterpriseDir().get(i);
@@ -291,7 +295,6 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
         unitJField.setText("Enter here");
         unitJField.setToolTipText("Click to enter your name.");
         unitJField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        unitJField.setEnabled(false);
         unitJField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 unitJFieldFocusGained(evt);
@@ -429,24 +432,24 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
     private void companyNameComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_companyNameComboBoxPropertyChange
         //        fetchData();
     }//GEN-LAST:event_companyNameComboBoxPropertyChange
-    
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Boolean valid = validateItem();
         if (valid) {
             ForexBuyWorkRequest newRequest = new ForexBuyWorkRequest(
-                this.account,
-                this.selectedMarketAgent,
-                new Date(),
-                null,
-                ForexBuyWorkRequest.StatusType.Initiated,
-                Integer.valueOf(this.priceJField.getText().toString()),
-                Integer.valueOf(this.unitJField.getText().toString()),
-                new Date(),
-                this.companyNameComboBox.getSelectedItem().toString(),
-                this.productNameJField.getText().toString(),
-                this.selectedOraganization
+                    this.account,
+                    this.selectedMarketAgent,
+                    new Date(),
+                    null,
+                    ForexBuyWorkRequest.StatusType.Initiated,
+                    Integer.valueOf(this.priceJField.getText().toString()),
+                    Integer.valueOf(this.unitJField.getText().toString()),
+                    new Date(),
+                    this.companyNameComboBox.getSelectedItem().toString(),
+                    this.productNameJField.getText().toString(),
+                    this.selectedOraganization
             );
 
             this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
@@ -454,7 +457,6 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
     public Boolean validateItem() {
         String errorMEssage = "";
         if (this.companyNameComboBox.getSelectedItem() == null) {
