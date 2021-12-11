@@ -149,7 +149,7 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Select Type (*):");
 
-        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Industries", "Jewellery", "Real Estate" }));
+        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bank", "Brokers" }));
         typeComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 typeComboBoxItemStateChanged(evt);
