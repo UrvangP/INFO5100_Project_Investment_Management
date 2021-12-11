@@ -65,5 +65,63 @@ public class ForexBuyWorkRequest extends WorkRequest{
         this.forexName = forexName;
         this.oraganization = oraganization;
     }
+
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getForexName() {
+        return forexName;
+    }
+
+    public void setForexName(String forexName) {
+        this.forexName = forexName;
+    }
+
+    public Object getOraganization() {
+        return oraganization;
+    }
+
+    public void setOraganization(Object oraganization) {
+        this.oraganization = oraganization;
+    }
+    
+    
     
 }
