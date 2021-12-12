@@ -269,8 +269,8 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
             }
             enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
             getLeftButtonStatus();
-            cryptoMarketDashboard createAdmin = new cryptoMarketDashboard(ecosystem, account, this.jSplitPane, browsingJPanel);
-            this.jSplitPane.setRightComponent(createAdmin);
+            cryptoMarketAdminHome home = new cryptoMarketAdminHome(ecosystem, account);
+            jSplitPane.setRightComponent(home);
         }
     }
 

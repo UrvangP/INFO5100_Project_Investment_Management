@@ -272,8 +272,8 @@ public class StockMarketAdminJPanel extends javax.swing.JPanel {
             }
             enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
             getLeftButtonStatus();
-            stockMarketDashboard createAdmin = new stockMarketDashboard(ecosystem, account, this.jSplitPane, browsingJPanel);
-            this.jSplitPane.setRightComponent(createAdmin);
+            stockMarketAdminHome home = new stockMarketAdminHome(ecosystem, account);
+            jSplitPane.setRightComponent(home);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
