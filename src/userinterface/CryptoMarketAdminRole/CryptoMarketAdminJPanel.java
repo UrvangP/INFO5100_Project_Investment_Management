@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import userinterface.StockMarketAdminRole.stockMarketAdminHome;
+import userinterface.StockMarketAdminRole.stockMarketDashboard;
 
 /**
  *
@@ -141,6 +142,22 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
         brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         brandJLabel1.setText("Select Network (*):");
 
+        networkComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                networkComboBoxItemStateChanged(evt);
+            }
+        });
+        networkComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                networkComboBoxMouseClicked(evt);
+            }
+        });
+        networkComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                networkComboBoxPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,12 +168,12 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
                     .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(brandJLabel1)
-                            .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 15, Short.MAX_VALUE)))
+                            .addComponent(brandJLabel1))
+                        .addGap(0, 15, Short.MAX_VALUE))
+                    .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,8 +185,8 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
                 .addComponent(userNameJLabel)
                 .addGap(33, 33, 33)
                 .addComponent(brandJLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,6 +241,37 @@ public class CryptoMarketAdminJPanel extends javax.swing.JPanel {
         jSplitPane.setRightComponent(home);
     }//GEN-LAST:event_homeButtonActionPerformed
 
+    private void networkComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxItemStateChanged
+
+    private void networkComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkComboBoxMouseClicked
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxMouseClicked
+
+    private void networkComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_networkComboBoxPropertyChange
+        _adminChnageHandler();
+
+    }//GEN-LAST:event_networkComboBoxPropertyChange
+
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+            for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+                Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+                if (ongoing == this.selectedNetwork) {
+                    ongoing.setIsSelected(true);
+                } else {
+                    ongoing.setIsSelected(!true);
+                }
+            }
+            enterpriseSelection = selectedNetwork.getEnterpriseDirectory().getEnterpriseDir();
+            getLeftButtonStatus();
+            cryptoMarketDashboard createAdmin = new cryptoMarketDashboard(ecosystem, account, this.jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(createAdmin);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AccountCreationJButton;
