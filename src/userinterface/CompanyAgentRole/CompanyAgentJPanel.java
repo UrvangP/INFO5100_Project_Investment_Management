@@ -251,22 +251,23 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
         
         OrganizationDirectory orgs = null;
         
-        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ep instanceof StockMarketEnterprise) {
-                orgs = ep.getOrganizationDirectory();
-                break;
+        if(ongoing!=null){
+            for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ep instanceof StockMarketEnterprise) {
+                    orgs = ep.getOrganizationDirectory();
+                    break;
+                }
             }
-        }
-        if(orgs == null){
-            return null;
-        }
-        
-        for(Organization o: orgs.getOrganizationList()){
-            if(o.getType().equals(Organization.Type.Companies.getValue())){
-                CompaniesOrganization temp = (CompaniesOrganization) o;
-                if(temp.getAdmin().getUsername().equals(account.getUsername())){
-                    return temp;
+
+            if(orgs!=null){
+                for(Organization o: orgs.getOrganizationList()){
+                    if(o.getType().equals(Organization.Type.Companies.getValue())){
+                        CompaniesOrganization temp = (CompaniesOrganization) o;
+                        if(temp.getAdmin().getUsername().equals(account.getUsername())){
+                            return temp;
+                        }
+                    }
                 }
             }
         }
@@ -287,6 +288,20 @@ public class CompanyAgentJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        this.company=getOrganization();
+        
+        if(this.company==null){
+            AccountCreationJButton.setVisible(false);
+            AccountCreationJButton1.setVisible(false);
+        }
+        else{
+            AccountCreationJButton.setVisible(true);
+            AccountCreationJButton1.setVisible(true);
+            
+        }
+        CompanyAgentHome home = new CompanyAgentHome(ecosystem, account, company);
+        jSplitPane.setRightComponent(home);
+        
     }
     
     public void getNetwork() {
