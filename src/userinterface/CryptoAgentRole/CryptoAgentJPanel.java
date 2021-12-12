@@ -297,19 +297,23 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
         
         OrganizationDirectory orgs = null;
         
-        for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
-            Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
-            if (ep instanceof CryptoMarketEnterprise) {
-                orgs = ep.getOrganizationDirectory();
-                break;
+        if(ongoing!=null){
+            for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
+                Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
+                if (ep instanceof CryptoMarketEnterprise) {
+                    orgs = ep.getOrganizationDirectory();
+                    break;
+                }
             }
-        }
-        
-        for(Organization o: orgs.getOrganizationList()){
-            if(o.getType().equals(Organization.Type.Wallet.getValue())){
-                WalletOrganization temp = (WalletOrganization) o;
-                if(temp.getAdmin().getUsername().equals(account.getUsername())){
-                    return temp;
+            
+            if(orgs!=null){
+                for(Organization o: orgs.getOrganizationList()){
+                    if(o.getType().equals(Organization.Type.Wallet.getValue())){
+                        WalletOrganization temp = (WalletOrganization) o;
+                        if(temp.getAdmin().getUsername().equals(account.getUsername())){
+                            return temp;
+                        }
+                    }
                 }
             }
         }
@@ -330,6 +334,18 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        this.company=getOrganization();
+        if(this.company==null){
+            AccountCreationJButton.setVisible(false);
+            AccountCreationJButton1.setVisible(false);
+        }
+        else{
+            AccountCreationJButton.setVisible(true);
+            AccountCreationJButton1.setVisible(true); 
+        }
+        CryptoAgentHome home = new CryptoAgentHome(ecosystem, account, company);
+        jSplitPane.setRightComponent(home);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
