@@ -186,8 +186,8 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         dataset.addValue(temp5, "Buy", "Forex Market");
         dataset.addValue(temp6, "Sell", "Forex Market");
 
-        dataset.addValue(temp5, "Buy", "Stock Market");
-        dataset.addValue(temp6, "Sell", "Stock Market");
+        dataset.addValue(temp7, "Buy", "Stock Market");
+        dataset.addValue(temp8, "Sell", "Stock Market");
         return dataset;
     }
 
