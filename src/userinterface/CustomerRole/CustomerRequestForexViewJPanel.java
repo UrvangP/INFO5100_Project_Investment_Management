@@ -10,6 +10,7 @@ import Business.Network.Network;
 import Business.Organization.BanksOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ForexBuyWorkRequest;
+import Business.WorkQueue.ForexSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -48,20 +49,19 @@ public class CustomerRequestForexViewJPanel extends javax.swing.JPanel {
                     temp.getStatusType()
                 };
                 model.addRow(row);
-            } 
-//            else if (ongoing instanceof ForexSellWorkRequest) {
-//                ForexSellWorkRequest temp = (ForexSellWorkRequest) ongoing;
-//                Object[] row = {
-//                    "SELL",
-//                    temp.getCompanyName(),
-//                    temp.getOraganization() instanceof BanksOrganization ? "Banks" : "Brokers",
-//                    temp.getQuantity(),
-//                    temp.getPrice(),
-//                    temp.getModifiedAt(),
-//                    temp.getStatusType()
-//                };
-//                model.addRow(row);
-//            }
+            } else if (ongoing instanceof ForexSellWorkRequest) {
+                ForexSellWorkRequest temp = (ForexSellWorkRequest) ongoing;
+                Object[] row = {
+                    "SELL",
+                    temp.getOraganization() instanceof BanksOrganization ? "Banks" : "Brokers",
+                    temp.getCompanyName(),
+                    temp.getQuantity(),
+                    temp.getPrice(),
+                    temp.getModifiedAt(),
+                    temp.getStatusType()
+                };
+                model.addRow(row);
+            }
         }
     }
 

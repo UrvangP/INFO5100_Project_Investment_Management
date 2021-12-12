@@ -65,7 +65,7 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
                                 productNameJField.setText(set.getKey());
                             }
                         }
-                    } else if (this.typeComboBox.getSelectedItem().toString() == "Broker") {
+                    } else if (this.typeComboBox.getSelectedItem().toString() == "Brokers") {
                         if (temp1 instanceof BrokersOrganization) {
                             companyName.add(((BrokersOrganization) temp1).getBrokerName().toString());
                             for (HashMap.Entry<String, HashMap<String, Object>> set
@@ -102,7 +102,7 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
                                 }
                             }
                         }
-                    } else if (this.typeComboBox.getSelectedItem().toString() == "Broker") {
+                    } else if (this.typeComboBox.getSelectedItem().toString() == "Brokers") {
                         if (temp1 instanceof BrokersOrganization) {
                             if (((BrokersOrganization) temp1).getBrokerName().toString() == this.companyNameComboBox.getSelectedItem().toString()) {
                                 for (HashMap.Entry<String, HashMap<String, Object>> set
@@ -430,7 +430,7 @@ public class CustomerForexViewOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_companyNameComboBoxActionPerformed
 
     private void companyNameComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_companyNameComboBoxPropertyChange
-        //        fetchData();
+   //     fetchData();
     }//GEN-LAST:event_companyNameComboBoxPropertyChange
 
 
