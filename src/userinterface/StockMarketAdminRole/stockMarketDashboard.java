@@ -55,7 +55,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
             }
         }
         
-        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")) {
+        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")) {
             jPanel1.setEnabled(true);
         }
         else{
@@ -63,7 +63,7 @@ public class stockMarketDashboard extends javax.swing.JPanel {
             jTabbedPane1.remove(jPanel1);
         }
         
-        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds")) {
+        if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("MutualFunds")) {
             jPanel2.setEnabled(true);
         }
         else{

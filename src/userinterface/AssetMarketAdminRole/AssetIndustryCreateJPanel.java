@@ -440,20 +440,20 @@ public class AssetIndustryCreateJPanel extends javax.swing.JPanel {
             errorMEssage += "Select Admin to proceed! \n";
         }
         if (!this.industryNameJField.getText().matches("[a-zA-Z0-9]+")) {
-            errorMEssage += "Invalid Real Estate Company Name! \n";
+            errorMEssage += "Invalid Company Name! \n";
         }
-        if (!this.industryLocationJField.getText().matches("[a-zA-Z0-9 ]+")) {
+        if (!this.industryLocationJField.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Location Name! \n";
         }
 
         if (!this.nameJField.getText().matches("[a-zA-Z]+")) {
-            errorMEssage += "Invalid Real Estate Name! \n";
+            errorMEssage += "Invalid Name! \n";
         }
         if (!this.industryUnitJField.getText().matches("[0-9]+")) {
-            errorMEssage += "Real Estate Unit should be a number! \n";
+            errorMEssage += "Unit should be a number! \n";
         }
         if (!this.industryJField.getText().matches("[0-9]+")) {
-            errorMEssage += "Real Estate Price should be a number! \n";
+            errorMEssage += "Price should be a number! \n";
         }
         if (errorMEssage.equals("")) {
             return true;
