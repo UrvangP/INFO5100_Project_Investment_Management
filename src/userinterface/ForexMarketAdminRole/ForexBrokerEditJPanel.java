@@ -198,6 +198,7 @@ public class ForexBrokerEditJPanel extends javax.swing.JPanel {
         bankAdminJLabel1.setForeground(new java.awt.Color(67, 100, 100));
         bankAdminJLabel1.setText("Admin (*):");
 
+        adminComboBox.setEnabled(false);
         adminComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 adminComboBoxItemStateChanged(evt);
