@@ -23,70 +23,70 @@ import javax.swing.JSplitPane;
  * @author prathameshnemade
  */
 public class CustomerDashboardJPanel extends javax.swing.JPanel {
-    
+
     EcoSystem system;
     UserAccount account;
     JSplitPane jSplitPane;
-    
+
     public CustomerDashboardJPanel(EcoSystem system, UserAccount account, JSplitPane jSplitPane) {
         initComponents();
         this.system = system;
         this.account = account;
         this.jSplitPane = jSplitPane;
-        
+
         getTotalInvestments();
     }
-    
+
     public void getTotalInvestments() {
         Integer stocks = 0;
         Integer assets = 0;
         Integer forex = 0;
         Integer crypto = 0;
-        
+
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof AssetBuyWorkRequest) {
+            if (ongoing instanceof AssetBuyWorkRequest && ((AssetBuyWorkRequest) ongoing).getStatusType() == AssetBuyWorkRequest.StatusType.Completed) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
                 assets += temp.getQuantity() * temp.getPrice();
-            } else if (ongoing instanceof AssetSellWorkRequest) {
+            } else if (ongoing instanceof AssetSellWorkRequest && ((AssetSellWorkRequest) ongoing).getStatusType() == AssetSellWorkRequest.StatusType.Sold) {
                 AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
                 assets -= temp.getQuantity() * temp.getPrice();
             }
         }
-        
+
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof ForexBuyWorkRequest) {
+            if (ongoing instanceof ForexBuyWorkRequest && ((ForexBuyWorkRequest) ongoing).getStatusType() == ForexBuyWorkRequest.StatusType.Completed) {
                 ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
                 forex += temp.getQuantity() * temp.getPrice();
-            } else if (ongoing instanceof ForexSellWorkRequest) {
+            } else if (ongoing instanceof ForexSellWorkRequest && ((ForexSellWorkRequest) ongoing).getStatusType() == ForexSellWorkRequest.StatusType.Sold) {
                 ForexSellWorkRequest temp = (ForexSellWorkRequest) ongoing;
                 forex -= temp.getQuantity() * temp.getPrice();
             }
         }
-        
+
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof StockBuyWorkQueue) {
+            if (ongoing instanceof StockBuyWorkQueue && ((StockBuyWorkQueue) ongoing).getStatusType() == StockBuyWorkQueue.StatusType.Completed) {
                 StockBuyWorkQueue temp = (StockBuyWorkQueue) ongoing;
-                stocks += temp.getQuantity() * temp.getPrice();
-            } else if (ongoing instanceof StockSellWorkRequest) {
+                stocks += temp.getPrice();
+            } else if (ongoing instanceof StockSellWorkRequest && ((StockSellWorkRequest) ongoing).getStatusType() == StockSellWorkRequest.StatusType.Sold) {
                 StockSellWorkRequest temp = (StockSellWorkRequest) ongoing;
-                stocks -= temp.getQuantity() * temp.getPrice();
+                stocks -= temp.getPrice();
             }
         }
-        
+
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof CryptoBuyWorkRequest) {
+            if (ongoing instanceof CryptoBuyWorkRequest && ((CryptoBuyWorkRequest) ongoing).getStatusType() == CryptoBuyWorkRequest.StatusType.Completed) {
                 CryptoBuyWorkRequest temp = (CryptoBuyWorkRequest) ongoing;
-                crypto += temp.getQuantity() * temp.getPrice();
-            } else if (ongoing instanceof CryptoSellWorkRequest) {
+                crypto += temp.getPrice();
+            } else if (ongoing instanceof CryptoSellWorkRequest && ((CryptoSellWorkRequest) ongoing).getStatusType() == CryptoSellWorkRequest.StatusType.Sold) {
                 CryptoSellWorkRequest temp = (CryptoSellWorkRequest) ongoing;
-                crypto -= temp.getQuantity() * temp.getPrice();
+                crypto -= temp.getPrice();
             }
         }
-        
+
         this.totalOrdersJLabel.setText(assets.toString());
         this.totalOrdersJLabel2.setText(stocks.toString());
         this.totalOrdersJLabel1.setText(forex.toString());
