@@ -16,6 +16,7 @@ public class AssetBuyWorkRequest extends WorkRequest {
 
     public enum StatusType {
         Initiated("INITIATED"),
+        Awaiting("AWAITING"),
         Completed("COMPLETED"),
         Sold("SOLD"),
         Rejected("REJECTED");

@@ -280,9 +280,8 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                 }
 
             } else {
-
                 AssetSellWorkRequest request = (AssetSellWorkRequest) this.selectedRequest;
-                request.setStatusType(statusSelected == "Approve" ? AssetSellWorkRequest.StatusType.Completed : AssetSellWorkRequest.StatusType.Rejected);
+                request.setStatusType(statusSelected == "Approve" ? AssetSellWorkRequest.StatusType.Sold : AssetSellWorkRequest.StatusType.SellRejected);
 
                 if (request.getOraganization() instanceof JewelleryOrganization) {
                     JewelleryOrganization temp = (JewelleryOrganization) request.getOraganization();
@@ -332,6 +331,16 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
 
                         SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Real Estate asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of " + temp.getEstates().get(request.getAssetName()).toString() + "  was successful.");
                         temp1.sendMail();
+                    }
+                }
+
+                for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+                    WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+                    if (ongoing instanceof AssetBuyWorkRequest) {
+                        AssetBuyWorkRequest temp1 = (AssetBuyWorkRequest) ongoing;
+                        if (temp1.getRaisedTo() == this.account && temp1.getRaisedBy() == request.getRaisedBy() && temp1.getOraganization() == request.getOraganization() && temp1.getAssetName().equals(request.getAssetName()) && temp1.getStatusType() == AssetBuyWorkRequest.StatusType.Awaiting) {
+                            temp1.setStatusType(statusSelected == "Approve" ? AssetBuyWorkRequest.StatusType.Sold : AssetBuyWorkRequest.StatusType.Completed);
+                        }
                     }
                 }
             }

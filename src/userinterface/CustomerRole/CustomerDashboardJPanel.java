@@ -45,7 +45,7 @@ public class CustomerDashboardJPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof AssetBuyWorkRequest && ((AssetBuyWorkRequest) ongoing).getStatusType() == AssetBuyWorkRequest.StatusType.Completed) {
+            if (ongoing instanceof AssetBuyWorkRequest && (((AssetBuyWorkRequest) ongoing).getStatusType() == AssetBuyWorkRequest.StatusType.Completed || ((AssetBuyWorkRequest) ongoing).getStatusType() == AssetBuyWorkRequest.StatusType.Sold)) {
                 AssetBuyWorkRequest temp = (AssetBuyWorkRequest) ongoing;
                 assets += temp.getQuantity() * temp.getPrice();
             } else if (ongoing instanceof AssetSellWorkRequest && ((AssetSellWorkRequest) ongoing).getStatusType() == AssetSellWorkRequest.StatusType.Sold) {
@@ -56,7 +56,7 @@ public class CustomerDashboardJPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof ForexBuyWorkRequest && ((ForexBuyWorkRequest) ongoing).getStatusType() == ForexBuyWorkRequest.StatusType.Completed) {
+            if (ongoing instanceof ForexBuyWorkRequest && (((ForexBuyWorkRequest) ongoing).getStatusType() == ForexBuyWorkRequest.StatusType.Completed || ((ForexBuyWorkRequest) ongoing).getStatusType() == ForexBuyWorkRequest.StatusType.Sold)) {
                 ForexBuyWorkRequest temp = (ForexBuyWorkRequest) ongoing;
                 forex += temp.getQuantity() * temp.getPrice();
             } else if (ongoing instanceof ForexSellWorkRequest && ((ForexSellWorkRequest) ongoing).getStatusType() == ForexSellWorkRequest.StatusType.Sold) {
@@ -67,7 +67,7 @@ public class CustomerDashboardJPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof StockBuyWorkQueue && ((StockBuyWorkQueue) ongoing).getStatusType() == StockBuyWorkQueue.StatusType.Completed) {
+            if (ongoing instanceof StockBuyWorkQueue && (((StockBuyWorkQueue) ongoing).getStatusType() == StockBuyWorkQueue.StatusType.Completed || ((StockBuyWorkQueue) ongoing).getStatusType() == StockBuyWorkQueue.StatusType.Sold)) {
                 StockBuyWorkQueue temp = (StockBuyWorkQueue) ongoing;
                 stocks += temp.getPrice();
             } else if (ongoing instanceof StockSellWorkRequest && ((StockSellWorkRequest) ongoing).getStatusType() == StockSellWorkRequest.StatusType.Sold) {
@@ -78,7 +78,7 @@ public class CustomerDashboardJPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < this.system.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.system.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof CryptoBuyWorkRequest && ((CryptoBuyWorkRequest) ongoing).getStatusType() == CryptoBuyWorkRequest.StatusType.Completed) {
+            if (ongoing instanceof CryptoBuyWorkRequest && (((CryptoBuyWorkRequest) ongoing).getStatusType() == CryptoBuyWorkRequest.StatusType.Completed || ((CryptoBuyWorkRequest) ongoing).getStatusType() == CryptoBuyWorkRequest.StatusType.Sold)) {
                 CryptoBuyWorkRequest temp = (CryptoBuyWorkRequest) ongoing;
                 crypto += temp.getPrice();
             } else if (ongoing instanceof CryptoSellWorkRequest && ((CryptoSellWorkRequest) ongoing).getStatusType() == CryptoSellWorkRequest.StatusType.Sold) {

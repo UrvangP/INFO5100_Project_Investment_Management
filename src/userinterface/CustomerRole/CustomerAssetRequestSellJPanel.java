@@ -199,7 +199,7 @@ public class CustomerAssetRequestSellJPanel extends javax.swing.JPanel {
                 }
 //            }
         }
-        selectedRequest.setStatusType(AssetBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setStatusType(AssetBuyWorkRequest.StatusType.Awaiting);
 
         AssetSellWorkRequest newRequest = new AssetSellWorkRequest(
                 this.account,
@@ -207,8 +207,8 @@ public class CustomerAssetRequestSellJPanel extends javax.swing.JPanel {
                 new Date(),
                 null,
                 AssetSellWorkRequest.StatusType.Initiated,
-                price,
-                unit,
+                selectedRequest.getPrice(),
+                selectedRequest.getQuantity(),
                 new Date(),
                 company,
                 productName,

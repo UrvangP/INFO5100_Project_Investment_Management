@@ -54,8 +54,8 @@ public class CustomerRequestAssetViewJPanel extends javax.swing.JPanel {
                 AssetSellWorkRequest temp = (AssetSellWorkRequest) ongoing;
                 Object[] row = {
                     "SELL",
-                    temp.getCompanyName(),
                     temp.getOraganization() instanceof IndustriesOrganization ? "Industries" : temp.getOraganization() instanceof JewelleryOrganization ? "Jewellery" : "Real Estate",
+                    temp.getCompanyName(),
                     temp.getQuantity(),
                     temp.getPrice(),
                     temp.getModifiedAt(),
