@@ -375,8 +375,8 @@ public class cryptoOrganizationPanel extends javax.swing.JPanel {
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
-            System.out.println(selectedDelIndex);
-            this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
+            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
+            System.out.println("!!!" + selectedUser.getUsername().toString());
         }
     }
     
