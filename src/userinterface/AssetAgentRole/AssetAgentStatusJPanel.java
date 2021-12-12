@@ -344,9 +344,9 @@ public class AssetAgentStatusJPanel extends javax.swing.JPanel {
                     }
                 }
             }
-            getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
-
+            AssetAgentDashboardJPanel assetAgentDashboardJPanel = new AssetAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(assetAgentDashboardJPanel);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a record to update!", "Request Status", ERROR_MESSAGE);
 

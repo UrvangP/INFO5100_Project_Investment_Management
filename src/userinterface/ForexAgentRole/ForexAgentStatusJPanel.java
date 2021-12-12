@@ -311,8 +311,10 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
                     }
                 }
             }
-            getStatus();
             JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
+
+            ForexAgentDashboardJPanel forexAgentDashboardJPanel = new ForexAgentDashboardJPanel(ecosystem, account, jSplitPane, browsingJPanel);
+            this.jSplitPane.setRightComponent(forexAgentDashboardJPanel);
 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a record to update!", "Request Status", ERROR_MESSAGE);

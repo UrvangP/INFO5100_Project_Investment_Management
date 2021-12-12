@@ -249,7 +249,7 @@ public class MutualFundsAllocation extends javax.swing.JPanel {
             }
             else {
                 StockSellWorkRequest request = (StockSellWorkRequest) this.selectedRequest;
-                request.setStatusType(statusSelected == "Approve" ? StockSellWorkRequest.StatusType.Completed : StockSellWorkRequest.StatusType.Rejected);
+                request.setStatusType(statusSelected == "Approve" ? StockSellWorkRequest.StatusType.Sold : StockSellWorkRequest.StatusType.SellRejected);
             }
         }
         getStatus();

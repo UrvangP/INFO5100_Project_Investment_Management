@@ -18,6 +18,8 @@ import Business.WorkQueue.StockBuyWorkQueue;
 import Business.WorkQueue.StockSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -267,6 +269,7 @@ public class CompanyAllocationRequest extends javax.swing.JPanel {
             }
         }
         getStatus();
+        JOptionPane.showMessageDialog(this, "Record updated successfully!", "Request Status", INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
