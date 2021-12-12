@@ -488,7 +488,7 @@ public class AssetRealEstateCreateJPanel extends javax.swing.JPanel {
         if (!this.realestateAreaJField1.getText().matches("[0-9]+")) {
             errorMEssage += "Invalid Real Estate Area should be a number! \n";
         }
-        if (!this.realestateLocationJField.getText().matches("[a-zA-Z0-9 ]+")) {
+        if (!this.realestateLocationJField.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Location Name! \n";
         }
 

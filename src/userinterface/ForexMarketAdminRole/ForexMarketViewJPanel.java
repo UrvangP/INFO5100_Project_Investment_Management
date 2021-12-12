@@ -12,6 +12,7 @@ import Business.Organization.BanksOrganization;
 import Business.Organization.BrokersOrganization;
 import Business.Organization.Organization;
 import Business.Role.AssetAgentRole;
+import Business.Role.ForexAgentRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -50,7 +51,7 @@ public class ForexMarketViewJPanel extends javax.swing.JPanel {
         }
 
         if (ongoing != null) {
-            if (!(this.account.getRole() instanceof AssetAgentRole) && ongoing != null) {
+            if (!(this.account.getRole() instanceof ForexAgentRole) && ongoing != null) {
                 if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")) {//Banks
                     ForexBankJPanel forexBankJpanel = new ForexBankJPanel(ecosystem, account, jSplitPane, browsingJPanel);
                     forexJTabbedPane.addTab("Banks", forexBankJpanel);

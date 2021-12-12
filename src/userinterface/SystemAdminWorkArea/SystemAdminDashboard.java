@@ -330,6 +330,7 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/output-onlinepngtools.png"))); // NOI18N
         jLabel1.setText("Statistics");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {

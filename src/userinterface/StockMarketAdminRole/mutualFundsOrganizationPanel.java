@@ -43,15 +43,16 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     Network ongoing;
     UserAccount selectedUser;
-    ArrayList<UserAccount> selectedDropDown;
+    ArrayList<UserAccount> selectedDropDown = new ArrayList<>();
     stockMarketDashboard parent;
-    ArrayList<Organization> marketData;
-    ArrayList<Organization> selectedFunds;
-    
+    ArrayList<Organization> marketData = new ArrayList<>();
+
+    ArrayList<Organization> selectedFunds = new ArrayList<>();
+
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
-    
+
     public mutualFundsOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
-        
+
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
@@ -59,11 +60,11 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         this.parent = parent;
         this.marketData = new ArrayList();
         this.selectedFunds = new ArrayList();
-        
+
         initComponents();
-        
+
         setStockAdminUsers();
-        
+
         this.ongoing = null;
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
@@ -72,9 +73,9 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
                 ongoing = ongoing1;
             }
         }
-        
+
         initData();
-        
+
         getMarketData();
     }
 
@@ -418,14 +419,13 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         String companyName = jTextField1.getText();
         String companyCountry = countryComboBox.getSelectedItem().toString();
         String creationDate = dateOfCreationJLabel.getText();
-        
-        if(validateItem()){
+
+        if (validateItem()) {
 
             UserAccount createdBy = account;
             UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
 
             //Company comp = new Company(companyName, companyCountry, createdBy, admin);
-
             for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
                 Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
                 if (ep instanceof StockMarketEnterprise) {
@@ -443,31 +443,31 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     private void addJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButton1ActionPerformed
         // TODO add your handling code here:
         DefaultListModel model = new DefaultListModel();
-        
+
         ListModel model1 = jList2.getModel();
 
-        for(int i=0; i < model1.getSize(); i++){
-             model.addElement(model1.getElementAt(i));  
+        for (int i = 0; i < model1.getSize(); i++) {
+            model.addElement(model1.getElementAt(i));
         }
-        
+
         String selection = jList1.getSelectedValue();
-        
+
         model.addElement(selection);
-        
-        for(Organization o: marketData){
-            if(o.getName().equals(selection)){
+
+        for (Organization o : marketData) {
+            if (o.getName().equals(selection)) {
                 selectedFunds.add(o);
                 marketData.remove(o);
                 break;
             }
         }
-        
+
         DefaultListModel model2 = new DefaultListModel();
-        
-        for(Organization o: marketData){
+
+        for (Organization o : marketData) {
             model2.addElement(o.getName());
         }
-        
+
         jList2.setModel(model);
         jList1.setModel(model2);
     }//GEN-LAST:event_addJButton1ActionPerformed
@@ -475,18 +475,19 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
     private void addJButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButton2ActionPerformed
         // TODO add your handling code here:
         DefaultListModel model = new DefaultListModel();
-        
+
         ListModel model1 = jList2.getModel();
-        
+
         String selection = jList2.getSelectedValue();
 
-        for(int i=0; i < model1.getSize(); i++){
-            if(model1.getElementAt(i) != selection)
-                model.addElement(model1.getElementAt(i));  
+        for (int i = 0; i < model1.getSize(); i++) {
+            if (model1.getElementAt(i) != selection) {
+                model.addElement(model1.getElementAt(i));
+            }
         }
-        
+
         OrganizationDirectory orgs = null;
-        
+
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
@@ -494,20 +495,20 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        
-        for(Organization o: orgs.getOrganizationList()){
-            if(o.getType().equals(Organization.Type.Companies.toString()) && o.getName().equals(selection)){
+
+        for (Organization o : orgs.getOrganizationList()) {
+            if (o.getType().equals(Organization.Type.Companies.toString()) && o.getName().equals(selection)) {
                 marketData.add(o);
                 selectedFunds.remove(o);
             }
         }
-        
+
         DefaultListModel model2 = new DefaultListModel();
-        
-        for(Organization o: marketData){
+
+        for (Organization o : marketData) {
             model2.addElement(o.getName());
         }
-        
+
         jList2.setModel(model);
         jList1.setModel(model2);
     }//GEN-LAST:event_addJButton2ActionPerformed
@@ -519,7 +520,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
             this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
         }
     }
-    
+
     public void setStockAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
@@ -553,14 +554,14 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         this.adminComboBox.setModel(brandSDropdownModel);
     }
 
-    private void initData(){
+    private void initData() {
         dateOfCreationJLabel.setText(new Date().toString());
         createdByJLabel.setText(account.getUsername());
     }
-    
-    public void getMarketData(){
+
+    public void getMarketData() {
         OrganizationDirectory orgs = null;
-        
+
         for (int i = 0; i < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); i++) {
             Enterprise ep = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(i);
             if (ep instanceof StockMarketEnterprise) {
@@ -568,25 +569,25 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        
+
         DefaultListModel model = new DefaultListModel();
         DefaultListModel model1 = new DefaultListModel();
-        
-        for(Organization o: orgs.getOrganizationList()){
-            if(o.getType().equals(Organization.Type.Companies.toString())){
+
+        for (Organization o : orgs.getOrganizationList()) {
+            if (o.getType().equals(Organization.Type.Companies.toString())) {
                 marketData.add(o);
             }
         }
-        
-        for(Organization o: marketData){
+
+        for (Organization o : marketData) {
             model.addElement(o.getName());
         }
-        
+
         jList1.setModel(model);
         jList2.setModel(model1);
-        
+
     }
-    
+
     public Boolean validateItem() {
         String errorMEssage = "";
         if (this.adminComboBox.getSelectedItem() == null) {
@@ -595,7 +596,7 @@ public class mutualFundsOrganizationPanel extends javax.swing.JPanel {
         if (!this.jTextField1.getText().matches("[a-zA-Z0-9]+")) {
             errorMEssage += "Invalid Company Name! \n";
         }
-        if(jList2.getModel().getSize()==0){
+        if (jList2.getModel().getSize() == 0) {
             errorMEssage += "Stock list cannot be empty! \n";
         }
         if (errorMEssage.equals("")) {

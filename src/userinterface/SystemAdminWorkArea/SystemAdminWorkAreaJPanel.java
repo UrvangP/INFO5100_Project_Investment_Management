@@ -71,18 +71,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 this.assetMarketButton.setVisible(!true);
             }
             if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket") != null && ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("CryptoMarket").get("Wallet")) {
-                this.forexMarketButton.setVisible(true);
-
-            } else {
-                this.forexMarketButton.setVisible(!true);
-
-            }
-            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")
-                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers"))) {
                 this.cryptoMarketButton.setVisible(true);
 
             } else {
                 this.cryptoMarketButton.setVisible(!true);
+
+            }
+            if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Banks")
+                    || ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("ForexMarket").get("Brokers"))) {
+                this.forexMarketButton.setVisible(true);
+
+            } else {
+                this.forexMarketButton.setVisible(!true);
 
             }
             if (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket") != null && (ongoing.getEnterpriseDirectory().getEnterpriseSelection().get("StockMarket").get("Companies")

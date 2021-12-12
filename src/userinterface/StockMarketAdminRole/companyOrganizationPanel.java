@@ -12,16 +12,9 @@ import Business.Network.Network;
 import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
 import Business.Role.CompanyAgentRole;
-import Business.Role.StockMarketAdminRole;
-import Business.StockMarket.Company;
 import Business.UserAccount.UserAccount;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -44,7 +37,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     Network ongoing;
     UserAccount selectedUser;
-    ArrayList<UserAccount> selectedDropDown;
+    ArrayList<UserAccount> selectedDropDown = new ArrayList<>();
     stockMarketDashboard parent;
     
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
