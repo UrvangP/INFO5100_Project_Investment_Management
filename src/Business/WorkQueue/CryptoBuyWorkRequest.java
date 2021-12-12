@@ -13,9 +13,11 @@ import java.util.Date;
  *
  * @author urvang
  */
-public class CryptoBuyWorkRequest extends WorkRequest{
+public class CryptoBuyWorkRequest extends WorkRequest {
+
     public enum StatusType {
         Initiated("INITIATED"),
+        Awaiting("AWAITING"),
         Completed("COMPLETED"),
         Sold("SOLD"),
         Rejected("REJECTED");
@@ -43,7 +45,7 @@ public class CryptoBuyWorkRequest extends WorkRequest{
     private String companyName;
     private String assetName;
     private Organization oraganization;
-    
+
     public CryptoBuyWorkRequest(UserAccount raisedBy,
             UserAccount raisedTo,
             Date requestDate,
