@@ -6,14 +6,19 @@
 package userinterface.CryptoAgentRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.CryptoMarketEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.ForexMarketEnterprise;
+import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.CompaniesOrganization;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Organization.WalletOrganization;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPanel;
@@ -30,6 +35,10 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
     JPanel browsingJPanel;
     WalletOrganization company;
     
+    ArrayList<Network> allNetworks = new ArrayList<>();
+    Network selectedNetwork;
+    ArrayList<Enterprise> enterpriseSelection = new ArrayList<>();
+    
     public CryptoAgentJPanel(JPanel rootJPanel, UserAccount account, EcoSystem system, JPanel browsingJPanel) {
         this.ecosystem = system;
         this.account = account;
@@ -41,14 +50,49 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
         
         this.company = getOrganization();
         
-        if(this.company == null){
-            homeButton.setEnabled(false);
-            AccountCreationJButton.setEnabled(false);
-            AccountCreationJButton1.setEnabled(false);
+        getNetwork();
+        
+        CryptoAgentHome home = new CryptoAgentHome(ecosystem, account, company);
+        jSplitPane.setRightComponent(home);
+        
+    }
+    
+    public void getNetwork() {
+        ArrayList<String> asset = new ArrayList<>();
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing1 = this.ecosystem.getNetwork().getNetworkList().get(i);
+            asset.add(ongoing1.getNName());
+            this.allNetworks.add(ongoing1);
+            enterpriseSelection = ongoing1.getEnterpriseDirectory().getEnterpriseDir();
         }
-        else{
-            CryptoAgentHome home = new CryptoAgentHome(ecosystem, account, company);
-            jSplitPane.setRightComponent(home);
+        String[] netwrokSDropdown = asset.toArray(new String[asset.size()]);
+        DefaultComboBoxModel<String> brandSDropdownModel = new DefaultComboBoxModel<>(netwrokSDropdown);
+        this.networkComboBox.setModel(brandSDropdownModel);
+
+    }
+
+    public void getLeftButtonStatus() {
+        Boolean isAssetFound = false;
+        Boolean isForexFound = false;
+        Boolean isStockFound = false;
+        Boolean isCryptoFound = false;
+        for (int i = 0; i < this.enterpriseSelection.size(); i++) {
+            if (enterpriseSelection.get(i) instanceof AssetMarketEnterprise && ((AssetMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isAssetFound = true;
+            } else if (enterpriseSelection.get(i) instanceof CryptoMarketEnterprise && ((CryptoMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isCryptoFound = true;
+            } else if (enterpriseSelection.get(i) instanceof ForexMarketEnterprise && ((ForexMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isForexFound = true;
+            } else if (enterpriseSelection.get(i) instanceof StockMarketEnterprise && ((StockMarketEnterprise) enterpriseSelection.get(i)).admin == this.account) {
+                isStockFound = true;
+            }
+        }
+        if (isCryptoFound) {
+            this.AccountCreationJButton.setVisible(true);
+            this.AccountCreationJButton1.setVisible(true);
+        } else {
+            this.AccountCreationJButton.setVisible(!true);
+            this.AccountCreationJButton1.setVisible(!true);
         }
     }
 
@@ -68,6 +112,8 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
         homeButton = new javax.swing.JButton();
         AccountCreationJButton = new javax.swing.JButton();
         AccountCreationJButton1 = new javax.swing.JButton();
+        brandJLabel1 = new javax.swing.JLabel();
+        networkComboBox = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -113,20 +159,42 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
             }
         });
 
+        brandJLabel1.setFont(new java.awt.Font("PT Sans Caption", 0, 14)); // NOI18N
+        brandJLabel1.setForeground(new java.awt.Color(67, 100, 100));
+        brandJLabel1.setText("Select Network (*):");
+
+        networkComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                networkComboBoxItemStateChanged(evt);
+            }
+        });
+        networkComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                networkComboBoxMouseClicked(evt);
+            }
+        });
+        networkComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                networkComboBoxPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AccountCreationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(networkComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brandJLabel1))
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -137,13 +205,17 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userNameJLabel)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
+                .addComponent(brandJLabel1)
+                .addGap(8, 8, 8)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountCreationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountCreationJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -201,6 +273,18 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
         this.jSplitPane.setRightComponent(allocation);
     }//GEN-LAST:event_AccountCreationJButton1ActionPerformed
 
+    private void networkComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkComboBoxItemStateChanged
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxItemStateChanged
+
+    private void networkComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkComboBoxMouseClicked
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxMouseClicked
+
+    private void networkComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_networkComboBoxPropertyChange
+        _adminChnageHandler();
+    }//GEN-LAST:event_networkComboBoxPropertyChange
+
     public WalletOrganization getOrganization(){
         Network ongoing = null;
 
@@ -232,15 +316,32 @@ public class CryptoAgentJPanel extends javax.swing.JPanel {
         
         return null;
     }
+    
+    public void _adminChnageHandler() {
+        Integer selectedDelIndex = this.networkComboBox.getSelectedIndex();
+        if (selectedDelIndex != -1) {
+            this.selectedNetwork = this.allNetworks.get(selectedDelIndex);
+            for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+                Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+                if (ongoing == this.selectedNetwork) {
+                    ongoing.setIsSelected(true);
+                } else {
+                    ongoing.setIsSelected(!true);
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AccountCreationJButton;
     private javax.swing.JButton AccountCreationJButton1;
+    private javax.swing.JLabel brandJLabel1;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JComboBox<String> networkComboBox;
     private javax.swing.JLabel userNameJLabel;
     // End of variables declaration//GEN-END:variables
 }
