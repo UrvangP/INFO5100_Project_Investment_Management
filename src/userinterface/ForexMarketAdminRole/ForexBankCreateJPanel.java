@@ -6,10 +6,17 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.ForexMarketEnterprise;
 import Business.Network.Network;
+import Business.Organization.BanksOrganization;
+import Business.Organization.BrokersOrganization;
+import Business.Organization.IndustriesOrganization;
+import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
+import Business.Organization.RealEstateOrganization;
+import Business.Role.AssetAgentRole;
 import Business.Role.ForexAgentRole;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
@@ -63,8 +70,33 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
             UserAccount ongoing = this.ecosystem.getUserAccountDirectory().getUserAccountList().get(i);
             if (ongoing.getRole() instanceof ForexAgentRole) {
-                this.forexAdminUser.add(ongoing);
-                forex.add(ongoing.getUsername());
+                Boolean found = false;
+                for (int k = 0; k < this.ecosystem.getNetwork().getNetworkList().size(); k++) {
+                    for (int j = 0; j < this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                        Enterprise temp = this.ecosystem.getNetwork().getNetworkList().get(k).getEnterpriseDirectory().getEnterpriseDir().get(j);
+                        if (temp instanceof ForexMarketEnterprise) {
+                            for (int p = 0; p < temp.getOrganizationDirectory().getOrganizationList().size(); p++) {
+                                Organization temp1 = temp.getOrganizationDirectory().getOrganizationList().get(p);
+                                if (temp1 instanceof BanksOrganization) {
+                                    BanksOrganization temp3 = ((BanksOrganization) temp1);
+                                    if (temp3.getAdmin() == ongoing) {
+                                        found = true;
+                                    }
+                                } else if (temp1 instanceof BrokersOrganization) {
+                                    BrokersOrganization temp4 = ((BrokersOrganization) temp1);
+                                    if (temp4.getAdmin() == ongoing) {
+                                        found = true;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!found) {
+                    this.forexAdminUser.add(ongoing);
+                    forex.add(ongoing.getUsername());
+                }
             }
         }
         String[] forexDropdown = forex.toArray(new String[forex.size()]);
@@ -474,6 +506,7 @@ public class ForexBankCreateJPanel extends javax.swing.JPanel {
                     ongoing.getOrganizationDirectory().createBankOrganization(this.bankNameJField.getText(), Organization.Type.Banks, this.nameJField.getText().toString(), this.selectedUser, banks, new Date());
                 }
             }
+            setForexAdminUsers();
             JOptionPane.showMessageDialog(this, "Bank created successfully!", "Bank", INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

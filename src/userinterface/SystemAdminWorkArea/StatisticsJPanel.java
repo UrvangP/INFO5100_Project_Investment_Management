@@ -157,22 +157,22 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         Integer temp8 = 0;
         for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
             WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
-            if (ongoing instanceof AssetBuyWorkRequest) {
+            if (ongoing instanceof AssetBuyWorkRequest && ((AssetBuyWorkRequest) ongoing).getStatusType() == AssetBuyWorkRequest.StatusType.Completed) {
                 temp1 += ((AssetBuyWorkRequest) ongoing).getPrice() * ((AssetBuyWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof AssetSellWorkRequest) {
+            } else if (ongoing instanceof AssetSellWorkRequest && ((AssetSellWorkRequest) ongoing).getStatusType() == AssetSellWorkRequest.StatusType.Sold) {
                 temp2 += ((AssetSellWorkRequest) ongoing).getPrice() * ((AssetSellWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof CryptoBuyWorkRequest) {
-                temp3 += ((CryptoBuyWorkRequest) ongoing).getPrice() * ((CryptoBuyWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof CryptoSellWorkRequest) {
-                temp4 += ((CryptoSellWorkRequest) ongoing).getPrice() * ((CryptoSellWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof ForexBuyWorkRequest) {
+            } else if (ongoing instanceof CryptoBuyWorkRequest && ((CryptoBuyWorkRequest) ongoing).getStatusType() == CryptoBuyWorkRequest.StatusType.Completed) {
+                temp3 += ((CryptoBuyWorkRequest) ongoing).getPrice();
+            } else if (ongoing instanceof CryptoSellWorkRequest && ((CryptoSellWorkRequest) ongoing).getStatusType() == CryptoSellWorkRequest.StatusType.Sold) {
+                temp4 += ((CryptoSellWorkRequest) ongoing).getPrice();
+            } else if (ongoing instanceof ForexBuyWorkRequest && ((ForexBuyWorkRequest) ongoing).getStatusType() == ForexBuyWorkRequest.StatusType.Completed) {
                 temp5 += ((ForexBuyWorkRequest) ongoing).getPrice() * ((ForexBuyWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof ForexSellWorkRequest) {
+            } else if (ongoing instanceof ForexSellWorkRequest && ((ForexSellWorkRequest) ongoing).getStatusType() == ForexSellWorkRequest.StatusType.Sold) {
                 temp6 += ((ForexSellWorkRequest) ongoing).getPrice() * ((ForexSellWorkRequest) ongoing).getQuantity();
-            } else if (ongoing instanceof StockBuyWorkQueue) {
-                temp7 += ((StockBuyWorkQueue) ongoing).getPrice() * ((StockBuyWorkQueue) ongoing).getQuantity();
-            } else if (ongoing instanceof StockSellWorkRequest) {
-                temp8 += ((StockSellWorkRequest) ongoing).getPrice() * ((StockSellWorkRequest) ongoing).getQuantity();
+            } else if (ongoing instanceof StockBuyWorkQueue && ((StockBuyWorkQueue) ongoing).getStatusType() == StockBuyWorkQueue.StatusType.Completed) {
+                temp7 += ((StockBuyWorkQueue) ongoing).getPrice();
+            } else if (ongoing instanceof StockSellWorkRequest && ((StockSellWorkRequest) ongoing).getStatusType() == StockSellWorkRequest.StatusType.Sold) {
+                temp8 += ((StockSellWorkRequest) ongoing).getPrice();
             }
 
         }
@@ -186,8 +186,8 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         dataset.addValue(temp5, "Buy", "Forex Market");
         dataset.addValue(temp6, "Sell", "Forex Market");
 
-        dataset.addValue(temp5, "Buy", "Stock Market");
-        dataset.addValue(temp6, "Sell", "Stock Market");
+        dataset.addValue(temp7, "Buy", "Stock Market");
+        dataset.addValue(temp8, "Sell", "Stock Market");
         return dataset;
     }
 

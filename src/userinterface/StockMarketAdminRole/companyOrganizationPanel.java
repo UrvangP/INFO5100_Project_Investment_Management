@@ -39,21 +39,21 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     UserAccount selectedUser;
     ArrayList<UserAccount> selectedDropDown = new ArrayList<>();
     stockMarketDashboard parent;
-    
+
     ArrayList<UserAccount> assetsAdminUser = new ArrayList<>();
-    
+
     public companyOrganizationPanel(EcoSystem ecosystem, UserAccount account, JSplitPane jSplitPane, JPanel browsingJPanel, stockMarketDashboard parent) {
-        
+
         this.ecosystem = ecosystem;
         this.account = account;
         this.jSplitPane = jSplitPane;
         this.browsingJPanel = browsingJPanel;
         this.parent = parent;
-        
+
         initComponents();
-        
+
         setStockAdminUsers();
-        
+
         this.ongoing = null;
 
         for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
@@ -62,7 +62,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                 ongoing = ongoing1;
             }
         }
-        
+
         initData();
     }
 
@@ -208,11 +208,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(467, 467, 467)
-                .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(337, 337, 337)
+                .addGap(230, 230, 230)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(brandJLabel)
                     .addComponent(brandJLabel1)
@@ -222,25 +218,27 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                     .addComponent(cardentifierJLabel4)
                     .addComponent(cardentifierJLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(adminComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(countryComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(dateOfCreationJLabel)
+                    .addComponent(createdByJLabel)
                     .addComponent(jTextField3)
-                    .addComponent(countryComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
-                    .addComponent(adminComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 183, Short.MAX_VALUE)
-                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createdByJLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(400, 400, 400))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(12, 12, 12)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(12, 12, 12)))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(452, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brandJLabel))
@@ -270,12 +268,7 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(addJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(19, 19, 19)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(645, Short.MAX_VALUE)))
+                .addGap(143, 143, 143))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -325,9 +318,9 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         String creationDate = dateOfCreationJLabel.getText();
         String price = jTextField2.getText();
         String revenue = jTextField3.getText();
-        
-        if(validateItem()){      
-        
+
+        if (validateItem()) {
+
             UserAccount createdBy = account;
             UserAccount admin = ecosystem.getUserAccountDirectory().getAccountOnUsername(adminComboBox.getSelectedItem().toString());
 
@@ -348,11 +341,10 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
     public void _adminChnageHandler() {
         Integer selectedDelIndex = this.adminComboBox.getSelectedIndex();
         if (selectedDelIndex != -1) {
-            System.out.println(selectedDelIndex);
-            this.selectedUser = this.selectedDropDown.get(selectedDelIndex);
+            this.selectedUser = this.assetsAdminUser.get(selectedDelIndex);
         }
     }
-    
+
     public void setStockAdminUsers() {
         ArrayList<String> asset = new ArrayList<>();
         for (int i = 0; i < this.ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
@@ -386,11 +378,11 @@ public class companyOrganizationPanel extends javax.swing.JPanel {
         this.adminComboBox.setModel(brandSDropdownModel);
     }
 
-    private void initData(){
+    private void initData() {
         dateOfCreationJLabel.setText(new Date().toString());
         createdByJLabel.setText(account.getUsername());
     }
-    
+
     public Boolean validateItem() {
         String errorMEssage = "";
         if (this.adminComboBox.getSelectedItem() == null) {

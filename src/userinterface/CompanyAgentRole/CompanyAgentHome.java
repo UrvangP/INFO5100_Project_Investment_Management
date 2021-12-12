@@ -31,7 +31,7 @@ public class CompanyAgentHome extends javax.swing.JPanel {
     JPanel browsingJPanel;
     Network ongoing;
     UserAccount selectedUser;
-    ArrayList<UserAccount> selectedDropDown;
+    ArrayList<UserAccount> selectedDropDown = new ArrayList<>();
     stockMarketDashboard parent;
     CompaniesOrganization org;
     
@@ -170,34 +170,33 @@ public class CompanyAgentHome extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(337, 337, 337)
+                .addGap(271, 271, 271)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(brandJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(brandJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardentifierJLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardentifierJLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cardentifierJLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(countryComboBox, 0, 1, Short.MAX_VALUE)
+                    .addComponent(adminComboBox, 0, 193, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(dateOfCreationJLabel)
                     .addComponent(jTextField2)
-                    .addComponent(countryComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
-                    .addComponent(adminComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 183, Short.MAX_VALUE)
-                    .addComponent(dateOfCreationJLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(400, 400, 400))
+                    .addComponent(jTextField3))
+                .addContainerGap(450, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(12, 12, 12)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
                     .addGap(12, 12, 12)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
+                .addGap(122, 122, 122)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brandJLabel))
@@ -221,33 +220,33 @@ public class CompanyAgentHome extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardentifierJLabel5)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(19, 19, 19)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(645, Short.MAX_VALUE)))
+                    .addContainerGap(646, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGap(0, 1054, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
