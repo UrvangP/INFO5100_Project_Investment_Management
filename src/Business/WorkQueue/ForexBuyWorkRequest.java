@@ -12,10 +12,11 @@ import java.util.Date;
  *
  * @author ronak
  */
-public class ForexBuyWorkRequest extends WorkRequest{
+public class ForexBuyWorkRequest extends WorkRequest {
 
     public enum StatusType {
         Initiated("INITIATED"),
+        Awaiting("AWAITING"),
         Completed("COMPLETED"),
         Sold("SOLD"),
         Rejected("REJECTED");
@@ -35,7 +36,7 @@ public class ForexBuyWorkRequest extends WorkRequest{
             return value;
         }
     }
-    
+
     private StatusType statusType;
     private Integer price;
     private Integer quantity;
@@ -121,7 +122,5 @@ public class ForexBuyWorkRequest extends WorkRequest{
     public void setOraganization(Object oraganization) {
         this.oraganization = oraganization;
     }
-    
-    
-    
+
 }

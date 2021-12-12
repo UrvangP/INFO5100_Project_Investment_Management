@@ -11,8 +11,6 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CryptoBuyWorkRequest;
 import Business.WorkQueue.CryptoSellWorkRequest;
-import Business.WorkQueue.StockBuyWorkQueue;
-import Business.WorkQueue.StockSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -247,10 +245,18 @@ public class CryptoAllocationRequest extends javax.swing.JPanel {
             if (this.selectedRequest instanceof CryptoBuyWorkRequest) {
                 CryptoBuyWorkRequest request = (CryptoBuyWorkRequest) this.selectedRequest;
                 request.setStatusType(statusSelected == "Approve" ? CryptoBuyWorkRequest.StatusType.Completed : CryptoBuyWorkRequest.StatusType.Rejected);
-            }
-            else {
+            } else {
                 CryptoSellWorkRequest request = (CryptoSellWorkRequest) this.selectedRequest;
-                request.setStatusType(statusSelected == "Approve" ? CryptoSellWorkRequest.StatusType.Completed : CryptoSellWorkRequest.StatusType.Rejected);
+                request.setStatusType(statusSelected == "Approve" ? CryptoSellWorkRequest.StatusType.Sold : CryptoSellWorkRequest.StatusType.SellRejected);
+                for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+                    WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+                    if (ongoing instanceof CryptoBuyWorkRequest) {
+                        CryptoBuyWorkRequest temp1 = (CryptoBuyWorkRequest) ongoing;
+                        if (temp1.getRaisedTo() == this.account && temp1.getRaisedBy() == request.getRaisedBy() && temp1.getOraganization() == request.getOraganization() && temp1.getAssetName().equals(request.getAssetName()) && temp1.getStatusType() == CryptoBuyWorkRequest.StatusType.Awaiting) {
+                            temp1.setStatusType(statusSelected == "Approve" ? CryptoBuyWorkRequest.StatusType.Sold : CryptoBuyWorkRequest.StatusType.Completed);
+                        }
+                    }
+                }
             }
         }
         getStatus();

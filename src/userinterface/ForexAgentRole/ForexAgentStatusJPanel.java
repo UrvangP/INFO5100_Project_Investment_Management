@@ -272,7 +272,7 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
             } else {
 
                 ForexSellWorkRequest request = (ForexSellWorkRequest) this.selectedRequest;
-                request.setStatusType(statusSelected == "Approve" ? ForexSellWorkRequest.StatusType.Completed : ForexSellWorkRequest.StatusType.Rejected);
+                request.setStatusType(statusSelected == "Approve" ? ForexSellWorkRequest.StatusType.Sold : ForexSellWorkRequest.StatusType.SellRejected);
 
                 if (request.getOraganization() instanceof BanksOrganization) {
                     BanksOrganization temp = (BanksOrganization) request.getOraganization();
@@ -298,6 +298,16 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
                         temp.getBroker().get(request.getAssetName()).replace("quantity", intialUnits + request.getQuantity());
                         SendEmail temp1 = new SendEmail(request.getRaisedBy().getUsername(), "Regading your recent transaction of Industry asset.", "Hi " + request.getRaisedBy().getUsername().toString() + ", This is to inform you that your recent transaction of " + temp.getBroker().get(request.getAssetName()).toString() + "  was successful.");
                         temp1.sendMail();
+                    }
+                }
+
+                for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+                    WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+                    if (ongoing instanceof ForexBuyWorkRequest) {
+                        ForexBuyWorkRequest temp1 = (ForexBuyWorkRequest) ongoing;
+                        if (temp1.getRaisedTo() == this.account && temp1.getRaisedBy() == request.getRaisedBy() && temp1.getOraganization() == request.getOraganization() && temp1.getForexName().equals(request.getAssetName()) && temp1.getStatusType() == ForexBuyWorkRequest.StatusType.Awaiting) {
+                            temp1.setStatusType(statusSelected == "Approve" ? ForexBuyWorkRequest.StatusType.Sold : ForexBuyWorkRequest.StatusType.Completed);
+                        }
                     }
                 }
             }

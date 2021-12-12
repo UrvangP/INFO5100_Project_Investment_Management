@@ -7,11 +7,7 @@ package userinterface.CustomerRole;
 
 import Business.EcoSystem;
 import Business.Network.Network;
-import Business.Organization.CompaniesOrganization;
-import Business.Organization.MutualFundsOrganization;
-import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.AssetBuyWorkRequest;
 import Business.WorkQueue.StockBuyWorkQueue;
 import Business.WorkQueue.StockSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -177,7 +173,7 @@ public class CustomerStockSell extends javax.swing.JPanel {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
 
-        selectedRequest.setStatusType(StockBuyWorkQueue.StatusType.Sold);
+        selectedRequest.setStatusType(StockBuyWorkQueue.StatusType.Awaiting);
 
         StockSellWorkRequest newRequest = new StockSellWorkRequest(
             this.account,

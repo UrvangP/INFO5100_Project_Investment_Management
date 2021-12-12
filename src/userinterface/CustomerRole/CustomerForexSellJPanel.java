@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ronak
  */
 public class CustomerForexSellJPanel extends javax.swing.JPanel {
-    
+
     JSplitPane jSplitPane;
     UserAccount account;
     EcoSystem ecosystem;
@@ -45,7 +45,7 @@ public class CustomerForexSellJPanel extends javax.swing.JPanel {
         this.selectedNetwork = selectedNetwork;
         initComponents();
     }
-    
+
     public void getData() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -175,44 +175,44 @@ public class CustomerForexSellJPanel extends javax.swing.JPanel {
         Organization temp1 = (Organization) selectedRequest.getOraganization();
         if (selectedRequest.getOraganization() instanceof BanksOrganization) {
             if (temp1 instanceof BanksOrganization) {
-                    selectedMarketAgent = ((BanksOrganization) temp1).getAdmin();
-                    company = ((BanksOrganization) temp1).getBankName();
-                    for (HashMap.Entry<String, HashMap<String, Object>> set
+                selectedMarketAgent = ((BanksOrganization) temp1).getAdmin();
+                company = ((BanksOrganization) temp1).getBankName();
+                for (HashMap.Entry<String, HashMap<String, Object>> set
                         : ((BanksOrganization) temp1).getBank().entrySet()) {
-                        productName = set.getKey();
+                    productName = set.getKey();
 
-                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
-                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
-                    }
-                    //                }
+                    price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                    unit = Integer.valueOf(set.getValue().get("quantity").toString());
+                }
+                //                }
             }
         } else if (selectedRequest.getOraganization() instanceof BrokersOrganization) {
             if (temp1 instanceof BrokersOrganization) {
-                    selectedMarketAgent = ((BrokersOrganization) temp1).getAdmin();
-                    company = ((BrokersOrganization) temp1).getBrokerName();
-                    for (HashMap.Entry<String, HashMap<String, Object>> set
+                selectedMarketAgent = ((BrokersOrganization) temp1).getAdmin();
+                company = ((BrokersOrganization) temp1).getBrokerName();
+                for (HashMap.Entry<String, HashMap<String, Object>> set
                         : ((BrokersOrganization) temp1).getBroker().entrySet()) {
-                        productName = set.getKey();
-                        price = Integer.valueOf(set.getValue().get("maxPrice").toString());
-                        unit = Integer.valueOf(set.getValue().get("quantity").toString());
-                    }
-                    //                }
+                    productName = set.getKey();
+                    price = Integer.valueOf(set.getValue().get("maxPrice").toString());
+                    unit = Integer.valueOf(set.getValue().get("quantity").toString());
+                }
+                //                }
             }
         }
-        selectedRequest.setStatusType(ForexBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setStatusType(ForexBuyWorkRequest.StatusType.Awaiting);
 
         ForexBuyWorkRequest newRequest = new ForexBuyWorkRequest(
-            this.account,
-            selectedMarketAgent,
-            new Date(),
-            null,
-            ForexBuyWorkRequest.StatusType.Initiated,
-            price,
-            unit,
-            new Date(),
-            company,
-            productName,
-            selectedRequest.getOraganization()
+                this.account,
+                selectedMarketAgent,
+                new Date(),
+                null,
+                ForexBuyWorkRequest.StatusType.Initiated,
+                selectedRequest.getPrice(),
+                selectedRequest.getQuantity(),
+                new Date(),
+                company,
+                productName,
+                selectedRequest.getOraganization()
         );
         this.ecosystem.getWorkQueue().getWorkRequestList().add(newRequest);
         getData();

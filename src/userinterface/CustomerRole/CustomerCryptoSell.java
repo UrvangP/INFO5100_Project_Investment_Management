@@ -10,7 +10,6 @@ import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CryptoBuyWorkRequest;
 import Business.WorkQueue.CryptoSellWorkRequest;
-import Business.WorkQueue.StockBuyWorkQueue;
 import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -174,7 +173,7 @@ public class CustomerCryptoSell extends javax.swing.JPanel {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
 
-        selectedRequest.setStatusType(CryptoBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setStatusType(CryptoBuyWorkRequest.StatusType.Awaiting);
 
         CryptoSellWorkRequest newRequest = new CryptoSellWorkRequest(
             this.account,
