@@ -6,16 +6,12 @@
 package userinterface.ForexMarketAdminRole;
 
 import Business.EcoSystem;
-import Business.Enterprise.AssetMarketEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.ForexMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.BanksOrganization;
 import Business.Organization.BrokersOrganization;
-import Business.Organization.IndustriesOrganization;
-import Business.Organization.JewelleryOrganization;
 import Business.Organization.Organization;
-import Business.Organization.RealEstateOrganization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
