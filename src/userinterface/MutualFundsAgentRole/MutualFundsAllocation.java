@@ -250,6 +250,15 @@ public class MutualFundsAllocation extends javax.swing.JPanel {
             else {
                 StockSellWorkRequest request = (StockSellWorkRequest) this.selectedRequest;
                 request.setStatusType(statusSelected == "Approve" ? StockSellWorkRequest.StatusType.Sold : StockSellWorkRequest.StatusType.SellRejected);
+                for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
+                    WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
+                    if (ongoing instanceof StockBuyWorkQueue) {
+                        StockBuyWorkQueue temp1 = (StockBuyWorkQueue) ongoing;
+                        if (temp1.getRaisedTo() == this.account && temp1.getRaisedBy() == request.getRaisedBy() && temp1.getOraganization() == request.getOraganization() && temp1.getAssetName().equals(request.getAssetName()) && temp1.getStatusType() == StockBuyWorkQueue.StatusType.Awaiting) {
+                            temp1.setStatusType(statusSelected == "Approve" ? StockBuyWorkQueue.StatusType.Sold : StockBuyWorkQueue.StatusType.Completed);
+                        }
+                    }
+                }
             }
         }
         getStatus();
