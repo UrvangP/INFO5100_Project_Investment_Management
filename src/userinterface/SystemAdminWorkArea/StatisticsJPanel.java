@@ -24,14 +24,20 @@ import Business.WorkQueue.StockBuyWorkQueue;
 import Business.WorkQueue.StockSellWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.BorderLayout;
+import java.text.DecimalFormat;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
  *
@@ -185,6 +191,73 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         return dataset;
     }
 
+    public void statistics3() {
+        PieDataset dataset = createDataset();
+
+        // Create chart  
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Organizations in each Enterprises",
+                dataset,
+                true,
+                true,
+                false);
+
+        PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator(
+                "{0} : ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+        ((PiePlot) chart.getPlot()).setLabelGenerator(labelGenerator);
+
+        ChartPanel panel = new ChartPanel(chart);
+        jPanel.setLayout(new java.awt.BorderLayout());
+        jPanel.add(panel, BorderLayout.CENTER);
+        jPanel.validate();
+    }
+
+    private PieDataset createDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for (int i = 0; i < this.ecosystem.getNetwork().getNetworkList().size(); i++) {
+            Network ongoing = this.ecosystem.getNetwork().getNetworkList().get(i);
+            for (int j = 0; j < ongoing.getEnterpriseDirectory().getEnterpriseDir().size(); j++) {
+                Integer total = 0;
+                Enterprise ongoing1 = ongoing.getEnterpriseDirectory().getEnterpriseDir().get(j);
+                String ongoingName = "";
+                if (ongoing1 instanceof AssetMarketEnterprise) {
+                    AssetMarketEnterprise temp1 = (AssetMarketEnterprise) ongoing1;
+                    ongoingName = "Asset Market";
+                    for (int k = 0; k < temp1.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp2 = temp1.getOrganizationDirectory().getOrganizationList().get(k);
+                        total += 1;
+                    }
+                } else if (ongoing1 instanceof CryptoMarketEnterprise) {
+                    ongoingName = "Crypto Market";
+                    CryptoMarketEnterprise temp1 = (CryptoMarketEnterprise) ongoing1;
+                    for (int k = 0; k < temp1.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp2 = temp1.getOrganizationDirectory().getOrganizationList().get(k);
+                        total += 1;
+                    }
+                } else if (ongoing1 instanceof ForexMarketEnterprise) {
+                    ongoingName = "Forex Market";
+                    ForexMarketEnterprise temp1 = (ForexMarketEnterprise) ongoing1;
+                    for (int k = 0; k < temp1.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp2 = temp1.getOrganizationDirectory().getOrganizationList().get(k);
+                        total += 1;
+                    }
+
+                } else if (ongoing1 instanceof StockMarketEnterprise) {
+                    ongoingName = "Stock Market";
+                    StockMarketEnterprise temp1 = (StockMarketEnterprise) ongoing1;
+                    for (int k = 0; k < temp1.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp2 = temp1.getOrganizationDirectory().getOrganizationList().get(k);
+                        total += 1;
+                    }
+                }
+
+                dataset.setValue(ongoingName, total);
+            }
+
+        }
+        return dataset;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,6 +271,7 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -227,10 +301,17 @@ public class StatisticsJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Netwrok Statistics");
+        jButton2.setText("Network Statistics");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Organization Statistics");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -251,7 +332,9 @@ public class StatisticsJPanel extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +344,8 @@ public class StatisticsJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
@@ -281,10 +365,15 @@ public class StatisticsJPanel extends javax.swing.JPanel {
         statistics2();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        statistics3();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel;
     // End of variables declaration//GEN-END:variables
