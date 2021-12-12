@@ -14,10 +14,13 @@ import Business.Enterprise.StockMarketEnterprise;
 import Business.Network.Network;
 import Business.Organization.BanksOrganization;
 import Business.Organization.BrokersOrganization;
+import Business.Organization.CompaniesOrganization;
 import Business.Organization.IndustriesOrganization;
 import Business.Organization.JewelleryOrganization;
+import Business.Organization.MutualFundsOrganization;
 import Business.Organization.Organization;
 import Business.Organization.RealEstateOrganization;
+import Business.Organization.WalletOrganization;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AssetBuyWorkRequest;
@@ -87,8 +90,16 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                     CryptoMarketEnterprise temp2 = (CryptoMarketEnterprise) temp1;
                     DefaultMutableTreeNode cryptoTemp = new DefaultMutableTreeNode("Crypto Market");
                     temp.add(cryptoTemp);
-                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
-                    cryptoTemp.add(nameTemp);
+
+                    for (int k = 0; k < temp2.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp3 = temp2.getOrganizationDirectory().getOrganizationList().get(k);
+                        if (temp3 instanceof WalletOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((WalletOrganization) temp3).getName().toString());
+                            cryptoTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((WalletOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
+                        }
+                    }
                 } else if (temp1 instanceof ForexMarketEnterprise) {
                     ForexMarketEnterprise temp2 = (ForexMarketEnterprise) temp1;
                     DefaultMutableTreeNode forexTemp = new DefaultMutableTreeNode("Forex Market");
@@ -113,8 +124,21 @@ public class SystemAdminDashboard extends javax.swing.JPanel {
                     StockMarketEnterprise temp2 = (StockMarketEnterprise) temp1;
                     DefaultMutableTreeNode stockTemp = new DefaultMutableTreeNode("Stock Market");
                     temp.add(stockTemp);
-                    DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(temp2.name.toString());
-                    stockTemp.add(nameTemp);
+
+                    for (int k = 0; k < temp2.getOrganizationDirectory().getOrganizationList().size(); k++) {
+                        Organization temp3 = temp2.getOrganizationDirectory().getOrganizationList().get(k);
+                        if (temp3 instanceof CompaniesOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((CompaniesOrganization) temp3).getName().toString());
+                            stockTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((CompaniesOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
+                        } else if (temp3 instanceof MutualFundsOrganization) {
+                            DefaultMutableTreeNode nameTemp = new DefaultMutableTreeNode(((MutualFundsOrganization) temp3).getName().toString());
+                            stockTemp.add(nameTemp);
+                            DefaultMutableTreeNode detailsTemp1 = new DefaultMutableTreeNode(((MutualFundsOrganization) temp3).getName().toString());
+                            nameTemp.add(detailsTemp1);
+                        }
+                    }
                 }
             }
         }

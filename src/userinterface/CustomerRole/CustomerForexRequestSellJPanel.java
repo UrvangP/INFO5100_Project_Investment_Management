@@ -9,7 +9,6 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import Business.Organization.BanksOrganization;
 import Business.Organization.BrokersOrganization;
-import Business.Organization.IndustriesOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ForexBuyWorkRequest;
@@ -184,7 +183,7 @@ public class CustomerForexRequestSellJPanel extends javax.swing.JPanel {
                 }
             }
         }
-        selectedRequest.setStatusType(ForexBuyWorkRequest.StatusType.Sold);
+        selectedRequest.setStatusType(ForexBuyWorkRequest.StatusType.Awaiting);
 
         ForexSellWorkRequest newRequest = new ForexSellWorkRequest(
                 this.account,
@@ -192,8 +191,8 @@ public class CustomerForexRequestSellJPanel extends javax.swing.JPanel {
                 new Date(),
                 null,
                 ForexSellWorkRequest.StatusType.Initiated,
-                price,
-                unit,
+                selectedRequest.getPrice(),
+                selectedRequest.getQuantity(),
                 new Date(),
                 company,
                 productName,

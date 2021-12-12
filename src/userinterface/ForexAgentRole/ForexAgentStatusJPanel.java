@@ -287,7 +287,6 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
                         temp1.sendMail();
                     }
                 } else if (request.getOraganization() instanceof BrokersOrganization) {
-
                     BrokersOrganization temp = (BrokersOrganization) request.getOraganization();
                     if (temp.getBrokerName().toString() == request.getCompanyName().toString()) {
                         Integer intialUnits = 0;
@@ -300,7 +299,7 @@ public class ForexAgentStatusJPanel extends javax.swing.JPanel {
                         temp1.sendMail();
                     }
                 }
-
+                
                 for (int i = 0; i < this.ecosystem.getWorkQueue().getWorkRequestList().size(); i++) {
                     WorkRequest ongoing = this.ecosystem.getWorkQueue().getWorkRequestList().get(i);
                     if (ongoing instanceof ForexBuyWorkRequest) {
