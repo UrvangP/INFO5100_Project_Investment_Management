@@ -63,7 +63,7 @@ public class ForexBuyWorkRequest extends WorkRequest {
         this.quantity = quantity;
         this.modifiedAt = modifiedAt;
         this.companyName = companyName;
-        this.forexName = forexName;
+        this.forexName = assetName;
         this.oraganization = oraganization;
     }
 
